@@ -1,0 +1,76 @@
+$color-green: #0f8e70;
+
+//Screen
+$mobile-width: 768px;
+$tablet-width: 992px;
+$desktop-width: 1024px;
+$xl-width: 1200px;
+
+@mixin mobile {
+  @media (max-width: #{$mobile-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+@mixin sm-desktop {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin lg-desktop {
+  @media (min-width: #{$desktop-width}) and (max-width: #{$xl-width - 1px}) {
+    @content;
+  }
+}
+// $mobile-width: 480px;
+// $tablet-width: 768px;
+// $desktop-width: 1024px;
+
+// @mixin mobile { @media (max-width: #{$mobile-width - 1px}) {
+//   @content;
+//  }
+// }
+
+// @mixin tablet { @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+//    @content;
+//  }
+// }
+
+// @mixin desktop {   @media (min-width: #{$desktop-width}) {
+//   @content;
+//  }
+// }
+
+$XS: 576px;
+$SM: 768px;
+$MD: 1024px;
+$XL: 1140px;
+
+// media queries
+@mixin Responsive($canvas) {
+  @if $canvas == XS {
+    @media only screen and (min-width: $XS) {
+      @content;
+    }
+  } @else if $canvas == SM {
+    @media only screen and (min-width: $SM) {
+      @content;
+    }
+  } @else if $canvas == MD {
+    @media only screen and (min-width: $MD) {
+      @content;
+    }
+  } @else if $canvas == XL {
+    @media only screen and (min-width: $XL) {
+      @content;
+    }
+  }
+}
+
+
