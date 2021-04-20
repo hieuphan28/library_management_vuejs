@@ -8,8 +8,8 @@
 <script>
 import { ref, computed } from "vue";
 import axios from 'axios'
-import GoalsList from "./GoalsList.vue";
-import AddGoal from "./AddGoal.vue";
+import GoalsList from "../src/components/GoalsList.vueGoalsList.vue";
+import AddGoal from "../src/components/AddGoal.vuee/AddGoal.vue";
 export default {
   components: {
     GoalsList,

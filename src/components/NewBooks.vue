@@ -18,12 +18,14 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
           </ol>
           <!-- Wrapper for carousel items -->
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -33,12 +35,12 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Apple iPad</h4>
+                      <p>Apple iPad</p>
                       <p class="item-price"><span>$369.00</span></p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -48,12 +50,12 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Sony Headphone</h4>
+                      <p>Sony Headphone</p>
                       <p class="item-price"><span>$23.99</span></p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -63,12 +65,12 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Macbook Air</h4>
+                      <p>Macbook Air</p>
                       <p class="item-price"><span>$649.00</span></p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -78,7 +80,7 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Nikon DSLR</h4>
+                      <p>Nikon DSLR</p>
                       <p class="item-price"><span>$250.00</span></p>
                     </div>
                   </div>
@@ -87,7 +89,7 @@
             </div>
             <div class="carousel-item">
               <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -97,12 +99,12 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Sony Play Station</h4>
+                      <p>Sony Play Station</p>
                       <p class="item-price"><span>$269.00</span></p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -112,12 +114,12 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Macbook Pro</h4>
+                      <p>Macbook Pro</p>
                       <p class="item-price"><span>$869.00</span></p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -127,12 +129,12 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Bose Speaker</h4>
+                      <p>Bose Speaker</p>
                       <p class="item-price"><span>$99.00</span></p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -142,7 +144,7 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Samsung Galaxy S8</h4>
+                      <p>Samsung Galaxy S8</p>
                       <p class="item-price"><span>$569.00</span></p>
                     </div>
                   </div>
@@ -151,7 +153,7 @@
             </div>
             <div class="carousel-item">
               <div class="row">
-                <div class="col-sm-3">
+                <div class="col-md-3 col-12">
                   <div class="thumb-wrapper">
                     <div class="img-box">
                       <img
@@ -161,7 +163,7 @@
                       />
                     </div>
                     <div class="thumb-content">
-                      <h4>Apple iPhone</h4>
+                      <p>Apple iPhone</p>
                       <p class="item-price"><span>$349.00</span></p>
                     </div>
                   </div>
@@ -187,9 +189,6 @@ export default {
 };
 </script>
 <style scoped>
-body {
-  font-family: "Open Sans", sans-serif;
-}
 .intro {
   text-align: center;
   width: 50%;
@@ -208,20 +207,22 @@ h2 {
   font-weight: bold;
 }
 h2 b {
-  color: #ffc000;
+  color: #FFC000;
 }
 .carousel {
-  margin: 50px auto;
+  margin: 2% auto;
   padding: 0 70px;
+  min-width: 100%;
 }
 .carousel .carousel-inner {
-  height: 40vh;
+  height: 34vh;
 }
 .carousel .carousel-item {
   /* min-height: 330px; */
   /* margin-top:10%; */
   text-align: center;
-  overflow: hidden;
+  /* overflow: hidden; */
+  width: 100%;
 }
 .carousel .carousel-item .img-box {
   height: 20vh;
@@ -238,15 +239,15 @@ h2 b {
   left: 0;
   right: 0;
 }
-.carousel .carousel-item h4 {
-  font-size: 18px;
-  margin: 10px 0;
+.carousel .carousel-item p {
+  /* font-weight: bold; */
 }
 .carousel .thumb-wrapper {
   text-align: center;
+  /* font-size: 100%; */
 }
 .carousel .thumb-content {
-  padding: 15px;
+  /* padding: 15px; */
 }
 .carousel-control-prev,
 .carousel-control-next {
@@ -277,10 +278,11 @@ h2 b {
 }
 .carousel .item-price {
   font-size: 13px;
-  padding: 2px 0;
+  /* padding: 2px 0; */
+  /* width:100%; */
 }
 .carousel .item-price span {
-  color: #86bd57;
+  color: #86BD57;
   font-size: 110%;
 }
 .carousel .carousel-indicators {

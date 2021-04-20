@@ -1,52 +1,48 @@
 <template>
   <!-- <NavigationBar /> -->
-  <div class="login ">
-    <img src="" alt="background" />
-    <form
-      class="login-form "
-      @submit.prevent="sendLoginInfo"
-      action=""
-      method=""
-    >
-      <div class="bar">
-        <a href="#" class="login-bar active">Login</a>
-        <a href="">Sign up</a>
-      </div>
-      <h1>Login</h1>
-      <div class="input-box">
-        <input v-model="username" type="text" placeholder="Username" />
-        <img src="" alt="" />
-      </div>
-      <div class="input-box">
-        <i></i>
-        <input v-model="password" type="password" placeholder="Password" />
-      </div>
-      <div class="forgot-password">
-        <a href="./forgot_password.html">Forgot password?</a>
-      </div>
-      <div class="btn-box">
-        <a href="">
-          <button type="submit">Login</button>
-        </a>
-      </div>
-    </form>
-  </div>
+ <div class="login ">
+      <img class="background" src="../assets/carousel/2.jpg" alt="background" />
+      <form class="login-form " action="" method="">
+          <div class="bar">
+            
+            <router-link to ="/login"><a href="#" class="login-bar active">Login</a></router-link>
+            <router-link to ="/register"><a href="#">Sign up</a></router-link>
+          </div>
+        <h1>Login</h1>
+        <div class="input-box">
+          <input type="text" placeholder="Username" />
+          <img src="../assets/icon_setting_white.png" alt="" />
+        </div>
+        <div class="input-box">
+          <i></i>
+          <input type="password" placeholder="Password" />
+        </div>
+        <div class="forgot-password">
+          <a href="#">Forgot password?</a>
+        </div>
+        <div class="btn-box">
+          <a href="">
+            <button type="submit">Login</button>
+          </a>
+        </div>
+      </form>
+    </div>
 </template>
 <script>
 export default {
   name: "Login",
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-  methods: {
-    sendLoginInfo() {
-      console.log(this.username,this.password);
-      // console.log(this.password);
-    },
-  },
+  // data() {
+  //   return {
+  //     username: "",
+  //     password: "",
+  //   };
+  // },
+  // methods: {
+  //   sendLoginInfo() {
+  //     console.log(this.username,this.password);
+  //     // console.log(this.password);
+  //   },
+  // },
 };
 </script>
 <style>
@@ -59,9 +55,12 @@ export default {
   text-decoration: none;
   font-family: Lato, sans-serif;
 }
-.login img {
-  width: 100%;
-  position: fixed;
+.login .background {
+ width:2000px;
+ /* height:88vh; */
+ /* display:block; */
+ background-attachment: none;
+ position:fixed;
 }
 /* COL-RIGHT */
 .login-form h1 {
@@ -69,14 +68,13 @@ export default {
   font-family: Merriweather;
   font-weight: bold;
   padding-bottom: 20px;
-  color: black;
+  color:rgba(0, 0, 0, 0.87);
   font-size: x-large;
 }
 .login-form {
-  max-width: 26%;
+  max-width: 390px;
   width: 100%;
   height: auto;
-  font-size: 14px;
   text-align: center;
   background-color: #ffff;
   border: 1px solid #E6E6E6;
@@ -99,30 +97,33 @@ export default {
   margin-bottom: 25px;
 }
 .login-form .input-box input {
+  color: rgba(0, 0, 0, 0.87);
   width: 100%;
   border: none;
-  font-size: 15px;
+  font-size:medium ;
   border-bottom: 1px solid #EFEFEF;
   border-radius: 0;
 }
 .login-form .input-box input::placeholder {
-  color: #CECECE;
+  color: rgba(0, 0, 0, 0.38);
+  font-style: italic;
 }
 /* Edit Forgot Password*/
 .login-form .forgot-password {
   text-align: right;
   margin-top: -3%;
   margin-bottom: 4%;
+  font-size: 14px;
 }
 .login-form .forgot-password a {
-  color: #CECECE;
+  color: rgba(0, 0, 0, 0.38);;
 }
 /*Edit Button*/
 .login-form .btn-box a button {
   padding: 0.2rem 7.2rem;
   margin: 10px 0;
   background: #ECD4B4;
-  border: 1px solid #B7B7B7;
+  border: 0.25px solid #B7B7B7;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
@@ -130,17 +131,17 @@ export default {
   font-family: Merriweather;
   font-style: normal;
   font-weight: bold;
-  font-size: 15px;
+  font-size: small ;
   line-height: 24px;
-  color: #897160;
+  color: rgba(0, 0, 0, 0.54);
   margin-bottom: 15%;
   width: 100%;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 .login-form .btn-box a button:hover {
-  background: #DDB176;
-  border-radius: 12px;
-  color: white;
+    background: #FFE5C3;
+    border-radius: 12px;
+    color: rgba(0, 0, 0, 0.87);
 }
 /* .col-left{
     border: black solid 10px;
@@ -155,19 +156,19 @@ export default {
   text-align: right;
   color: #EFEFEF;
   padding: 0 0 20px 167px;
+  font-size: 14px;
 }
 .login-form .bar a {
   padding: 0 5%;
-  color: #CECECE;
+  color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }
 /* Hover - Active*/
 .login-form .bar a:hover:not(.active) {
-  color: #898989 !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 .login-form .bar .active {
-  border-right: #CECECE solid 0.1rem;
-  color: #898989 !important;
+  border-right: rgba(0, 0, 0, 0.38) solid 0.1rem;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
-/* COL-LEFT */
 </style>

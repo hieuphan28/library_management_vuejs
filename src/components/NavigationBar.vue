@@ -1,6 +1,6 @@
 <template>
   <header id="wn__header" class="header__area header__absolute sticky__header">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-2 col-md-4 col-lg-2">
           <div class="logo">
@@ -9,21 +9,39 @@
         </div>
         <div class="col-lg-6 mainmenu">
           <nav class="mainmenu__nav">
-            <ul class="meninmenu" >
-              <li><a href="/">Home</a></li>
-              <li><a href="/bookinfo">Books</a></li>
+            <ul class="meninmenu">
+              <li><router-link to="/">Home</router-link></li>
+              <li>
+                <router-link to="/books">Books</router-link>
+              </li>
               <li><a href="">Contact</a></li>
             </ul>
           </nav>
         </div>
         <div class="col-8 col-md-6 col-lg-4">
           <ul class="header__sidebar__right d-flex align-items-center">
-            <li class="shop_search">
+            <li class="shop_search dropdown show">
+              <button
+                class="btn dropdown-toggle btn-sm"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Title
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Title</a>
+                <a class="dropdown-item" href="#">Author</a>
+              </div>
               <input type="text" placeholder="Search your books" />
               <a class="search__active" href="#"></a>
             </li>
             <li class="shopcart">
-              <a class="cartbox_active" href="#"></a>
+              <router-link to="/cart"
+                ><a class="cartbox_active" href="#"></a
+              ></router-link>
             </li>
             <li class="user dropdown">
               <a
@@ -32,10 +50,22 @@
                 href="#"
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">View Profile</a>
-                <a class="dropdown-item" href="#">Change Password</a>
-                <a class="dropdown-item" href="#">Logout</a>
-                <a class="dropdown-item" href="/borrow-history">View Borrowing Settings</a>
+                <router-link to="/viewprofile"
+                  ><a class="dropdown-item" href="#"
+                    >View Profile</a
+                  ></router-link
+                >
+                <router-link to="/changepassword"
+                  ><a class="dropdown-item" href="#"
+                    >Change Password</a
+                  ></router-link
+                >
+                <router-link to="/login"
+                  ><a class="dropdown-item" href="#">Logout</a></router-link
+                >
+                <router-link class="dropdown-item" to="/borrow-history">
+                  View Borrowing Settings</router-link
+                >
               </div>
             </li>
           </ul>
@@ -118,6 +148,7 @@ export default {
 }
 .header__area {
   background: #ecd4b4;
+  opacity: 80%;
 }
 .header__area .logo {
   @include mobile {
@@ -200,7 +231,7 @@ export default {
 }
 .header__area .header__sidebar__right > li.shop_search > input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
+  // border-radius: 8px;
   text-decoration: none;
   float: right;
   padding: 6px;
@@ -209,8 +240,7 @@ export default {
   margin-right: 16px;
   font-size: 17px;
 }
-
-.header__area .header__sidebar__right > li.shop_search > a {
+.header__area .header__sidebar__right > li.shop_search > a.search__active {
   background: rgba(0, 0, 0, 0) url("~@/assets/search.png") no-repeat scroll 0
     center;
   cursor: pointer;
@@ -219,13 +249,22 @@ export default {
   width: 30px;
   height: 100%;
 }
+.header__area .header__sidebar__right > li.shop_search > button.btn {
+  background: rgba(255, 255, 255, 0.8);
+  height: 46%;
+  color: gray;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 0.1rem;
+  font-size: 17px;
+}
+
 .mainmenu__nav .meninmenu li a:hover {
   background: rgba(137, 113, 96, 0.3);
   border-radius: 7px;
   text-decoration: none;
   outline: none;
 }
-
 
 .header__area .header__sidebar__right > li.shop_search > a:hover {
   background: rgba(0, 0, 0, 0) url("~@/assets/search_white.png") no-repeat
@@ -235,7 +274,7 @@ export default {
   background: rgba(0, 0, 0, 0) url("~@/assets/cart_white.png") no-repeat scroll
     0 center;
 }
-.header__area .header__sidebar__right > li.user > a:hover {
+.header__area .header__sidebar__right > li.user > a.search__active:hover {
   background: rgba(0, 0, 0, 0) url("~@/assets/icon_setting_white.png") no-repeat
     scroll 0 center;
 }

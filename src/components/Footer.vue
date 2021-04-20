@@ -1,67 +1,59 @@
 <template>
-  <footer class="footer">
-    <div class="container">
-      <div class="title">OUR <span class="brown">WEB</span></div>
-      <div class="content">
-        We are here to give you a great experience of Danalib library. You will
-        not have to worry about competing for books, just book in advance to be
-        able to bring back your favorite books.
-        <div class="contact">
-          <div class="contactus">Contact Us:</div>
-          <a href="#">Danalib@gmail.com</a>
-        </div>
-        <div class="company">&copy; Copyright 2021 Danalib</div>
+<footer>
+      <div class="container">
+          <div class="contact">
+            <div class="contactus">Contact us: </div>
+            <a href="#">Danalib@gmail.com</a>
+          </div>
+          <div class="company">&copy; Copyright 2021 Danalib</div>
       </div>
-    </div>
-  </footer>
+    </footer> 
 </template>
-
 <script>
 export default {
   name: "Footer",
 };
 </script>
-
 <style>
 footer {
-  /* position: absolute; */
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #f1f1f1;
+  height: 100%;
+  background-color: rgba(236, 212, 180, 0.8);
   text-align: center;
-  font-family: Lato;
+ 
 }
 footer .container {
+  /* margin: 2% 0%; */
   color: black;
-
-}
-footer .title {
-  font-size: xx-large;
-  font-weight: bold;
-  margin: 3% 0%;
-  font-family: Merriweather;
-}
-footer .content {
-  font-size: large;
-  padding: 0% 15%;
-  font-weight: normal;
-  opacity: 60%;
+  padding:1.5%
 }
 footer .contact {
+  font-family: Lato;
+  font-style: italic;
+  font-weight: normal;
   font-size: large;
-  margin-top: 5%;
+  text-align: center;
 }
 footer .contact .contactus {
   font-weight: bold;
-  font-style: italic;
+  font-style: normal;
   display: inline;
+  text-decoration-line: underline;
+}
+footer .contact a{
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+}
+footer .contact a:hover{
+  color: red;
 }
 footer .container .company {
   margin-top: 1%;
   font-size: medium;
 }
-.brown {
-  color: #886e5e;
-}
+
 </style>
