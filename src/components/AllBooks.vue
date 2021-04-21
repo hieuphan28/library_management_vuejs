@@ -193,7 +193,7 @@
       </div>
     </div>
     <div id="allbook">
-      <router-link to="/viewprofile">All Books</router-link>
+      <router-link to="/books">All Books</router-link>
     </div>
   </div>
 </template>

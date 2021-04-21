@@ -1,7 +1,7 @@
 <template>
 <footer>
       <div class="container">
-          <div class="contact">
+          <div class="contact-footer">
             <div class="contactus">Contact us: </div>
             <a href="#">Danalib@gmail.com</a>
           </div>

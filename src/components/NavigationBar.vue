@@ -14,7 +14,9 @@
               <li>
                 <router-link to="/books">Books</router-link>
               </li>
-              <li><a href="">Contact</a></li>
+              <li>
+                <router-link to="/contact">Contact</router-link>
+              </li>
             </ul>
           </nav>
         </div>

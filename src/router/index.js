@@ -9,21 +9,14 @@ import Carts  from '../views/Carts.vue'
 import Register  from '../views/Register.vue'
 import ViewProfile  from '../views/ViewProfile.vue'
 import ChangePassword  from '../views/ChangePassword.vue'
-
+import Contact from '../views/Contact.vue'
+import ExtendLoan from '../views/ExtendLoan.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/Contact.vue')
   },
   {
     path: '/bookinfo',
@@ -64,6 +57,16 @@ const routes = [
     path: '/changepassword',
     name: 'changepassword',
     component: ChangePassword
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: Contact
+  },
+  {
+    path: '/extendloan',
+    name: 'extendloan',
+    component: ExtendLoan
   },
 
 

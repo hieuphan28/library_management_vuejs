@@ -39,14 +39,11 @@
         </form>
       </div>
 </template>
-
 <script>
 export default {
     name: "Register"
-
 }
 </script>
-
 <style>
 * {
     margin: 0;
@@ -62,13 +59,9 @@ export default {
     height: 100%;
     background-attachment: fixed;
   }
-  .register {
-    height: 100vh;
-    position: relative;
-  }
   .register img {
-    width: 100%;
-    position: fixed;
+  width: 100%;
+  height: 80vh;
   }
   /* COL-RIGHT H1 BANNER */
   .register .create-account-form h1 {

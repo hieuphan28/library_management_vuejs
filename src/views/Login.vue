@@ -1,32 +1,33 @@
 <template>
   <!-- <NavigationBar /> -->
- <div class="login ">
-      <img class="background" src="../assets/carousel/2.jpg" alt="background" />
-      <form class="login-form " action="" method="">
-          <div class="bar">
-            
-            <router-link to ="/login"><a href="#" class="login-bar active">Login</a></router-link>
-            <router-link to ="/register"><a href="#">Sign up</a></router-link>
-          </div>
-        <h1>Login</h1>
-        <div class="input-box">
-          <input type="text" placeholder="Username" />
-          <img src="../assets/icon_setting_white.png" alt="" />
-        </div>
-        <div class="input-box">
-          <i></i>
-          <input type="password" placeholder="Password" />
-        </div>
-        <div class="forgot-password">
-          <a href="#">Forgot password?</a>
-        </div>
-        <div class="btn-box">
-          <a href="">
-            <button type="submit">Login</button>
-          </a>
-        </div>
-      </form>
-    </div>
+  <div class="login">
+    <img class="background" src="../assets/carousel/2.jpg" alt="background" />
+    <form class="login-form" action="" method="">
+      <div class="bar">
+        <router-link to="/login"
+          ><a href="#" class="login-bar active">Login</a></router-link
+        >
+        <router-link to="/register"><a href="#">Sign up</a></router-link>
+      </div>
+      <h1>Login</h1>
+      <div class="input-box">
+        <input type="text" placeholder="Username" />
+        <img src="../assets/icon_setting_white.png" alt="" />
+      </div>
+      <div class="input-box">
+        <i></i>
+        <input type="password" placeholder="Password" />
+      </div>
+      <div class="forgot-password">
+        <a href="#">Forgot password?</a>
+      </div>
+      <div class="btn-box">
+        <a href="">
+          <button type="submit">Login</button>
+        </a>
+      </div>
+    </form>
+  </div>
 </template>
 <script>
 export default {
@@ -45,7 +46,7 @@ export default {
   // },
 };
 </script>
-<style>
+<style lang="scss" scoped>
 * {
   margin: 0;
   padding: 0;
@@ -55,12 +56,15 @@ export default {
   text-decoration: none;
   font-family: Lato, sans-serif;
 }
+.login {
+  height: 76.3vh;
+}
 .login .background {
- width:2000px;
- /* height:88vh; */
- /* display:block; */
- background-attachment: none;
- position:fixed;
+  width: 2000px;
+  /* height:88vh; */
+  /* display:block; */
+  background-attachment: none;
+  position: fixed;
 }
 /* COL-RIGHT */
 .login-form h1 {
@@ -68,7 +72,7 @@ export default {
   font-family: Merriweather;
   font-weight: bold;
   padding-bottom: 20px;
-  color:rgba(0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.87);
   font-size: x-large;
 }
 .login-form {
@@ -77,7 +81,7 @@ export default {
   height: auto;
   text-align: center;
   background-color: #ffff;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   border-radius: 25px;
   padding: 30px 30px 20px;
   box-shadow: 0px 10px 30px 10px rgba(0, 0, 0, 0.5);
@@ -100,8 +104,8 @@ export default {
   color: rgba(0, 0, 0, 0.87);
   width: 100%;
   border: none;
-  font-size:medium ;
-  border-bottom: 1px solid #EFEFEF;
+  font-size: medium;
+  border-bottom: 1px solid #efefef;
   border-radius: 0;
 }
 .login-form .input-box input::placeholder {
@@ -116,14 +120,14 @@ export default {
   font-size: 14px;
 }
 .login-form .forgot-password a {
-  color: rgba(0, 0, 0, 0.38);;
+  color: rgba(0, 0, 0, 0.38);
 }
 /*Edit Button*/
 .login-form .btn-box a button {
   padding: 0.2rem 7.2rem;
   margin: 10px 0;
-  background: #ECD4B4;
-  border: 0.25px solid #B7B7B7;
+  background: #ecd4b4;
+  border: 0.25px solid #b7b7b7;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
@@ -131,7 +135,7 @@ export default {
   font-family: Merriweather;
   font-style: normal;
   font-weight: bold;
-  font-size: small ;
+  font-size: small;
   line-height: 24px;
   color: rgba(0, 0, 0, 0.54);
   margin-bottom: 15%;
@@ -139,9 +143,9 @@ export default {
   transition: 0.3s;
 }
 .login-form .btn-box a button:hover {
-    background: #FFE5C3;
-    border-radius: 12px;
-    color: rgba(0, 0, 0, 0.87);
+  background: #ffe5c3;
+  border-radius: 12px;
+  color: rgba(0, 0, 0, 0.87);
 }
 /* .col-left{
     border: black solid 10px;
@@ -154,7 +158,7 @@ export default {
 .login-form .bar {
   margin-bottom: 10%;
   text-align: right;
-  color: #EFEFEF;
+  color: #efefef;
   padding: 0 0 20px 167px;
   font-size: 14px;
 }
@@ -172,3 +176,4 @@ export default {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 </style>
+
