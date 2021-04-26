@@ -7,6 +7,7 @@
       </div>
       <p v-if="invalidInput">Please enter a valid goal text (non-empty).</p>
       <button>Add Goal</button>
+      
     </form>
   </section>
 </template>

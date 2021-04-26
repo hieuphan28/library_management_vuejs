@@ -46,8 +46,7 @@
         class="col-lg-4 col-md-4 col-sm-4 col-4 book-extend d-flex"
         v-if="borrowHistory.status == 'Borrowing'"
       >
-      <router-link to="/extendloan"><button>Extend Loan</button></router-link>
-        
+        <button><router-link to="/extendloan">Extend Loan</router-link></button>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
@@ -210,13 +209,17 @@ export default {
     }
     .book-extend {
       padding: 2.5% 4% 0 4%;
-     
+
       button {
         margin-left: auto;
         border-radius: 8px;
         padding: 2%;
         border: none;
-        background-color: rgba(236, 212, 180, 1);        
+        background-color: rgba(236, 212, 180, 1);
+        a {
+          text-decoration: none;
+          color: black;
+        }
       }
       button:hover {
         background-color: rgba(255, 229, 195, 1);

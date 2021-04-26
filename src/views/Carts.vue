@@ -3,20 +3,28 @@
     <div class="row cart-details">
       <div class="col-lg-3 col-md-3 col-sm-3 col-3 detail-left">
         <ul>
-          <li>Today:</li>
           <li>Reserved Date:</li>
-          <li>Time:</li>
           <li>Expected Return Date:</li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
         <ul>
-          <li>{{ format_date(Date()) }}</li>
           <li>
             <input type="date" v-model="reservedDate" />
+            <span v-if="Date.now() < new Date(reservedDate)">Valid Date</span>
+            <span v-if="Date.now() >= new Date(reservedDate)"
+              >Invalid Date! Please re-input</span
+            >
           </li>
-          <li><input type="time" v-model="time" /></li>
-          <li><input type="date" v-model="returnedDate" /></li>
+          <li>
+            <input type="date" v-model="returnedDate" />
+            <span v-if="new Date(reservedDate) < new Date(returnedDate)"
+              >Valid Date</span
+            >
+            <span v-if="new Date(reservedDate) >= new Date(returnedDate)"
+              >Invalid Date! Please re-input</span
+            >
+          </li>
         </ul>
       </div>
       <div class="col-lg-5 col-md-5 col-sm-5 col-5 detail-right">
@@ -24,7 +32,6 @@
         <div class="total-fee">${{ showTotalRentFee }}</div>
         <button>Reserve</button>
       </div>
-      
     </div>
     <div class="row title">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
@@ -34,7 +41,7 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">TOTAL</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1"></div>
     </div>
-    <div class="row info" v-for="cart in carts" :key="cart.id">
+    <div class="row info" v-for="(cart, index) in carts" :key="index">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">
         <div>
           <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
@@ -45,12 +52,11 @@
           {{ cart.book_name }}
           {{ reservedDate }}
           {{ time }}
+          {{ cart.quantity }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <div>
-          {{ cart.quantity }}
-        </div>
+        <input type="number" v-model="cart.quantity" />
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-price">
         <div>
@@ -61,7 +67,9 @@
         <div>{{ cart.total }}</div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1 icon">
-        <a> </a>
+        <button @click="deleteCart(index)">
+          <img src="../assets/Bin.png" alt="" />
+        </button>
       </div>
     </div>
   </div>
@@ -74,8 +82,8 @@ export default {
   data() {
     return {
       reservedDate: "",
-      time: "",
       returnedDate: "",
+      checkDate: false,
       carts: [
         {
           id: 1,
@@ -92,32 +100,45 @@ export default {
           total: "$60",
           date: "",
         },
+        {
+          id: 3,
+          book_name: "Gulliver's Travel",
+          quantity: "1",
+          price: "$60",
+          total: "$60",
+          date: "",
+        },
+        {
+          id: 4,
+          book_name: "Gulliver's Travel",
+          quantity: "1",
+          price: "$60",
+          total: "$60",
+          date: "",
+        },
+        {
+          id: 5,
+          book_name: "Gulliver's Travel",
+          quantity: "1",
+          price: "$60",
+          total: "$60",
+          date: "",
+        },
       ],
     };
   },
   methods: {
-    format_date(value) {
-      if (value) {
-        return moment(String(value)).format("DD/MM/YYYY");
-      }
+    deleteCart(index) {
+      return this.carts.splice(index, 1);
     },
   },
   computed: {
-    totalDate() {
-      return (
-        new Date(this.returnedDate).getDate() -
-        new Date(this.reservedDate).getDate()
-      );
-    },
-    totalMonth() {
-      return (
-        (new Date(this.returnedDate).getMonth() -
-          new Date(this.reservedDate).getMonth()) *
-        30
-      );
-    },
     showTotalRentFee() {
-      return (this.totalDate + this.totalMonth) * 2;
+      return (
+        (new Date(this.returnedDate).getTime() -
+          new Date(this.reservedDate).getTime()) /
+        (24 * 3600 * 1000)
+      );
     },
   },
 };
@@ -151,7 +172,6 @@ export default {
         border: none;
         margin-left: 5%;
         background-color: rgba(236, 236, 236, 1);
-         
       }
       button {
         margin-left: 10px;
@@ -160,7 +180,7 @@ export default {
         border-radius: 5px;
         background-color: rgba(236, 212, 180, 1);
       }
-      button:hover{
+      button:hover {
         background-color: rgba(255, 229, 195, 1);
       }
     }
@@ -185,12 +205,8 @@ export default {
       }
     }
     .book-quantity {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      div {
-        border: 1px solid;
-        width: 25px;
+      input {
+        width: 25%;
       }
     }
     .book-price {
@@ -202,21 +218,17 @@ export default {
       color: rgba(0, 0, 0, 0.54);
     }
     .icon {
-      a {
-        cursor: pointer;
-        background: rgba(0, 0, 0, 0) url("~@/assets/Bin.png") no-repeat scroll 0
-          center;
-        position: relative;
-        padding: 100%;
-        margin: 0;
-      }
-      a:hover {
-        background: rgba(0, 0, 0, 0) url("~@/assets/bin2.png") no-repeat scroll
-          0 center;
-        cursor: pointer;
-        padding: 100%;
-        margin: 0;
-        position: relative;
+      button {
+        text-decoration: none;
+        border: none;
+        background: white;
+        img {
+          cursor: pointer;
+          width: 60%;
+        }
+        img:hover {
+          background-color: rgba(226, 226, 226, 0.5);
+        }
       }
     }
   }
