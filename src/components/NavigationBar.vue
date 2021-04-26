@@ -150,7 +150,6 @@ export default {
 }
 .header__area {
   background: #ecd4b4;
-  opacity: 80%;
 }
 .header__area .logo {
   @include mobile {
