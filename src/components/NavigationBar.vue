@@ -23,7 +23,7 @@
         <div class="col-8 col-md-6 col-lg-4">
           <ul class="header__sidebar__right d-flex align-items-center">
             <li class="shop_search dropdown show">
-              <button
+              <!-- <button
                 class="btn dropdown-toggle btn-sm"
                 type="button"
                 id="dropdownMenuButton"
@@ -36,20 +36,18 @@
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Title</a>
                 <a class="dropdown-item" href="#">Author</a>
-              </div>
+              </div> -->
               <input type="text" placeholder="Search your books" />
-              <a class="search__active" href="#"></a>
+              <a href="#"> <i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
             <li class="shopcart">
-              <router-link to="/cart"
-                ><a class="cartbox_active" href="#"></a
-              ></router-link>
+              <router-link to="/cart" href="#"
+                ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </router-link>
             </li>
             <li class="user dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                href="#"
+              <a class="nav-link" data-toggle="dropdown" href="#"
+                ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
                 <router-link to="/viewprofile"
@@ -124,12 +122,14 @@ export default {
   text-align: right;
   cursor: pointer;
   text-decoration: none;
+  border: none;
 
   button {
+    color: rgba(0, 0, 0, 0.54);
     background: #ecd4b4;
-    margin-top: 23px;
-    border-radius: 5px;
-    width: 35%;
+    margin-top: 28px;
+    border: none;
+    width: 60%;
     height: auto;
   }
 }
@@ -189,7 +189,7 @@ export default {
 .mainmenu__nav .meninmenu li a {
   align-items: center;
   align-self: stretch;
-  color: #333;
+  color: rgba(0, 0, 0, 0.54);
   display: flex;
   font-size: 14px;
   font-weight: 600;
@@ -212,24 +212,16 @@ export default {
   align-self: stretch;
   display: flex;
 }
-.header__area .header__sidebar__right > li.shopcart > a {
-  background: rgba(0, 0, 0, 0) url("~@/assets/cart.png") no-repeat scroll 0
-    center;
-  cursor: pointer;
-  font-size: 0;
-  position: relative;
-  height: 100%;
-  width: 24px;
-}
-.header__area .header__sidebar__right > li.user > a {
-  background: rgba(0, 0, 0, 0) url("~@/assets/icon_setting.png") no-repeat
-    scroll 0 center;
-  cursor: pointer;
-  font-size: 0;
-  position: relative;
-  width: 30px;
-  height: 100%;
-}
+
+// .header__area .header__sidebar__right > li.user > a {
+//   background: rgba(0, 0, 0, 0) url("~@/assets/icon_setting.png") no-repeat
+//     scroll 0 center;
+//   cursor: pointer;
+//   font-size: 0;
+//   position: relative;
+//   width: 30px;
+//   height: 100%;
+// }
 .header__area .header__sidebar__right > li.shop_search > input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
   // border-radius: 8px;
@@ -241,47 +233,53 @@ export default {
   margin-right: 16px;
   font-size: 17px;
 }
-.header__area .header__sidebar__right > li.shop_search > a.search__active {
-  background: rgba(0, 0, 0, 0) url("~@/assets/search.png") no-repeat scroll 0
-    center;
-  cursor: pointer;
-  font-size: 0;
-  position: relative;
-  width: 30px;
-  height: 100%;
+
+.shop_search a {
+  color: rgba(0, 0, 0, 0.54);
 }
-.header__area .header__sidebar__right > li.shop_search > button.btn {
-  background: rgba(255, 255, 255, 0.8);
-  height: 46%;
-  color: gray;
-  padding: 6px;
-  margin-top: 8px;
-  margin-right: 0.1rem;
-  font-size: 17px;
+
+.shop_search a i:hover {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.shopcart a i {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.shopcart a i:hover {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.user {
+  a {
+    padding: 0;
+    i {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
+
+.user a i:hover {
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .mainmenu__nav .meninmenu li a:hover {
-  background: rgba(137, 113, 96, 0.3);
+  color: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 7px;
   text-decoration: none;
   outline: none;
 }
 
-.header__area .header__sidebar__right > li.shop_search > a:hover {
-  background: rgba(0, 0, 0, 0) url("~@/assets/search_white.png") no-repeat
-    scroll 0 center;
-}
-.header__area .header__sidebar__right > li.shopcart > a:hover {
-  background: rgba(0, 0, 0, 0) url("~@/assets/cart_white.png") no-repeat scroll
-    0 center;
-}
-.header__area .header__sidebar__right > li.user > a.search__active:hover {
-  background: rgba(0, 0, 0, 0) url("~@/assets/icon_setting_white.png") no-repeat
-    scroll 0 center;
-}
-
 // mobile menu
 .mobile-menu {
+  display: none;
+  @include mobile {
+    display: block;
+  }
+  @include tablet {
+    display: block;
+  }
   position: fixed;
   width: 100%;
   background: #ecd4b4;
@@ -295,7 +293,7 @@ export default {
       list-style: none;
     }
     a {
-      color: #333;
+      color: rgba(0, 0, 0, 0.54);
       display: flex;
       font-size: 14px;
       font-weight: 600;
@@ -306,7 +304,7 @@ export default {
       text-align: right;
     }
     a:hover {
-      color: white;
+      color: rgba(0, 0, 0, 0.87);
     }
   }
 }
