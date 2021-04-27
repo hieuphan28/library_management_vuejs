@@ -11,6 +11,12 @@ import ViewProfile  from '../views/ViewProfile.vue'
 import ChangePassword  from '../views/ChangePassword.vue'
 import Contact from '../views/Contact.vue'
 import ExtendLoan from '../views/ExtendLoan.vue'
+import ManageBook from '../views/ManageBook.vue'
+import AddBook from '../views/AddBook.vue'
+import AddBookItem from '../views/AddBookItem.vue'
+import UpdateBook from '../views/UpdateBook.vue'
+import IssueBook from '../views/IssueBook.vue'
+import ReturnBook from '../views/ReturnBook.vue'
 
 const routes = [
   {
@@ -68,7 +74,36 @@ const routes = [
     name: 'extendloan',
     component: ExtendLoan
   },
-
+  {
+    path: '/managebook',
+    name: 'managebook',
+    component: ManageBook
+  },
+  {
+    path: '/addbook',
+    name: 'addbook',
+    component: AddBook
+  },
+  {
+    path: '/addbookitem',
+    name: 'addbookitem',
+    component: AddBookItem
+  },
+  {
+    path: '/updatebook',
+    name: 'updatebook',
+    component: UpdateBook
+  },
+  {
+    path: '/issuebook',
+    name: 'issuebook',
+    component: IssueBook
+  },
+  {
+    path: '/returnbook',
+    name: 'returnbook',
+    component: ReturnBook
+  },
 
 ]
 
