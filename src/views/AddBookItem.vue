@@ -2,7 +2,7 @@
   <div class="container">
     <form class="add-item-form" action="" method="">
       <div class="row back">
-        <a href=""><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        <router-link to="/managebook"><i class="fa fa-arrow-left" aria-hidden="true"></i></router-link>
       </div>
 
       <div class="row title">

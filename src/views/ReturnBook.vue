@@ -4,7 +4,7 @@
     <div class="head">
       <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-12 col-12 issue">
-          <a href="">Issue Book</a>
+          <router-link to="/issuebook">Issue Book</router-link>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-12 col-12 return">
           <a href="">Return Book</a>

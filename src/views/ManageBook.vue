@@ -23,10 +23,12 @@
       >
         <div class="row allbook">
           <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+            <router-link to="/updatebook">
             <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
+            </router-link>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-7 col-7 book-info">
-            <div class="book-name">{{ book.book_name }}</div>
+            <router-link to="/updatebook"><div class="book-name">{{ book.book_name }}</div></router-link>
             <div class="info">
               <div class="book_descrip">{{ book.book_descrip }}</div>
               <div class="quantity">{{ book.quantity }} book(s)</div>
@@ -36,12 +38,11 @@
                 <a href=""><i class="fa fa-trash"></i>Delete </a>
               </button>
               <button class="btn d-block">
-                <a href=""><i class="fa fa-list" aria-hidden="true"></i>Edit</a>
+                <router-link to="/updatebook"><i class="fa fa-list" aria-hidden="true"></i>Edit</router-link>
               </button>
               <button class="btn d-block">
-                <a href=""
-                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book Item</a
-                >
+                <router-link to="/addbookitem"
+                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book Item</router-link>
               </button>
             </div>
           </div>
