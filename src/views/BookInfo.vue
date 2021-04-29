@@ -12,8 +12,10 @@ import BookProfies from "../components/BookProfies.vue";
 import Categories from "../components/Categories.vue";
 
 export default {
+  created () {
+  },
   components: { BookProfies, Categories },
-  name: "BookInfo",aaaaa
+  name: "BookInfo",
   
 };
 </script>
