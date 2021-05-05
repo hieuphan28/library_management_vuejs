@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="page-title">BORROWING HISTORY</div>
+    <div class="ex-title">EXTEND LOANS</div>
     <div class="row title">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">BORROWING ID</div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4">NAME</div>
@@ -41,7 +41,7 @@
         <div>Borrowed Date: {{ borrowHistory.borrowedDate }}</div>
         <div>Expected Date: {{ borrowHistory.expectedDate }}</div>
       </div>
-      <div
+      <!-- <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="borrowHistory.status == 'Finished'"
       >
@@ -53,7 +53,25 @@
         v-if="borrowHistory.status == 'Reserved'"
       >
         <div>Reserved Date: {{ borrowHistory.reservedDate }}</div>
-      </div>
+      </div> -->
+    </div>
+    <div>
+      <form class="extend-loan">
+        <label for="newDate">Number of Days</label>
+        <input type="text" id="newDate" />
+        <div class="extend-option">
+          <div>drop down button</div>
+          <select name="" id="">
+            <option
+              :value="option.value"
+              v-for="(option, index) in extendFee"
+              :key="index"
+            >
+            {{option.day}}  -  {{option.fee}}  $
+            </option>
+          </select>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -63,6 +81,20 @@ export default {
   name: "ExtendLoan",
   data() {
     return {
+      extendFee: [
+        {
+          day: "3",
+          fee: "5",
+        },
+        {
+          day: "7",
+          fee: "8",
+        },
+        {
+          day: "14",
+          fee: "12",
+        },
+      ],
       borrowHistories: [
         {
           id: 1,
@@ -79,48 +111,15 @@ export default {
           reservedDate: "7/02/2021",
           returnedDate: "11/02/2021",
         },
-        {
-          id: 2,
-          borrowId: "#7654321",
-          bookInfos: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 4, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 5, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 6, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$90",
-          status: "Finished",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-        {
-          id: 3,
-          borrowId: "#7654321",
-          bookInfos: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$90",
-          status: "Reserved",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
       ],
     };
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .container {
-  .page-title {
+  .ex-title {
     text-align: center;
     font-weight: 600;
     padding: 5%;
@@ -134,7 +133,7 @@ export default {
     text-align: center;
     padding: 2% 0 2% 0;
     align-items: center;
-    border-bottom: 1px solid #00000099;
+    // border-bottom: 1px solid #00000099;
 
     .borrowingID {
       div {
@@ -172,33 +171,34 @@ export default {
     .book-status {
     }
     .Borrowing {
-      background: #fdffae;
+      background: rgba(226, 226, 226, 0.5);
       border-radius: 18px;
       padding: 0.5rem 0.5rem;
       width: 80%;
       margin-left: auto;
       margin-right: auto;
     }
-    .Finished {
-      background: rgba(135, 255, 115, 0.7);
-      border-radius: 18px;
-      padding: 0.5rem 0.5rem;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .Reserved {
-      background: #ff9494 50%;
-      border-radius: 18px;
-      padding: 0.5rem 0.5rem;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    // .Finished {
+    //   background: rgba(135, 255, 115, 0.7);
+    //   border-radius: 18px;
+    //   padding: 0.5rem 0.5rem;
+    //   width: 80%;
+    //   margin-left: auto;
+    //   margin-right: auto;
+    // }
+    // .Reserved {
+    //   background: #ff9494 50%;
+    //   border-radius: 18px;
+    //   padding: 0.5rem 0.5rem;
+    //   width: 80%;
+    //   margin-left: auto;
+    //   margin-right: auto;
+    // }
     .book-date {
       div {
         padding: 5% 4% 0 4%;
       }
     }
-  }}
+  }
+}
 </style>

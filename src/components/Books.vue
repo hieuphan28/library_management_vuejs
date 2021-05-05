@@ -14,7 +14,7 @@
             {{ book.rentFee }}
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <button class="btn">
+            <button class="btn" >
               <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
@@ -27,6 +27,7 @@
 <script>
 export default {
   name: "Books",
+ emits: ["add-to-cart"],
   data() {
     return {
       books: [
@@ -53,6 +54,8 @@ export default {
       ],
     };
   },
+  
+  
 };
 </script>
 
