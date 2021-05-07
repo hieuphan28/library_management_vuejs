@@ -2,7 +2,12 @@
   <!-- <NavigationBar /> -->
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
-    <form class="login-form" action="" method="">
+    <form
+      @submit.prevent="HandleSubmit"
+      class="login-form"
+      action=""
+      method=""
+    >
       <div class="bar">
         <router-link to="/login"
           ><a href="#" class="login-bar active">Login</a></router-link
@@ -11,12 +16,12 @@
       </div>
       <h1>Login</h1>
       <div class="input-box">
-        <input type="text" placeholder="Username" />
+        <input v-model="username" type="text" placeholder="Username" />
         <img src="../assets/icon_setting_white.png" alt="" />
       </div>
       <div class="input-box">
         <i></i>
-        <input type="password" placeholder="Password" />
+        <input v-model="password" type="password" placeholder="Password" />
       </div>
       <div class="forgot-password">
         <a href="#">Forgot password?</a>
@@ -30,8 +35,42 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+// import HandleSubmit1 from "./views/Register.vue";
+// import script from "./views/Register.vue";
 export default {
   name: "Login",
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    async HandleSubmit() {
+      const response = await axios.post("https://lit-everglades-79316.herokuapp.com/api/login", {
+        id: this.id,
+        username: this.username,
+        password: this.password,
+      });
+      localStorage.setItem('token',response.data.token);
+      console.log(response);
+      this.$router.push("/");
+
+
+      // console.log(data);
+      //  axios
+      //   .post("http://localhost:3000/users", data)
+      //   .then(function(response) {
+      //     console.log(response);
+      //     // this.$router.push("/");
+      //     return response;
+      //   })
+      //   .catch(function(error) {
+      //     console.log(error);
+      //   });
+    },
+  },
   // data() {
   //   return {
   //     username: "",
@@ -176,4 +215,3 @@ export default {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 </style>
-
