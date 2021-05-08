@@ -1,20 +1,22 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row books">
       <div
         class="col-lg-4 col-md-6 col-sm-12 col-12"
         v-for="book in books"
         :key="book.id"
       >
-      <router-link to="/bookinfo"><img class="book-cover" src="../assets/book/gulliver.png" alt="" /></router-link>
-        
+        <router-link to="/bookinfo"
+          ><img class="book-cover" src="../assets/book/gulliver.png" alt=""
+        /></router-link>
+
         <div class="book-name">{{ book.book_name }}</div>
         <div class="row book-info">
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
             {{ book.rentFee }}
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <button class="btn" >
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6 cart">
+            <button class="btn">
               <i class="fas fa-shopping-cart"></i>
             </button>
           </div>
@@ -27,7 +29,7 @@
 <script>
 export default {
   name: "Books",
- emits: ["add-to-cart"],
+  emits: ["add-to-cart"],
   data() {
     return {
       books: [
@@ -54,33 +56,43 @@ export default {
       ],
     };
   },
-  
-  
 };
 </script>
 
 <style lang="scss" scoped>
 .row {
-  
+  margin-top: 7%;
 }
 .book-cover {
+  // margin-top: 12%;
   width: 100%;
   height: auto;
 }
-.book-name{
-    padding-top: 5%;
-    font-size: 20px;
-    
+.book-name {
+  padding-top: 5%;
+  font-size: large;
+  font-weight: bold;
 }
-.book-info{
-    padding: 2% 0 8% 0;
+.book-info {
+  margin-top: 0;
+  padding: 2% 0 5% 0;
+  color: rgba(0, 0, 0, 0.54);
+  align-items: center;
+  margin-bottom: 15%;
+  button i {
+    float: right;
     color: rgba(0, 0, 0, 0.54);
-    align-items: center;
-    i{
-         color: rgba(0, 0, 0, 0.54);
-         margin-right: auto;
-         font-size: 20px;
-;
-    }
+    font-size: large;
+    transition: 0.3s;
+  }
+  .cart{
+    text-align: right;
+  }
+  .btn{
+    padding: 0;
+  }
+  i:hover{
+    color: rgba(0, 0, 0, 0.87);
+  }
 }
 </style>

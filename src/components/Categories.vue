@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div>
       <div class="title">CATEGORIES:</div>
       <div class="filter" v-for="category in categories" :key="category.id">
@@ -27,21 +27,45 @@ export default {
       categories: [
         {
           id: 1,
-          name: "Action and Adventure",
+          name: "Textbook",
         },
         {
           id: 2,
-          name: "Art and Architecture",
+          name: "Magazine",
+        },
+        {
+          id: 3,
+          name: "Novel",
+        },
+        {
+          id: 4,
+          name: "Science Journal",
+        },
+        {
+          id: 5,
+          name: "Reference Book",
         },
       ],
       departments: [
         {
           id: 1,
-          name: "Action and Adventure",
+          name: "Engineering Department",
         },
         {
           id: 2,
-          name: "Art and Architecture",
+          name: "IT Department",
+        },
+        {
+          id: 3,
+          name: "Economic Department",
+        },
+        {
+          id: 4,
+          name: "Literature Department",
+        },
+        {
+          id: 5,
+          name: "Music Department",
         },
       ],
     };
@@ -51,12 +75,13 @@ export default {
 
 <style lang='scss' scoped>
 .title {
-  text-align: center;
+  text-align: left;
   font-size: x-large;
   font-weight: bold;
+  margin-bottom: 5%;
 }
 .filter {
-  padding: 5% 0;
+  padding: 3% 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   .category-name {
     a {

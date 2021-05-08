@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-5 col-5 left-side">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
           <div>
             <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
             <div class="row book-info">
@@ -15,11 +15,11 @@
             </div>
 
             <button class="btn">
-              Add to cart<i class="fas fa-shopping-cart"></i>
+             <a href=""><i class="fas fa-shopping-cart"></i> Add to cart</a>
             </button>
           </div>
         </div>
-        <div class="col-lg-7 col-md-7 col-sm-7 col-7 right-side">
+        <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
           <h1>{{ book_name }}</h1>
           <div>{{ description }}</div>
           <div class="row ">
@@ -85,8 +85,9 @@ export default {
   height: auto;
 }
 .book-info {
-  padding: 5%;
+  padding-top: 5%;
   .book-left {
+    font-size: small;
     text-align: right;
     font-style: italic;
     color: rgba(0, 0, 0, 0.5);
@@ -94,18 +95,31 @@ export default {
 }
 
 button {
+  margin-top: 10%;
   background: rgba(236, 212, 180, 1);
   border-radius: 10px;
-  width: 40%;
-  color: rgba(0, 0, 0, 0.54);
-
+  width: 150px;
+  text-decoration: none;
+  padding-bottom: 2%;
+  a{
+    color: rgba(0, 0, 0, 0.54);
+    transition: 0.3s;
+  }
   i {
     position: relative;
-    width: 50%;
+    width: auto;
+    margin-right: 5%;
   }
 }
+
 button:hover {
-  color: white;
+  background: #ffe5c3;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+a:hover {
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
 }
 
 ul {

@@ -83,6 +83,10 @@
       </div>
     </div>
 
+    <div class="fine">
+      
+    </div>
+
     <!-- BOOK RESERVED -->
     <div class="book">
       <div class="row title">
