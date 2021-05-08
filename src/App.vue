@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// import axios from "axios";
 import NavigationBar from "./components/NavigationBar.vue";
 import Footer from "./components/Footer.vue";
 
@@ -18,6 +19,11 @@ export default {
     NavigationBar,
     Footer,
   },
+    async created(){
+    const response = await axios.get("user");
+     
+    console.log(response);
+}
 };
 </script>
 

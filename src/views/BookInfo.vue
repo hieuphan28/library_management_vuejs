@@ -13,7 +13,6 @@ import Carousel from '../components/Carousel.vue';
 import Categories from "../components/Categories.vue";
 
 export default {
-  components: { BookProfies, Categories, Carousel },
   name: "BookInfo",
   
 };

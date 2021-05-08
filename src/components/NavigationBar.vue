@@ -4,7 +4,9 @@
       <div class="row">
         <div class="col-2 col-md-4 col-lg-2">
           <div class="logo">
+            <router-link to="/">
             <img src="../assets/logo.png" alt="logo images" />
+            </router-link>
           </div>
         </div>
         <div class="col-lg-6 mainmenu">
