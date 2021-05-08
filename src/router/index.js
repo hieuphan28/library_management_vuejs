@@ -17,6 +17,8 @@ import AddBookItem from '../views/AddBookItem.vue'
 import UpdateBook from '../views/UpdateBook.vue'
 import IssueBook from '../views/IssueBook.vue'
 import ReturnBook from '../views/ReturnBook.vue'
+import AddCategory from '../views/AddCategory.vue'
+import AddDepartment from '../views/AddDepartment.vue'
 
 const routes = [
   {
@@ -103,6 +105,16 @@ const routes = [
     path: '/returnbook',
     name: 'returnbook',
     component: ReturnBook
+  },
+  {
+    path: '/addcategory',
+    name: 'addcategory',
+    component: AddCategory
+  },
+  {
+    path: '/adddepartment',
+    name: 'adddepartment',
+    component: AddDepartment
   },
 
 ]
