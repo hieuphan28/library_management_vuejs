@@ -5,7 +5,7 @@
         <div class="col-2 col-md-4 col-lg-2">
           <div class="logo">
             <router-link to="/">
-            <img src="../assets/logo.png" alt="logo images" />
+              <img src="../assets/logo.png" alt="logo images" />
             </router-link>
           </div>
         </div>
@@ -47,10 +47,11 @@
                 ><a class="cartbox_active" href="#"></a
               ></router-link>
             </li>
-            <li class="user dropdown">
+            <li v-if="user" class="user dropdown">
               <a
                 class="nav-link dropdown-toggle"
                 data-toggle="dropdown"
+                @click="checkLogin"
                 href="#"
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
@@ -71,6 +72,16 @@
                   View Borrowing Settings</router-link
                 >
               </div>
+            </li>
+            <li v-if="!user" class="user dropdown">
+              <router-link to="/login">
+              <a
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                @click="checkLogin"
+                href="#"
+              ></a>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -93,15 +104,21 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "Header",
-  data: () => {
+  prop:["user"],
+  data() {
     return {
       showNav: false,
+      // userLogin: null,
     };
   },
+  // methods: {
+  //   checkLogin(){
+  //     if()
+  //   }
+  // }
 };
 </script>
 

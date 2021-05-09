@@ -16,12 +16,12 @@
       </div>
       <h1>Login</h1>
       <div class="input-box">
-        <input v-model="username" type="text" placeholder="Username" />
+        <input v-model="username" type="string" placeholder="Username" />
         <img src="../assets/icon_setting_white.png" alt="" />
       </div>
       <div class="input-box">
         <i></i>
-        <input v-model="password" type="password" placeholder="Password" />
+        <input v-model="password" type="string" placeholder="Password" />
       </div>
       <div class="forgot-password">
         <a href="#">Forgot password?</a>
