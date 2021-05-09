@@ -326,7 +326,7 @@ export default {
 }
 
 button {
-  width: 13%;
+  width: 130px;
   margin-left: 44%;
   background: rgba(236, 212, 180, 1);
   border-radius: 10px;
