@@ -21,6 +21,9 @@
       <div class="forgot-password">
         <a href="#">Forgot password?</a>
       </div>
+      <div>
+        <p id="Login" style="color:red"></p>
+      </div>
       <div class="btn-box">
         <a href="">
           <button type="submit">Login</button>
@@ -43,19 +46,20 @@ export default {
   },
   methods: {
     async HandleSubmit() {
-      const response = await axios
+      await axios
         .post("login", {
           id: this.id,
           username: this.username,
           password: this.password,
         })
         .then((response) => {
-          localStorage.setItem("token", response.data.token);
-          console.log(response);
+          localStorage.setItem("token", response.data.data.token);
+          console.log(response.data.data.token);
           this.$router.push("/");
         })
         .catch((error) => {
-          console.log(error.response.meta.meta.message);
+          document.getElementById("Login").innerHTML = error.response.data.meta.message;
+          console.log(error.response.data.meta.message);
         });
 
       // console.log(data);

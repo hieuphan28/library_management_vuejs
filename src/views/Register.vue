@@ -41,7 +41,7 @@
         <span v-if="ErrorPassword">{{ErrorPassword}}</span>
         <span v-if="ErrorEmail">{{ErrorEmail}}</span>
         <span v-if="error">{{}}</span> -->
-        <p id="demo" style="color:red"></p>
+        <p id="ErrorRegister" style="color:red"></p>
       </div>
       <div class="btn-box">
         <a href="">
@@ -89,8 +89,8 @@ export default {
           console.log(response);
         })
         .catch((error) => {
-          document.getElementById("demo").innerHTML = error.message;
-          // console.log(error.response.meta.meta.message);
+          document.getElementById("ErrorRegister").innerHTML = error.response.data.meta.message;
+          console.log(error.response.data.meta.message);
 
         });
 
