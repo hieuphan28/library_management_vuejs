@@ -22,7 +22,7 @@
         <a href="#">Forgot password?</a>
       </div>
       <div>
-        <p id="Login" style="color:red"></p>
+        <span id="Login"></span>
       </div>
       <div class="btn-box">
         <a href="">
@@ -164,6 +164,10 @@ export default {
 }
 .login-form .forgot-password a {
   color: rgba(0, 0, 0, 0.38);
+}
+#Login span {
+  color: red;
+  font-style: italic;
 }
 /*Edit Button*/
 .login-form .btn-box a button {

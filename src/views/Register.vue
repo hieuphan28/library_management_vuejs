@@ -18,7 +18,13 @@
       </div>
       <div class="input-box">
         <span>Password:</span>
-        <input v-model="password" type="string" placeholder="" required maxlength="8" />
+        <input
+          v-model="password"
+          type="password"
+          placeholder=""
+          required
+          maxlength="8"
+        />
       </div>
       <div class="input-box">
         <span>Email:</span>
@@ -30,7 +36,7 @@
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input v-model="dob" type="string" placeholder="" required />
+        <input v-model="dob" type="date" placeholder="" required />
       </div>
       <div class="input-box">
         <span>Address:</span>
@@ -41,7 +47,8 @@
         <span v-if="ErrorPassword">{{ErrorPassword}}</span>
         <span v-if="ErrorEmail">{{ErrorEmail}}</span>
         <span v-if="error">{{}}</span> -->
-        <p id="ErrorRegister" style="color:red"></p>
+
+        <span id="ErrorRegister"></span>
       </div>
       <div class="btn-box">
         <a href="">
@@ -89,9 +96,9 @@ export default {
           console.log(response);
         })
         .catch((error) => {
-          document.getElementById("ErrorRegister").innerHTML = error.response.data.meta.message;
+          document.getElementById("ErrorRegister").innerHTML =
+            error.response.data.meta.message;
           console.log(error.response.data.meta.message);
-
         });
 
       // .catch()
@@ -194,6 +201,10 @@ body {
   box-sizing: border-box;
   border-radius: 6px;
   padding: 0.5% 0 0.5% 2%;
+}
+#ErrorRegister span {
+  color: red;
+  font-style: italic;
 }
 /*Edit Button*/
 .create-account-form .btn-box {
