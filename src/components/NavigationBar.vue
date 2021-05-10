@@ -107,10 +107,11 @@
 <script>
 export default {
   name: "Header",
-  prop:["user"],
+  props:["user"],
   data() {
     return {
       showNav: false,
+      user:null,
       // userLogin: null,
     };
   },

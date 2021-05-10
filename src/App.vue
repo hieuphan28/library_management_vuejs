@@ -20,14 +20,7 @@ export default {
     Footer,
   },
   async created() {
-    const response = await axios.get(
-      "https://lit-everglades-79316.herokuapp.com/api/profile",
-      {
-        headers: {
-          Authorization: "Bearer" + localStorage.getItem("token"),
-        },
-      }
-    );
+    const response = await axios.get("user");
 
     console.log(response);
   },

@@ -2,12 +2,7 @@
   <!-- <NavigationBar /> -->
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
-    <form
-      @submit.prevent="HandleSubmit"
-      class="login-form"
-      action=""
-      method=""
-    >
+    <form @submit.prevent="HandleSubmit" class="login-form" action="" method="">
       <div class="bar">
         <router-link to="/login"
           ><a href="#" class="login-bar active">Login</a></router-link
@@ -48,15 +43,20 @@ export default {
   },
   methods: {
     async HandleSubmit() {
-      const response = await axios.post("https://lit-everglades-79316.herokuapp.com/api/login", {
-        id: this.id,
-        username: this.username,
-        password: this.password,
-      });
-      localStorage.setItem('token',response.data.token);
-      console.log(response);
-      this.$router.push("/");
-
+      const response = await axios
+        .post("login", {
+          id: this.id,
+          username: this.username,
+          password: this.password,
+        })
+        .then((response) => {
+          localStorage.setItem("token", response.data.token);
+          console.log(response);
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.log(error.response.meta.meta.message);
+        });
 
       // console.log(data);
       //  axios

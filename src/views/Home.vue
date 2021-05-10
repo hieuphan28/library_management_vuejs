@@ -16,7 +16,7 @@ export default {
     NewBooks,
     AllBooks,
   },
-  // props: ["user"]
+  props: ["user"]
 
 };
 </script>
