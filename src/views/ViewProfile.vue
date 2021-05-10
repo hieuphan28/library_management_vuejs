@@ -1,31 +1,41 @@
 <template>
   <div class="personal">
     <img src="../assets/carousel/3.jpg" alt="./img/3.jpg" />
-    <form class="personal-form" action="" method="">
+    <form @submit.prevent="Handlesubmit" class="personal-form" action="" method="">
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
-        <input type="text" placeholder="#1234" readonly="true" />
+        <input
+          type="text"
+          placeholder="#1234"
+          readonly="true"
+          v-model="userId"
+        />
       </div>
       <div class="input-box">
         <span>Username:</span>
-        <input type="text" placeholder="danalib123" readonly="true" />
+        <input
+          type="text"
+          placeholder="danalib123"
+          readonly="true"
+          v-model="username"
+        />
       </div>
       <div class="input-box">
         <span>Email:</span>
-        <input type="text" placeholder="danalib123@gmail.com" />
+        <input type="text" placeholder="danalib123@gmail.com" v-model="email" />
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input type="text" placeholder="01238675162" />
+        <input type="text" placeholder="01238675162" v-model="phone" />
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input type="text" placeholder="1999/6/12" />
+        <input type="text" placeholder="1999/6/12" v-model="dob" />
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input type="text" placeholder="123 ABC" />
+        <input type="text" placeholder="123 ABC" v-model="address" />
       </div>
       <div class="btn-box">
         <a href="./update.html">
@@ -37,8 +47,38 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "ViewProfile",
+  data() {
+    return{
+      userId:"",
+      username:"",
+      email:"",
+      phone:"",
+      dob:"",
+      address:"",
+    }
+  },
+
+  methods:{
+    async Handlesubmit(){
+      await axios.get("https://lit-everglades-79316.herokuapp.com/api/profile",{
+          userId: this.userId,
+          username: this.username,
+          password: this.password,
+          email: this.email,
+          phone: this.phone,
+          dob: this.dob,
+          address: this.address,
+      })
+      .then((response) =>{
+        console.log(response);
+      })
+    }
+  }
+
 };
 </script>
 
