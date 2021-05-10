@@ -5,8 +5,6 @@
     <form
       @submit.prevent="HandleSubmit"
       class="login-form"
-      action=""
-      method=""
     >
       <div class="bar">
         <router-link to="/login"
@@ -27,19 +25,19 @@
         <a href="#">Forgot password?</a>
       </div>
       <div class="btn-box">
-        <a href="">
-          <button type="submit">Login</button>
-        </a>
+          <button @click="login({username, password})">Login</button>
       </div>
     </form>
   </div>
 </template>
 <script>
-import axios from "axios";
-// import HandleSubmit1 from "./views/Register.vue";
-// import script from "./views/Register.vue";
+import { mapActions, mapGetters, mapState } from "vuex";
+
 export default {
   name: "Login",
+  computed: mapState('auth', {
+    currentUser: state => state.currentUser
+  }),
   data() {
     return {
       username: "",
@@ -47,42 +45,18 @@ export default {
     };
   },
   methods: {
-    async HandleSubmit() {
-      const response = await axios.post("https://lit-everglades-79316.herokuapp.com/api/login", {
-        id: this.id,
-        username: this.username,
-        password: this.password,
-      });
-      localStorage.setItem('token',response.data.token);
-      console.log(response);
-      this.$router.push("/");
-
-
-      // console.log(data);
-      //  axios
-      //   .post("http://localhost:3000/users", data)
-      //   .then(function(response) {
-      //     console.log(response);
-      //     // this.$router.push("/");
-      //     return response;
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
-    },
+    ...mapActions('auth', ['login']) 
   },
-  // data() {
-  //   return {
-  //     username: "",
-  //     password: "",
-  //   };
-  // },
-  // methods: {
-  //   sendLoginInfo() {
-  //     console.log(this.username,this.password);
-  //     // console.log(this.password);
-  //   },
-  // },
+  watch: {
+    currentUser: { 
+      deep: true,
+      handler(newValue) {
+        alert('xin chao cac ban')
+        if (newValue != null) 
+          alert(newValue);
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
