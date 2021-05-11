@@ -5,6 +5,7 @@
         <ul>
           <li>Reserved Date:</li>
           <li>Expected Return Date :</li>
+          <li>Expected Return Date :</li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
@@ -83,11 +84,10 @@ export default {
       reservedDate: "",
       returnedDate: "",
       checkDate: false,
-      cart: []
+      carts: items,
     };
   },
- 
-}
+};
 </script>
 
 <style lang="scss" scoped>
