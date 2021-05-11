@@ -3,7 +3,7 @@
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form
-      @submit.prevent="HandleSubmit"
+      @submit.prevent="handleLogin({username, password})"
       class="login-form"
     >
       <div class="bar">
@@ -25,13 +25,16 @@
         <a href="#">Forgot password?</a>
       </div>
       <div class="btn-box">
-          <button @click="handleLogin({username, password})">Login</button>
+        <a>
+          <button type="submit">Login</button>
+        </a>
       </div>
     </form> 
   </div>
 </template>
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
+import store from "../store";
 
 export default {
   name: "Login",

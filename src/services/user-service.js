@@ -6,25 +6,34 @@ const apiPrefix = appManager.getApiPrefix();
 
 const login = ({username, password}, cb) => {
     axios.post(`${apiPrefix}/login`, {
-        username,
-        password,
-    }).then(res => {
-        handleResponse(res, cb);
-    }).catch(err => {
-        throw err;
-    });
+            username,
+            password,
+        }).then(res => {
+            handleResponse(res, cb);
+        }).catch(err => {
+            throw err;
+        });
 }
 
 const register = (data, cb) => {
     axios.post(`${apiPrefix}/registration`, data)
         .then(res => {
-            handleResponse(res);
+            handleResponse(res, cb);
         }).catch(err => {
+            throw err;
+        });
+}
+
+const getProfile = (cb) => {
+    axios.get(`${apiPrefix}/profile`)
+        .then(res => handleResponse(res, cb))
+        .catch(err => {
             throw err;
         });
 }
 
 export {
     login,
-    register
-};
+    register,
+    getProfile,
+}

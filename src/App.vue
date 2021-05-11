@@ -25,7 +25,10 @@ export default {
     const hostname = getHostName();
     console.log(hostname);
   },
-  store: store
+  store: store,
+  beforeMount: function() {
+    store.dispatch('auth/checkAuth')
+  }
 };
 </script>
 
