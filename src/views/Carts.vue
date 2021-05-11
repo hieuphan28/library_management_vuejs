@@ -4,7 +4,8 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-3 detail-left">
         <ul>
           <li>Reserved Date:</li>
-          <li>Expected Return Date:</li>
+          <li>Expected Return Date
+            :</li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
@@ -77,6 +78,7 @@
 
 <script>
 import moment from "moment";
+import items from '../store/item.js'
 export default {
   name: "Carts",
   data() {
@@ -84,47 +86,7 @@ export default {
       reservedDate: "",
       returnedDate: "",
       checkDate: false,
-      carts: [
-        {
-          id: 1,
-          book_name: "Gulliver's Travel",
-          quantity: "1",
-          price: "$60",
-          total: "$60",
-        },
-        {
-          id: 2,
-          book_name: "Gulliver's Travel",
-          quantity: "1",
-          price: "$60",
-          total: "$60",
-          date: "",
-        },
-        {
-          id: 3,
-          book_name: "Gulliver's Travel",
-          quantity: "1",
-          price: "$60",
-          total: "$60",
-          date: "",
-        },
-        {
-          id: 4,
-          book_name: "Gulliver's Travel",
-          quantity: "1",
-          price: "$60",
-          total: "$60",
-          date: "",
-        },
-        {
-          id: 5,
-          book_name: "Gulliver's Travel",
-          quantity: "1",
-          price: "$60",
-          total: "$60",
-          date: "",
-        },
-      ],
+      carts: items
     };
   },
   methods: {
