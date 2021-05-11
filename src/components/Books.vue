@@ -1,24 +1,22 @@
 <template>
   <div class="container-fluid">
-    <div class="row books">
+    <div class="row">
       <div
         class="col-lg-4 col-md-6 col-sm-12 col-12"
-        v-for="book in books"
-        :key="book.id"
+        v-for="item in shop"
+        :key="item.id"
       >
         <router-link to="/bookinfo"
           ><img class="book-cover" src="../assets/book/gulliver.png" alt=""
         /></router-link>
 
-        <div class="book-name">{{ book.book_name }}</div>
+        <div class="book-name">{{ item.book_name }}</div>
         <div class="row book-info">
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            {{ book.rentFee }}
+            {{ item.rentFee }}
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6 cart">
-            <button class="btn">
-              <i class="fas fa-shopping-cart"></i>
-            </button>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+            <i class="fas fa-shopping-cart"> </i>
           </div>
         </div>
       </div>
@@ -27,72 +25,39 @@
 </template>
 
 <script>
+import items from "../store/item.js";
 export default {
   name: "Books",
-  emits: ["add-to-cart"],
   data() {
     return {
-      books: [
-        {
-          id: 1,
-          book_name: "Gulliver's Travel",
-          rentFee: "10$",
-        },
-        {
-          id: 2,
-          book_name: "Gulliver's Travel",
-          rentFee: "10$",
-        },
-        {
-          id: 3,
-          book_name: "Gulliver's Travel",
-          rentFee: "10$",
-        },
-        {
-          id: 4,
-          book_name: "Gulliver's Travel",
-          rentFee: "10$",
-        },
-      ],
+      shop: items,
+      cart: [],
     };
   },
+  
 };
 </script>
 
 <style lang="scss" scoped>
 .row {
-  margin-top: 7%;
 }
 .book-cover {
-  // margin-top: 12%;
   width: 100%;
   height: auto;
 }
 .book-name {
   padding-top: 5%;
-  font-size: large;
-  font-weight: bold;
+  font-size: 20px;
 }
 .book-info {
-  margin-top: 0;
-  padding: 2% 0 5% 0;
+  padding: 2% 0 8% 0;
   color: rgba(0, 0, 0, 0.54);
   align-items: center;
-  margin-bottom: 15%;
-  button i {
-    float: right;
+  i {
     color: rgba(0, 0, 0, 0.54);
-    font-size: large;
-    transition: 0.3s;
-  }
-  .cart{
-    text-align: right;
-  }
-  .btn{
-    padding: 0;
-  }
-  i:hover{
-    color: rgba(0, 0, 0, 0.87);
+    margin-right: auto;
+    font-size: 20px;
   }
 }
 </style>
+
