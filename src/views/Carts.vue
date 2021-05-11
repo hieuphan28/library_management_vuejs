@@ -4,8 +4,12 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-3 detail-left">
         <ul>
           <li>Reserved Date:</li>
+<<<<<<< HEAD
           <li>Expected Return Date
             :</li>
+=======
+          <li>Expected Return Date :</li>
+>>>>>>> bd8ed81a43182e3ba4385c7d7817f461fc349e63
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
@@ -42,7 +46,7 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">TOTAL</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1"></div>
     </div>
-    <div class="row info" v-for="(cart, index) in carts" :key="index">
+    <div class="row info" v-for="(cart, index) in cart" :key="index">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">
         <div>
           <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
@@ -51,9 +55,6 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-3 book-name">
         <div>
           {{ cart.book_name }}
-          {{ reservedDate }}
-          {{ time }}
-          {{ cart.quantity }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
@@ -68,7 +69,7 @@
         <div>{{ cart.total }}</div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1 icon">
-        <button @click="deleteCart(index)">
+        <button @click="removeFromCart(index)">
           <img src="../assets/Bin.png" alt="" />
         </button>
       </div>
@@ -78,7 +79,12 @@
 
 <script>
 import moment from "moment";
+<<<<<<< HEAD
 import items from '../store/item.js'
+=======
+import items from "../store/item.js";
+
+>>>>>>> bd8ed81a43182e3ba4385c7d7817f461fc349e63
 export default {
   name: "Carts",
   data() {
@@ -86,24 +92,15 @@ export default {
       reservedDate: "",
       returnedDate: "",
       checkDate: false,
+<<<<<<< HEAD
       carts: items
+=======
+      cart: []
+>>>>>>> bd8ed81a43182e3ba4385c7d7817f461fc349e63
     };
   },
-  methods: {
-    deleteCart(index) {
-      return this.carts.splice(index, 1);
-    },
-  },
-  computed: {
-    showTotalRentFee() {
-      return (
-        (new Date(this.returnedDate).getTime() -
-          new Date(this.reservedDate).getTime()) /
-        (24 * 3600 * 1000)
-      );
-    },
-  },
-};
+ 
+}
 </script>
 
 <style lang="scss" scoped>

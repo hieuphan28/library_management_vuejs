@@ -1,10 +1,24 @@
 <template>
   <div class="container">
     <div class="row head">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-6 left">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left">
         <button class="btn d-block">
           <router-link to="/addbook"
-            >Add New Book <i class="fa fa-plus" aria-hidden="true"></i>
+            ><i class="fa fa-plus" aria-hidden="true"></i>Add New Book 
+          </router-link>
+        </button>
+      </div>
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left">
+        <button class="btn d-block">
+          <router-link to="/addbook"
+            ><i class="fa fa-plus" aria-hidden="true"></i>Add Category
+          </router-link>
+        </button>
+      </div>
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left">
+        <button class="btn d-block">
+          <router-link to="/addbook"
+            ><i class="fa fa-plus" aria-hidden="true"></i>Add Department
           </router-link>
         </button>
       </div>
@@ -24,25 +38,36 @@
         <div class="row allbook">
           <div class="col-lg-5 col-md-5 col-sm-5 col-5">
             <router-link to="/updatebook">
-            <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
+              <img
+                class="book-cover"
+                src="../assets/book/gulliver.png"
+                alt=""
+              />
             </router-link>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-7 col-7 book-info">
-            <router-link to="/updatebook"><div class="book-name">{{ book.book_name }}</div></router-link>
+            <router-link to="/updatebook"
+              ><div class="book-name">{{ book.book_name }}</div></router-link
+            >
             <div class="info">
               <div class="book_descrip">{{ book.book_descrip }}</div>
               <div class="quantity">{{ book.quantity }} book(s)</div>
             </div>
             <div>
-              <button class="btn d-block">
+              <button class="btn d-block" >
                 <a href=""><i class="fa fa-trash"></i>Delete </a>
               </button>
               <button class="btn d-block">
-                <router-link to="/updatebook"><i class="fa fa-list" aria-hidden="true"></i>Edit</router-link>
+                <router-link to="/updatebook"
+                  ><i class="fa fa-list" aria-hidden="true"></i
+                  >Edit</router-link
+                >
               </button>
               <button class="btn d-block">
                 <router-link to="/addbookitem"
-                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book Item</router-link>
+                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book
+                  Item</router-link
+                >
               </button>
             </div>
           </div>
@@ -102,13 +127,14 @@ export default {
 
     i {
       align-content: center;
-      margin-left: 10%;
+    
     }
   }
 
   .search {
     text-align: right;
     input {
+      // width: 20px;
       background: rgba(255, 255, 255, 0.8);
       border: 1px solid rgba(0, 0, 0, 0.28);
       box-sizing: border-box;

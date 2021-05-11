@@ -48,38 +48,33 @@
     <!-- MONEY -->
     <div class="money">
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12 left-side">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm- 6 col-6 name">
-              <ul>
-                <li>Return Date:</li>
-                <li>Late:</li>
-              </ul>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
-              <ul>
-                <li><input type="text" placeholder="" /></li>
-                <li><input type="text" placeholder="" /></li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 name">
+          <ul>
+            <li>Return Date:</li>
+            <li>Late:</li>
+            <li>Money Receive:</li>
+            <li>Money Exchange:</li>
+            <li>Fine:</li>
+          </ul>
+          <!-- <div class="deposit">Return Date:</div>
+          <div class="moneyr">Late:</div>
+          <div class="moneyr">Money Receive:</div>
+          <div class="moneyr">Money Exchange:</div>
+          <div class="moneyr">Fine:</div> -->
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12 right-side">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm- 6 col-6 name">
-              <ul>
-                <li>Money Receive:</li>
-                <li>Money Exchange:</li>
-              </ul>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
-              <ul>
-                <li><input type="text" placeholder="" /></li>
-                <li><input type="text" placeholder="" /></li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
+          <ul>
+          <li> <input type="text" placeholder="" /></li>
+           <li> <input type="text" placeholder="" /></li>
+           <li> <input type="text" placeholder="" /></li>
+           <li> <input type="text" placeholder="" /></li>
+           <li> <input type="text" placeholder="" /></li>
+          
+          </ul>
+          
         </div>
+
+
       </div>
     </div>
 
@@ -223,7 +218,7 @@ export default {
       border: 1px solid rgba(0, 0, 0, 0.28);
       box-sizing: border-box;
       border-radius: 8px;
-      padding: 1% 2% 1% 2%;
+      padding: 0.5% 1% 0.5% 1%;
     }
     i {
       margin-left: 2%;
@@ -276,19 +271,20 @@ export default {
     text-align: right;
     font-weight: bold;
     ul li{
-      margin-top: 5% ;
+      padding-bottom: 2.3%;
     }
   }
   .input {
     text-align: left;
+
+    ul li{
+      padding-bottom: 1%;
+    }
     input {
       border-radius: 8px;
       border: 0.25px solid rgba(0, 0, 0, 0.38);
-      padding: 1% 0 1% 0;
-    }
-
-    ul li{
-      margin-top: 4% ;
+     
+      padding: 0.5% 0 0.5% 0;
     }
   }
 }
@@ -345,7 +341,7 @@ export default {
 }
 
 button {
-  width: 13%;
+  width: 130px;
   margin-left: 44%;
   background: rgba(236, 212, 180, 1);
   border-radius: 10px;

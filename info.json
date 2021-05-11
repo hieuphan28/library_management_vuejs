@@ -1,0 +1,22 @@
+{
+  "register": [
+    {
+      "id": 1,
+      "username": "long",
+      "password": "dean",
+      "email": "deanlong1305@gmail.com",
+      "phone": "0938340922",
+      "dob": "1999-12-05",
+      "address": "131 Huy can"
+    },
+    {
+      "id": 2,
+      "username": "nhung",
+      "password": "dean",
+      "email": "lnhung2111@gmail.com",
+      "phone": "0905596093",
+      "dob": "2001-02-11",
+      "address": "111 Ong Ich Khiem"
+    }
+  ]
+}

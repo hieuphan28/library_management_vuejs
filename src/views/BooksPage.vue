@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <categories class="col-lg-3 col-md-3 col-sm-3 col-3"> </categories>
-      <books class="col-lg-9 col-md-9 col-sm-9 col-9"> </books>
+      <books class="col-lg-9 col-md-9 col-sm-6 col-6"> </books>
     </div>
   </div>
 </template>
@@ -21,7 +21,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container-fluid{
+.container{
+
     padding: 3%;
 }
 </style>

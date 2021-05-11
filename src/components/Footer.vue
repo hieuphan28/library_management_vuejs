@@ -2,8 +2,8 @@
 <footer>
       <div class="container">
           <div class="contact-footer">
-            <div class="contactus">Contact us: </div>
-            <a href="#">Danalib@gmail.com</a>
+            <div class="contactus">Contact us: <a href="#">Danalib@gmail.com</a> </div>
+            
           </div>
           <div class="company">&copy; Copyright 2021 Danalib</div>
       </div>
@@ -20,7 +20,6 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 100%;
   background-color:  #ECD4B4;
   text-align: center;
  
@@ -33,13 +32,11 @@ footer .container {
 footer .contact {
   font-family: Lato;
   font-style: italic;
-  font-weight: normal;
-  font-size: large;
+  font-size: medium;
   text-align: center;
 }
 footer .contact .contactus {
   font-weight: bold;
-  font-style: normal;
   display: inline;
   text-decoration-line: underline;
 }
@@ -52,7 +49,6 @@ footer .contact a:hover{
   color: red;
 }
 footer .container .company {
-  margin-top: 1%;
   font-size: medium;
 }
 

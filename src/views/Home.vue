@@ -2,7 +2,6 @@
   <Carousel />
   <NewBooks />
   <AllBooks />
-
 </template>
 
 <script>
@@ -15,11 +14,11 @@ export default {
   components: {
     Carousel,
     NewBooks,
-    AllBooks
-
+    AllBooks,
   },
+  // props: ["user"]
+
 };
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
