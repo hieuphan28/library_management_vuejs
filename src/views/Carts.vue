@@ -4,12 +4,8 @@
       <div class="col-lg-3 col-md-3 col-sm-3 col-3 detail-left">
         <ul>
           <li>Reserved Date:</li>
-<<<<<<< HEAD
-          <li>Expected Return Date
-            :</li>
-=======
           <li>Expected Return Date :</li>
->>>>>>> bd8ed81a43182e3ba4385c7d7817f461fc349e63
+          <li>Expected Return Date :</li>
         </ul>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
@@ -79,12 +75,8 @@
 
 <script>
 import moment from "moment";
-<<<<<<< HEAD
-import items from '../store/item.js'
-=======
 import items from "../store/item.js";
 
->>>>>>> bd8ed81a43182e3ba4385c7d7817f461fc349e63
 export default {
   name: "Carts",
   data() {
@@ -92,15 +84,10 @@ export default {
       reservedDate: "",
       returnedDate: "",
       checkDate: false,
-<<<<<<< HEAD
-      carts: items
-=======
-      cart: []
->>>>>>> bd8ed81a43182e3ba4385c7d7817f461fc349e63
+      carts: items,
     };
   },
- 
-}
+};
 </script>
 
 <style lang="scss" scoped>
