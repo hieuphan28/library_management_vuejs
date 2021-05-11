@@ -12,11 +12,16 @@
       <h1>Login</h1>
       <div class="input-box">
         <input v-model="username" type="string" placeholder="Username" />
-        <img src="../assets/icon_setting_white.png" alt="" />
+        <img src="../assets/icon_setting.png" alt="" />
       </div>
       <div class="input-box">
-        <i></i>
-        <input v-model="password" type="string" placeholder="Password" />
+        <input id="myInput" v-model="password" type="password" placeholder="Password" />
+        <img
+          class="eye"
+          src="../assets/eye.svg"
+          alt=""
+          @click="myFunction()"
+        />
       </div>
       <div class="forgot-password">
         <a href="#">Forgot password?</a>
@@ -58,7 +63,8 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          document.getElementById("Login").innerHTML = error.response.data.meta.message;
+          document.getElementById("Login").innerHTML =
+            error.response.data.meta.message;
           console.log(error.response.data.meta.message);
         });
 
@@ -73,6 +79,15 @@ export default {
       //   .catch(function(error) {
       //     console.log(error);
       //   });
+    },
+
+    myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
     },
   },
   // data() {
@@ -136,9 +151,12 @@ export default {
 }
 .login-form .input-box > img {
   float: right;
-  width: 7%;
+  width: 6%;
   position: relative;
   margin-top: -25px;
+}
+.login-form .input-box .eye {
+  cursor: pointer;
 }
 .login-form .input-box {
   margin-bottom: 25px;
