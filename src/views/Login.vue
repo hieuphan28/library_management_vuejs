@@ -25,9 +25,9 @@
         <a href="#">Forgot password?</a>
       </div>
       <div class="btn-box">
-          <button @click="login({username, password})">Login</button>
+          <button @click="handleLogin({username, password})">Login</button>
       </div>
-    </form>
+    </form> 
   </div>
 </template>
 <script>
@@ -35,8 +35,8 @@ import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   name: "Login",
-  computed: mapState('auth', {
-    currentUser: state => state.currentUser
+  computed: mapState({
+    currentUser: state => state.auth.currentUser
   }),
   data() {
     return {
@@ -45,16 +45,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions('auth', ['login']) 
+    ...mapActions('auth', {
+      handleLogin: 'login'
+    })
   },
   watch: {
-    currentUser: { 
-      deep: true,
-      handler(newValue) {
-        alert('xin chao cac ban')
-        if (newValue != null) 
-          alert(newValue);
-      }
+    currentUser: {
+      handler: function(user) {
+        if (user && user.token)
+          alert('Dang nhap thanh cong')
+      },
+      deep: true
     }
   }
 };

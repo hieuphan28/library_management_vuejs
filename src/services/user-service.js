@@ -9,7 +9,7 @@ const login = ({username, password}, cb) => {
         username,
         password,
     }).then(res => {
-        handleResponse(res);
+        handleResponse(res, cb);
     }).catch(err => {
         throw err;
     });
