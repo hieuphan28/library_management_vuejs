@@ -48,15 +48,15 @@ import store from '../store';
 export default {
   name: "ViewProfile",
   computed: mapState({
-    currentUser: state => state.auth.currentUser
+    currentUser: state => state.user.currentUser
   }),
-  // methods: {
-  //   ...mapActions('user', {
-  //     handleSubmit: 'updateProfile'
-  //   })
-  // },
+  methods: {
+    ...mapActions('user', {
+      handleSubmit: 'updateProfile'
+    })
+  },
   mounted: function() {
-    store.dispatch('auth/getProfile');
+    store.dispatch('user/getProfile');
   }
 };
 </script>

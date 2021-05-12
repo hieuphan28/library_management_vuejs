@@ -43,11 +43,12 @@
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
 import store from "../store";
+import router from "../router"
 
 export default {
   name: "Login",
   computed: mapState({
-    currentUser: state => state.auth.currentUser
+    currentUser: state => state.user.currentUser
   }),
   data() {
     return {
@@ -56,7 +57,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('auth', {
+    ...mapActions('user', {
       handleLogin: 'login'
     })
   },
@@ -65,7 +66,7 @@ export default {
       handler: function(user) {
         if (user && user.token) {
           alert('Dang nhap thanh cong');
-          this.router$.push('/');
+          router.push('/');
         }
       },
       deep: true

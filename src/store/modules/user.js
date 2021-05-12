@@ -32,6 +32,13 @@ const actions = {
         });
     },
 
+    updateProfile({state, commit}, user) {
+        userService.updateProfile(user, (data) => {
+            const refrProfile = Object.assign(state.currentUser, data);
+            commit('setCurrentUser', refrProfile);
+        });
+    },
+
     checkAuth({state, commit}, data) {
         const savedUser = JSON.parse(localStorage['currentUser'] || undefined);
         commit('setCurrentUser', savedUser);

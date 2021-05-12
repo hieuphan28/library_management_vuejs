@@ -32,8 +32,17 @@ const getProfile = (cb) => {
         });
 }
 
+const updateProfile = (user, cb) => {
+    axios.put(`${apiPrefix}/user`, user)
+        .then(res => handleResponse(res, cb))
+        .catch(err => {
+            throw err;
+        });
+}
+
 export {
     login,
     register,
     getProfile,
+    updateProfile,
 }
