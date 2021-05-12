@@ -40,7 +40,9 @@ const actions = {
     },
 
     checkAuth({state, commit}, data) {
-        const savedUser = JSON.parse(localStorage['currentUser'] || undefined);
+        const savedLocalUser = localStorage['currentUser'];
+        const savedUser = savedLocalUser && savedLocalUser.length > 0 
+            && JSON.parse(savedLocalUser) || undefined;
         commit('setCurrentUser', savedUser);
     }
 }
@@ -48,7 +50,7 @@ const actions = {
 const mutations = {
     setCurrentUser(state, user) {
         state.currentUser = user;
-        setAuthorization(user.token);
+        setAuthorization(user?.token);
     },
 }
 
