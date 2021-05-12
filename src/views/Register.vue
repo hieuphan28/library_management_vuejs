@@ -43,12 +43,7 @@
         <input v-model="address" type="string" placeholder="" required />
       </div>
       <div>
-        <!-- <span v-if="ErrorUsername">{{ErrorUsername}}</span>
-        <span v-if="ErrorPassword">{{ErrorPassword}}</span>
-        <span v-if="ErrorEmail">{{ErrorEmail}}</span>
-        <span v-if="error">{{}}</span> -->
-
-        <span id="ErrorRegister"></span>
+        <span id="Register"></span>
       </div>
       <div class="btn-box">
         <a href="">
@@ -93,46 +88,17 @@ export default {
           role: this.role,
         })
         .then((response) => {
+          document.getElementById("Register").innerHTML =
+            response.data.meta.message;
           console.log(response);
         })
         .catch((error) => {
-          document.getElementById("ErrorRegister").innerHTML =
+          document.getElementById("Register").innerHTML =
             error.response.data.meta.message;
           console.log(error.response.data.meta.message);
         });
-
-      // .catch()
-      // {
-      //   if(message.username != null){
-      //     ErrorUsername = true;
-      //   }
-      //   if(message.password != null){
-      //     ErrorPassword = true;
-      //   }
-      // }
-      // this.$router.push("/login");
-
-      // console.log(data);
-      // axios
-      //   .post("http://localhost:3000/users", data)
-      //   .then(function (response) {
-      //     console.log(response);
-      //     this.$router.push("/login");
-      //     return response;
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
     },
   },
-  // chekDOB(){
-  //   if (getYear(Date.now()) - getYear(Date.dob()) <= 16) {
-  //     this.error = "Age under 16 is not accepted";
-  //     console.log("Đúng");
-  //   } else {
-  //     console.log("sai cmnr");
-  //   }
-  // }
 };
 </script>
 <style>
