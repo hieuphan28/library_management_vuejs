@@ -58,6 +58,7 @@ export default {
     handleSubmit: async function() {
       try {
         await store.dispatch('user/updateProfile', this.currentUser);
+        alert('update successfully')
       } catch(e) {
         alert(e.message);
       }

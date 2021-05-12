@@ -19,8 +19,7 @@ const actions = {
 
     async register({state, commit}, user) {
         const data = await userService.register(user);
-
-        localStorage['currentUser'] = JSON.stringify(data);
+        
         commit('setCurrentUser', data);
     },
 
@@ -32,9 +31,9 @@ const actions = {
     },
 
     async updateProfile({state, commit}, user) {
-        const data = await userService.updateProfile(user);
+        const data = await userService.updateProfile(user) || user;
 
-        const refrProfile = Object.assign(state.currentUser, data);
+        const refrProfile = Object.assign(state.currentUser, user);
         commit('setCurrentUser', refrProfile);
     },
 
@@ -49,6 +48,7 @@ const actions = {
 const mutations = {
     setCurrentUser(state, user) {
         state.currentUser = user;
+        localStorage['currentUser'] = JSON.stringify(user);
         setAuthorization(user?.token);
     },
 }

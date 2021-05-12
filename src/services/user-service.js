@@ -13,20 +13,20 @@ const login = async ({username, password}) => {
     return handleResponse(res);
 }
 
-const register = (data) => {
-    const res = axios.post(`${apiPrefix}/registration`, data);
+const register = async (data) => {
+    const res = await axios.post(`${apiPrefix}/registration`, data);
 
     return handleResponse(res);
 }
 
-const getProfile = () => {
-    const res = axios.get(`${apiPrefix}/profile`);
+const getProfile = async () => {
+    const res = await axios.get(`${apiPrefix}/profile`);
 
     return handleResponse(res);
 }
 
-const updateProfile = (user, cb) => {
-    const res = axios.put(`${apiPrefix}/user`, user);
+const updateProfile = async (user) => {
+    const res = await axios.put(`${apiPrefix}/user`, user);
 
     return handleResponse(res);
 }

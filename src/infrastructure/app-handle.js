@@ -1,7 +1,8 @@
 import LibException from "../exceptions/lib-exception";
 
 const handleResponse = (res) => {
-    if (res.data && res.data.data)
+    if ((res.data && res.data.data) 
+        || (res.data.meta?.code && res.data.meta?.code.startsWith('2')))
         return res.data.data;
 
     if (res.data.meta?.message)
