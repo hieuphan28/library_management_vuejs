@@ -5,27 +5,27 @@
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
-        <input type="text" placeholder="#1234" readonly="true" />
+        <input type="text" :placeholder="'#' + currentUser.user_id" readonly="true" />
       </div>
       <div class="input-box">
         <span>Username:</span>
-        <input type="text" placeholder="danalib123" readonly="true" />
+        <input type="text" :placeholder="currentUser.username" readonly="true" />
       </div>
       <div class="input-box">
         <span>Email:</span>
-        <input type="text" placeholder="danalib123@gmail.com" />
+        <input type="text" :placeholder="currentUser.email" />
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input type="text" placeholder="01238675162" />
+        <input type="text" :placeholder="currentUser.phone" />
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input type="text" placeholder="1999/6/12" />
+        <input type="text" :placeholder="currentUser.dob" />
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input type="text" placeholder="123 ABC" />
+        <input type="text" :placeholder="currentUser.address" />
       </div>
       <div class="btn-box">
         <a href="./update.html">
@@ -37,8 +37,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import store from '../store';
+
 export default {
   name: "ViewProfile",
+  computed: mapState({
+    currentUser: state => state.auth.currentUser
+  }),
+  mounted: function() {
+    store.dispatch('auth/getProfile');
+  }
 };
 </script>
 

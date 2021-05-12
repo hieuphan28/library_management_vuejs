@@ -3,10 +3,8 @@
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form
-      @submit.prevent="HandleSubmit"
+      @submit.prevent="handleLogin({username, password})"
       class="login-form"
-      action=""
-      method=""
     >
       <div class="bar">
         <router-link to="/login"
@@ -27,19 +25,22 @@
         <a href="#">Forgot password?</a>
       </div>
       <div class="btn-box">
-        <a href="">
+        <a>
           <button type="submit">Login</button>
         </a>
       </div>
-    </form>
+    </form> 
   </div>
 </template>
 <script>
-import axios from "axios";
-// import HandleSubmit1 from "./views/Register.vue";
-// import script from "./views/Register.vue";
+import { mapActions, mapGetters, mapState } from "vuex";
+import store from "../store";
+
 export default {
   name: "Login",
+  computed: mapState({
+    currentUser: state => state.auth.currentUser
+  }),
   data() {
     return {
       username: "",
@@ -47,42 +48,19 @@ export default {
     };
   },
   methods: {
-    async HandleSubmit() {
-      const response = await axios.post("https://lit-everglades-79316.herokuapp.com/api/login", {
-        id: this.id,
-        username: this.username,
-        password: this.password,
-      });
-      localStorage.setItem('token',response.data.token);
-      console.log(response);
-      this.$router.push("/");
-
-
-      // console.log(data);
-      //  axios
-      //   .post("http://localhost:3000/users", data)
-      //   .then(function(response) {
-      //     console.log(response);
-      //     // this.$router.push("/");
-      //     return response;
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
-    },
+    ...mapActions('auth', {
+      handleLogin: 'login'
+    })
   },
-  // data() {
-  //   return {
-  //     username: "",
-  //     password: "",
-  //   };
-  // },
-  // methods: {
-  //   sendLoginInfo() {
-  //     console.log(this.username,this.password);
-  //     // console.log(this.password);
-  //   },
-  // },
+  watch: {
+    currentUser: {
+      handler: function(user) {
+        if (user && user.token)
+          alert('Dang nhap thanh cong')
+      },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
