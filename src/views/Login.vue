@@ -3,10 +3,8 @@
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form
-      @submit.prevent="HandleSubmit"
+      @submit.prevent="handleLogin({username, password})"
       class="login-form"
-      action=""
-      method=""
     >
       <div class="bar">
         <router-link to="/login"
@@ -16,30 +14,42 @@
       </div>
       <h1>Login</h1>
       <div class="input-box">
-        <input v-model="username" type="text" placeholder="Username" />
-        <img src="../assets/icon_setting_white.png" alt="" />
+        <input v-model="username" type="string" placeholder="Username" />
+        <img src="../assets/icon_setting.png" alt="" />
       </div>
       <div class="input-box">
-        <i></i>
-        <input v-model="password" type="password" placeholder="Password" />
+        <input id="myInput" v-model="password" type="password" placeholder="Password" />
+        <img
+          class="eye"
+          src="../assets/eye.svg"
+          alt=""
+          @click="myFunction()"
+        />
       </div>
       <div class="forgot-password">
         <a href="#">Forgot password?</a>
       </div>
+      <div>
+        <span id="Login"></span>
+      </div>
       <div class="btn-box">
-        <a href="">
+        <a>
           <button type="submit">Login</button>
         </a>
       </div>
-    </form>
+    </form> 
   </div>
 </template>
 <script>
-import axios from "axios";
-// import HandleSubmit1 from "./views/Register.vue";
-// import script from "./views/Register.vue";
+import { mapActions, mapGetters, mapState } from "vuex";
+import store from "../store";
+import router from "../router"
+
 export default {
   name: "Login",
+  computed: mapState({
+    currentUser: state => state.user.currentUser
+  }),
   data() {
     return {
       username: "",
@@ -47,42 +57,21 @@ export default {
     };
   },
   methods: {
-    async HandleSubmit() {
-      const response = await axios.post("https://lit-everglades-79316.herokuapp.com/api/login", {
-        id: this.id,
-        username: this.username,
-        password: this.password,
-      });
-      localStorage.setItem('token',response.data.token);
-      console.log(response);
-      this.$router.push("/");
-
-
-      // console.log(data);
-      //  axios
-      //   .post("http://localhost:3000/users", data)
-      //   .then(function(response) {
-      //     console.log(response);
-      //     // this.$router.push("/");
-      //     return response;
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
-    },
+    ...mapActions('user', {
+      handleLogin: 'login'
+    })
   },
-  // data() {
-  //   return {
-  //     username: "",
-  //     password: "",
-  //   };
-  // },
-  // methods: {
-  //   sendLoginInfo() {
-  //     console.log(this.username,this.password);
-  //     // console.log(this.password);
-  //   },
-  // },
+  watch: {
+    currentUser: {
+      handler: function(user) {
+        if (user && user.token) {
+          alert('Dang nhap thanh cong');
+          router.push('/');
+        }
+      },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -132,9 +121,12 @@ export default {
 }
 .login-form .input-box > img {
   float: right;
-  width: 7%;
+  width: 6%;
   position: relative;
   margin-top: -25px;
+}
+.login-form .input-box .eye {
+  cursor: pointer;
 }
 .login-form .input-box {
   margin-bottom: 25px;
@@ -160,6 +152,10 @@ export default {
 }
 .login-form .forgot-password a {
   color: rgba(0, 0, 0, 0.38);
+}
+#Login span {
+  color: red;
+  font-style: italic;
 }
 /*Edit Button*/
 .login-form .btn-box a button {

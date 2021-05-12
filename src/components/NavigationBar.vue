@@ -5,7 +5,7 @@
         <div class="col-2 col-md-4 col-lg-2">
           <div class="logo">
             <router-link to="/">
-            <img src="../assets/logo.png" alt="logo images" />
+              <img src="../assets/logo.png" alt="logo images" />
             </router-link>
           </div>
         </div>
@@ -47,6 +47,7 @@
                 ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </router-link>
             </li>
+
             <li class="user dropdown">
               <a class="nav-link" data-toggle="dropdown" href="#"
                 ><i class="fa fa-user" aria-hidden="true"></i
@@ -70,6 +71,16 @@
                 >
               </div>
             </li>
+            <li v-if="!user" class="user dropdown">
+              <router-link to="/login">
+              <a
+                class="nav-link dropdown-toggle"
+                data-toggle="dropdown"
+                @click="checkLogin"
+                href="#"
+              ></a>
+              </router-link>
+            </li>
           </ul>
         </div>
         <div class="col-2 col-md-2 nav-menu">
@@ -91,15 +102,22 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "Header",
-  data: () => {
+  props:["user"],
+  data() {
     return {
       showNav: false,
+      user:null,
+      // userLogin: null,
     };
   },
+  // methods: {
+  //   checkLogin(){
+  //     if()
+  //   }
+  // }
 };
 </script>
 
@@ -142,7 +160,7 @@ export default {
   -webkit-animation: 0.4s ease-in-out 0s normal both 1 running fadeInDown;
   animation: 0.4s ease-in-out 0s normal both 1 running fadeInDown;
   background: rgba(0, 0, 0, 0.9) none repeat scroll 0 0;
-  box-shadow: 0 0 5px #bdbdbd;
+  box-shadow: 0 0 5px #BDBDBD;
   left: 0;
   position: sticky;
   top: 0;
@@ -151,7 +169,7 @@ export default {
   z-index: 99;
 }
 .header__area {
-  background: #ecd4b4;
+  background: #ECD4B4;
 }
 .header__area .logo {
   @include mobile {
@@ -199,7 +217,6 @@ export default {
   text-transform: uppercase;
   transition: all 0.3s ease 0s;
 }
-
 .header__area .header__sidebar__right {
   height: 100%;
   list-style: outside none none;
@@ -214,7 +231,6 @@ export default {
   align-self: stretch;
   display: flex;
 }
-
 // .header__area .header__sidebar__right > li.user > a {
 //   background: rgba(0, 0, 0, 0) url("~@/assets/icon_setting.png") no-repeat
 //     scroll 0 center;
@@ -284,7 +300,7 @@ export default {
   }
   position: fixed;
   width: 100%;
-  background: #ecd4b4;
+  background: #ECD4B4;
   z-index: 10;
   .mobile-nav {
     .mobile-item {

@@ -1,41 +1,36 @@
 <template>
   <div class="personal">
     <img src="../assets/carousel/3.jpg" alt="./img/3.jpg" />
-    <form @submit.prevent="Handlesubmit" class="personal-form" action="" method="">
+    <form
+      @submit.prevent="handleSubmit(currentUser)"
+      class="personal-form"
+      action=""
+      method=""
+    >
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
-        <input
-          type="text"
-          placeholder="#1234"
-          readonly="true"
-          v-model="userId"
-        />
+        <input type="text" placeholder="id" readonly="true" v-model="currentUser.user_id"/>
       </div>
       <div class="input-box">
         <span>Username:</span>
-        <input
-          type="text"
-          placeholder="danalib123"
-          readonly="true"
-          v-model="username"
-        />
+        <input type="text" placeholder="username" readonly="true" v-model="currentUser.username"/>
       </div>
       <div class="input-box">
         <span>Email:</span>
-        <input type="text" placeholder="danalib123@gmail.com" v-model="email" />
+        <input type="text" placeholder="email" v-model="currentUser.email" />
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input type="text" placeholder="01238675162" v-model="phone" />
+        <input type="text" placeholder="phone" v-model="currentUser.phone"/>
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input type="text" placeholder="1999/6/12" v-model="dob" />
+        <input type="text" placeholder="dob" v-model="currentUser.dob" />
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input type="text" placeholder="123 ABC" v-model="address" />
+        <input type="text" placeholder="address" v-model="currentUser.address" />
       </div>
       <div class="btn-box">
         <a href="./update.html">
@@ -47,38 +42,22 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapState } from 'vuex';
+import store from '../store';
 
 export default {
   name: "ViewProfile",
-  data() {
-    return{
-      userId:"",
-      username:"",
-      email:"",
-      phone:"",
-      dob:"",
-      address:"",
-    }
+  computed: mapState({
+    currentUser: state => state.user.currentUser
+  }),
+  methods: {
+    ...mapActions('user', {
+      handleSubmit: 'updateProfile'
+    })
   },
-
-  methods:{
-    async Handlesubmit(){
-      await axios.get("https://lit-everglades-79316.herokuapp.com/api/profile",{
-          userId: this.userId,
-          username: this.username,
-          password: this.password,
-          email: this.email,
-          phone: this.phone,
-          dob: this.dob,
-          address: this.address,
-      })
-      .then((response) =>{
-        console.log(response);
-      })
-    }
+  mounted: function() {
+    store.dispatch('user/getProfile');
   }
-
 };
 </script>
 
