@@ -14,27 +14,41 @@
       <h1>Create An Account</h1>
       <div class="input-box">
         <span>User Name:</span>
-        <input v-model="username" type="string" placeholder="" />
+        <input v-model="username" type="string" placeholder="" required />
       </div>
       <div class="input-box">
         <span>Password:</span>
-        <input v-model="password" type="string" placeholder="" />
+        <input
+          v-model="password"
+          type="password"
+          placeholder=""
+          required
+          maxlength="8"
+        />
       </div>
       <div class="input-box">
         <span>Email:</span>
-        <input v-model="email" type="string" placeholder="" />
+        <input v-model="email" type="string" placeholder="" required />
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input v-model="phone" type="string" placeholder="" />
+        <input v-model="phone" type="string" placeholder="" required />
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input v-model="dob" type="string" placeholder="" />
+        <input v-model="dob" type="date" placeholder="" required />
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input v-model="address" type="string" placeholder="" />
+        <input v-model="address" type="string" placeholder="" required />
+      </div>
+      <div>
+        <!-- <span v-if="ErrorUsername">{{ErrorUsername}}</span>
+        <span v-if="ErrorPassword">{{ErrorPassword}}</span>
+        <span v-if="ErrorEmail">{{ErrorEmail}}</span>
+        <span v-if="error">{{}}</span> -->
+
+        <span id="ErrorRegister"></span>
       </div>
       <div class="btn-box">
         <a href="">
@@ -57,26 +71,45 @@ export default {
       phone: "",
       dob: "",
       address: "",
-      role:"0"
+      role: "0",
+      // ErrorUsername:fasle,
+      // ErrorPassword:false,
+      // ErrorEmail:false,
       // error: null,
     };
   },
   methods: {
     async HandleSubmit() {
-      // const response = 
-      await axios.post("https://lit-everglades-79316.herokuapp.com/api/user/registration", {
-        userId: this.userId,
-        username: this.username,
-        password: this.password,
-        email: this.email,
-        phone: this.phone,
-        dob: this.dob,
-        address: this.address,
-        role: this.role
-      })
-      .then(response =>{ 
-        console.log(response)
-      })
+      // const response =
+      await axios
+        .post("user/registration", {
+          userId: this.userId,
+          username: this.username,
+          password: this.password,
+          email: this.email,
+          phone: this.phone,
+          dob: this.dob,
+          address: this.address,
+          role: this.role,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          document.getElementById("ErrorRegister").innerHTML =
+            error.response.data.meta.message;
+          console.log(error.response.data.meta.message);
+        });
+
+      // .catch()
+      // {
+      //   if(message.username != null){
+      //     ErrorUsername = true;
+      //   }
+      //   if(message.password != null){
+      //     ErrorPassword = true;
+      //   }
+      // }
       // this.$router.push("/login");
 
       // console.log(data);
@@ -168,6 +201,10 @@ body {
   box-sizing: border-box;
   border-radius: 6px;
   padding: 0.5% 0 0.5% 2%;
+}
+#ErrorRegister span {
+  color: red;
+  font-style: italic;
 }
 /*Edit Button*/
 .create-account-form .btn-box {

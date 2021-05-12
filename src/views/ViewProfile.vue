@@ -1,31 +1,36 @@
 <template>
   <div class="personal">
     <img src="../assets/carousel/3.jpg" alt="./img/3.jpg" />
-    <form class="personal-form" action="" method="">
+    <form
+      @submit.prevent="handleSubmit(currentUser)"
+      class="personal-form"
+      action=""
+      method=""
+    >
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
-        <input type="text" :placeholder="'#' + currentUser.user_id" readonly="true" />
+        <input type="text" placeholder="id" readonly="true" v-model="currentUser.user_id"/>
       </div>
       <div class="input-box">
         <span>Username:</span>
-        <input type="text" :placeholder="currentUser.username" readonly="true" />
+        <input type="text" placeholder="username" readonly="true" v-model="currentUser.username"/>
       </div>
       <div class="input-box">
         <span>Email:</span>
-        <input type="text" :placeholder="currentUser.email" />
+        <input type="text" placeholder="email" v-model="currentUser.email" />
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input type="text" :placeholder="currentUser.phone" />
+        <input type="text" placeholder="phone" v-model="currentUser.phone"/>
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input type="text" :placeholder="currentUser.dob" />
+        <input type="text" placeholder="dob" v-model="currentUser.dob" />
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input type="text" :placeholder="currentUser.address" />
+        <input type="text" placeholder="address" v-model="currentUser.address" />
       </div>
       <div class="btn-box">
         <a href="./update.html">
@@ -37,7 +42,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import store from '../store';
 
 export default {
@@ -45,6 +50,11 @@ export default {
   computed: mapState({
     currentUser: state => state.auth.currentUser
   }),
+  // methods: {
+  //   ...mapActions('user', {
+  //     handleSubmit: 'updateProfile'
+  //   })
+  // },
   mounted: function() {
     store.dispatch('auth/getProfile');
   }

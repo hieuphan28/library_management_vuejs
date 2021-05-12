@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <NavigationBar />
+    <NavigationBar :user="user" />
     <div>
-      <router-view />
+      <router-view :user="user" />
     </div>
     <Footer />
   </div>
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 import NavigationBar from "./components/NavigationBar.vue";
 import Footer from "./components/Footer.vue";
 import store from "./store";
@@ -21,10 +21,6 @@ export default {
     NavigationBar,
     Footer,
   },
-  async created(){
-    const hostname = getHostName();
-    console.log(hostname);
-  },
   store: store,
   beforeMount: function() {
     store.dispatch('auth/checkAuth')
@@ -33,9 +29,8 @@ export default {
 </script>
 
 <style lang="scss">
-#app{
+#app {
   width: 100%;
   min-height: 100vh;
 }
-
 </style>

@@ -14,15 +14,23 @@
       </div>
       <h1>Login</h1>
       <div class="input-box">
-        <input v-model="username" type="text" placeholder="Username" />
-        <img src="../assets/icon_setting_white.png" alt="" />
+        <input v-model="username" type="string" placeholder="Username" />
+        <img src="../assets/icon_setting.png" alt="" />
       </div>
       <div class="input-box">
-        <i></i>
-        <input v-model="password" type="password" placeholder="Password" />
+        <input id="myInput" v-model="password" type="password" placeholder="Password" />
+        <img
+          class="eye"
+          src="../assets/eye.svg"
+          alt=""
+          @click="myFunction()"
+        />
       </div>
       <div class="forgot-password">
         <a href="#">Forgot password?</a>
+      </div>
+      <div>
+        <span id="Login"></span>
       </div>
       <div class="btn-box">
         <a>
@@ -55,8 +63,10 @@ export default {
   watch: {
     currentUser: {
       handler: function(user) {
-        if (user && user.token)
-          alert('Dang nhap thanh cong')
+        if (user && user.token) {
+          alert('Dang nhap thanh cong');
+          this.router$.push('/');
+        }
       },
       deep: true
     }
@@ -110,9 +120,12 @@ export default {
 }
 .login-form .input-box > img {
   float: right;
-  width: 7%;
+  width: 6%;
   position: relative;
   margin-top: -25px;
+}
+.login-form .input-box .eye {
+  cursor: pointer;
 }
 .login-form .input-box {
   margin-bottom: 25px;
@@ -138,6 +151,10 @@ export default {
 }
 .login-form .forgot-password a {
   color: rgba(0, 0, 0, 0.38);
+}
+#Login span {
+  color: red;
+  font-style: italic;
 }
 /*Edit Button*/
 .login-form .btn-box a button {
