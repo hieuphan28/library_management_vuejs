@@ -1,0 +1,282 @@
+<template>
+  <div class="container">
+    <!-- UPDATE--BOOK--INFO -->
+    <div class="updatebookinfo">
+      <div class="row save">
+        <button class="btn">Save</button>
+      </div>
+
+      <div class="row all">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
+          <div>
+            <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
+          <h1 class="title"><input type="text" v-model="book_name" /></h1>
+          <div class="textarea">
+            <textarea
+              name="paragraph_text"
+              cols="60"
+              rows="4"
+              v-model="description"
+            ></textarea>
+          </div>
+          <div class="input-box">
+            <span>Language:</span>
+            <input type="text" placeholder="" v-model="language" />
+          </div>
+          <div class="input-box">
+            <span>Author:</span>
+            <input type="text" placeholder="" v-model="book_author" />
+          </div>
+          <div class="input-box">
+            <span>Category:</span>
+            <input type="text" placeholder="" v-model="category" />
+          </div>
+
+          <div class="input-box">
+            <span>Department:</span>
+            <input type="text" placeholder="" v-model="department" />
+          </div>
+          <div class="input-box">
+            <span>Price:</span>
+            <input type="text" placeholder="" v-model="price" />
+          </div>
+          <div class="input-box">
+            <span>Rent Cost:</span>
+            <input type="text" placeholder="" v-model="rentcost" />
+          </div>
+          <div class="input-box">
+            <span>Publication Date:</span>
+            <input type="text" placeholder="" v-model="publication_date" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPDATE--BOOK--ITEM -->
+    <div class="bookitem" v-for="(book, index) in books" :key="index">
+      <div class="row title">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 order">
+          <h1>Book Item {{ book.id }} :</h1>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6 button">
+          <button class="btn">
+            <i class="fa fa-trash" aria-hidden="true"> Delete </i>
+          </button>
+        </div>
+      </div>
+      <div class="info">
+        <div class="input-box">
+          <span>Barcode:</span>
+          <input type="text" placeholder="" v-model="book.barcode" />
+        </div>
+        <div class="input-box">
+          <span>Date of Purchase:</span>
+          <input type="text" placeholder="" v-model="book.datepurchase" />
+        </div>
+        <div class="input-box">
+          <span>Date add to lib:</span>
+          <input type="text" placeholder="" v-model="book.dateaddtolib" />
+        </div>
+
+        <div class="input-box">
+          <span>Location:</span>
+          <input type="text" placeholder="" v-model="book.location" />
+        </div>
+        <div class="input-box">
+          <span>Status:</span>
+          <input type="text" placeholder="" v-model="book.status" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "UpdateBook",
+  data() {
+    return {
+      book_name: "Gulliver's Travel",
+      rentFee: "10$",
+      booksLeft: "4",
+      description:
+        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form There are many variations of passages of Lorem Ipsum available ",
+      language: "English",
+      book_author: "Johnathan Swift",
+      category: "Novel",
+      department: "Comic Department",
+      price: "$25",
+      rentcost: "$105",
+      publication_date: "17/2/1999",
+      books: [
+        {
+          id: "1",
+          barcode: "123",
+
+          datepurchase: "22/1/2021",
+          dateaddtolib: "16/2/2021",
+
+          location: "Floor 5",
+          status: "Available",
+        },
+        {
+          id: "2",
+          barcode: "123",
+
+          datepurchase: "22/1/2021",
+          dateaddtolib: "16/2/2021",
+
+          location: "Floor 5",
+          status: "Available",
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.container {
+}
+
+//UPDATEBOOKINFO
+.updatebookinfo {
+  margin-top: 5%;
+  margin-bottom: 2%;
+
+  .save {
+    width: 100%;
+    display: inline-block;
+    button {
+      width: 20%;
+      float: right;
+      margin-bottom: 3%;
+      font-size: medium;
+      background: rgba(236, 212, 180);
+      border-radius: 10px;
+      color: rgba(0, 0, 0, 0.54);
+      box-shadow: 5px 5px 18px rgba(0, 0, 0, 0.38);
+    }
+    button:hover {
+      background: #ffe5c3;
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+  .all {
+    .book-cover {
+      // position: relative;
+      margin: auto;
+      width: 90%;
+    }
+
+    .right-side {
+      .title {
+        input {
+          width: 500px;
+          font-size: xx-large;
+          border: 0.25px solid rgba(0, 0, 0, 0.38);
+          border-radius: 6px;
+        }
+      }
+      .des {
+        margin-bottom: 4%;
+        textarea {
+          font-size: medium;
+          color: rgba(0, 0, 0, 0.87);
+          outline: 0.25px solid rgba(0, 0, 0, 0.38);
+          border-radius: 6px;
+        }
+      }
+      .input-box {
+        margin-bottom: 5%;
+      }
+      .input-box span {
+        color: rgba(0, 0, 0, 0.87);
+        display: inline;
+        font-size: medium;
+        font-weight: bold;
+      }
+      .input-box input {
+        /* border: none; */
+        width: 53%;
+        float: right;
+        font-size: medium;
+        background: #fafafa;
+        border: 1px solid #cecece;
+        box-sizing: border-box;
+        border-radius: 6px;
+        padding: 0.5% 0 0.5% 2%;
+        margin-right: 10%;
+      }
+    }
+  }
+}
+
+//UPDATE BOOK ITEM
+.bookitem {
+  text-align: center;
+  border-top: rgba(0, 0, 0, 0.25) solid;
+
+  .title {
+    margin-top: 3%;
+    .order h1 {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: x-large;
+      text-align: left;
+      font-weight: bold;
+      margin-top: 0;
+    }
+  }
+
+  .button button {
+    float: right;
+    width: 150px;
+    background: #ecd4b4;
+    // border: 1px solid #b7b7b7;
+    box-sizing: border-box;
+    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    margin: 0% 0% 3% 0%;
+    transition: 0.4s;
+
+    i {
+      padding-right: 0%;
+      color: rgba(0, 0, 0, 0.38);
+      font-size: medium;
+    }
+  }
+  .button button:hover {
+    background: #ffe5c3;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .info {
+    margin-bottom: 5%;
+  }
+  .input-box {
+    margin-bottom: 2%;
+  }
+  .input-box span {
+    margin-left: 20%;
+    color: rgba(0, 0, 0, 0.87);
+    display: inline;
+    font-size: medium;
+    font-weight: bold;
+  }
+  .input-box input {
+    /* border: none; */
+    width: 30%;
+    float: right;
+    font-size: medium;
+    background: #fafafa;
+    border: 1px solid #cecece;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 0.5% 0 0.5% 2%;
+    margin-right: 25%;
+  }
+}
+</style>

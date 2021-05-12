@@ -12,6 +12,8 @@
 import axios from "axios";
 import NavigationBar from "./components/NavigationBar.vue";
 import Footer from "./components/Footer.vue";
+import store from "./store";
+import { getHostName } from "./infrastructure/app-manager";
 
 export default {
   name: "app",
@@ -19,11 +21,10 @@ export default {
     NavigationBar,
     Footer,
   },
-  async created() {
-    const response = await axios.get("user");
-
-    console.log(response);
-  },
+  store: store,
+  beforeMount: function() {
+    store.dispatch('auth/checkAuth')
+  }
 };
 </script>
 

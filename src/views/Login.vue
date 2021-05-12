@@ -2,7 +2,10 @@
   <!-- <NavigationBar /> -->
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
-    <form @submit.prevent="HandleSubmit" class="login-form" action="" method="">
+    <form
+      @submit.prevent="handleLogin({username, password})"
+      class="login-form"
+    >
       <div class="bar">
         <router-link to="/login"
           ><a href="#" class="login-bar active">Login</a></router-link
@@ -30,19 +33,22 @@
         <span id="Login"></span>
       </div>
       <div class="btn-box">
-        <a href="">
+        <a>
           <button type="submit">Login</button>
         </a>
       </div>
-    </form>
+    </form> 
   </div>
 </template>
 <script>
-import axios from "axios";
-// import HandleSubmit1 from "./views/Register.vue";
-// import script from "./views/Register.vue";
+import { mapActions, mapGetters, mapState } from "vuex";
+import store from "../store";
+
 export default {
   name: "Login",
+  computed: mapState({
+    currentUser: state => state.auth.currentUser
+  }),
   data() {
     return {
       username: "",
@@ -50,58 +56,21 @@ export default {
     };
   },
   methods: {
-    async HandleSubmit() {
-      await axios
-        .post("login", {
-          id: this.id,
-          username: this.username,
-          password: this.password,
-        })
-        .then((response) => {
-          localStorage.setItem("token", response.data.data.token);
-          console.log(response.data.data.token);
-          this.$router.push("/");
-        })
-        .catch((error) => {
-          document.getElementById("Login").innerHTML =
-            error.response.data.meta.message;
-          console.log(error.response.data.meta.message);
-        });
-
-      // console.log(data);
-      //  axios
-      //   .post("http://localhost:3000/users", data)
-      //   .then(function(response) {
-      //     console.log(response);
-      //     // this.$router.push("/");
-      //     return response;
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error);
-      //   });
-    },
-
-    myFunction() {
-      var x = document.getElementById("myInput");
-      if (x.type === "password") {
-        x.type = "text";
-      } else {
-        x.type = "password";
-      }
-    },
+    ...mapActions('auth', {
+      handleLogin: 'login'
+    })
   },
-  // data() {
-  //   return {
-  //     username: "",
-  //     password: "",
-  //   };
-  // },
-  // methods: {
-  //   sendLoginInfo() {
-  //     console.log(this.username,this.password);
-  //     // console.log(this.password);
-  //   },
-  // },
+  watch: {
+    currentUser: {
+      handler: function(user) {
+        if (user && user.token) {
+          alert('Dang nhap thanh cong');
+          this.router$.push('/');
+        }
+      },
+      deep: true
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
   <div class="personal">
     <img src="../assets/carousel/3.jpg" alt="./img/3.jpg" />
     <form
-      @submit.prevent="HandleSubmit"
+      @submit.prevent="handleSubmit(currentUser)"
       class="personal-form"
       action=""
       method=""
@@ -10,32 +10,27 @@
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
-        <input type="number" v-model="userID" placeholder="" readonly="true" />
+        <input type="text" placeholder="id" readonly="true" v-model="currentUser.user_id"/>
       </div>
       <div class="input-box">
         <span>Username:</span>
-        <input
-          type="string"
-          v-model="username"
-          placeholder=""
-          readonly="true"
-        />
+        <input type="text" placeholder="username" readonly="true" v-model="currentUser.username"/>
       </div>
       <div class="input-box">
         <span>Email:</span>
-        <input type="email" v-model="email" placeholder="" />
+        <input type="text" placeholder="email" v-model="currentUser.email" />
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input type="string" v-model="phone" placeholder="" />
+        <input type="text" placeholder="phone" v-model="currentUser.phone"/>
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input type="date" v-model="dob" placeholder="" />
+        <input type="text" placeholder="dob" v-model="currentUser.dob" />
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input type="string" v-model="address" placeholder="" />
+        <input type="text" placeholder="address" v-model="currentUser.address" />
       </div>
       <div class="btn-box">
         <a href="./update.html">
@@ -47,39 +42,22 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+import store from '../store';
+
 export default {
   name: "ViewProfile",
-  data() {
-    return {
-      userID: "",
-      username: "",
-      password: "",
-      email: "",
-      phone: "",
-      dob: "",
-      address: "",
-      role: "0",
-    };
-  },
-  methods: {
-    async HandleSubmit() {
-      // const response =
-      await axios
-        .get("profile", {
-          userId: this.userId,
-          username: this.username,
-          password: this.password,
-          email: this.email,
-          phone: this.phone,
-          dob: this.dob,
-          address: this.address,
-          role: this.role,
-        })
-        .then((response) => {
-          console.log(response);
-        });
-    },
-  },
+  computed: mapState({
+    currentUser: state => state.auth.currentUser
+  }),
+  // methods: {
+  //   ...mapActions('user', {
+  //     handleSubmit: 'updateProfile'
+  //   })
+  // },
+  mounted: function() {
+    store.dispatch('auth/getProfile');
+  }
 };
 </script>
 

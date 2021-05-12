@@ -40,19 +40,17 @@
                 <a class="dropdown-item" href="#">Author</a>
               </div> -->
               <input type="text" placeholder="Search your books" />
-              <a class="search__active" href="#"></a>
+              <a href="#"> <i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
             <li class="shopcart">
-              <router-link to="/cart"
-                ><a class="cartbox_active" href="#"></a
-              ></router-link>
+              <router-link to="/cart" href="#"
+                ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </router-link>
             </li>
-            <li v-if="user" class="user dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                @click="checkLogin"
-                href="#"
+
+            <li class="user dropdown">
+              <a class="nav-link" data-toggle="dropdown" href="#"
+                ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
                 <router-link to="/viewprofile"
@@ -145,9 +143,10 @@ export default {
   cursor: pointer;
   text-decoration: none;
   border: none;
+
   button {
     color: rgba(0, 0, 0, 0.54);
-    background: #ECD4B4;
+    background: #ecd4b4;
     margin-top: 28px;
     border: none;
     width: 60%;
@@ -252,18 +251,23 @@ export default {
   margin-right: 16px;
   font-size: 17px;
 }
+
 .shop_search a {
   color: rgba(0, 0, 0, 0.54);
 }
+
 .shop_search a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
+
 .shopcart a i {
   color: rgba(0, 0, 0, 0.54);
 }
+
 .shopcart a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
+
 .user {
   a {
     padding: 0;
@@ -272,9 +276,11 @@ export default {
     }
   }
 }
+
 .user a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
+
 .mainmenu__nav .meninmenu li a:hover {
   color: rgba(0, 0, 0, 0.54);
   background: rgba(0, 0, 0, 0.1);
@@ -282,6 +288,7 @@ export default {
   text-decoration: none;
   outline: none;
 }
+
 // mobile menu
 .mobile-menu {
   display: none;
