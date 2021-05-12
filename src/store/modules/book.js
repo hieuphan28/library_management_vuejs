@@ -11,16 +11,14 @@ const getters = {
 }
 
 const actions = {
-    addBook({state, commit}, book) {
-        bookService.addBook(books, (data) => {
-            commit('addBook', data);
-        });
+    async addBook({state, commit}, book) {
+        const data = await bookService.addBook(book);    
+        commit('addBook', data);
     },
 
-    search({state, commit}, {query, skip, limit}) {
-        bookService.searchBook({query, skip, limit}, data => {
-            commit('setBooks', data);
-        });
+    async search({state, commit}, {query, skip, limit}) {
+        const data = await bookService.searchBook({query, skip, limit});    
+        commit('setBooks', data);
     }
 }
 

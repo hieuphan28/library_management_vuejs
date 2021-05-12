@@ -42,21 +42,31 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import router from '../router';
 import store from '../store';
+import user from '../store/modules/user';
 
 export default {
   name: "ViewProfile",
-  computed: mapState({
-    currentUser: state => state.user.currentUser
-  }),
-  methods: {
-    ...mapActions('user', {
-      handleSubmit: 'updateProfile'
+  computed: {
+    ...mapGetters('user',{
+      currentUser: 'currentUser'
     })
   },
+  methods: {
+    handleSubmit: async function() {
+      try {
+        await store.dispatch('user/updateProfile', this.currentUser);
+      } catch(e) {
+        alert(e.message);
+      }
+    }
+  },
   mounted: function() {
-    store.dispatch('user/getProfile');
+    if (!this.currentUser?.user_id || !this.currentUser?.token) 
+      router.push('/login');
+    // store.dispatch('user/getProfile');
   }
 };
 </script>

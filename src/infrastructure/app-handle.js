@@ -1,8 +1,8 @@
 import LibException from "../exceptions/lib-exception";
 
-const handleResponse = (res, cb) => {
+const handleResponse = (res) => {
     if (res.data && res.data.data)
-        return cb(res.data.data);
+        return res.data.data;
 
     if (res.data.meta?.message)
         throw new LibException(res.data.meta.message);
@@ -10,7 +10,12 @@ const handleResponse = (res, cb) => {
     throw new LibException("Something went wrong!!!");
 };
 
+const handleError = (err) => {
+    throw err;
+}
+
 export {
-    handleResponse
+    handleResponse,
+    handleError,
 }
 

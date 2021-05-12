@@ -1,43 +1,34 @@
 import axios from "axios";
 import * as appManager from '../infrastructure/app-manager';
-import { handleResponse } from '../infrastructure/app-handle'; 
+import { handleResponse, handleError } from '../infrastructure/app-handle'; 
 
 const apiPrefix = appManager.getApiPrefix();
 
-const login = ({username, password}, cb) => {
-    axios.post(`${apiPrefix}/login`, {
-            username,
-            password,
-        }).then(res => {
-            handleResponse(res, cb);
-        }).catch(err => {
-            throw err;
-        });
+const login = async ({username, password}) => {
+    const res = await axios.post(`${apiPrefix}/login`, {
+        username,
+        password,
+    });
+
+    return handleResponse(res);
 }
 
-const register = (data, cb) => {
-    axios.post(`${apiPrefix}/registration`, data)
-        .then(res => {
-            handleResponse(res, cb);
-        }).catch(err => {
-            throw err;
-        });
+const register = (data) => {
+    const res = axios.post(`${apiPrefix}/registration`, data);
+
+    return handleResponse(res);
 }
 
-const getProfile = (cb) => {
-    axios.get(`${apiPrefix}/profile`)
-        .then(res => handleResponse(res, cb))
-        .catch(err => {
-            throw err;
-        });
+const getProfile = () => {
+    const res = axios.get(`${apiPrefix}/profile`);
+
+    return handleResponse(res);
 }
 
 const updateProfile = (user, cb) => {
-    axios.put(`${apiPrefix}/user`, user)
-        .then(res => handleResponse(res, cb))
-        .catch(err => {
-            throw err;
-        });
+    const res = axios.put(`${apiPrefix}/user`, user);
+
+    return handleResponse(res);
 }
 
 export {
