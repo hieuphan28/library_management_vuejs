@@ -8,6 +8,7 @@
 import Carousel from "../components/Carousel.vue";
 import AllBooks from "../components/AllBooks.vue";
 import NewBooks from "../components/NewBooks.vue";
+import store from "../store";
 
 export default {
   name: "Home",
