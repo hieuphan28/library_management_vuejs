@@ -7,36 +7,34 @@ const state = () => ({
 
 const getters = {
     currentUser: (state, getters) => {
-        return state.currentUser;
+        return state.currentUser || {};
     }
 }
 
 const actions = {
-    login({state, commit}, {username, password}) {
-        userService.login({username, password}, (data) => {
-            commit('setCurrentUser', data);
-        });
+    async login({state, commit}, {username, password}) {
+        const data = await userService.login({username, password});
+        commit('setCurrentUser', data);
     },
 
-    register({state, commit}, user) {
-        userService.register(user, (data) => {
-            localStorage['currentUser'] = JSON.stringify(data);
-            commit('setCurrentUser', data);
-        });
+    async register({state, commit}, user) {
+        const data = await userService.register(user);
+        
+        commit('setCurrentUser', data);
     },
 
-    getProfile({state, commit}) {
-        userService.getProfile((data) => {
-            const refrProfile = Object.assign(state.currentUser, data);
-            commit('setCurrentUser', refrProfile);
-        });
+    async getProfile({state, commit}) {
+        const data = await userService.getProfile(data);
+
+        const refrProfile = Object.assign(state.currentUser, data);
+        commit('setCurrentUser', refrProfile);
     },
 
-    updateProfile({state, commit}, user) {
-        userService.updateProfile(user, (data) => {
-            const refrProfile = Object.assign(state.currentUser, data);
-            commit('setCurrentUser', refrProfile);
-        });
+    async updateProfile({state, commit}, user) {
+        const data = await userService.updateProfile(user) || user;
+
+        const refrProfile = Object.assign(state.currentUser, user);
+        commit('setCurrentUser', refrProfile);
     },
 
     checkAuth({state, commit}, data) {
@@ -50,6 +48,7 @@ const actions = {
 const mutations = {
     setCurrentUser(state, user) {
         state.currentUser = user;
+        localStorage['currentUser'] = JSON.stringify(user);
         setAuthorization(user?.token);
     },
 }

@@ -4,33 +4,26 @@ import { handleResponse } from '../infrastructure/app-handle';
 
 const apiPrefix = appManager.getApiPrefix();
 
-const addBook = (book, cb) => {
-    axios.post(`${apiPrefix}/book`, book)
-        .then(res => handleResponse(res, cb))
-        .catch(err => {
-            throw err;
-        });
+const addBook = async (book) => {
+    const res = await axios.post(`${apiPrefix}/book`, book);
+    return handleResponse(res);
 }
 
-const searchBook = ({query, skip, limit}, cb) => {
-    axios.get(`${apiPrefix}/book`, {
+const searchBook = async ({query, skip, limit}) => {
+    const res = await axios.get(`${apiPrefix}/book`, {
         params: {
             q: query,
             skip,
             limit,
         }
-    }).then(res => handleResponse(res, cb))
-    .catch(err => {
-        throw err;
     });
+    return handleResponse(res);
 }
 
-const updateBook = (book, cb) => {
-    axios.put(`${apiPrefix}/book`, book)
-        .then(res => handleResponse(res, cb))
-        .catch(err => {
-            throw err;
-        });
+const updateBook = async (book) => {
+    const res = await axios.put(`${apiPrefix}/book`, book);
+
+    return handleResponse(res);
 }
 
 export {

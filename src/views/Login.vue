@@ -3,7 +3,7 @@
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form
-      @submit.prevent="handleLogin({username, password})"
+      @submit.prevent="handleLogin"
       class="login-form"
     >
       <div class="bar">
@@ -57,19 +57,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions('user', {
-      handleLogin: 'login'
-    })
-  },
-  watch: {
-    currentUser: {
-      handler: function(user) {
-        if (user && user.token) {
-          alert('Dang nhap thanh cong');
-          router.push('/');
-        }
-      },
-      deep: true
+    handleLogin: async function() {
+      try {
+        await store.dispatch('user/login', {
+          username: this.username,
+          password: this.password,
+        });
+        router.push('/');
+      } catch(e) {
+        alert(e.message);
+      }
     }
   }
 };
