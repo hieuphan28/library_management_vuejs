@@ -51,6 +51,12 @@ const mutations = {
         localStorage['currentUser'] = JSON.stringify(user);
         setAuthorization(user?.token);
     },
+
+    clearCurrentUser(state) {
+        state.currentUser = undefined,
+        localStorage.removeItem('currentUser');
+        setAuthorization(undefined);
+    }
 }
 
 export default {
