@@ -43,9 +43,8 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
-import router from '../router';
-import store from '../store';
 import user from '../store/modules/user';
+import { toastError, toastMessage, toastSuccess } from '../utilities/toast-util';
 
 export default {
   name: "ViewProfile",
@@ -57,17 +56,17 @@ export default {
   methods: {
     handleSubmit: async function() {
       try {
-        await store.dispatch('user/updateProfile', this.currentUser);
-        alert('update successfully')
+        await this.$store.dispatch('user/updateProfile', this.currentUser);
+        toastSuccess('Update successfully');
       } catch(e) {
-        alert(e.message);
+        toastError(e.message);
       }
     }
   },
   mounted: function() {
     if (!this.currentUser?.user_id || !this.currentUser?.token) 
-      router.push('/login');
-    // store.dispatch('user/getProfile');
+      this.$router.push('/login');
+    this.$store.dispatch('user/getProfile');
   }
 };
 </script>

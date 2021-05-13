@@ -23,7 +23,7 @@ export default {
   },
   store: store,
   beforeMount: function() {
-    store.dispatch('user/checkAuth');
+    this.$store.dispatch('user/checkAuth');
   }
 };
 </script>
