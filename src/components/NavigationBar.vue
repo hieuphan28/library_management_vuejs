@@ -42,7 +42,7 @@
               <input type="text" placeholder="Search your books" />
               <a href="#"> <i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
-            <li class="shopcart">
+            <li class="shopcart" v-if="isMember">
               <router-link to="/cart" href="#"
                 ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </router-link>
@@ -107,13 +107,12 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import { UserRole } from "../common/bundleOfEnum";
+
 export default {
   name: "Header",
   computed: {
-    ...mapGetters('user', ['currentUser']),
-    isLogged: function() {
-      return this.currentUser && this.currentUser.token;
-    }
+    ...mapGetters('user', ['currentUser', 'isLogged', 'isMember', 'isAdmin']),
   },
   data() {
     return {
