@@ -3,7 +3,7 @@
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form
-      @submit.prevent="handleLogin({username, password})"
+      @submit.prevent="handleLogin"
       class="login-form"
     >
       <div class="bar">
@@ -41,9 +41,8 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
-import store from "../store";
-import router from "../router"
+import { toastError, toastMessage } from '../utilities/toast-util';
+import { mapState } from 'vuex';
 
 export default {
   name: "Login",
@@ -57,19 +56,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions('user', {
-      handleLogin: 'login'
-    })
-  },
-  watch: {
-    currentUser: {
-      handler: function(user) {
-        if (user && user.token) {
-          alert('Dang nhap thanh cong');
-          router.push('/');
-        }
-      },
-      deep: true
+    handleLogin: async function() {
+      try {
+        await this.$store.dispatch('user/login', {
+          username: this.username,
+          password: this.password,
+        });
+        
+        this.$router.push('/');
+      } catch(e) {
+        toastError(e);
+      }
     }
   }
 };

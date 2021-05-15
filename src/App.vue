@@ -19,11 +19,11 @@ export default {
   name: "app",
   components: {
     NavigationBar,
-    Footer,
+    Footer
   },
   store: store,
   beforeMount: function() {
-    store.dispatch('user/checkAuth')
+    this.$store.dispatch('user/checkAuth');
   }
 };
 </script>

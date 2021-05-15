@@ -42,21 +42,31 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import store from '../store';
+import { mapActions, mapGetters, mapState } from 'vuex';
+import user from '../store/modules/user';
+import { toastError, toastMessage, toastSuccess } from '../utilities/toast-util';
 
 export default {
   name: "ViewProfile",
-  computed: mapState({
-    currentUser: state => state.user.currentUser
-  }),
-  methods: {
-    ...mapActions('user', {
-      handleSubmit: 'updateProfile'
+  computed: {
+    ...mapGetters('user',{
+      currentUser: 'currentUser'
     })
   },
+  methods: {
+    handleSubmit: async function() {
+      try {
+        await this.$store.dispatch('user/updateProfile', this.currentUser);
+        toastSuccess('Update successfully');
+      } catch(e) {
+        toastError(e.message);
+      }
+    }
+  },
   mounted: function() {
-    store.dispatch('user/getProfile');
+    if (!this.currentUser?.user_id || !this.currentUser?.token) 
+      this.$router.push('/login');
+    this.$store.dispatch('user/getProfile');
   }
 };
 </script>
