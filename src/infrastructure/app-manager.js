@@ -8,7 +8,7 @@ const getApiPrefix = () => {
     return getHostName() + "/api";
 }
 
-const setAuthorization = (token) => {
+const setAuthorizationToken = (token) => {
     token && (axios.defaults.headers.common['Authorization'] = "Bearer " + token)
         || (clearAuthorization());
 }
@@ -20,6 +20,6 @@ const clearAuthorization = () => {
 export {
     getHostName,
     getApiPrefix,
-    setAuthorization,
+    setAuthorizationToken,
     clearAuthorization,
 }
