@@ -53,20 +53,23 @@
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
-                <router-link to="/viewprofile"
+                <router-link to="/viewprofile" v-if="isLogged"
                   ><a class="dropdown-item" href="#"
                     >View Profile</a
                   ></router-link
                 >
-                <router-link to="/changepassword"
+                <router-link to="/changepassword" v-if="isLogged"
                   ><a class="dropdown-item" href="#"
                     >Change Password</a
                   ></router-link
                 >
-                <router-link to="/login"
-                  ><a class="dropdown-item" href="#">Logout</a></router-link
+                <router-link to="/login" v-if="isLogged"
+                  ><a class="dropdown-item" href="#" @click="clearCurrentUser">Logout</a></router-link
                 >
-                <router-link class="dropdown-item" to="/borrow-history">
+                <router-link to="/login" v-if="!isLogged"
+                  ><a class="dropdown-item" href="#" @click="clearCurrentUser">Login</a></router-link
+                >
+                <router-link class="dropdown-item" to="/borrow-history" v-if="isLogged">
                   View Borrowing Settings</router-link
                 >
               </div>
@@ -103,21 +106,24 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   name: "Header",
-  props:["user"],
+  computed: {
+    ...mapGetters('user', ['currentUser']),
+    isLogged: function() {
+      return this.currentUser && this.currentUser.token;
+    }
+  },
   data() {
     return {
       showNav: false,
       user:null,
-      // userLogin: null,
     };
   },
-  // methods: {
-  //   checkLogin(){
-  //     if()
-  //   }
-  // }
+  methods: {
+    ...mapMutations('user', ['clearCurrentUser'])
+  }  
 };
 </script>
 

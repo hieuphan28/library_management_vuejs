@@ -41,9 +41,8 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
-import store from "../store";
-import router from "../router"
+import { toastError, toastMessage } from '../utilities/toast-util';
+import { mapState } from 'vuex';
 
 export default {
   name: "Login",
@@ -59,13 +58,14 @@ export default {
   methods: {
     handleLogin: async function() {
       try {
-        await store.dispatch('user/login', {
+        await this.$store.dispatch('user/login', {
           username: this.username,
           password: this.password,
         });
-        router.push('/');
+        
+        this.$router.push('/');
       } catch(e) {
-        alert(e.message);
+        toastError(e);
       }
     }
   }

@@ -19,6 +19,11 @@ const actions = {
     async search({state, commit}, {query, skip, limit}) {
         const data = await bookService.searchBook({query, skip, limit});    
         commit('setBooks', data);
+    },
+
+    async updateBook({state, commit}, book) {
+        const data = await bookService.updateBook(book) || book;
+        commit('updateBook', data);
     }
 }
 
@@ -29,6 +34,10 @@ const mutations = {
     
     addBook(state, book) {
         state.data.push(book);  
+    },
+
+    updateBook(state, book) {
+        state.data.map(x => x.book_id === book.book_id ? book : x);
     },
 }
 
