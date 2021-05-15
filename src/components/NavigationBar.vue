@@ -74,7 +74,7 @@
                 >
               </div>
             </li>
-            <li v-if="!user" class="user dropdown">
+            <!-- <li v-if="!user" class="user dropdown">
               <router-link to="/login">
               <a
                 class="nav-link dropdown-toggle"
@@ -83,7 +83,7 @@
                 href="#"
               ></a>
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div class="col-2 col-md-2 nav-menu">

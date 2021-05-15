@@ -14,7 +14,7 @@ const login = async ({username, password}) => {
 }
 
 const register = async (data) => {
-    const res = await axios.post(`${apiPrefix}/registration`, data);
+    const res = await axios.post(`${apiPrefix}/user/registration`, data);
 
     return handleResponse(res);
 }

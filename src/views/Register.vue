@@ -55,8 +55,16 @@
 </template>
 <script>
 import axios from "axios";
+import user from "../store/modules/user";
+import { toastError , toastMessage } from "../utilities/toast-util";
+import { mapActions, mapGetters, mapState } from 'vuex';
 export default {
   name: "Register",
+    computed: {
+    ...mapGetters('user',{
+      currentUser: 'currentUser'
+    })
+  },
   data() {
     return {
       userId: "",
@@ -67,17 +75,12 @@ export default {
       dob: "",
       address: "",
       role: "0",
-      // ErrorUsername:fasle,
-      // ErrorPassword:false,
-      // ErrorEmail:false,
-      // error: null,
     };
   },
   methods: {
-    async HandleSubmit() {
-      // const response =
-      await axios
-        .post("user/registration", {
+    HandleSubmit: async function() {
+      try {
+        await this.$store.dispatch("user/register", {
           userId: this.userId,
           username: this.username,
           password: this.password,
@@ -86,17 +89,12 @@ export default {
           dob: this.dob,
           address: this.address,
           role: this.role,
-        })
-        .then((response) => {
-          document.getElementById("Register").innerHTML =
-            response.data.meta.message;
-          console.log(response);
-        })
-        .catch((error) => {
-          document.getElementById("Register").innerHTML =
-            error.response.data.meta.message;
-          console.log(error.response.data.meta.message);
         });
+        console.log(response);
+        toastSuccess('Register successfully');
+      } catch (e) {
+        toastError(e.response.data.meta.message);
+      }
     },
   },
 };
