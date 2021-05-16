@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <NavigationBar :user="user" />
+    <NavigationBar />
     <div>
-      <router-view :user="user" />
+      <router-view />
     </div>
     <Footer />
   </div>

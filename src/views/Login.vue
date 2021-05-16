@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { toastError, toastMessage } from '../utilities/toast-util';
+import { toastError, toastMessage, toastSuccess  } from '../utilities/toast-util';
 import { mapState } from 'vuex';
 
 export default {
@@ -62,7 +62,7 @@ export default {
           username: this.username,
           password: this.password,
         });
-        
+        toastSuccess('Login successfully');
         this.$router.push('/');
       } catch(e) {
         toastError(e);

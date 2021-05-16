@@ -9,17 +9,20 @@
 
 <script>
 import BookProfies from "../components/BookProfies.vue";
-import Carousel from '../components/Carousel.vue';
+import Carousel from "../components/Carousel.vue";
 import Categories from "../components/Categories.vue";
 
 export default {
   name: "BookInfo",
-  
+  components: {
+    Categories,
+    BookProfies,
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.container{
-    padding: 3%;
+.container {
+  padding: 3%;
 }
 </style>
