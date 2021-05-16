@@ -27,11 +27,7 @@
         />
       </div>
       <div class="forgot-password">
-<<<<<<< HEAD
         <router-link to="/forgotpassword">Forgot Password</router-link>
-=======
-        <router-link to="/forgotpassword0">Forgot password?</router-link>
->>>>>>> d4ba687b408124a94995bc9773bff9c080b416fc
       </div>
       <div>
         <span id="Login"></span>

@@ -14,12 +14,6 @@ import Categories from "../components/Categories.vue";
 
 export default {
   name: "BookInfo",
-<<<<<<< HEAD
-  components: {
-    Categories,
-    BookProfies
-  }
-=======
   data() {
     return {
       book_id: this.$router.currentRoute.value.params.book_id
@@ -29,7 +23,6 @@ export default {
     Categories,
     BookProfies,
   },
->>>>>>> d4ba687b408124a94995bc9773bff9c080b416fc
 };
 </script>
 
