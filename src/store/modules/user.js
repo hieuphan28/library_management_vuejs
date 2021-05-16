@@ -1,5 +1,6 @@
-import { setAuthorization } from "../../infrastructure/app-manager";
+import { setAuthorizationToken } from "../../infrastructure/app-manager";
 import * as userService from "../../services/user-service";
+import { UserRole } from "../../common/bundleOfEnum";
 
 const state = () => ({
     currentUser: {}
@@ -8,7 +9,19 @@ const state = () => ({
 const getters = {
     currentUser: (state, getters) => {
         return state.currentUser || {};
-    }
+    },
+
+    isLogged: (state, getters) => {
+        return state.currentUser && state.currentUser.token;
+    },
+
+    isMember: (state, getters) => {
+    return getters.isLogged && state.currentUser.role === UserRole.MEMBER;
+    },
+
+    isAdmin: (state, getters) => {
+    return getters.isLogged && state.currentUser.role === UserRole.ADMIN;
+    },
 }
 
 const actions = {
@@ -39,7 +52,8 @@ const actions = {
 
     checkAuth({state, commit}, data) {
         const savedLocalUser = localStorage['currentUser'];
-        const savedUser = savedLocalUser && savedLocalUser.length > 0 
+        const savedUser = savedLocalUser && savedLocalUser.length > 0
+            && savedLocalUser !== "undefined"
             && JSON.parse(savedLocalUser) || undefined;
         commit('setCurrentUser', savedUser);
     }
@@ -48,14 +62,15 @@ const actions = {
 const mutations = {
     setCurrentUser(state, user) {
         state.currentUser = user;
-        localStorage['currentUser'] = JSON.stringify(user);
-        setAuthorization(user?.token);
+        if (user && user.token)
+            localStorage['currentUser'] = JSON.stringify(user) ;
+        setAuthorizationToken(user?.token);
     },
 
     clearCurrentUser(state) {
         state.currentUser = undefined,
         localStorage.removeItem('currentUser');
-        setAuthorization(undefined);
+        setAuthorizationToken(undefined);
     }
 }
 
