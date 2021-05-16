@@ -20,6 +20,9 @@ import IssueBook from '../views/IssueBook.vue'
 import ReturnBook from '../views/ReturnBook.vue'
 import AddCategory from '../views/AddCategory.vue'
 import AddDepartment from '../views/AddDepartment.vue'
+import ForgotPassword0 from '../views/ForgotPassword0.vue'
+import ForgotPassword1 from '../views/ForgotPassword1.vue'
+import ForgotPassword2 from '../views/ForgotPassword2.vue'
 
 const routes = [
   {
@@ -28,7 +31,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/bookinfo',
+    path: '/bookinfo/:book_id',
     name: 'BookInfo',
     component: BookInfo
   },
@@ -121,6 +124,21 @@ const routes = [
     path: '/adddepartment',
     name: 'adddepartment',
     component: AddDepartment
+  },
+  {
+    path: '/forgotpassword0',
+    name: 'forgotpassword0',
+    component: ForgotPassword0
+  },
+  {
+    path: '/forgotpassword1',
+    name: 'forgotpassword1',
+    component: ForgotPassword1
+  },
+  {
+    path: '/forgotpassword2',
+    name: 'forgotpassword2',
+    component: ForgotPassword2
   },
 
 ]

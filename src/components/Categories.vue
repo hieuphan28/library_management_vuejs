@@ -4,7 +4,7 @@
       <div class="title">CATEGORIES:</div>
       <div class="filter" v-for="category in categories" :key="category.id">
         <div class="category-name">
-          <a href="">{{ category.name }}</a>
+          <a href="">{{ category.category_name }}</a>
         </div>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <div class="title">DEPARTMENT:</div>
       <div class="filter" v-for="department in departments" :key="department.id">
         <div class="department-name">
-          <a href="">{{ department.name }}</a>
+          <a href="">{{ department.department_name }}</a>
         </div>
       </div>
     </div>
@@ -20,55 +20,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "Categories",
-  data() {
-    return {
-      categories: [
-        {
-          id: 1,
-          name: "Textbook",
-        },
-        {
-          id: 2,
-          name: "Magazine",
-        },
-        {
-          id: 3,
-          name: "Novel",
-        },
-        {
-          id: 4,
-          name: "Science Journal",
-        },
-        {
-          id: 5,
-          name: "Reference Book",
-        },
-      ],
-      departments: [
-        {
-          id: 1,
-          name: "Engineering Department",
-        },
-        {
-          id: 2,
-          name: "IT Department",
-        },
-        {
-          id: 3,
-          name: "Economic Department",
-        },
-        {
-          id: 4,
-          name: "Literature Department",
-        },
-        {
-          id: 5,
-          name: "Music Department",
-        },
-      ],
-    };
+  computed: {
+    ...mapGetters({
+      categories: 'category/categories',
+      departments: 'department/departments',
+    })
   },
 };
 </script>

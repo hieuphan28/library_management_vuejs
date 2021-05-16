@@ -26,8 +26,15 @@ const updateBook = async (book) => {
     return handleResponse(res);
 }
 
+const getBookById = async (id) => {
+    const res = await axios.get(`${apiPrefix}/book/${id}`);
+
+    return handleResponse(res);
+}
+
 export {
     addBook,
     searchBook,
     updateBook,
+    getBookById,
 }

@@ -27,7 +27,11 @@
         />
       </div>
       <div class="forgot-password">
+<<<<<<< HEAD
         <router-link to="/forgotpassword">Forgot Password</router-link>
+=======
+        <router-link to="/forgotpassword0">Forgot password?</router-link>
+>>>>>>> d4ba687b408124a94995bc9773bff9c080b416fc
       </div>
       <div>
         <span id="Login"></span>
@@ -41,7 +45,7 @@
   </div>
 </template>
 <script>
-import { toastError, toastMessage } from '../utilities/toast-util';
+import { toastError, toastMessage, toastSuccess  } from '../utilities/toast-util';
 import { mapState } from 'vuex';
 
 export default {
@@ -62,7 +66,7 @@ export default {
           username: this.username,
           password: this.password,
         });
-        
+        toastSuccess('Login successfully');
         this.$router.push('/');
       } catch(e) {
         toastError(e);
@@ -195,7 +199,7 @@ export default {
   font-size: 14px;
 }
 .login-form .bar a {
-  padding: 0 5%;
+  padding-right: 5%;
   color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }

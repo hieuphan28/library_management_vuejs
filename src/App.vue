@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <NavigationBar :user="user" />
+    <NavigationBar />
     <div>
-      <router-view :user="user" />
+      <router-view />
     </div>
     <Footer />
   </div>
@@ -14,6 +14,7 @@ import NavigationBar from "./components/NavigationBar.vue";
 import Footer from "./components/Footer.vue";
 import store from "./store";
 import { getHostName } from "./infrastructure/app-manager";
+import { toastError } from './utilities/toast-util';
 
 export default {
   name: "app",
@@ -22,8 +23,14 @@ export default {
     Footer
   },
   store: store,
-  beforeMount: function() {
-    this.$store.dispatch('user/checkAuth');
+  beforeMount: async function() {
+    try {
+      await this.$store.dispatch('user/checkAuth');
+      await this.$store.dispatch('category/init');
+      await this.$store.dispatch('department/init');
+    } catch(e) {
+      toastError(e);
+    }
   }
 };
 </script>

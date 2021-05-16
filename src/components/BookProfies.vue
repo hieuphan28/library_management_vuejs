@@ -7,7 +7,7 @@
             <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
             <div class="row book-info">
               <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                {{ rentFee }}
+                {{ bookInfo.rent_cost }}
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 book-left">
                 Only ({{ booksLeft }}) books left
@@ -20,8 +20,8 @@
           </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
-          <h1>{{ book_name }}</h1>
-          <div>{{ description }}</div>
+          <h1>{{ bookInfo.book_name }}</h1>
+          <div>{{ bookInfo.description }}</div>
           <div class="row ">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
               <ul>
@@ -35,12 +35,12 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-6">
               <ul>
-                <li>{{ language }}</li>
-                <li>{{ book_author }}</li>
-                <li>{{ category }}</li>
-                <li>{{ department }}</li>
-                <li>{{ quantity }}</li>
-                <li>{{ publication_date }}</li>
+                <li>{{ bookInfo.language }}</li>
+                <li>{{ bookInfo.author }}</li>
+                <li>{{ bookInfo.category?.category_name || bookInfo.category_name}}</li>
+                <li>{{ bookInfo.department?.department_name || bookInfo.department_name}}</li>
+                <li>{{ bookInfo.quantity }}</li>
+                <li>{{ bookInfo.publication_date }}</li>
               </ul>
             </div>
           </div>
@@ -51,24 +51,26 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { toastError } from '../utilities/toast-util';
 export default {
   name: "BookProfies",
-
-  data() {
-    return {
-      book_name: "Gulliver's Travel",
-      rentFee: "10$",
-      booksLeft: "4",
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form There are many variations of passages of Lorem Ipsum available ",
-      language: "English",
-      book_author: "Johnathan Swift",
-      category: "Novel",
-      department: "Comic Department",
-      quantity: "24",
-      publication_date: "17/2/1999",
-    };
+  props: ['book_id'],
+  computed: {
+    ...mapGetters({
+      getBookById: 'book/bookById',
+    }),
+    bookInfo() {
+      return this.getBookById(this.book_id) || {};
+    }
   },
+  async mounted() {
+    try {
+      await this.$store.dispatch('book/getBookById', this.book_id);
+    } catch(e) {
+      toastError(e);
+    }
+  }
 };
 </script>
 
