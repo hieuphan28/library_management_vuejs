@@ -27,7 +27,7 @@
         />
       </div>
       <div class="forgot-password">
-        <a href="#">Forgot password?</a>
+        <router-link to="/forgotpassword0">Forgot password?</router-link>
       </div>
       <div>
         <span id="Login"></span>
@@ -195,7 +195,7 @@ export default {
   font-size: 14px;
 }
 .login-form .bar a {
-  padding: 0 5%;
+  padding-right: 5%;
   color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }

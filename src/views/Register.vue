@@ -9,11 +9,11 @@
     >
       <div class="bar">
         <router-link to="/login">Login</router-link>
-        <router-link to="/register">Sign Up</router-link>
+        <router-link to="/register"><a href="#" class="register-bar active">Sign Up</a>   </router-link>
       </div>
       <h1>Create An Account</h1>
       <div class="input-box">
-        <span>User Name:</span>
+        <span>Username:</span>
         <input v-model="username" type="string" placeholder="" required />
       </div>
       <div class="input-box">
@@ -101,7 +101,8 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss" scoped>
+
 * {
   margin: 0;
   padding: 0;
@@ -111,18 +112,20 @@ export default {
   text-decoration: none;
   font-family: Lato, sans-serif;
 }
-body {
-  width: 100%;
-  height: 100%;
-  background-attachment: fixed;
+.register {
+  height: 100vh;
+  position: relative;
+  img{
+    width: 100%;
+    background-attachment: none;
+    position: fixed;
+  }
 }
-.register img {
-  width: 100%;
-  height: 80vh;
-}
+
+
 /* COL-RIGHT H1 BANNER */
 .register .create-account-form h1 {
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   font-family: Merriweather;
   font-weight: bold;
   padding-bottom: 15px;
@@ -132,7 +135,7 @@ body {
 }
 /* COL-RIGHT FORM */
 .register .create-account-form {
-  max-width: 390px;
+  max-width: 430px;
   width: 100%;
   height: auto;
   /* font-size: 14px; */
@@ -149,7 +152,7 @@ body {
   transform: translate(-50%, -50%);
 }
 .register .create-account-form .input-box {
-  margin-bottom: 5%;
+  // margin-bottom: 5%;
   margin-bottom: 10%;
 }
 .register .create-account-form .input-box span {
@@ -166,7 +169,7 @@ body {
   border: 1px solid #cecece;
   box-sizing: border-box;
   border-radius: 6px;
-  padding: 0.5% 0 0.5% 2%;
+  padding: 1.5% 0 1.5% 2%;
 }
 #ErrorRegister span {
   color: red;
@@ -203,14 +206,14 @@ body {
 }
 /* COL-RIGHT - BAR */
 .create-account-form .bar {
-  margin-bottom: 7%;
+  margin-bottom: 5%;
   text-align: right;
   color: rgba(0, 0, 0, 0.38);
   padding: 0 0 20px 167px;
   font-size: 14px;
 }
 .create-account-form .bar a {
-  padding: 0 5%;
+  padding-left: 5%;
   color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }
