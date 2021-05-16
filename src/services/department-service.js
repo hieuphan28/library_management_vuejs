@@ -4,19 +4,19 @@ import { handleResponse } from '../infrastructure/app-handle';
 
 const apiPrefix = appManager.getApiPrefix();
 
-const addCategory = async (category) => {
-    const res = await axios.post(`${apiPrefix}/category`, category);
+const addDepartment = async (department) => {
+    const res = await axios.post(`${apiPrefix}/department`, department);
 
     return handleResponse(res);
 }
 
-const getCategories = async () => {
-    const res = await axios.get(`${apiPrefix}/categories-list`);
+const getDepartments = async () => {
+    const res = await axios.get(`${apiPrefix}/departments-list`);
 
     return handleResponse(res);
 }
 
 export {
-    addCategory,
-    getCategories,
+    addDepartment,
+    getDepartments,
 }

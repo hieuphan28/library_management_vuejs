@@ -70,11 +70,7 @@ const mutations = {
     clearCurrentUser(state) {
         state.currentUser = undefined,
         localStorage.removeItem('currentUser');
-<<<<<<< HEAD
-        setAuthorization(undefined);    
-=======
         setAuthorizationToken(undefined);
->>>>>>> ae9c346c4b974272f5a48d0ff7e4f6524933b9bd
     }
 }
 

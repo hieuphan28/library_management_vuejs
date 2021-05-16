@@ -76,7 +76,7 @@
                 <router-link
                   class="dropdown-item"
                   to="/borrow-history"
-                  v-if="isLogged"
+                  v-if="isMember"
                 >
                   View Borrowing Settings</router-link
                 >

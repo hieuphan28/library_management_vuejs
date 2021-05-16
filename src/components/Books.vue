@@ -8,17 +8,17 @@
     <div class="row ">
       <div
         class="col-lg-4 col-md-6 col-sm-12 col-12"
-        v-for="item in shop"
+        v-for="item in books"
         :key="item.id"
       >
-        <router-link to="/bookinfo"
+        <router-link :to="{ path: '/bookinfo/' + item.book_id}"
           ><img class="book-cover" src="../assets/book/gulliver.png" alt=""
         /></router-link>
 
         <div class="book-name">{{ item.book_name }}</div>
         <div class="row book-info">
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 fee">
-            {{ item.rentFee }}
+            {{ item.rent_cost + '$' }}
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
             <i class="fas fa-shopping-cart"> </i>
@@ -30,16 +30,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import items from "../store/item.js";
 export default {
   name: "Books",
+  computed: {
+    ...mapGetters('book', ['books'])
+  },
   data() {
     return {
       shop: items,
       cart: [],
     };
   },
-  
+  mounted: function() {
+    this.$store.dispatch('book/init');
+  }
 };
 </script>
 
