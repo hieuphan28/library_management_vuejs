@@ -281,7 +281,13 @@ export default {
     }
   }
 }
-
+.user{
+  .dropdown-menu{
+    .dropdown-item {
+      padding: 0.2rem 1rem;
+    }
+  }
+}
 .user a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
