@@ -9,6 +9,7 @@ import Carts  from '../views/Carts.vue'
 import Register  from '../views/Register.vue'
 import ViewProfile  from '../views/ViewProfile.vue'
 import ChangePassword  from '../views/ChangePassword.vue'
+import ForgotPassword  from '../views/ForgotPassword.vue'
 import Contact from '../views/Contact.vue'
 import ExtendLoan from '../views/ExtendLoan.vue'
 import ManageBook from '../views/ManageBook.vue'
@@ -65,6 +66,11 @@ const routes = [
     path: '/changepassword',
     name: 'changepassword',
     component: ChangePassword
+  },
+  {
+    path: '/forgotpassword',
+    name: 'forgotpassword',
+    component: ForgotPassword
   },
   {
     path: '/contact',

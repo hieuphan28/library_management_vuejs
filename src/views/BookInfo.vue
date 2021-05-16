@@ -14,7 +14,10 @@ import Categories from "../components/Categories.vue";
 
 export default {
   name: "BookInfo",
-  
+  components: {
+    Categories,
+    BookProfies
+  }
 };
 </script>
 

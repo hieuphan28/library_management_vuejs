@@ -27,7 +27,7 @@
         />
       </div>
       <div class="forgot-password">
-        <a href="#">Forgot password?</a>
+        <router-link to="/forgotpassword">Forgot Password</router-link>
       </div>
       <div>
         <span id="Login"></span>
