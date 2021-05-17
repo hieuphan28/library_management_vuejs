@@ -12,7 +12,7 @@
         :key="item.id"
       >
         <router-link :to="{ path: '/bookinfo/' + item.book_id}"
-          ><img class="book-cover" src="../assets/book/gulliver.png" alt=""
+          ><img class="book-cover" :src="item.thumbnail" alt=""
         /></router-link>
 
         <div class="book-name">{{ item.book_name }}</div>
