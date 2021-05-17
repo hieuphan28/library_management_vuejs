@@ -32,9 +32,19 @@ const getBookById = async (id) => {
     return handleResponse(res);
 }
 
+const removeBook = async (book) => {
+    const data = book;
+    const res = await axios.delete(`${apiPrefix}/book`, {
+        data: book
+    });
+
+    return handleResponse(res);
+}
+
 export {
     addBook,
     searchBook,
     updateBook,
     getBookById,
+    removeBook,
 }

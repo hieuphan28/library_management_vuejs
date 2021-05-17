@@ -6,7 +6,9 @@ const state = () => ({
 
 const getters = {
     books: (state, getters) => {
-        return state.data;
+        return state.data.sort((a, b) => {
+            return new Date(b.create_date) - new Date(a.create_date);
+        });
     },
 
     bookById: (state, getters) => (book_id) => {
@@ -38,6 +40,11 @@ const actions = {
     async getBookById({state, commit}, book_id) {
         const data = await bookService.getBookById(book_id);
         commit('upsertBook', data);
+    },
+
+    async removeBook({state, commit}, book) {
+        const data = await bookService.removeBook(book);   
+        commit('removeBook', book);
     }
 }
 
@@ -55,6 +62,10 @@ const mutations = {
         bookExist && state.data.map(x => x.book_id === book.book_id ? book : x)
             || state.data.push(book);    
     },
+
+    removeBook(state, book) {
+        state.data = state.data.filter(x => x.book_id !== book.book_id); 
+    }
 }
 
 export default {

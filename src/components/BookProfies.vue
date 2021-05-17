@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
           <div>
-            <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
+            <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
             <div class="row book-info">
               <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                 {{ bookInfo.rent_cost }}

@@ -3,53 +3,53 @@
     <!-- UPDATE--BOOK--INFO -->
     <div class="updatebookinfo">
       <div class="row save">
-        <button class="btn">Save</button>
+        <button class="btn" @click="saveBook">Save</button>
       </div>
 
       <div class="row all">
         <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
           <div>
-            <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
+            <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
           </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
-          <h1 class="title"><input type="text" v-model="book_name" /></h1>
+          <h1 class="title"><input type="text" v-model="bookInfo.book_name" /></h1>
           <div class="textarea">
             <textarea
               name="paragraph_text"
               cols="60"
               rows="4"
-              v-model="description"
+              v-model="bookInfo.description"
             ></textarea>
           </div>
           <div class="input-box">
             <span>Language:</span>
-            <input type="text" placeholder="" v-model="language" />
+            <input type="text" placeholder="" v-model="bookInfo.language" />
           </div>
           <div class="input-box">
             <span>Author:</span>
-            <input type="text" placeholder="" v-model="book_author" />
+            <input type="text" placeholder="" v-model="bookInfo.author" />
           </div>
           <div class="input-box">
             <span>Category:</span>
-            <input type="text" placeholder="" v-model="category" />
+            <input type="text" placeholder="" v-model="bookInfo.category" />
           </div>
 
           <div class="input-box">
             <span>Department:</span>
-            <input type="text" placeholder="" v-model="department" />
+            <input type="text" placeholder="" v-model="bookInfo.department" />
           </div>
           <div class="input-box">
             <span>Price:</span>
-            <input type="text" placeholder="" v-model="price" />
+            <input type="text" placeholder="" v-model="bookInfo.price" />
           </div>
           <div class="input-box">
             <span>Rent Cost:</span>
-            <input type="text" placeholder="" v-model="rentcost" />
+            <input type="text" placeholder="" v-model="bookInfo.rent_cost" />
           </div>
           <div class="input-box">
             <span>Publication Date:</span>
-            <input type="text" placeholder="" v-model="publication_date" />
+            <input type="text" placeholder="" v-model="bookInfo.publication_date" />
           </div>
         </div>
       </div>
@@ -95,46 +95,41 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { toastError, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "UpdateBook",
+  computed: {
+    ...mapGetters({
+      getBookById: 'book/bookById',
+    }),
+    bookInfo() {
+      return this.getBookById(this.book_id) || {};
+    }
+  },
   data() {
     return {
-      book_name: "Gulliver's Travel",
-      rentFee: "10$",
-      booksLeft: "4",
-      description:
-        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form There are many variations of passages of Lorem Ipsum available ",
-      language: "English",
-      book_author: "Johnathan Swift",
-      category: "Novel",
-      department: "Comic Department",
-      price: "$25",
-      rentcost: "$105",
-      publication_date: "17/2/1999",
-      books: [
-        {
-          id: "1",
-          barcode: "123",
-
-          datepurchase: "22/1/2021",
-          dateaddtolib: "16/2/2021",
-
-          location: "Floor 5",
-          status: "Available",
-        },
-        {
-          id: "2",
-          barcode: "123",
-
-          datepurchase: "22/1/2021",
-          dateaddtolib: "16/2/2021",
-
-          location: "Floor 5",
-          status: "Available",
-        },
-      ],
-    };
+      book_id: this.$router.currentRoute.value.params.book_id,
+    }
   },
+  async mounted() {
+    try {
+      await this.$store.dispatch('book/getBookById', this.book_id);
+    } catch(e) {
+      toastError(e);
+    }
+  },
+  methods: {
+    async saveBook() {
+      try {
+        await this.$store.dispatch('book/updateBook', this.bookInfo);
+
+        toastSuccess('Update book successfully.');
+      } catch(e) {
+        toastError(e);
+      }
+    }
+  }
 };
 </script>
 

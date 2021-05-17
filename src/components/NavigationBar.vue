@@ -52,8 +52,18 @@
               <a class="nav-link" data-toggle="dropdown" href="#"
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
+<<<<<<< HEAD
               <div class="dropdown-menu dropdown-menu-right" v-if="isLogged">
                 <router-link to="/viewprofile" v-if="isMember"
+=======
+              <div class="dropdown-menu dropdown-menu-right">
+                <router-link to="/managebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Manage book</a
+                  ></router-link
+                >
+                <router-link to="/viewprofile" v-if="isLogged"
+>>>>>>> main
                   ><a class="dropdown-item" href="#"
                     >View Profile</a
                   ></router-link

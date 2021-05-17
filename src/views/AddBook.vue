@@ -7,7 +7,9 @@
       <div class="row info">
         <div class="col-lg-5 col-md-5 col-sm-5 col-5 ava">
           <div class="row avatar">
-            <a href=""><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <i class="fa fa-plus" aria-hidden="true">
+              <input type="file" accept="image/*" @change="selectFile($event)" id="file-input">
+            </i>
           </div>
           <div class="row pd">
             <div class="input-box">
@@ -63,22 +65,29 @@
 
 <script>
 import { toastError, toastSuccess } from '../utilities/toast-util';
+import { uploadImage } from '../services/upload-service';
+
 export default {
   name: "AddBook",
   data() {
     return {
-      book: {}
+      book: {},
+      imageFile: undefined,
     }
   },
   methods: {
     async addBookSubmit() {
       try {
+        this.book.thumbnail = await uploadImage(this.imageFile);
         await this.$store.dispatch('book/addBook', this.book);
 
         toastSuccess('Add book successfully!');
       } catch(e) {
         toastError(e);
       }
+    },
+    async selectFile(event) {
+      this.imageFile = event.target.files[0];
     }
   }
 };
