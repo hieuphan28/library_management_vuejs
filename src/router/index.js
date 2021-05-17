@@ -95,7 +95,7 @@ const routes = [
     component: AddBookItem
   },
   {
-    path: '/updatebook',
+    path: '/updatebook/:book_id',
     name: 'updatebook',
     component: UpdateBook
   },

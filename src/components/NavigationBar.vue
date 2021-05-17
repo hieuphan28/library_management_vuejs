@@ -53,6 +53,11 @@
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
+                <router-link to="/managebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Manage book</a
+                  ></router-link
+                >
                 <router-link to="/viewprofile" v-if="isLogged"
                   ><a class="dropdown-item" href="#"
                     >View Profile</a
