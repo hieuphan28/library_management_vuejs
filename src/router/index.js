@@ -22,6 +22,7 @@ import AddDepartment from '../views/AddDepartment.vue'
 import ForgotPassword0 from '../views/ForgotPassword0.vue'
 import ForgotPassword1 from '../views/ForgotPassword1.vue'
 import ForgotPassword2 from '../views/ForgotPassword2.vue'
+import RegisterAdmin from '../views/RegisterAdmin.vue'
 
 const routes = [
   {
@@ -133,6 +134,11 @@ const routes = [
     path: '/forgotpassword2',
     name: 'forgotpassword2',
     component: ForgotPassword2
+  },
+  {
+    path: '/admin',
+    name: 'registeradmin',
+    component: RegisterAdmin
   },
 
 ]

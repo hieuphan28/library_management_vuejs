@@ -2,10 +2,7 @@
   <!-- <NavigationBar /> -->
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
-    <form
-      @submit.prevent="handleLogin"
-      class="login-form"
-    >
+    <form @submit.prevent="handleLogin" class="login-form">
       <div class="bar">
         <router-link to="/login"
           ><a href="#" class="login-bar active">Login</a></router-link
@@ -18,13 +15,13 @@
         <img src="../assets/icon_setting.png" alt="" />
       </div>
       <div class="input-box">
-        <input id="myInput" v-model="password" type="password" placeholder="Password" />
-        <img
-          class="eye"
-          src="../assets/eye.svg"
-          alt=""
-          @click="myFunction()"
+        <input
+          id="myInput"
+          v-model="password"
+          type="password"
+          placeholder="Password"
         />
+        <img class="eye" src="../assets/eye.svg" alt="" @click="myFunction()" />
       </div>
       <div class="forgot-password">
         <router-link to="/forgotpassword0">Forgot password?</router-link>
@@ -37,17 +34,21 @@
           <button type="submit">Login</button>
         </a>
       </div>
-    </form> 
+    </form>
   </div>
 </template>
 <script>
-import { toastError, toastMessage, toastSuccess  } from '../utilities/toast-util';
-import { mapState } from 'vuex';
+import {
+  toastError,
+  toastMessage,
+  toastSuccess,
+} from "../utilities/toast-util";
+import { mapState } from "vuex";
 
 export default {
   name: "Login",
   computed: mapState({
-    currentUser: state => state.user.currentUser
+    currentUser: (state) => state.user.currentUser,
   }),
   data() {
     return {
@@ -58,17 +59,25 @@ export default {
   methods: {
     handleLogin: async function() {
       try {
-        await this.$store.dispatch('user/login', {
+        await this.$store.dispatch("user/login", {
           username: this.username,
           password: this.password,
         });
-        toastSuccess('Login successfully');
-        this.$router.push('/');
-      } catch(e) {
+        toastSuccess("Login successfully");
+        this.$router.push("/");
+      } catch (e) {
         toastError(e);
       }
-    }
-  }
+    },
+    myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

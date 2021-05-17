@@ -11,7 +11,7 @@
         <router-link to="/login">Login</router-link>
         <router-link to="/register"><a href="#" class="register-bar active">Sign Up</a>   </router-link>
       </div>
-      <h1>Create An Account</h1>
+      <h1>Create An Account - Admin</h1>
       <div class="input-box">
         <span>Username:</span>
         <input v-model="username" type="string" placeholder="" required />
@@ -74,13 +74,13 @@ export default {
       phone: "",
       dob: "",
       address: "",
-      role: 0,
+      role: 1,
     };
   },
   methods: {
     HandleSubmit: async function() {
       try {
-        await this.$store.dispatch("user/register", {
+        await this.$store.dispatch("user/registerAdmin", {
           userId: this.userId,
           username: this.username,
           password: this.password,

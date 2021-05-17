@@ -52,15 +52,23 @@
               <a class="nav-link" data-toggle="dropdown" href="#"
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
-              <div class="dropdown-menu dropdown-menu-right">
-                <router-link to="/viewprofile" v-if="isLogged"
+              <div class="dropdown-menu dropdown-menu-right" v-if="isLogged">
+                <router-link to="/viewprofile" v-if="isMember"
                   ><a class="dropdown-item" href="#"
                     >View Profile</a
                   ></router-link
                 >
-                <router-link to="/changepassword" v-if="isLogged"
+                <router-link to="/changepassword" v-if="isMember"
                   ><a class="dropdown-item" href="#"
                     >Change Password</a
+                  ></router-link
+                >
+                <router-link to="#" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#">Reserve</a></router-link
+                >
+                <router-link to="/managebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Manage books</a
                   ></router-link
                 >
                 <router-link to="/login" v-if="isLogged"
@@ -68,30 +76,27 @@
                     >Logout</a
                   ></router-link
                 >
-                <router-link to="/login" v-if="!isLogged"
+                <!-- <router-link to="/login" v-if="!isLogged"
                   ><a class="dropdown-item" href="#" @click="clearCurrentUser"
                     >Login</a
                   ></router-link
-                >
+                > -->
                 <router-link
                   class="dropdown-item"
                   to="/borrow-history"
                   v-if="isMember"
                 >
-                  View Borrowing Settings</router-link
+                  View Borrowing History</router-link
+                >
+              </div>
+              <div class="dropdown-menu dropdown-menu-right" v-if="!isLogged">
+                <router-link to="/login" v-if="!isLogged"
+                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
+                    >Login</a
+                  ></router-link
                 >
               </div>
             </li>
-            <!-- <li v-if="!user" class="user dropdown">
-              <router-link to="/login">
-                <a
-                  class="nav-link dropdown-toggle"
-                  data-toggle="dropdown"
-                  @click="checkLogin"
-                  href="#"
-                ></a>
-              </router-link>
-            </li> -->
           </ul>
         </div>
         <div class="col-2 col-md-2 nav-menu">
@@ -289,8 +294,8 @@ export default {
     }
   }
 }
-.user{
-  .dropdown-menu{
+.user {
+  .dropdown-menu {
     .dropdown-item {
       padding: 0.2rem 1rem;
     }
