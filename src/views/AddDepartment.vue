@@ -10,11 +10,7 @@
       <input type="text" class="input" v-model="department_name" />
       <div class="row bt">
         <button class="btn">
-<<<<<<< HEAD
          <i class="fa fa-plus"></i>Add Department
-=======
-          <a href="#"> <i class="fa fa-plus"></i>Add Department </a>
->>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
         </button>
       </div>
     </form>
@@ -26,7 +22,7 @@ import department from "../store/modules/department"
 import { toastSuccess, toastError } from "../utilities/toast-util";
 import { mapActions, mapGetters, mapState } from "vuex";
 export default {
-  name: "AddCategory",
+  name: "AddDepartment",
   data(){
     return {
       department_name: "",
@@ -44,7 +40,6 @@ export default {
       }
     },
   }
-
 };
 </script>
 

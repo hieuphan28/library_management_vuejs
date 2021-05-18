@@ -83,7 +83,6 @@ export default {
       reservedDate: "",
       returnedDate: "",
       checkDate: false,
-      carts: items,
     };
   },
 };

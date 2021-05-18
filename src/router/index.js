@@ -20,14 +20,7 @@ import IssueBook from '../views/IssueBook.vue'
 import ReturnBook from '../views/ReturnBook.vue'
 import AddCategory from '../views/AddCategory.vue'
 import AddDepartment from '../views/AddDepartment.vue'
-<<<<<<< HEAD
-import ForgotPassword0 from '../views/ForgotPassword0.vue'
-import ForgotPassword1 from '../views/ForgotPassword1.vue'
-import ForgotPassword2 from '../views/ForgotPassword2.vue'
 import RegisterAdmin from '../views/RegisterAdmin.vue'
-=======
-
->>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
 
 const routes = [
   {
@@ -130,30 +123,12 @@ const routes = [
     name: 'adddepartment',
     component: AddDepartment
   },
-<<<<<<< HEAD
-  {
-    path: '/forgotpassword0',
-    name: 'forgotpassword0',
-    component: ForgotPassword0
-  },
-  {
-    path: '/forgotpassword1',
-    name: 'forgotpassword1',
-    component: ForgotPassword1
-  },
-  {
-    path: '/forgotpassword2',
-    name: 'forgotpassword2',
-    component: ForgotPassword2
-  },
+
   {
     path: '/admin',
     name: 'registeradmin',
     component: RegisterAdmin
   },
-
-=======
->>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
 ]
 
 const router = createRouter({

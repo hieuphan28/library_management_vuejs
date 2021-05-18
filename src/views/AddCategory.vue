@@ -15,11 +15,7 @@
       <input type="string" class="input" v-model="category_name" />
       <div class="row bt">
         <button class="btn">
-<<<<<<< HEAD
          <i class="fa fa-plus"></i>Add Category 
-=======
-          <a href="#"> <i class="fa fa-plus"></i>Add Category </a>
->>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
         </button>
       </div>
     </form>

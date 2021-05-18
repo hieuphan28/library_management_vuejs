@@ -38,36 +38,7 @@
               <a class="nav-link" data-toggle="dropdown" href="#"
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
-<<<<<<< HEAD
               <div class="dropdown-menu dropdown-menu-right" v-if="isLogged">
-                <router-link
-                  to="/viewprofile"
-                  class="dropdown-item"
-                  v-if="isMember"
-                  >View Profile
-                </router-link>
-                <router-link
-                  to="/changepassword"
-                  class="dropdown-item"
-                  v-if="isMember"
-                  >Change Password
-                </router-link>
-                <router-link
-                  to="/managebook"
-                  class="dropdown-item"
-                  v-if="isAdmin"
-                  >Manage books
-                </router-link>
-                <router-link to="#" class="dropdown-item" v-if="isAdmin"
-                  >Reserve
-                </router-link>
-                <router-link
-                  to="/login"
-                  v-if="isLogged"
-                  class="dropdown-item"
-                  @click="clearCurrentUser"
-=======
-              <div class="dropdown-menu dropdown-menu-right">
                 <router-link to="/managebook" v-if="isAdmin"
                   ><a class="dropdown-item" href="#"
                     >Manage book</a
@@ -88,14 +59,11 @@
                     >Change Password</a
                   ></router-link
                 >
-                <router-link to="/login" v-if="isLogged"
+                <router-link to="/login" v-if="isLogged" 
                   ><a class="dropdown-item" href="#" @click="clearCurrentUser"
                     >Logout</a
                   ></router-link
->>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
                 >
-                  Logout
-                </router-link>
                 <!-- <router-link to="/login" v-if="!isLogged"
                   ><a class="dropdown-item" href="#" @click="clearCurrentUser"
                     >Login</a
