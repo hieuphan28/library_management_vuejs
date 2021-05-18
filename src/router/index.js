@@ -125,7 +125,7 @@ const routes = [
   },
 
   {
-    path: '/admin',
+    path: '/admin/register',
     name: 'registeradmin',
     component: RegisterAdmin
   },

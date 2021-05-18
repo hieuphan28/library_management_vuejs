@@ -29,7 +29,7 @@ const registerAdmin = async (data) => {
 
 }
 const changePassword = async (data) => {
-    const res = await axios.put(`${apiPrefix}/user/changepassword`, data);
+    const res = await axios.put(`${apiPrefix}/changepassword`, data);
     return handleResponse(res);
 }
 

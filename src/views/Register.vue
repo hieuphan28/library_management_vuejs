@@ -51,9 +51,9 @@
         <span id="Register"></span>
       </div>
       <div class="btn-box">
-        <router-link>
+        <a href="">
           <button type="submit">Register</button>
-        </router-link>
+        </a>
       </div>
     </form>
   </div>
@@ -98,7 +98,7 @@ export default {
         console.log(response);
         toastSuccess("Register successfully");
       } catch (e) {
-        toastError(e.response.data.meta.message);
+        toastError(e);
       }
     },
     myFunction() {
@@ -231,7 +231,7 @@ export default {
   font-size: 14px;
 }
 .create-account-form .bar a {
-  padding: 0% 5%;
+  padding-left: 5%;
   color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }

@@ -98,7 +98,7 @@ export default {
           toastMessage("Confirm Password is not correct. Try again!");
         }
       } catch (e) {
-        toastError(e);
+        toastError(e.response.data.meta.message);
       }
     },
     mounted: function() {

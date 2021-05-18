@@ -114,6 +114,11 @@ import { UserRole } from "../common/bundleOfEnum";
 
 export default {
   name: "Header",
+  data(){
+    return{
+    showNav: false,
+    }
+  },
   computed: {
     ...mapGetters("user", ["currentUser", "isLogged", "isMember", "isAdmin"]),
   },

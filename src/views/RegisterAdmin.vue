@@ -9,7 +9,7 @@
     >
       <div class="bar">
         <router-link to="/login">Login</router-link>
-        <router-link to="/register"
+        <router-link to="/admin/register"
           ><a href="#" class="register-bar active">Sign Up</a>
         </router-link>
       </div>
@@ -98,7 +98,7 @@ export default {
         console.log(response);
         toastSuccess("Register successfully");
       } catch (e) {
-        toastError(e.response.data.meta.message);
+        toastError(e);
       }
     },
     myFunction() {
