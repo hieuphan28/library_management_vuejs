@@ -54,7 +54,7 @@
           </div>
           <div class="input-box">
             <span>Category:</span>
-            <select name="" id="">
+            <select v-model="book.category_id">
               <option
                 :value="option.value"
                 v-for="(option, index) in categories"
@@ -66,7 +66,7 @@
           </div>
           <div class="input-box">
             <span>Department:</span>
-            <select name="" id="">
+            <select v-model="book.department_id">
               <option
                 :value="option.value"
                 v-for="(option, index) in departments"
