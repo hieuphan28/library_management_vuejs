@@ -215,7 +215,7 @@ h2 b {
   min-width: 100%;
 }
 .carousel .carousel-inner {
-  height: 34vh;
+  height: 50%;
 }
 .carousel .carousel-item {
   /* min-height: 330px; */

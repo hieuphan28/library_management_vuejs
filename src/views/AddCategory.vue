@@ -1,16 +1,21 @@
 <template>
   <div class="container">
-    <form class="add-category-form" action="" method="">
+    <form
+      @submit.prevent="addCartSubmit"
+      class="add-category-form"
+      action=""
+      method=""
+    >
       <div class="row back">
         <router-link to="/managebook"
           ><i class="fa fa-arrow-left" aria-hidden="true"></i
         ></router-link>
       </div>
       <div class="title">Add Category</div>
-      <input type="text" class="input" />
+      <input type="string" class="input" v-model="category_name" />
       <div class="row bt">
         <button class="btn">
-          <a href=""> <i class="fa fa-plus"></i>Add Category </a>
+         <i class="fa fa-plus"></i>Add Category 
         </button>
       </div>
     </form>
@@ -18,8 +23,28 @@
 </template>
 
 <script>
+import categories from "../store/modules/category";
+import { toastSuccess, toastError } from "../utilities/toast-util";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   name: "AddCategory",
+  data() {
+    return {
+      category_name:'',
+    };
+  },
+  methods: {
+    addCartSubmit: async function() {
+      try {
+        await this.$store.dispatch("category/addCategory", {
+          category_name: this.category_name,
+        });
+        toastSuccess("Add Category Successfully!");
+      } catch (e) {
+        toastError(e);
+      }
+    },
+  },
 };
 </script>
 

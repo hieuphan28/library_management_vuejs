@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as appManager from '../infrastructure/app-manager';
-import { handleResponse } from '../infrastructure/app-handle'; 
+import { handleResponse, handleError } from '../infrastructure/app-handle'; 
 
 const apiPrefix = appManager.getApiPrefix();
 

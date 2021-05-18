@@ -217,7 +217,7 @@ h2 {
   text-align: center;
   text-transform: uppercase;
   position: relative;
-  margin: 2% 0 2%;
+  margin: 3% 0 2%;
   font-weight: bold;
 }
 h2 b {
@@ -236,13 +236,10 @@ h2 b {
   min-width: 100%;
 }
 .carousel .carousel-inner {
-  height: 34vh;
+  height: 50%;
 }
 .carousel .carousel-item {
-  /* min-height: 330px; */
-  /* margin-top:10%; */
   text-align: center;
-  /* overflow: hidden; */
   width: 100%;
 }
 .carousel .carousel-item .img-box {

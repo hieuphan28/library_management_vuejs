@@ -25,20 +25,6 @@
         <div class="col-8 col-md-6 col-lg-4">
           <ul class="header__sidebar__right d-flex align-items-center">
             <li class="shop_search dropdown show">
-              <!-- <button
-                class="btn dropdown-toggle btn-sm"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Title
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Title</a>
-                <a class="dropdown-item" href="#">Author</a>
-              </div> -->
               <input type="text" placeholder="Search your books" />
               <a href="#"> <i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
@@ -53,32 +39,35 @@
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
               <div class="dropdown-menu dropdown-menu-right" v-if="isLogged">
-                <router-link to="/managebook" v-if="isAdmin"
-                  ><a class="dropdown-item" href="#"
-                    >Manage book</a
-                  ></router-link
-                >
-                <router-link to="/viewprofile" v-if="isMember"
-                  ><a class="dropdown-item" href="#">View Profile </a>
+                <router-link
+                  to="/viewprofile"
+                  class="dropdown-item"
+                  v-if="isMember"
+                  >View Profile
                 </router-link>
-                <router-link to="/changepassword" v-if="isMember"
-                  ><a class="dropdown-item" href="#"
-                    >Change Password</a
-                  ></router-link
+                <router-link
+                  to="/changepassword"
+                  class="dropdown-item"
+                  v-if="isMember"
+                  >Change Password
+                </router-link>
+                <router-link
+                  to="/managebook"
+                  class="dropdown-item"
+                  v-if="isAdmin"
+                  >Manage books
+                </router-link>
+                <router-link to="#" class="dropdown-item" v-if="isAdmin"
+                  >Reserve
+                </router-link>
+                <router-link
+                  to="/login"
+                  v-if="isLogged"
+                  class="dropdown-item"
+                  @click="clearCurrentUser"
                 >
-                <router-link to="#" v-if="isAdmin"
-                  ><a class="dropdown-item" href="#">Reserve</a></router-link
-                >
-                <router-link to="/managebook" v-if="isAdmin"
-                  ><a class="dropdown-item" href="#"
-                    >Manage books</a
-                  ></router-link
-                >
-                <router-link to="/login" v-if="isLogged"
-                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
-                    >Logout</a
-                  ></router-link
-                >
+                  Logout
+                </router-link>
                 <!-- <router-link to="/login" v-if="!isLogged"
                   ><a class="dropdown-item" href="#" @click="clearCurrentUser"
                     >Login</a
@@ -93,10 +82,12 @@
                 >
               </div>
               <div class="dropdown-menu dropdown-menu-right" v-if="!isLogged">
-                <router-link to="/login" v-if="!isLogged"
-                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
-                    >Login</a
-                  ></router-link
+                <router-link
+                  to="/login"
+                  class="dropdown-item"
+                  href="#"
+                  @click="clearCurrentUser"
+                  >Login</router-link
                 >
               </div>
             </li>

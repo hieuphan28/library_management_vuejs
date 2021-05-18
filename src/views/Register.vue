@@ -9,22 +9,27 @@
     >
       <div class="bar">
         <router-link to="/login">Login</router-link>
-        <router-link to="/register"><a href="#" class="register-bar active">Sign Up</a>   </router-link>
+        <router-link to="/register"
+          ><a href="#" class="register-bar active">Sign Up</a>
+        </router-link>
       </div>
       <h1>Create An Account</h1>
       <div class="input-box">
         <span>Username:</span>
         <input v-model="username" type="string" placeholder="" required />
+        <img src="../assets/icon_setting.png" alt="" class="icon_user"/>
       </div>
       <div class="input-box">
         <span>Password:</span>
         <input
+          id="myInput"
           v-model="password"
           type="password"
           placeholder=""
           required
           maxlength="8"
         />
+        <img class="eye" src="../assets/eye.svg" alt="" @click="myFunction()" />
       </div>
       <div class="input-box">
         <span>Email:</span>
@@ -46,9 +51,9 @@
         <span id="Register"></span>
       </div>
       <div class="btn-box">
-        <a href="">
+        <router-link>
           <button type="submit">Register</button>
-        </a>
+        </router-link>
       </div>
     </form>
   </div>
@@ -56,14 +61,14 @@
 <script>
 import axios from "axios";
 import user from "../store/modules/user";
-import { toastError , toastMessage } from "../utilities/toast-util";
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { toastError, toastMessage } from "../utilities/toast-util";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   name: "Register",
-    computed: {
-    ...mapGetters('user',{
-      currentUser: 'currentUser'
-    })
+  computed: {
+    ...mapGetters("user", {
+      currentUser: "currentUser",
+    }),
   },
   data() {
     return {
@@ -91,16 +96,23 @@ export default {
           role: this.role,
         });
         console.log(response);
-        toastSuccess('Register successfully');
+        toastSuccess("Register successfully");
       } catch (e) {
         toastError(e.response.data.meta.message);
+      }
+    },
+    myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
       }
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-
 * {
   margin: 0;
   padding: 0;
@@ -113,13 +125,12 @@ export default {
 .register {
   height: 100vh;
   position: relative;
-  img{
+  img {
     width: 100%;
     background-attachment: none;
     position: fixed;
   }
 }
-
 
 /* COL-RIGHT H1 BANNER */
 .register .create-account-form h1 {
@@ -169,9 +180,18 @@ export default {
   border-radius: 6px;
   padding: 1.5% 0 1.5% 2%;
 }
-#ErrorRegister span {
-  color: red;
-  font-style: italic;
+.create-account-form .input-box > img {
+  float: right;
+  width: 6%;
+  position: relative;
+  left: 68%;
+  margin-top: 0.6rem;
+}
+.create-account-form .input-box > img.icon_user {
+  width:5%;
+}
+.create-account-form .input-box .eye {
+  cursor: pointer;
 }
 /*Edit Button*/
 .create-account-form .btn-box {
