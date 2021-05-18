@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <categories class="col-lg-3 col-md-3 col-sm-3 col-3"> </categories>
-      <book-profies :book_id="book_id" class="col-lg-8 col-md-8 col-sm-8 col-7"> </book-profies>
+      <book-profies :book_id="book_id" class="col-lg-9 col-md-9 col-sm-6 col-6"> </book-profies>
     </div>
   </div>
 </template>

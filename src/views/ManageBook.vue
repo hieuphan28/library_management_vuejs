@@ -1,21 +1,21 @@
 <template>
   <div class="container">
     <div class="row head">
-      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left-side">
         <button class="btn d-block">
           <router-link to="/addbook"
-            ><i class="fa fa-plus" aria-hidden="true"></i>Add New Book 
+            ><i class="fa fa-plus" aria-hidden="true"></i>Add New Book
           </router-link>
         </button>
       </div>
-      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left-side">
         <button class="btn d-block">
           <router-link to="/addcategory"
             ><i class="fa fa-plus" aria-hidden="true"></i>Add Category
           </router-link>
         </button>
       </div>
-      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left">
+      <div class="col-lg-2 col-md-12 col-sm-12 col-12 left-side">
         <button class="btn d-block">
           <router-link to="/adddepartment"
             ><i class="fa fa-plus" aria-hidden="true"></i>Add Department
@@ -37,16 +37,15 @@
       >
         <div class="row allbook">
           <div class="col-lg-5 col-md-5 col-sm-5 col-5">
-            <router-link :to="{path: '/updatebook/' + book.book_id}">
-              <img
-                class="book-cover"
-                :src="book.thumbnail"
-                alt=""
-              />
+
+            <div class="contain">
+            <router-link :to="{ path: '/updatebook/' + book.book_id }">
+              <img class="book-cover" :src="book.thumbnail" alt="" />
             </router-link>
+            </div>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-7 col-7 book-info">
-            <router-link :to="{path: '/updatebook/' + book.book_id}"
+            <router-link :to="{ path: '/updatebook/' + book.book_id }"
               ><div class="book-name">{{ book.book_name }}</div></router-link
             >
             <div class="info">
@@ -54,11 +53,13 @@
               <div class="quantity">{{ book.quantity }} book(s)</div>
             </div>
             <div>
-              <button class="btn d-block" >
-                <a @click="removeBook(book)"><i class="fa fa-trash"></i>Delete </a>
+              <button class="btn d-block">
+                <a @click="removeBook(book)"
+                  ><i class="fa fa-trash"></i>Delete
+                </a>
               </button>
               <button class="btn d-block">
-                <router-link :to="{path: '/updatebook/' + book.book_id}"
+                <router-link :to="{ path: '/updatebook/' + book.book_id }"
                   ><i class="fa fa-list" aria-hidden="true"></i
                   >Edit</router-link
                 >
@@ -78,46 +79,65 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { toastError, toastSuccess } from '../utilities/toast-util';
+import { mapGetters } from "vuex";
+import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
   name: "ManageBook",
   computed: {
     ...mapGetters({
-      books: 'book/books'
-    })
+      books: "book/books",
+    }),
   },
   mounted() {
-    this.$store.dispatch('book/init');
+    this.$store.dispatch("book/init");
   },
   methods: {
     async removeBook(book) {
       try {
-        await this.$store.dispatch('book/removeBook', book);
+        await this.$store.dispatch("book/removeBook", book);
 
-        toastSuccess('Remove book successfully.');
-      } catch(e) {
+        toastSuccess("Remove book successfully.");
+      } catch (e) {
         toastError(e);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+
+.contain {
+  border: solid 1px rgba(0, 0, 0, 0.87);
+  display: block;
+  width: 210px;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+}
+
+
 .head {
   margin-top: 5%;
-  .left button {
-    margin-left: 2%;
+  button {
     float: left;
     width: 160px;
 
     i {
       align-content: center;
-    
     }
   }
-
   .search {
     text-align: right;
     input {
@@ -172,7 +192,8 @@ button {
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-  margin: 0% 0% 3% 0%;
+  margin-bottom: 5%;
+  padding: 1.5% 0% 2.5% 0%;
   a {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.38);
@@ -180,6 +201,7 @@ button {
   }
 
   i {
+    margin-left: 8%;
     padding-right: 5%;
     color: rgba(0, 0, 0, 0.38);
     font-size: medium;
