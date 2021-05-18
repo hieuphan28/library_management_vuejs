@@ -9,9 +9,13 @@
     >
       <div class="bar">
         <router-link to="/login">Login</router-link>
+<<<<<<< HEAD
         <router-link to="/register"
           ><a href="#" class="register-bar active">Sign Up</a>
         </router-link>
+=======
+        <router-link to="/register" class="register-bar active">Sign Up</router-link>
+>>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
       </div>
       <h1>Create An Account</h1>
       <div class="input-box">
@@ -51,7 +55,11 @@
         <span id="Register"></span>
       </div>
       <div class="btn-box">
+<<<<<<< HEAD
         <router-link>
+=======
+        <a href="#">
+>>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
           <button type="submit">Register</button>
         </router-link>
       </div>
@@ -231,7 +239,7 @@ export default {
   font-size: 14px;
 }
 .create-account-form .bar a {
-  padding-left: 5%;
+  padding: 0% 5%;
   color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }

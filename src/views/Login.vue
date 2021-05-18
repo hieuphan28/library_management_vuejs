@@ -4,10 +4,10 @@
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form @submit.prevent="handleLogin" class="login-form">
       <div class="bar">
-        <router-link to="/login"
-          ><a href="#" class="login-bar active">Login</a></router-link
+        <router-link to="/login" class="login-bar active"
+          >Login</router-link
         >
-        <router-link to="/register"><a href="#">Sign up</a></router-link>
+        <router-link to="/register">Sign up</router-link>
       </div>
       <h1>Login</h1>
       <div class="input-box">
@@ -24,7 +24,7 @@
         <img class="eye" src="../assets/eye.svg" alt="" @click="myFunction()" />
       </div>
       <div class="forgot-password">
-        <router-link to="/forgotpassword0">Forgot password?</router-link>
+        <router-link to="/forgotpassword">Forgot Password</router-link>
       </div>
       <div>
         <span id="Login"></span>
@@ -204,7 +204,7 @@ export default {
   font-size: 14px;
 }
 .login-form .bar a {
-  padding-right: 5%;
+  padding: 0% 5%;
   color: rgba(0, 0, 0, 0.38);
   text-decoration: none;
 }

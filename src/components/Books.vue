@@ -21,7 +21,8 @@
             {{ item.rent_cost + '$' }}
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <i class="fas fa-shopping-cart"> </i>
+            <router-link to="/cart" v-if="isMember">
+            <i class="fas fa-shopping-cart"> </i> </router-link>
           </div>
         </div>
       </div>
@@ -31,17 +32,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import items from "../store/item.js";
 export default {
   name: "Books",
   computed: {
-    ...mapGetters('book', ['books'])
-  },
-  data() {
-    return {
-      shop: items,
-      cart: [],
-    };
+    ...mapGetters('book', ['books']),
+    ...mapGetters("user", ["currentUser",  "isMember"])
   },
   mounted: function() {
     this.$store.dispatch('book/init');

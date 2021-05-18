@@ -65,7 +65,7 @@
         <div>{{ cart.total }}</div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1 icon">
-        <button @click="removeFromCart(index)">
+        <button>
           <img src="../assets/Bin.png" alt="" />
         </button>
       </div>
@@ -75,7 +75,6 @@
 
 <script>
 import moment from "moment";
-import items from "../store/item.js";
 
 export default {
   name: "Carts",

@@ -33,7 +33,7 @@
         <input type="text" placeholder="address" v-model="currentUser.address" />
       </div>
       <div class="btn-box">
-        <a href="./update.html">
+        <a href="#">
           <button type="submit">Save</button>
         </a>
       </div>

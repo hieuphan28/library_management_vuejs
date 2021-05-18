@@ -7,11 +7,11 @@
           <router-link to="/issuebook">Issue Book</router-link>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-12 col-12 return">
-          <a href="">Return Book</a>
+          <router-link to="/returnbook">Return Book</router-link>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-12 lookfor">
           <input type="text" placeholder="Search username" />
-          <a href=""><i class="fa fa-search" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>

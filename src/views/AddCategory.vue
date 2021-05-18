@@ -15,7 +15,11 @@
       <input type="string" class="input" v-model="category_name" />
       <div class="row bt">
         <button class="btn">
+<<<<<<< HEAD
          <i class="fa fa-plus"></i>Add Category 
+=======
+          <a href="#"> <i class="fa fa-plus"></i>Add Category </a>
+>>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
         </button>
       </div>
     </form>
@@ -54,13 +58,6 @@ export default {
   margin-bottom: 5%;
 }
 
-i {
-  color: rgba(0, 0, 0, 0.38);
-}
-i:hover {
-  color: rgba(0, 0, 0, 0.87);
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -86,6 +83,15 @@ i:hover {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+
+  .back {
+    i {
+      color: rgba(0, 0, 0, 0.38);
+    }
+    i:hover {
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
 }
 
 .title {

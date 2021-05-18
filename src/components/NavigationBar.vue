@@ -38,6 +38,7 @@
               <a class="nav-link" data-toggle="dropdown" href="#"
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
+<<<<<<< HEAD
               <div class="dropdown-menu dropdown-menu-right" v-if="isLogged">
                 <router-link
                   to="/viewprofile"
@@ -65,6 +66,33 @@
                   v-if="isLogged"
                   class="dropdown-item"
                   @click="clearCurrentUser"
+=======
+              <div class="dropdown-menu dropdown-menu-right">
+                <router-link to="/managebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Manage book</a
+                  ></router-link
+                >
+                <router-link to="/issuebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Reserve book</a
+                  ></router-link
+                >
+                <router-link to="/viewprofile" v-if="isLogged"
+                  ><a class="dropdown-item" href="#"
+                    >View Profile</a
+                  ></router-link
+                >
+                <router-link to="/changepassword" v-if="isLogged"
+                  ><a class="dropdown-item" href="#"
+                    >Change Password</a
+                  ></router-link
+                >
+                <router-link to="/login" v-if="isLogged"
+                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
+                    >Logout</a
+                  ></router-link
+>>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
                 >
                   Logout
                 </router-link>
@@ -104,9 +132,9 @@
   <div class="mobile-menu" v-show="showNav">
     <nav class="mobile-nav">
       <ul class="mobile-item" style="">
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">BOOKS</a></li>
-        <li class="mean-last"><a href="#">CONTACT</a></li>
+        <li><router-link to="/">HOME</router-link></li>
+        <li><router-link to="/books">BOOKS</router-link></li>
+        <li class="mean-last"> <router-link to="/contact">CONTACT</router-link></li>
       </ul>
     </nav>
   </div>
@@ -120,12 +148,6 @@ export default {
   name: "Header",
   computed: {
     ...mapGetters("user", ["currentUser", "isLogged", "isMember", "isAdmin"]),
-  },
-  data() {
-    return {
-      showNav: false,
-      user: null,
-    };
   },
   methods: {
     ...mapMutations("user", ["clearCurrentUser"]),

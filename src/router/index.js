@@ -9,6 +9,7 @@ import Carts  from '../views/Carts.vue'
 import Register  from '../views/Register.vue'
 import ViewProfile  from '../views/ViewProfile.vue'
 import ChangePassword  from '../views/ChangePassword.vue'
+import ForgotPassword  from '../views/ForgotPassword.vue'
 import Contact from '../views/Contact.vue'
 import ExtendLoan from '../views/ExtendLoan.vue'
 import ManageBook from '../views/ManageBook.vue'
@@ -19,10 +20,14 @@ import IssueBook from '../views/IssueBook.vue'
 import ReturnBook from '../views/ReturnBook.vue'
 import AddCategory from '../views/AddCategory.vue'
 import AddDepartment from '../views/AddDepartment.vue'
+<<<<<<< HEAD
 import ForgotPassword0 from '../views/ForgotPassword0.vue'
 import ForgotPassword1 from '../views/ForgotPassword1.vue'
 import ForgotPassword2 from '../views/ForgotPassword2.vue'
 import RegisterAdmin from '../views/RegisterAdmin.vue'
+=======
+
+>>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
 
 const routes = [
   {
@@ -69,6 +74,11 @@ const routes = [
     path: '/changepassword',
     name: 'changepassword',
     component: ChangePassword
+  },
+  {
+    path: '/forgotpassword',
+    name: 'forgotpassword',
+    component: ForgotPassword
   },
   {
     path: '/contact',
@@ -120,6 +130,7 @@ const routes = [
     name: 'adddepartment',
     component: AddDepartment
   },
+<<<<<<< HEAD
   {
     path: '/forgotpassword0',
     name: 'forgotpassword0',
@@ -141,6 +152,8 @@ const routes = [
     component: RegisterAdmin
   },
 
+=======
+>>>>>>> a3804cc7072b1b1f9de74e87c586382871fb7a9d
 ]
 
 const router = createRouter({

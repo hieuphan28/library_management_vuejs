@@ -24,8 +24,7 @@
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-6 search">
         <input type="text" placeholder="Search books" />
-
-        <a href=""><i class="fa fa-search" aria-hidden="true"></i></a>
+        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
       </div>
     </div>
 
