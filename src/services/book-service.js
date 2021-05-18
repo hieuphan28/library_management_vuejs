@@ -33,9 +33,28 @@ const getBookById = async (id) => {
 }
 
 const removeBook = async (book) => {
-    const data = book;
     const res = await axios.delete(`${apiPrefix}/book`, {
         data: book
+    });
+
+    return handleResponse(res);
+}
+
+const getBookByCate = async (cate_id) => {
+    const res = await axios.get(`${apiPrefix}/getbooksbycategory`, {
+        params: {
+            q: cate_id
+        }
+    });
+
+    return handleResponse(res);
+}
+
+const getBookByDepart = async (depart_id) => {
+    const res = await axios.get(`${apiPrefix}/getbooksbydepartment`, {
+        params: {
+            q: depart_id
+        }
     });
 
     return handleResponse(res);
@@ -47,4 +66,6 @@ export {
     updateBook,
     getBookById,
     removeBook,
+    getBookByCate,
+    getBookByDepart,
 }
