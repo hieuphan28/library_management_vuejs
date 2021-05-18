@@ -106,7 +106,7 @@ body {
 }
 /* COL-RIGHT FORM */
 .personal .personal-form {
-  max-width: 390px;
+  max-width: 430px;
   width: 100%;
   height: auto;
   /* font-size: 14px; */
@@ -143,7 +143,7 @@ body {
   border: 1px solid #cecece;
   box-sizing: border-box;
   border-radius: 6px;
-  padding: 0.5% 0 0.5% 2%;
+  padding: 1.5% 0 1.5% 2%;
 }
 .personal .personal-form .input-box input::placeholder {
   color: rgba(0, 0, 0, 0.38);
@@ -160,6 +160,7 @@ body {
   text-align: center;
 }
 .personal-form .btn-box a button {
+  width: 100%;
   padding: 0.2rem 7.2rem;
   margin: 10px 0;
   background: #ecd4b4;
