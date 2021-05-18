@@ -64,9 +64,6 @@
           </div>
         </div>
       </div>
-      <button class="btn">
-        <a href=""><i class="fas fa-shopping-cart"></i> Add to cart</a>
-      </button>
     </div>
   </div>
 </template>
