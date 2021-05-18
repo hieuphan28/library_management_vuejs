@@ -2,12 +2,12 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
+        <div class="col-lg-5 col-md-12 col-sm-12 col-12 left-side">
           <div>
-            <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
+            <div class="contain"><img class="book-cover" :src="bookInfo.thumbnail" alt="" /></div>
             <div class="row book-info">
               <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                {{ bookInfo.rent_cost }}
+                ${{ bookInfo.rent_cost }}
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 book-left">
                 Only ({{ booksLeft }}) books left
@@ -15,7 +15,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-12 right-side">
           <h1>{{ bookInfo.book_name }}</h1>
           <div class="des" >{{ bookInfo.description }}</div>
           <div class="row">
@@ -80,14 +80,18 @@ export default {
 * {
   width: 100%;
 }
+
+.container{
+  margin-top: 5%;
+}
 .left-side {
   display: block;
 }
 
 .contain {
   border: solid 1px rgba(0, 0, 0, 0.38);
-  width: 250px;
-  height: 300px;
+  width: 270px;
+  height: 330px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,7 +111,7 @@ export default {
 .des{
   display: block;
   width: 100%;
-  height: 30px;
+  height: 90px;
   position: relative;
   overflow: hidden;
 }
@@ -118,7 +122,7 @@ export default {
   height: auto;
 }
 .book-info {
-  padding-top: 1%;
+  padding-top: 3%;
   .book-left {
     font-size: small;
     text-align: right;
@@ -133,7 +137,6 @@ button {
   border-radius: 10px;
   width: 150px;
   text-decoration: none;
-  padding-bottom: 2%;
   a{
     color: rgba(0, 0, 0, 0.54);
     transition: 0.3s;
