@@ -53,6 +53,11 @@
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
               <div class="dropdown-menu dropdown-menu-right">
+                <router-link to="/managebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Manage book</a
+                  ></router-link
+                >
                 <router-link to="/viewprofile" v-if="isLogged"
                   ><a class="dropdown-item" href="#"
                     >View Profile</a
@@ -64,26 +69,34 @@
                   ></router-link
                 >
                 <router-link to="/login" v-if="isLogged"
-                  ><a class="dropdown-item" href="#" @click="clearCurrentUser">Logout</a></router-link
+                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
+                    >Logout</a
+                  ></router-link
                 >
                 <router-link to="/login" v-if="!isLogged"
-                  ><a class="dropdown-item" href="#" @click="clearCurrentUser">Login</a></router-link
+                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
+                    >Login</a
+                  ></router-link
                 >
-                <router-link class="dropdown-item" to="/borrow-history" v-if="isLogged">
+                <router-link
+                  class="dropdown-item"
+                  to="/borrow-history"
+                  v-if="isMember"
+                >
                   View Borrowing Settings</router-link
                 >
               </div>
             </li>
-            <li v-if="!user" class="user dropdown">
+            <!-- <li v-if="!user" class="user dropdown">
               <router-link to="/login">
-              <a
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                @click="checkLogin"
-                href="#"
-              ></a>
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-toggle="dropdown"
+                  @click="checkLogin"
+                  href="#"
+                ></a>
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div class="col-2 col-md-2 nav-menu">
@@ -106,23 +119,23 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from "vuex";
 import { UserRole } from "../common/bundleOfEnum";
 
 export default {
   name: "Header",
   computed: {
-    ...mapGetters('user', ['currentUser', 'isLogged', 'isMember', 'isAdmin']),
+    ...mapGetters("user", ["currentUser", "isLogged", "isMember", "isAdmin"]),
   },
   data() {
     return {
       showNav: false,
-      user:null,
+      user: null,
     };
   },
   methods: {
-    ...mapMutations('user', ['clearCurrentUser'])
-  }  
+    ...mapMutations("user", ["clearCurrentUser"]),
+  },
 };
 </script>
 
@@ -165,7 +178,7 @@ export default {
   -webkit-animation: 0.4s ease-in-out 0s normal both 1 running fadeInDown;
   animation: 0.4s ease-in-out 0s normal both 1 running fadeInDown;
   background: rgba(0, 0, 0, 0.9) none repeat scroll 0 0;
-  box-shadow: 0 0 5px #BDBDBD;
+  box-shadow: 0 0 5px #bdbdbd;
   left: 0;
   position: sticky;
   top: 0;
@@ -174,7 +187,7 @@ export default {
   z-index: 99;
 }
 .header__area {
-  background: #ECD4B4;
+  background: #ecd4b4;
 }
 .header__area .logo {
   @include mobile {
@@ -281,7 +294,13 @@ export default {
     }
   }
 }
-
+.user{
+  .dropdown-menu{
+    .dropdown-item {
+      padding: 0.2rem 1rem;
+    }
+  }
+}
 .user a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
@@ -305,7 +324,7 @@ export default {
   }
   position: fixed;
   width: 100%;
-  background: #ECD4B4;
+  background: #ecd4b4;
   z-index: 10;
   .mobile-nav {
     .mobile-item {
@@ -329,6 +348,23 @@ export default {
     a:hover {
       color: rgba(0, 0, 0, 0.87);
     }
+  }
+}
+
+.dropdown-menu-right {
+  width: 210px;
+  .dropdown-item {
+    padding-left: 8%;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .dropdown-item:hover {
+    background-color: rgb(214, 214, 214);
+  }
+
+  a:hover {
+    background: none;
+    text-decoration: none;
   }
 }
 </style>

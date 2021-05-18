@@ -1,19 +1,24 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="search">
+      Search results for 
+      <span>'{{search-result}} '</span>
+    </div>
+
+    <div class="row ">
       <div
         class="col-lg-4 col-md-6 col-sm-12 col-12"
-        v-for="item in shop"
+        v-for="item in books"
         :key="item.id"
       >
-        <router-link to="/bookinfo"
-          ><img class="book-cover" src="../assets/book/gulliver.png" alt=""
+        <router-link :to="{ path: '/bookinfo/' + item.book_id}"
+          ><img class="book-cover" :src="item.thumbnail" alt=""
         /></router-link>
 
         <div class="book-name">{{ item.book_name }}</div>
         <div class="row book-info">
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            {{ item.rentFee }}
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6 fee">
+            {{ item.rent_cost + '$' }}
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
             <i class="fas fa-shopping-cart"> </i>
@@ -25,38 +30,64 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import items from "../store/item.js";
 export default {
   name: "Books",
+  computed: {
+    ...mapGetters('book', ['books'])
+  },
   data() {
     return {
       shop: items,
       cart: [],
     };
   },
-  
+  mounted: function() {
+    this.$store.dispatch('book/init');
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.search{
+  border-bottom: solid 1px rgba(0, 0, 0, 0.87);
+  margin-top: 5%;
+  font-size: large;
+  padding-bottom: 1%;
+  span{
+    color: #897160;
+    font-style: italic;
+  }
+}
+
 .row {
+  margin-top: 3%;
 }
 .book-cover {
   width: 100%;
   height: auto;
 }
 .book-name {
-  padding-top: 5%;
+  padding-top: 3%;
   font-size: 20px;
+  font-weight: bold;
 }
 .book-info {
-  padding: 2% 0 8% 0;
+  margin-top: 5%;
+  padding-bottom: 20%;
   color: rgba(0, 0, 0, 0.54);
   align-items: center;
+
+
   i {
-    color: rgba(0, 0, 0, 0.54);
-    margin-right: auto;
+    color: rgba(0, 0, 0, 0.38);
+    float: right;
     font-size: 20px;
+    transition: 0.3s;
+  }
+  i:hover{
+    color: rgba(0, 0, 0, 0.87);
   }
 }
 </style>

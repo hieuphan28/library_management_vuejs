@@ -1,59 +1,61 @@
 <template>
   <div class="container">
-    <form class="add-book-form" action="" method="">
+    <form class="add-book-form" @submit.prevent="addBookSubmit">
       <div class="row back">
         <router-link to="/managebook"><i class="fa fa-arrow-left" aria-hidden="true"></i></router-link>
       </div>
       <div class="row info">
         <div class="col-lg-5 col-md-5 col-sm-5 col-5 ava">
           <div class="row avatar">
-            <a href=""><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <i class="fa fa-plus" aria-hidden="true">
+              <input type="file" accept="image/*" @change="selectFile($event)" id="file-input">
+            </i>
           </div>
           <div class="row pd">
             <div class="input-box">
               <span class="d-block">Description:</span>
-              <textarea type="text" cols="100" rows="8"/>
+              <textarea type="text" cols="100" rows="8" v-model="book.description"/>
             </div>
           </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-7 col-7 input">
           <div class="input-box">
             <span>Title:</span>
-            <input type="text" placeholder="" v-model="title" />
+            <input type="text" placeholder="" v-model="book.book_name" />
           </div>
           <div class="input-box">
             <span>Language:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.language"/>
           </div>
           <div class="input-box">
             <span>Author:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.author"/>
           </div>
           <div class="input-box">
             <span>Category:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.category_id"/>
           </div>
           <div class="input-box">
             <span>Department:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.department_id"/>
           </div>
           <div class="input-box">
             <span>Publication Date:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.publication_date" />
           </div>
           <div class="input-box">
             <span>Price:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.price"/>
           </div>
           <div class="input-box">
             <span>Rent Cost:</span>
-            <input type="text" placeholder="" />
+            <input type="text" placeholder="" v-model="book.rent_cost"/>
           </div>
         </div>
       </div>
       <div class="row bt">
-        <button class="btn">
-          <a href="">Add Book <i class="fa fa-plus"></i></a>
+        <button class="btn" type="submit">
+          <a>Add Book <i class="fa fa-plus"></i></a>
         </button>
       </div>
     </form>
@@ -62,8 +64,32 @@
 </template>
 
 <script>
+import { toastError, toastSuccess } from '../utilities/toast-util';
+import { uploadImage } from '../services/upload-service';
+
 export default {
   name: "AddBook",
+  data() {
+    return {
+      book: {},
+      imageFile: undefined,
+    }
+  },
+  methods: {
+    async addBookSubmit() {
+      try {
+        this.book.thumbnail = await uploadImage(this.imageFile);
+        await this.$store.dispatch('book/addBook', this.book);
+
+        toastSuccess('Add book successfully!');
+      } catch(e) {
+        toastError(e);
+      }
+    },
+    async selectFile(event) {
+      this.imageFile = event.target.files[0];
+    }
+  }
 };
 </script>
 
