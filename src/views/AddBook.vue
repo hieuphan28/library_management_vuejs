@@ -131,8 +131,9 @@ export default {
       }
     },
     async selectFile(event) {
-      const file = event.target.files[0];
-      this.image = URL.createObjectURL(file);
+      this.imageFile = event.target.files[0];
+      const file = this.imageFile;
+      this.image = URL.createObjectURL(file)
     },
   },
 };
@@ -196,6 +197,7 @@ i:hover {
   cursor: pointer;
   padding: 2% 0%;
   margin-top: 5%;
+  
 }
 .add-cover:hover {
   background: #ffe5c3;
