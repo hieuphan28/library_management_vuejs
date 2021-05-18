@@ -58,6 +58,11 @@
                     >Manage book</a
                   ></router-link
                 >
+                <router-link to="/issuebook" v-if="isAdmin"
+                  ><a class="dropdown-item" href="#"
+                    >Reserve book</a
+                  ></router-link
+                >
                 <router-link to="/viewprofile" v-if="isLogged"
                   ><a class="dropdown-item" href="#"
                     >View Profile</a
@@ -110,9 +115,9 @@
   <div class="mobile-menu" v-show="showNav">
     <nav class="mobile-nav">
       <ul class="mobile-item" style="">
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">BOOKS</a></li>
-        <li class="mean-last"><a href="#">CONTACT</a></li>
+        <li><router-link to="/">HOME</router-link></li>
+        <li><router-link to="/books">BOOKS</router-link></li>
+        <li class="mean-last"> <router-link to="/contact">CONTACT</router-link></li>
       </ul>
     </nav>
   </div>
@@ -126,12 +131,6 @@ export default {
   name: "Header",
   computed: {
     ...mapGetters("user", ["currentUser", "isLogged", "isMember", "isAdmin"]),
-  },
-  data() {
-    return {
-      showNav: false,
-      user: null,
-    };
   },
   methods: {
     ...mapMutations("user", ["clearCurrentUser"]),

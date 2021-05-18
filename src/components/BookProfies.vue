@@ -14,8 +14,8 @@
               </div>
             </div>
 
-            <button class="btn">
-             <a href=""><i class="fas fa-shopping-cart"></i> Add to cart</a>
+            <button class="btn" v-if="isMember">
+             <router-link to="/cart" ><i class="fas fa-shopping-cart"></i> Add to cart</router-link>
             </button>
           </div>
         </div>
@@ -60,6 +60,7 @@ export default {
     ...mapGetters({
       getBookById: 'book/bookById',
     }),
+     ...mapGetters("user", ["currentUser",  "isMember"]),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
     }

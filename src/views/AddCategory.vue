@@ -10,7 +10,7 @@
       <input type="text" class="input" />
       <div class="row bt">
         <button class="btn">
-          <a href=""> <i class="fa fa-plus"></i>Add Category </a>
+          <a href="#"> <i class="fa fa-plus"></i>Add Category </a>
         </button>
       </div>
     </form>
@@ -27,13 +27,6 @@ export default {
 .back {
   margin-left: 1px;
   margin-bottom: 5%;
-}
-
-i {
-  color: rgba(0, 0, 0, 0.38);
-}
-i:hover {
-  color: rgba(0, 0, 0, 0.87);
 }
 
 * {
@@ -61,6 +54,15 @@ i:hover {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+
+  .back {
+    i {
+      color: rgba(0, 0, 0, 0.38);
+    }
+    i:hover {
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
 }
 
 .title {
