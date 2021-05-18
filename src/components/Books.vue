@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
-    <div class="search">
+    <div class="search" v-if="query && query.length > 0">
       Search results for 
-      <span>'{{search-result}} '</span>
+      <span>'{{query}} '</span>
     </div>
 
     <div class="row ">
@@ -32,19 +32,39 @@
 <script>
 import { mapGetters } from 'vuex';
 import items from "../store/item.js";
+import { useRoute } from "vue-router";
+import { toastError } from '../utilities/toast-util.js';
+
 export default {
   name: "Books",
   computed: {
-    ...mapGetters('book', ['books'])
+    ...mapGetters({
+      books: 'book/books'
+    })
   },
   data() {
     return {
       shop: items,
       cart: [],
+      query: this.$route.query.q,
+      skip: this.$route.query.skip,
+      limit: this.$route.query.limit,
     };
   },
-  mounted: function() {
-    this.$store.dispatch('book/init');
+  async mounted() {
+    try {
+      if (this.query || this.skip || this.limit) {
+        this.$store.dispatch('book/searchBook', {
+          query: this.query,
+          skip: this.skip,
+          limit: this.limit,
+        });
+      } else {
+        this.$store.dispatch('book/init');
+      }
+    } catch(e) {
+      toastError(e);
+    }
   }
 };
 </script>

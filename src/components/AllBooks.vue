@@ -198,8 +198,12 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "AllBooks",
+  computed: {
+    ...mapGetters('book', ['allBooks'])
+  }
 };
 </script>
 <style scoped>

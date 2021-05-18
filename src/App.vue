@@ -26,6 +26,7 @@ export default {
   beforeMount: async function() {
     try {
       await this.$store.dispatch('user/checkAuth');
+      // await this.$store.dispatch('book/init');
       await this.$store.dispatch('category/init');
       await this.$store.dispatch('department/init');
     } catch(e) {

@@ -13,6 +13,14 @@ const getters = {
 
     bookById: (state, getters) => (book_id) => {
         return state.data.filter(x => `${x.book_id}` === `${book_id}`)[0];
+    },
+
+    newBooks: (state, getters) => {
+        return getters.books?.slice(0, 8);
+    },
+
+    allBooks: (state, getters) => {
+        return state.data;
     }
 }
 
@@ -27,7 +35,7 @@ const actions = {
         commit('addBook', data);
     },
 
-    async search({state, commit}, {query, skip, limit}) {
+    async searchBook({state, commit}, {query, skip, limit}) {
         const data = await bookService.searchBook({query, skip, limit});    
         commit('setBooks', data);
     },

@@ -14,7 +14,7 @@
             <ul class="meninmenu">
               <li><router-link to="/">Home</router-link></li>
               <li>
-                <router-link to="/books">Books</router-link>
+                <a :href="'/books'">Books</a>
               </li>
               <li>
                 <router-link to="/contact">Contact</router-link>
@@ -39,8 +39,8 @@
                 <a class="dropdown-item" href="#">Title</a>
                 <a class="dropdown-item" href="#">Author</a>
               </div> -->
-              <input type="text" placeholder="Search your books" />
-              <a href="#"> <i class="fa fa-search" aria-hidden="true"></i></a>
+              <input type="text" placeholder="Search your books" v-model="searchQuery" />
+              <a :href="`/books?q=${searchQuery}`"> <i class="fa fa-search" aria-hidden="true"></i></a>
             </li>
             <li class="shopcart" v-if="isMember">
               <router-link to="/cart" href="#"
@@ -131,6 +131,7 @@ export default {
     return {
       showNav: false,
       user: null,
+      searchQuery: undefined
     };
   },
   methods: {
