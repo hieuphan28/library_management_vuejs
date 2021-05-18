@@ -56,7 +56,7 @@
     </div>
 
     <!-- UPDATE--BOOK--ITEM -->
-    <div class="bookitem" v-for="(book, index) in books" :key="index">
+    <div class="bookitem" v-for="(book, index) in bookItems" :key="index">
       <div class="row title">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 order">
           <h1>Book Item {{ book.id }} :</h1>
@@ -64,6 +64,9 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 button">
           <button class="btn">
             <i class="fa fa-trash" aria-hidden="true"> Delete </i>
+          </button>
+          <button class="btn" style="margin-right: 10px" @click="saveBookItem(book)">
+            <i class="fa fa-save" aria-hidden="true"> Save </i>
           </button>
         </div>
       </div>
@@ -74,11 +77,11 @@
         </div>
         <div class="input-box">
           <span>Date of Purchase:</span>
-          <input type="text" placeholder="" v-model="book.datepurchase" />
+          <input type="text" placeholder="" v-model="book.date_of_purchase" />
         </div>
         <div class="input-box">
           <span>Date add to lib:</span>
-          <input type="text" placeholder="" v-model="book.dateaddtolib" />
+          <input type="text" placeholder="" v-model="book.date_added_to_library" />
         </div>
 
         <div class="input-box">
@@ -102,9 +105,13 @@ export default {
   computed: {
     ...mapGetters({
       getBookById: 'book/bookById',
+      getBookItemById: 'bookitem/bookItemByBookId'
     }),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
+    },
+    bookItems() {
+      return this.getBookItemById(this.book_id) || {};
     }
   },
   data() {
@@ -113,11 +120,8 @@ export default {
     }
   },
   async mounted() {
-    try {
-      await this.$store.dispatch('book/getBookById', this.book_id);
-    } catch(e) {
-      toastError(e);
-    }
+    this.$store.dispatch('book/getBookById', this.book_id);
+    this.$store.dispatch('bookitem/getBookItemByBookId', this.book_id);
   },
   methods: {
     async saveBook() {
@@ -127,6 +131,16 @@ export default {
         toastSuccess('Update book successfully.');
       } catch(e) {
         toastError(e);
+      }
+    },
+
+    async saveBookItem(bookitem) {
+      try {
+        await this.$store.dispatch('bookitem/updateBookItem', bookitem);
+
+        toastSuccess('Update book item successfully.');
+      } catch(e) {
+        toastError(e)
       }
     }
   }

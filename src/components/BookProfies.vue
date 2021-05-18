@@ -67,6 +67,7 @@ export default {
   async mounted() {
     try {
       await this.$store.dispatch('book/getBookById', this.book_id);
+      await this.$store.dispatch('bookitem/countBookItemByBookId', this.bookInfo);
     } catch(e) {
       toastError(e);
     }

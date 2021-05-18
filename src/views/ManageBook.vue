@@ -23,7 +23,7 @@
         </button>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-6 search">
-        <input type="text" placeholder="Search books" />
+        <input type="text" placeholder="Search books" v-model="searchText" />
 
         <a href=""><i class="fa fa-search" aria-hidden="true"></i></a>
       </div>
@@ -64,7 +64,7 @@
                 >
               </button>
               <button class="btn d-block">
-                <router-link to="/addbookitem"
+                <router-link :to="`/addbookitem/${book.book_id}`"
                   ><i class="fa fa-plus" aria-hidden="true"></i>Add Book
                   Item</router-link
                 >
@@ -84,11 +84,27 @@ export default {
   name: "ManageBook",
   computed: {
     ...mapGetters({
-      books: 'book/books'
-    })
+      localSearch: 'book/search',
+    }),
+    books: function() {
+      return this.bookData;
+    },
   },
-  mounted() {
-    this.$store.dispatch('book/init');
+  data() {
+    return {
+      searchText: undefined,
+      bookData: undefined,
+    }
+  },
+  async mounted() {
+    try {
+      this.bookData = this.$store.getters['book/books'];
+      await this.$store.dispatch('book/init');
+      this.bookData = this.$store.getters['book/books'];
+    }
+    catch(e) {
+      toastError(e);
+    }
   },
   methods: {
     async removeBook(book) {
@@ -99,7 +115,14 @@ export default {
       } catch(e) {
         toastError(e);
       }
+    },
+
+    search() {
+      this.bookData = this.localSearch(this.searchText);
     }
+  },
+  watch: {
+    searchText: 'search' 
   }
 };
 </script>

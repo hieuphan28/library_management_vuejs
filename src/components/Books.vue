@@ -31,8 +31,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import items from "../store/item.js";
-import { useRoute } from "vue-router";
 import { toastError } from '../utilities/toast-util.js';
 
 export default {
@@ -44,24 +42,33 @@ export default {
   },
   data() {
     return {
-      shop: items,
       cart: [],
       query: this.$route.query.q,
       skip: this.$route.query.skip,
       limit: this.$route.query.limit,
+      category: this.$route.query.category,
+      department: this.$route.query.department,
     };
   },
   async mounted() {
     try {
-      if (this.query || this.skip || this.limit) {
-        this.$store.dispatch('book/searchBook', {
+      if (this.category) {
+        await this.$store.dispatch('book/getBookByCategory', parseInt(this.category));
+      }
+      else if (this.department) {
+        await this.$store.dispatch('book/getBookByDepart', parseInt(this.department));  
+      }
+      else if (this.query || this.skip || this.limit) {
+        await this.$store.dispatch('book/searchBook', {
           query: this.query,
           skip: this.skip,
           limit: this.limit,
         });
-      } else {
-        this.$store.dispatch('book/init');
+      } 
+      else {
+        await this.$store.dispatch('book/init');
       }
+      
     } catch(e) {
       toastError(e);
     }
