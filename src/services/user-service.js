@@ -20,13 +20,17 @@ const login = async ({
 }
 
 const register = async (data) => {
-        const res = await axios.post(`${apiPrefix}/user/registration`, data);
-        return handleResponse(res);
+    const res = await axios.post(`${apiPrefix}/user/registration`, data);
+    return handleResponse(res);
 }
 const registerAdmin = async (data) => {
-        const res = await axios.post(`${apiPrefix}/user/registration/admin`, data);
-        return handleResponse(res);
+    const res = await axios.post(`${apiPrefix}/user/registration/admin`, data);
+    return handleResponse(res);
 
+}
+const changePassword = async (data) => {
+    const res = await axios.put(`${apiPrefix}/user/changepassword`, data);
+    return handleResponse(res);
 }
 
 const getProfile = async () => {
@@ -45,6 +49,7 @@ export {
     login,
     register,
     registerAdmin,
+    changePassword,
     getProfile,
     updateProfile,
 }

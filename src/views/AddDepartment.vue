@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <form class="add-category-form" action="" method="">
+    <form @submit.prevent="addDepartSubmit" class="add-category-form" action="" method="">
       <div class="row back">
         <router-link to="/managebook"
           ><i class="fa fa-arrow-left" aria-hidden="true"></i
         ></router-link>
       </div>
       <div class="title">Add Department</div>
-      <input type="text" class="input" />
+      <input type="text" class="input" v-model="department_name" />
       <div class="row bt">
         <button class="btn">
-          <a href=""> <i class="fa fa-plus"></i>Add Department </a>
+         <i class="fa fa-plus"></i>Add Department
         </button>
       </div>
     </form>
@@ -18,8 +18,29 @@
 </template>
 
 <script>
+import department from "../store/modules/department"
+import { toastSuccess, toastError } from "../utilities/toast-util";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   name: "AddCategory",
+  data(){
+    return {
+      department_name: "",
+    }
+  },
+  methods:{
+    async addDepartSubmit(){
+      try{
+        await this.$store.dispatch("department/addDepartment",{
+          department_name:this.department_name,
+        });
+        toastSuccess("Add Department Successfully!")
+      } catch(e){
+        toastError(e)
+      }
+    },
+  }
+
 };
 </script>
 

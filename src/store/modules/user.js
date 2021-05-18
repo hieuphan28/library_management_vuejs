@@ -40,6 +40,11 @@ const actions = {
         
         commit('setCurrentUser', data);
     },
+    async changePassword({state, commit},user){
+        const data = await userService.changePassword(user)|| user;
+        const refrPassword = Object.assign(state.currentUser, user);
+        commit('setCurrentUser', refrPassword);
+    },
 
     async getProfile({state, commit}) {
         const data = await userService.getProfile(data);

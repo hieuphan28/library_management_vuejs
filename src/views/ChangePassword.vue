@@ -1,19 +1,57 @@
 <template>
   <div class="changepass">
     <img src="../assets/carousel/3.jpg" alt="./img/3.jpg" />
-    <form class="changepass-form" action="" method="">
-      <h1>Chang Password</h1>
+    <form
+      @submit.prevent="changePassSubmit"
+      class="changepass-form"
+      action=""
+      method=""
+    >
+      <h1>Change Password</h1>
       <div class="input-box">
         <span>Current Password:</span>
-        <input type="text" placeholder="" />
+        <input
+          id="myInput1"
+          v-model="current_password"
+          type="password"
+          placeholder=""
+        />
+        <img
+          class="eye"
+          src="../assets/eye.svg"
+          alt=""
+          @click="myFunction1()"
+        />
       </div>
       <div class="input-box">
         <span>New Password:</span>
-        <input type="text" placeholder="" />
+        <input
+          id="myInput2"
+          v-model="password"
+          type="password"
+          placeholder=""
+        />
+        <img
+          class="eye"
+          src="../assets/eye.svg"
+          alt=""
+          @click="myFunction2()"
+        />
       </div>
       <div class="input-box">
         <span>Confirm Password:</span>
-        <input type="text" placeholder="" />
+        <input
+          id="myInput3"
+          v-model="confirmed_password"
+          type="password"
+          placeholder=""
+        />
+        <img
+          class="eye"
+          src="../assets/eye.svg"
+          alt=""
+          @click="myFunction3()"
+        />
       </div>
       <div class="btn-box">
         <a href="">
@@ -25,8 +63,57 @@
 </template>
 
 <script>
+import user from "../store/modules/user";
+import {
+  toastError,
+  toastMessage,
+  toastSuccess,
+} from "../utilities/toast-util";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
-    name: "ChangePassword"
+  name: "ChangePassword",
+  computed: {
+    ...mapGetters("user", {
+      currentUser: "currentUser",
+    }),
+  },
+  data() {
+    return {
+      current_password: "",
+      password: "",
+      confirmed_password: "",
+    };
+  },
+  methods: {
+    async changePassSubmit() {
+      try {
+        if (this.password == this.confirmed_password) {
+          await this.$store.dispatch(`user/changePassword`, {
+            current_password: this.current_password,
+            password: this.confirmed_password,
+            confirmed_password: this.confirmed_password,
+          });
+          toastSuccess("Change Password Successfully!");
+        } else {
+          toastMessage("Confirm Password is not correct. Try again!");
+        }
+      } catch (e) {
+        toastError(e);
+      }
+    },
+    mounted: function() {
+      if (!this.currentUser?.user_id || !this.currentUser?.token)
+        this.$router.push("/login");
+    },
+    myFunction1() {
+      var x = document.getElementById("myInput1");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    },
+  },
 };
 </script>
 
@@ -52,6 +139,16 @@ body {
 .changepass img {
   width: 100%;
   position: fixed;
+}
+.changepass-form .input-box > img {
+  float: right;
+  width: 6%;
+  position: relative;
+  left: 58%;
+  margin-top: 0.3rem;
+}
+.changepass-form .input-box .eye {
+  cursor: pointer;
 }
 /* COL-RIGHT H1 BANNER */
 .changepass .changepass-form h1 {

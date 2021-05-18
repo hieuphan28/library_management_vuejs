@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    addCartSubmit: async function() {
+    async addCartSubmit() {
       try {
         await this.$store.dispatch("category/addCategory", {
           category_name: this.category_name,
