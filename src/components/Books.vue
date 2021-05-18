@@ -1,30 +1,27 @@
 <template>
   <div class="container-fluid">
-    <div class="search">
-      Search results for
-      <span>'{{search-result}} '</span>
+    <div class="search" v-if="query && query.length > 0">
+      Search results for 
+      <span>'{{query}} '</span>
     </div>
 
-    <div class="row">
+    <div class="row ">
       <div
         class="col-lg-4 col-md-6 col-sm-12 col-12"
         v-for="item in books"
         :key="item.id"
       >
-        <router-link :to="{ path: '/bookinfo/' + item.book_id }">
-          <div class="contain">
-            <img class="book-cover" :src="item.thumbnail" alt="" />
-          </div>
-        </router-link>
+        <router-link :to="{ path: '/bookinfo/' + item.book_id}"
+          ><img class="book-cover" :src="item.thumbnail" alt=""
+        /></router-link>
 
         <div class="book-name">{{ item.book_name }}</div>
         <div class="row book-info">
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 fee">
-            {{ item.rent_cost + "$" }}
+            {{ item.rent_cost + '$' }}
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-            <router-link to="/cart" v-if="isMember">
-            <i class="fas fa-shopping-cart"> </i> </router-link>
+            <i class="fas fa-shopping-cart"> </i>
           </div>
         </div>
       </div>
@@ -34,25 +31,58 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { toastError } from '../utilities/toast-util.js';
+
 export default {
   name: "Books",
   computed: {
-    ...mapGetters('book', ['books']),
-    ...mapGetters("user", ["currentUser",  "isMember"])
+    ...mapGetters({
+      books: 'book/books'
+    })
   },
-  mounted: function () {
-    this.$store.dispatch("book/init");
+  data() {
+    return {
+      cart: [],
+      query: this.$route.query.q,
+      skip: this.$route.query.skip,
+      limit: this.$route.query.limit,
+      category: this.$route.query.category,
+      department: this.$route.query.department,
+    };
   },
+  async mounted() {
+    try {
+      if (this.category) {
+        await this.$store.dispatch('book/getBookByCategory', parseInt(this.category));
+      }
+      else if (this.department) {
+        await this.$store.dispatch('book/getBookByDepart', parseInt(this.department));  
+      }
+      else if (this.query || this.skip || this.limit) {
+        await this.$store.dispatch('book/searchBook', {
+          query: this.query,
+          skip: this.skip,
+          limit: this.limit,
+        });
+      } 
+      else {
+        await this.$store.dispatch('book/init');
+      }
+      
+    } catch(e) {
+      toastError(e);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.search {
+.search{
   border-bottom: solid 1px rgba(0, 0, 0, 0.87);
   margin-top: 5%;
   font-size: large;
   padding-bottom: 1%;
-  span {
+  span{
     color: #897160;
     font-style: italic;
   }
@@ -96,13 +126,14 @@ export default {
   color: rgba(0, 0, 0, 0.54);
   align-items: center;
 
+
   i {
     color: rgba(0, 0, 0, 0.38);
     float: right;
     font-size: 20px;
     transition: 0.3s;
   }
-  i:hover {
+  i:hover{
     color: rgba(0, 0, 0, 0.87);
   }
 }

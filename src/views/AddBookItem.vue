@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <form class="add-item-form" action="" method="">
+    <form class="add-item-form" action="" method="" @submit.prevent="addBookItem">
       <div class="row back">
         <router-link to="/managebook"><i class="fa fa-arrow-left" aria-hidden="true"></i></router-link>
       </div>
 
       <div class="row title">
         <div class="col-lg-9 col-md-9 col-sm-9 col-9 left">
-          <h1>{{ title }}</h1>
+          <h1>{{ bookInfo.book_name }}</h1>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-3 right">
           <div class="avatar">
@@ -18,28 +18,28 @@
 
       <div class="input-box">
         <span>Barcode:</span>
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" v-model="bookitem.barcode" />
       </div>
-      <div class="input-box">
+      <div class="input-box" v-if="false">
         <span>Book Id:</span>
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" v-model="bookitem.book_id" />
       </div>
       <div class="input-box">
         <span>Date of Purchase:</span>
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" v-model="bookitem.date_of_purchase" />
       </div>
       <div class="input-box">
         <span>Date add to lib:</span>
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" v-model="bookitem.date_added_to_library" />
       </div>
 
       <div class="input-box">
         <span>Location:</span>
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" v-model="bookitem.location" />
       </div>
       <div class="input-box">
         <span>Status:</span>
-        <input type="text" placeholder="" />
+        <input type="text" placeholder="" v-model="bookitem.status" />
       </div>
       <div class="row bt">
         <button class="btn">
@@ -51,14 +51,42 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { toastError, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "AddBookItem",
   data() {
     return {
-      id: 1,
-      title: "Gulliver's Travel",
+      book_id: this.$route.params.book_id,
+      bookitem: {},
     };
   },
+  computed: {
+    ...mapGetters({
+      getBookById: 'book/bookById',
+    }),
+    bookInfo() {
+      return this.getBookById(this.book_id) || {};
+    }
+  },
+  methods: {
+    async addBookItem() {
+      try {
+        this.bookitem.book_id = parseInt(this.book_id);
+        
+        await this.$store.dispatch('bookitem/addBookItem', this.bookitem);
+
+        toastSuccess('Add bookitem successfully!');
+      } catch(e) {
+        toastError(e);
+      }
+    }
+  },
+  mounted() {
+    if (!this.bookInfo.book_name) {
+      this.$store.dispatch('book/getBookById', this.book_id);
+    } 
+  }
 };
 </script>
 
