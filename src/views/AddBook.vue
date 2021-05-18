@@ -17,7 +17,7 @@
             />
           </div>
           <div class="row add-cover" @click="$refs.fileInput.click()">
-            Add cover
+            Choose file
             <input
               type="file"
               accept="image/*"
@@ -92,7 +92,7 @@
       </div>
       <div class="row bt">
         <button class="btn" type="submit">
-          <a>Add Book <i class="fa fa-plus"></i></a>
+          <a><i class="fa fa-plus"></i>Add Book </a>
         </button>
       </div>
     </form>
@@ -273,7 +273,8 @@ button {
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-  padding: 1% 0%;
+  padding: 1% 0% 2% 0%;
+  transition: 0.3s;
   a {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.38);
@@ -284,6 +285,12 @@ button {
   i {
     color: rgba(0, 0, 0, 0.38);
     font-size: small;
+    margin-right: 8%;
+    transition: 0.3s;
+  }
+
+  a:hover{
+    color: rgba(0, 0, 0, 0.87);
   }
 }
 
@@ -291,4 +298,6 @@ button:hover {
   background: #ffe5c3;
   color: rgba(0, 0, 0, 0.87);
 }
+
+
 </style>

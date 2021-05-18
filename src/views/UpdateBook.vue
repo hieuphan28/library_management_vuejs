@@ -8,16 +8,18 @@
 
       <div class="row all">
         <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
-          <div>
+          <div class="contain">
             <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
           </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
-          <h1 class="title"><input type="text" v-model="bookInfo.book_name" /></h1>
+          <h1 class="title">
+            <input type="text" v-model="bookInfo.book_name" />
+          </h1>
           <div class="textarea">
             <textarea
               name="paragraph_text"
-              cols="60"
+              cols="69"
               rows="4"
               v-model="bookInfo.description"
             ></textarea>
@@ -49,7 +51,11 @@
           </div>
           <div class="input-box">
             <span>Publication Date:</span>
-            <input type="text" placeholder="" v-model="bookInfo.publication_date" />
+            <input
+              type="text"
+              placeholder=""
+              v-model="bookInfo.publication_date"
+            />
           </div>
         </div>
       </div>
@@ -95,48 +101,45 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { toastError, toastSuccess } from '../utilities/toast-util';
+import { mapGetters } from "vuex";
+import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
   name: "UpdateBook",
   computed: {
     ...mapGetters({
-      getBookById: 'book/bookById',
+      getBookById: "book/bookById",
     }),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
-    }
+    },
   },
   data() {
     return {
       book_id: this.$router.currentRoute.value.params.book_id,
-    }
+    };
   },
   async mounted() {
     try {
-      await this.$store.dispatch('book/getBookById', this.book_id);
-    } catch(e) {
+      await this.$store.dispatch("book/getBookById", this.book_id);
+    } catch (e) {
       toastError(e);
     }
   },
   methods: {
     async saveBook() {
       try {
-        await this.$store.dispatch('book/updateBook', this.bookInfo);
+        await this.$store.dispatch("book/updateBook", this.bookInfo);
 
-        toastSuccess('Update book successfully.');
-      } catch(e) {
+        toastSuccess("Update book successfully.");
+      } catch (e) {
         toastError(e);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
-}
-
 //UPDATEBOOKINFO
 .updatebookinfo {
   margin-top: 5%;
@@ -161,117 +164,129 @@ export default {
     }
   }
   .all {
-    .book-cover {
-      // position: relative;
-      margin: auto;
-      width: 90%;
-    }
-
-    .right-side {
-      .title {
-        input {
-          width: 500px;
-          font-size: xx-large;
-          border: 0.25px solid rgba(0, 0, 0, 0.38);
-          border-radius: 6px;
-        }
+    .contain {
+      border: solid 1px rgba(0, 0, 0, 0.38);
+      width: 300px;
+      height: 370px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      img {
+        flex-shrink: 15;
+        min-width: 100%;
+        min-height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
       }
-      .des {
-        margin-bottom: 4%;
-        textarea {
-          font-size: medium;
+    }
+      .right-side {
+        .title {
+          input {
+            width: 570px;
+            font-size: xx-large;
+            border: 0.25px solid rgba(0, 0, 0, 0.38);
+          }
+        }
+        .des {
+          margin-bottom: 4%;
+          width: 570px;
+          textarea {
+            font-size: medium;
+            color: rgba(0, 0, 0, 0.87);
+            outline: 0.25px solid rgba(0, 0, 0, 0.38);
+            border-radius: 6px;
+          }
+        }
+        .input-box {
+          margin-bottom: 4%;
+        }
+        .input-box span {
           color: rgba(0, 0, 0, 0.87);
-          outline: 0.25px solid rgba(0, 0, 0, 0.38);
-          border-radius: 6px;
+          display: inline;
+          font-size: medium;
+          font-weight: bold;
+        }
+        .input-box input {
+          /* border: none; */
+          width: 53%;
+          float: right;
+          font-size: medium;
+          background: #fafafa;
+          border: 1px solid rgba(0, 0, 0, 0.38);
+          box-sizing: border-box;
+          padding: 0.5% 0 0.5% 2%;
+          margin-right: 10%;
         }
       }
-      .input-box {
-        margin-bottom: 5%;
-      }
-      .input-box span {
+    }
+  }
+
+  //UPDATE BOOK ITEM
+  .bookitem {
+    text-align: center;
+    border-top: rgba(0, 0, 0, 0.25) solid;
+
+    .title {
+      margin-top: 3%;
+      .order h1 {
         color: rgba(0, 0, 0, 0.87);
-        display: inline;
-        font-size: medium;
+        font-size: x-large;
+        text-align: left;
         font-weight: bold;
+        margin-top: 0;
       }
-      .input-box input {
-        /* border: none; */
-        width: 53%;
-        float: right;
+    }
+
+    .button button {
+      float: right;
+      width: 150px;
+      background: #ecd4b4;
+      // border: 1px solid #b7b7b7;
+      box-sizing: border-box;
+      // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      margin: 0% 0% 3% 0%;
+      transition: 0.4s;
+
+      i {
+        padding-right: 0%;
+        color: rgba(0, 0, 0, 0.38);
         font-size: medium;
-        background: #fafafa;
-        border: 1px solid #cecece;
-        box-sizing: border-box;
-        border-radius: 6px;
-        padding: 0.5% 0 0.5% 2%;
-        margin-right: 10%;
       }
     }
-  }
-}
-
-//UPDATE BOOK ITEM
-.bookitem {
-  text-align: center;
-  border-top: rgba(0, 0, 0, 0.25) solid;
-
-  .title {
-    margin-top: 3%;
-    .order h1 {
+    .button button:hover {
+      background: #ffe5c3;
       color: rgba(0, 0, 0, 0.87);
-      font-size: x-large;
-      text-align: left;
-      font-weight: bold;
-      margin-top: 0;
     }
-  }
 
-  .button button {
-    float: right;
-    width: 150px;
-    background: #ecd4b4;
-    // border: 1px solid #b7b7b7;
-    box-sizing: border-box;
-    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    margin: 0% 0% 3% 0%;
-    transition: 0.4s;
-
-    i {
-      padding-right: 0%;
-      color: rgba(0, 0, 0, 0.38);
+    .info {
+      margin-bottom: 5%;
+    }
+    .input-box {
+      margin-bottom: 2%;
+    }
+    .input-box span {
+      margin-left: 20%;
+      color: rgba(0, 0, 0, 0.87);
+      display: inline;
       font-size: medium;
+      font-weight: bold;
     }
-  }
-  .button button:hover {
-    background: #ffe5c3;
-    color: rgba(0, 0, 0, 0.87);
-  }
-
-  .info {
-    margin-bottom: 5%;
-  }
-  .input-box {
-    margin-bottom: 2%;
-  }
-  .input-box span {
-    margin-left: 20%;
-    color: rgba(0, 0, 0, 0.87);
-    display: inline;
-    font-size: medium;
-    font-weight: bold;
-  }
-  .input-box input {
-    /* border: none; */
-    width: 30%;
-    float: right;
-    font-size: medium;
-    background: #fafafa;
-    border: 1px solid #cecece;
-    box-sizing: border-box;
-    border-radius: 6px;
-    padding: 0.5% 0 0.5% 2%;
-    margin-right: 25%;
-  }
+    .input-box input {
+      /* border: none; */
+      width: 30%;
+      float: right;
+      font-size: medium;
+      background: #fafafa;
+      border: 1px solid #cecece;
+      box-sizing: border-box;
+      border-radius: 6px;
+      padding: 0.5% 0 0.5% 2%;
+      margin-right: 25%;
+    }
 }
 </style>

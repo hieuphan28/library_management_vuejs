@@ -59,17 +59,17 @@ export default {
 }
 
 .contain {
-  border: solid 1px rgba(0, 0, 0, 0.87);
-  display: block;
+  border: solid 1px rgba(0, 0, 0, 0.38);
   width: 250px;
   height: 300px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
+   img {
+    flex-shrink: 15;
+    min-width: 100%;
+    min-height: 100%;
     top: 0;
     bottom: 0;
     left: 0;
@@ -79,7 +79,7 @@ export default {
 }
 
 .row {
-  margin-top: 3%;
+  margin-top: 2%;
 }
 .book-cover {
   width: 100%;

@@ -22,15 +22,11 @@
                 Only ({{ booksLeft }}) books left
               </div>
             </div>
-
-            <button class="btn" v-if="isMember">
-             <router-link to="/cart" ><i class="fas fa-shopping-cart"></i> Add to cart</router-link>
-            </button>
           </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
           <h1>{{ bookInfo.book_name }}</h1>
-          <div>{{ bookInfo.description }}</div>
+          <div class="des" >{{ bookInfo.description }}</div>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-6 tip">
               <ul>
@@ -64,8 +60,9 @@
           </div>
         </div>
       </div>
-      <button class="btn">
-        <a href=""><i class="fas fa-shopping-cart"></i> Add to cart</a>
+      <button class="btn" v-if="isMember">
+        <router-link to="/cart"
+          ><i class="fas fa-shopping-cart"></i> Add to cart</router-link>
       </button>
     </div>
   </div>
@@ -81,7 +78,7 @@ export default {
     ...mapGetters({
       getBookById: "book/bookById",
     }),
-     ...mapGetters("user", ["currentUser",  "isMember"]),
+    ...mapGetters("user", ["currentUser", "isMember"]),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
     },
@@ -109,17 +106,17 @@ export default {
 }
 
 .contain {
-  border: solid 1px rgba(0, 0, 0, 0.87);
-  display: block;
+  border: solid 1px rgba(0, 0, 0, 0.38);
   width: 250px;
-  height: 340px;
-  position: relative;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
+   img {
+    flex-shrink: 15;
+    min-width: 100%;
+    min-height: 100%;
     top: 0;
     bottom: 0;
     left: 0;
@@ -128,13 +125,21 @@ export default {
   }
 }
 
+.des{
+  display: block;
+  width: 100%;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
 .book-cover {
   position: relative;
   margin: auto;
   height: auto;
 }
 .book-info {
-  padding-top: 5%;
+  padding-top: 1%;
   .book-left {
     font-size: small;
     text-align: right;
@@ -144,7 +149,7 @@ export default {
 }
 
 button {
-  margin-top: 5%;
+  margin-top: 3%;
   background: rgba(236, 212, 180, 1);
   border-radius: 10px;
   width: 150px;
@@ -172,11 +177,10 @@ a:hover {
 }
 
 ul {
-  margin: 20px 0 0 0;
   padding: 0;
   li {
     list-style: none;
-    padding: 10px 0 10px 0;
+    padding: 5px 0 8px 0;
   }
 }
 
@@ -184,6 +188,7 @@ ul {
   h1 {
     font-size: xx-large;
     font-weight: bold;
+    margin-bottom: 1%;
   }
   .tip {
     font-weight: bold;

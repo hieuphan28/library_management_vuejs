@@ -35,23 +35,22 @@
         :key="book.id"
       >
         <div class="row allbook">
-          <div class="col-lg-5 col-md-5 col-sm-5 col-5">
-
+          <div class="col-lg-5 col-md-12 col-sm-12 col-12">
             <div class="contain">
-            <router-link :to="{ path: '/updatebook/' + book.book_id }">
-              <img class="book-cover" :src="book.thumbnail" alt="" />
-            </router-link>
+              <router-link :to="{ path: '/updatebook/' + book.book_id }">
+                <img class="book-cover" :src="book.thumbnail" alt="" />
+              </router-link>
             </div>
           </div>
-          <div class="col-lg-7 col-md-7 col-sm-7 col-7 book-info">
+          <div class="col-lg-7 col-md-12 col-sm-12 col-12 book-info">
             <router-link :to="{ path: '/updatebook/' + book.book_id }"
               ><div class="book-name">{{ book.book_name }}</div></router-link
             >
             <div class="info">
               <div class="book_descrip">{{ book.description }}</div>
-              <div class="quantity">{{ book.quantity }} book(s)</div>
+              <!-- <div class="quantity">{{ book.quantity }} book(s)</div> -->
             </div>
-            <div>
+            <div class="button">
               <button class="btn d-block">
                 <a @click="removeBook(book)"
                   ><i class="fa fa-trash"></i>Delete
@@ -59,15 +58,13 @@
               </button>
               <button class="btn d-block">
                 <router-link :to="{ path: '/updatebook/' + book.book_id }"
-                  ><i class="fa fa-list" aria-hidden="true"></i
-                  >Edit</router-link
-                >
+                  ><i class="fa fa-list" aria-hidden="true"></i>Edit
+                </router-link>
               </button>
               <button class="btn d-block">
                 <router-link to="/addbookitem"
-                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book
-                  Item</router-link
-                >
+                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book Item
+                </router-link>
               </button>
             </div>
           </div>
@@ -105,19 +102,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .contain {
-  border: solid 1px rgba(0, 0, 0, 0.87);
-  display: block;
-  width: 210px;
-  height: 280px;
-  position: relative;
+  border: solid 1px rgba(0, 0, 0, 0.38);
+  width: 180px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
+   img {
+    flex-shrink: 15;
+    min-width: 100%;
+    min-height: 100%;
     top: 0;
     bottom: 0;
     left: 0;
@@ -126,13 +122,30 @@ export default {
   }
 }
 
-
 .head {
   margin-top: 5%;
   button {
     float: left;
     width: 160px;
+    background: #ecd4b4;
+    border: 1px solid #b7b7b7;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    margin-bottom: 3%;
+    padding: 1% 0% 2% 0%;
+    a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.38);
+      float: left;
+    }
 
+    i {
+      margin-left: 8%;
+      padding-right: 5%;
+      color: rgba(0, 0, 0, 0.38);
+      font-size: medium;
+    }
     i {
       align-content: center;
     }
@@ -144,7 +157,7 @@ export default {
       background: rgba(255, 255, 255, 0.8);
       border: 1px solid rgba(0, 0, 0, 0.28);
       box-sizing: border-box;
-      border-radius: 8px;
+      border-radius: 5px;
       padding: 1% 2% 1% 2%;
     }
     i {
@@ -174,6 +187,11 @@ export default {
   font-size: x-large;
   font-weight: bold;
 }
+
+.book_descrip {
+  width: 100%;
+  height: 50px;
+}
 .info {
   margin: 2% 0%;
   font-size: medium;
@@ -184,15 +202,15 @@ export default {
   }
 }
 
-button {
+.button button {
   width: 150px;
   background: #ecd4b4;
   border: 1px solid #b7b7b7;
   box-sizing: border-box;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
-  margin-bottom: 5%;
-  padding: 1.5% 0% 2.5% 0%;
+  margin-bottom: 3%;
+  padding: 1% 0% 2% 4%;
   a {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.38);
@@ -200,15 +218,13 @@ button {
   }
 
   i {
-    margin-left: 8%;
-    padding-right: 5%;
     color: rgba(0, 0, 0, 0.38);
     font-size: medium;
+    margin-right: 5%;
   }
 }
 
 button:hover {
   background: #ffe5c3;
-  color: rgba(0, 0, 0, 0.87);
 }
 </style>

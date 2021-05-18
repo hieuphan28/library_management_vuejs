@@ -7,7 +7,6 @@
           There are many variations of passages of Lorem Ipsum available, but
           the majority have suffered lebmid alteration in some ledmid form
         </p>
-        <p id="title">Fiction</p>
         <div
           id="myCarousel1"
           class="carousel slide"
@@ -193,7 +192,10 @@
       </div>
     </div>
     <div id="allbook">
-      <router-link to="/books">All Books</router-link>
+      <button class="btn d-block">
+                 <router-link to="/books">All Books</router-link>
+      </button>
+     
     </div>
   </div>
 </template>
@@ -202,7 +204,7 @@ export default {
   name: "AllBooks",
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .intro {
   text-align: center;
   width: 50%;
@@ -327,5 +329,27 @@ h2 b {
   font-weight: bold;
   text-decoration: underline;
   cursor: pointer;
+}
+
+
+button {
+  margin-top: 7%;
+  width: 100px;
+  background: #ecd4b4;
+  border: 1px solid #b7b7b7;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  margin-left: 45%;
+  text-decoration: none;
+  a{
+    color: rgba(0, 0, 0, 0.54);
+    text-decoration: none;
+    text-align: center;
+  }
+}
+
+button:hover {
+  background: #ffe5c3;
 }
 </style>
