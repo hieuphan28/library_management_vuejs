@@ -40,6 +40,11 @@ const actions = {
         const data = await bookItemService.updateBookItem(bookitem);
         commit('upsertBookItem', data);
     }, 
+
+    async removeBookItem({state, commit}, bookitem) {
+        const data = await bookItemService.removeBookItem(bookitem);
+        commit('removeBookItem', bookitem);
+    }
 }
 
 const mutations = {
@@ -57,6 +62,10 @@ const mutations = {
         const existIndex = state.data.findIndex(x => x.book_item_id === bookitem.book_item_id);
         (existIndex !== -1) && (state.data[existIndex] = bookitem)
             || state.data.push(bookitem);
+    },
+
+    removeBookItem(state, bookitem) {
+        state.data = state.data.filter(x => x.book_item_id !== bookitem.book_item_id); 
     }
 }
 

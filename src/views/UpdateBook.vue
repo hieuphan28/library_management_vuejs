@@ -68,7 +68,7 @@
           <h1>Book Item {{ book.id }} :</h1>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 button">
-          <button class="btn">
+          <button class="btn" @click="removeBookItem(book)">
             <i class="fa fa-trash" aria-hidden="true"> Delete </i>
           </button>
           <button class="btn" style="margin-right: 10px" @click="saveBookItem(book)">
@@ -147,6 +147,16 @@ export default {
         toastSuccess('Update book item successfully.');
       } catch(e) {
         toastError(e)
+      }
+    },
+
+    async removeBookItem(bookitem) {
+      try {
+        await this.$store.dispatch('bookitem/removeBookItem', bookitem);
+
+        toastSuccess('Remove book item successfully.');
+      } catch(e) {
+        toastError(e);
       }
     }
   }

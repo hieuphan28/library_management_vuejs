@@ -36,10 +36,19 @@ const updateBookItem = async (bookitem) => {
     return handleResponse(res);
 }
 
+const removeBookItem = async (bookitem) => {
+    const res = await axios.delete(`${apiPrefix}/bookitem`, {
+        data: bookitem
+    });
+
+    return handleResponse(res);
+}
+
 
 export {
     getBookItemByBookId,
     countBookItemByBookId,
     addBookItem,
     updateBookItem,
+    removeBookItem,
 }
