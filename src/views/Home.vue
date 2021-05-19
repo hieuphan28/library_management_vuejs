@@ -17,8 +17,10 @@ export default {
     NewBooks,
     AllBooks,
   },
-  props: ["user"]
-
+  props: ["user"],
+  mounted() {
+    this.$store.dispatch('book/init');  
+  },
 };
 </script>
 

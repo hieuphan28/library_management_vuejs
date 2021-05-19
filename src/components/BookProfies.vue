@@ -2,21 +2,12 @@
   <div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-5 col-md-12 col-sm-12 col-12 left-side">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
           <div>
-            <div class="contain">
-              <img
-                class="book-cover"
-                :src="bookInfo.thumbnail"
-                alt=""
-                width="600"
-                height="267"
-              />
-            </div>
-
+            <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
             <div class="row book-info">
               <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                ${{ bookInfo.rent_cost }}
+                {{ bookInfo.rent_cost }}
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 book-left">
                 Only ({{ booksLeft }}) books left
@@ -38,21 +29,12 @@
                 <li>Publication Date:</li>
               </ul>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-6 value">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
               <ul>
                 <li>{{ bookInfo.language }}</li>
                 <li>{{ bookInfo.author }}</li>
-                <li>
-                  {{
-                    bookInfo.category?.category_name || bookInfo.category_name
-                  }}
-                </li>
-                <li>
-                  {{
-                    bookInfo.department?.department_name ||
-                    bookInfo.department_name
-                  }}
-                </li>
+                <li>{{ bookInfo.category?.category_name || bookInfo.category_name}}</li>
+                <li>{{ bookInfo.department?.department_name || bookInfo.department_name}}</li>
                 <li>{{ bookInfo.quantity }}</li>
                 <li>{{ bookInfo.publication_date }}</li>
               </ul>
@@ -69,37 +51,34 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { toastError } from "../utilities/toast-util";
+import { mapGetters } from 'vuex';
+import { toastError } from '../utilities/toast-util';
 export default {
   name: "BookProfies",
-  props: ["book_id"],
+  props: ['book_id'],
   computed: {
     ...mapGetters({
-      getBookById: "book/bookById",
+      getBookById: 'book/bookById',
     }),
     ...mapGetters("user", ["currentUser", "isMember"]),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
-    },
+    }
   },
   async mounted() {
     try {
-      await this.$store.dispatch("book/getBookById", this.book_id);
-    } catch (e) {
+      await this.$store.dispatch('book/getBookById', this.book_id);
+      await this.$store.dispatch('bookitem/countBookItemByBookId', this.bookInfo);
+    } catch(e) {
       toastError(e);
     }
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 * {
   width: 100%;
-}
-
-.row {
-  margin-top: 5%;
 }
 .left-side {
   display: block;
@@ -154,8 +133,8 @@ button {
   border-radius: 10px;
   width: 150px;
   text-decoration: none;
-  padding-bottom: 1%;
-  a {
+  padding-bottom: 2%;
+  a{
     color: rgba(0, 0, 0, 0.54);
     transition: 0.3s;
   }

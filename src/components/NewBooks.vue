@@ -184,8 +184,12 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "NewBooks",
+  computed: {
+    ...mapGetters('book', ['newBooks'])
+  }
 };
 </script>
 <style scoped>

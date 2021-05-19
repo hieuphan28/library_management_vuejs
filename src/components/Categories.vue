@@ -4,7 +4,7 @@
       <div class="title">CATEGORIES:</div>
       <div class="filter" v-for="category in categories" :key="category.id">
         <div class="category-name">
-          <a href="#">{{ category.category_name }}</a>
+          <a :href="`/books?category=${category.category_id}`">{{ category.category_name }}</a>
         </div>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <div class="title">DEPARTMENT:</div>
       <div class="filter" v-for="department in departments" :key="department.id">
         <div class="department-name">
-          <a href="#">{{ department.department_name }}</a>
+          <a :href="`/books?department=${department.department_id}`">{{ department.department_name }}</a>
         </div>
       </div>
     </div>
