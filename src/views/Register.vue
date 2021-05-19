@@ -61,7 +61,7 @@
 <script>
 import axios from "axios";
 import user from "../store/modules/user";
-import { toastError, toastMessage } from "../utilities/toast-util";
+import { toastError, toastMessage, toastSuccess } from "../utilities/toast-util";
 import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   name: "Register",
@@ -95,7 +95,7 @@ export default {
           address: this.address,
           role: this.role,
         });
-        console.log(response);
+
         toastSuccess("Register Successfully!");
       } catch (e) {
         toastError(e);
