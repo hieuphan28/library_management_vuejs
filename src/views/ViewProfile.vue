@@ -26,7 +26,7 @@
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input type="text" placeholder="dob" v-model="currentUser.dob" />
+        <input type="date" placeholder="dob" v-model="currentUser.dob" />
       </div>
       <div class="input-box">
         <span>Address:</span>
