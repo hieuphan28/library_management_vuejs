@@ -108,7 +108,8 @@ export default {
     async removeBook(book) {
       try {
         await this.$store.dispatch("book/removeBook", book);
-
+        this.bookData = this.$store.getters['book/books'];
+        
         toastSuccess("Remove book successfully.");
       } catch (e) {
         toastError(e);
