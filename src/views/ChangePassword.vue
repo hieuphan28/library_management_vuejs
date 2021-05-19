@@ -11,7 +11,7 @@
       <div class="input-box">
         <span>Current Password:</span>
         <input
-          id="myInput1"
+          id="myInput"
           v-model="current_password"
           type="password"
           placeholder=""
@@ -20,37 +20,23 @@
           class="eye"
           src="../assets/eye.svg"
           alt=""
-          @click="myFunction1()"
+          @click="myFunction()"
         />
       </div>
       <div class="input-box">
         <span>New Password:</span>
         <input
-          id="myInput2"
           v-model="password"
           type="password"
           placeholder=""
-        />
-        <img
-          class="eye"
-          src="../assets/eye.svg"
-          alt=""
-          @click="myFunction2()"
         />
       </div>
       <div class="input-box">
         <span>Confirm Password:</span>
         <input
-          id="myInput3"
           v-model="confirmed_password"
           type="password"
           placeholder=""
-        />
-        <img
-          class="eye"
-          src="../assets/eye.svg"
-          alt=""
-          @click="myFunction3()"
         />
       </div>
       <div class="btn-box">
@@ -105,8 +91,8 @@ export default {
       if (!this.currentUser?.user_id || !this.currentUser?.token)
         this.$router.push("/login");
     },
-    myFunction1() {
-      var x = document.getElementById("myInput1");
+    myFunction() {
+      var x = document.getElementById("myInput");
       if (x.type === "password") {
         x.type = "text";
       } else {
