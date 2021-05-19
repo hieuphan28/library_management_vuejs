@@ -82,11 +82,11 @@
           </div>
           <div class="input-box">
             <span>Price:</span>
-            <input type="text" placeholder="" v-model="book.price" />
+            <input type="number" min="0"   placeholder="" v-model="book.price" />
           </div>
           <div class="input-box">
             <span>Rent Cost:</span>
-            <input type="text" placeholder="" v-model="book.rent_cost" />
+            <input type="number" min="0"  placeholder="" v-model="book.rent_cost" />
           </div>
         </div>
       </div>
