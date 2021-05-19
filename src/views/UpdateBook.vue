@@ -34,20 +34,36 @@
           </div>
           <div class="input-box">
             <span>Category:</span>
-            <input type="text" placeholder="" v-model="bookInfo.category" />
+            <select v-model="bookInfo.category_id">
+              <option
+                :value="option.category_id"
+                v-for="(option, index) in categories"
+                :key="index"
+              >
+                {{ option.category_name }}
+              </option>
+            </select>
           </div>
 
           <div class="input-box">
             <span>Department:</span>
-            <input type="text" placeholder="" v-model="bookInfo.department" />
+            <select v-model="bookInfo.department_id">
+              <option
+                :value="option.department_id"
+                v-for="(option, index) in departments"
+                :key="index"
+              >
+                {{ option.department_name }}
+              </option>
+            </select>
           </div>
           <div class="input-box">
             <span>Price:</span>
-            <input type="text" placeholder="" v-model="bookInfo.price" />
+            <input type="number" min="0"  placeholder="" v-model="bookInfo.price" />
           </div>
           <div class="input-box">
             <span>Rent Cost:</span>
-            <input type="text" placeholder="" v-model="bookInfo.rent_cost" />
+            <input type="number" min="0" placeholder="" v-model="bookInfo.rent_cost" />
           </div>
           <div class="input-box">
             <span>Publication Date:</span>
@@ -71,7 +87,11 @@
           <button class="btn" @click="removeBookItem(book)">
             <i class="fa fa-trash" aria-hidden="true"> Delete </i>
           </button>
-          <button class="btn" style="margin-right: 10px" @click="saveBookItem(book)">
+          <button
+            class="btn"
+            style="margin-right: 10px"
+            @click="saveBookItem(book)"
+          >
             <i class="fa fa-save" aria-hidden="true"> Save </i>
           </button>
         </div>
@@ -87,7 +107,11 @@
         </div>
         <div class="input-box">
           <span>Date add to lib:</span>
-          <input type="text" placeholder="" v-model="book.date_added_to_library" />
+          <input
+            type="text"
+            placeholder=""
+            v-model="book.date_added_to_library"
+          />
         </div>
 
         <div class="input-box">
@@ -110,15 +134,17 @@ export default {
   name: "UpdateBook",
   computed: {
     ...mapGetters({
-      getBookById: 'book/bookById',
-      getBookItemById: 'bookitem/bookItemByBookId'
+      getBookById: "book/bookById",
+      getBookItemById: "bookitem/bookItemByBookId",
+      categories: "category/categories",
+      departments: "department/departments",
     }),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
     },
     bookItems() {
       return this.getBookItemById(this.book_id) || {};
-    }
+    },
   },
   data() {
     return {
@@ -126,8 +152,8 @@ export default {
     };
   },
   async mounted() {
-    this.$store.dispatch('book/getBookById', this.book_id);
-    this.$store.dispatch('bookitem/getBookItemByBookId', this.book_id);
+    this.$store.dispatch("book/getBookById", this.book_id);
+    this.$store.dispatch("bookitem/getBookItemByBookId", this.book_id);
   },
   methods: {
     async saveBook() {
@@ -142,24 +168,24 @@ export default {
 
     async saveBookItem(bookitem) {
       try {
-        await this.$store.dispatch('bookitem/updateBookItem', bookitem);
+        await this.$store.dispatch("bookitem/updateBookItem", bookitem);
 
-        toastSuccess('Update book item successfully.');
-      } catch(e) {
-        toastError(e)
+        toastSuccess("Update book item successfully.");
+      } catch (e) {
+        toastError(e);
       }
     },
 
     async removeBookItem(bookitem) {
       try {
-        await this.$store.dispatch('bookitem/removeBookItem', bookitem);
+        await this.$store.dispatch("bookitem/removeBookItem", bookitem);
 
-        toastSuccess('Remove book item successfully.');
-      } catch(e) {
+        toastSuccess("Remove book item successfully.");
+      } catch (e) {
         toastError(e);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -207,110 +233,120 @@ export default {
         margin: 0;
       }
     }
-      .right-side {
-        .title {
-          input {
-            width: 570px;
-            font-size: xx-large;
-            border: 0.25px solid rgba(0, 0, 0, 0.38);
-          }
-        }
-        .des {
-          margin-bottom: 4%;
+    .right-side {
+      .title {
+        input {
           width: 570px;
-          textarea {
-            font-size: medium;
-            color: rgba(0, 0, 0, 0.87);
-            outline: 0.25px solid rgba(0, 0, 0, 0.38);
-            border-radius: 6px;
-          }
+          font-size: xx-large;
+          border: 0.25px solid rgba(0, 0, 0, 0.38);
         }
-        .input-box {
-          margin-bottom: 4%;
-        }
-        .input-box span {
+      }
+      .des {
+        margin-bottom: 4%;
+        width: 570px;
+        textarea {
+          font-size: medium;
           color: rgba(0, 0, 0, 0.87);
-          display: inline;
-          font-size: medium;
-          font-weight: bold;
+          outline: 0.25px solid rgba(0, 0, 0, 0.38);
+          border-radius: 6px;
         }
-        .input-box input {
-          /* border: none; */
-          width: 53%;
-          float: right;
-          font-size: medium;
-          background: #fafafa;
-          border: 1px solid rgba(0, 0, 0, 0.38);
-          box-sizing: border-box;
-          padding: 0.5% 0 0.5% 2%;
-          margin-right: 10%;
-        }
+      }
+      .input-box {
+        margin-bottom: 4%;
+      }
+      select{
+        width: 53%;
+        float: right;
+        font-size: medium;
+        background: #fafafa;
+        border: 1px solid rgba(0, 0, 0, 0.38);
+        box-sizing: border-box;
+        padding: 0.5% 0 0.5% 2%;
+        margin-right: 10%;
+      }
+      .input-box span {
+        color: rgba(0, 0, 0, 0.87);
+        display: inline;
+        font-size: medium;
+        font-weight: bold;
+      }
+      .input-box input {
+        /* border: none; */
+        width: 53%;
+        float: right;
+        font-size: medium;
+        background: #fafafa;
+        border: 1px solid rgba(0, 0, 0, 0.38);
+        box-sizing: border-box;
+        padding: 0.5% 0 0.5% 2%;
+        margin-right: 10%;
       }
     }
   }
+}
 
-  //UPDATE BOOK ITEM
-  .bookitem {
-    text-align: center;
-    border-top: rgba(0, 0, 0, 0.25) solid;
+//UPDATE BOOK ITEM
+.bookitem {
+  text-align: center;
+  border-top: rgba(0, 0, 0, 0.25) solid;
 
-    .title {
-      margin-top: 3%;
-      .order h1 {
-        color: rgba(0, 0, 0, 0.87);
-        font-size: x-large;
-        text-align: left;
-        font-weight: bold;
-        margin-top: 0;
-      }
-    }
-
-    .button button {
-      float: right;
-      width: 150px;
-      background: #ecd4b4;
-      // border: 1px solid #b7b7b7;
-      box-sizing: border-box;
-      // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 12px;
-      margin: 0% 0% 3% 0%;
-      transition: 0.4s;
-
-      i {
-        padding-right: 0%;
-        color: rgba(0, 0, 0, 0.38);
-        font-size: medium;
-      }
-    }
-    .button button:hover {
-      background: #ffe5c3;
+  .title {
+    margin-top: 3%;
+    .order h1 {
       color: rgba(0, 0, 0, 0.87);
-    }
-
-    .info {
-      margin-bottom: 5%;
-    }
-    .input-box {
-      margin-bottom: 2%;
-    }
-    .input-box span {
-      margin-left: 20%;
-      color: rgba(0, 0, 0, 0.87);
-      display: inline;
-      font-size: medium;
+      font-size: x-large;
+      text-align: left;
       font-weight: bold;
+      margin-top: 0;
     }
-    .input-box input {
-      /* border: none; */
-      width: 30%;
-      float: right;
+  }
+
+  .button button {
+    float: right;
+    width: 150px;
+    background: #ecd4b4;
+    // border: 1px solid #b7b7b7;
+    box-sizing: border-box;
+    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    margin: 0% 0% 3% 0%;
+    transition: 0.4s;
+
+    i {
+      padding-right: 0%;
+      color: rgba(0, 0, 0, 0.38);
       font-size: medium;
-      background: #fafafa;
-      border: 1px solid #cecece;
-      box-sizing: border-box;
-      border-radius: 6px;
-      padding: 0.5% 0 0.5% 2%;
-      margin-right: 25%;
     }
+  }
+  .button button:hover {
+    background: #ffe5c3;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .info {
+    margin-bottom: 5%;
+  }
+  .input-box {
+    margin-bottom: 2%;
+  }
+  .input-box span {
+    margin-left: 20%;
+    color: rgba(0, 0, 0, 0.87);
+    display: inline;
+    font-size: medium;
+    font-weight: bold;
+  }
+  .input-box input {
+    /* border: none; */
+    width: 30%;
+    float: right;
+    font-size: medium;
+    background: #fafafa;
+    border: 1px solid #cecece;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 0.5% 0 0.5% 2%;
+    margin-right: 25%;
+  }
 }
 </style>
