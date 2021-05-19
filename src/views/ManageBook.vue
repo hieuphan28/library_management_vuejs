@@ -50,8 +50,8 @@
               <div class="book_descrip">{{ book.description }}</div>
               <!-- <div class="quantity">{{ book.quantity }} book(s)</div> -->
             </div>
-            <div @click="removeBook(book)" class="button">
-              <button class="btn d-block">
+            <div class="button">
+              <button @click="removeBook(book)" class="btn d-block">
                 <a
                   ><i class="fa fa-trash"></i>Delete
                 </a>

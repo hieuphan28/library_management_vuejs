@@ -23,9 +23,9 @@
         />
         <img class="eye" src="../assets/eye.svg" alt="" @click="myFunction()" />
       </div>
-      <div class="forgot-password">
+      <!-- <div class="forgot-password">
         <router-link to="/forgotpassword">Forgot Password</router-link>
-      </div>
+      </div> -->
       <div>
         <span id="Login"></span>
       </div>
