@@ -33,8 +33,14 @@
                 ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </router-link>
             </li>
+            <li class="not_logged" v-if="!isLogged">
+              <router-link to="/register">Register</router-link>
+            </li>
+            <li class="not_logged" v-if="!isLogged">
+              <router-link to="/login">Login</router-link>
+            </li>
 
-            <li class="user dropdown">
+            <li class="user dropdown" v-if="isLogged">
               <a class="nav-link" data-toggle="dropdown" href="#"
                 ><i class="fa fa-user" aria-hidden="true"></i
               ></a>
@@ -59,7 +65,7 @@
                     >Change Password</a
                   ></router-link
                 >
-                <router-link to="/login" v-if="isLogged" 
+                <router-link to="/login" v-if="isLogged"
                   ><a class="dropdown-item" href="#" @click="clearCurrentUser"
                     >Logout</a
                   ></router-link
@@ -102,7 +108,9 @@
       <ul class="mobile-item" style="">
         <li><router-link to="/">HOME</router-link></li>
         <li><router-link to="/books">BOOKS</router-link></li>
-        <li class="mean-last"> <router-link to="/contact">CONTACT</router-link></li>
+        <li class="mean-last">
+          <router-link to="/contact">CONTACT</router-link>
+        </li>
       </ul>
     </nav>
   </div>
@@ -114,10 +122,10 @@ import { UserRole } from "../common/bundleOfEnum";
 
 export default {
   name: "Header",
-  data(){
-    return{
-    showNav: false,
-    }
+  data() {
+    return {
+      showNav: false,
+    };
   },
   computed: {
     ...mapGetters("user", ["currentUser", "isLogged", "isMember", "isAdmin"]),
@@ -238,15 +246,6 @@ export default {
   align-self: stretch;
   display: flex;
 }
-// .header__area .header__sidebar__right > li.user > a {
-//   background: rgba(0, 0, 0, 0) url("~@/assets/icon_setting.png") no-repeat
-//     scroll 0 center;
-//   cursor: pointer;
-//   font-size: 0;
-//   position: relative;
-//   width: 30px;
-//   height: 100%;
-// }
 .header__area .header__sidebar__right > li.shop_search > input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
   // border-radius: 8px;
@@ -301,7 +300,29 @@ export default {
   text-decoration: none;
   outline: none;
 }
-
+li.not_logged {
+  align-self: stretch;
+  display: flex;
+  margin: 15px 10px;
+}
+li.not_logged a:hover {
+  color: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  text-decoration: none;
+  outline: none;
+}
+li.not_logged a {
+  align-items: center;
+  align-self: stretch;
+  color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 10px;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
 // mobile menu
 .mobile-menu {
   display: none;
