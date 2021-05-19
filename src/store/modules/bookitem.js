@@ -28,7 +28,9 @@ const actions = {
 
     async getBookItemByBookId({state, commit}, book_id) {
         const data = await bookItemService.getBookItemByBookId(book_id);
-        commit('addBulkBookItem', data);
+        data.forEach(item => {
+            commit('upsertBookItem', item);
+        });
     },
 
     async addBookItem({state, commit}, bookitem) {
@@ -50,12 +52,6 @@ const actions = {
 const mutations = {
     addBookItem(state, bookitem) {
         state.data.push(bookitem);
-    },
-
-    addBulkBookItem(state, bookitems) {
-        bookitems.forEach(item => {
-            state.data.push(item);
-        });
     },
 
     upsertBookItem(state, bookitem) {
