@@ -56,7 +56,7 @@
             <span>Category:</span>
             <select v-model="book.category_id">
               <option
-                :value="option.value"
+                :value="option.category_id"
                 v-for="(option, index) in categories"
                 :key="index"
               >
@@ -68,7 +68,7 @@
             <span>Department:</span>
             <select v-model="book.department_id">
               <option
-                :value="option.value"
+                :value="option.department_id"
                 v-for="(option, index) in departments"
                 :key="index"
               >
@@ -125,6 +125,8 @@ export default {
       try {
         this.book.thumbnail = await uploadImage(this.imageFile);
         await this.$store.dispatch("book/addBook", this.book);
+        this.$router.push('/managebook')
+
         toastSuccess("Add book successfully!");
       } catch (e) {
         toastError(e);

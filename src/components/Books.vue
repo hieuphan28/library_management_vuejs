@@ -12,8 +12,8 @@
         :key="item.id"
       >
         <router-link :to="{ path: '/bookinfo/' + item.book_id}"
-          ><img class="book-cover" :src="item.thumbnail" alt=""
-        /></router-link>
+          > <div class="contain"><img class="book-cover" :src="item.thumbnail" alt=""
+        /></div> </router-link>
 
         <div class="book-name">{{ item.book_name }}</div>
         <div class="row book-info">

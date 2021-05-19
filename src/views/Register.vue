@@ -41,7 +41,7 @@
       </div>
       <div class="input-box">
         <span>DOB:</span>
-        <input v-model="dob" type="date" placeholder="" required />
+        <input v-model="dob" type="Date" placeholder="" required />
       </div>
       <div class="input-box">
         <span>Address:</span>
@@ -96,7 +96,7 @@ export default {
           role: this.role,
         });
         console.log(response);
-        toastSuccess("Register successfully");
+        toastSuccess("Register Successfully!");
       } catch (e) {
         toastError(e);
       }
