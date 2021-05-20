@@ -11,7 +11,17 @@ const BookStatus = {
     LOST: 2,
 }
 
+const ReservationStatus = {
+    UNDEFINED: -1,
+    TEMP: 0,
+    BORROWING: 1,
+    RESERVED: 2,
+    CLOSED: 3,
+    CANCELED: 4,
+}
+
 export {
     UserRole,
     BookStatus,
+    ReservationStatus,
 }

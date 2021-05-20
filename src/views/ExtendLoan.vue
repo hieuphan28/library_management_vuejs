@@ -8,38 +8,39 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">PRICE</div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">STATUS</div>
     </div>
+    <!-- v-for="borrowHistory in borrowHistories"
+      :key="borrowHistory.id" -->
     <div
       class="row info"
-      v-for="borrowHistory in borrowHistories"
-      :key="borrowHistory.id"
+      
     >
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 borrowingID">
-        <div>{{ borrowHistory.borrowId }}</div>
+        <div>{{ reservation.reservation_id }}</div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-        <div v-for="bookInfo in borrowHistory.bookInfos" :key="bookInfo.id">
+        <div v-for="bookInfo in preProcessBookItems(reservation.book_items)" :key="bookInfo.book_id">
           {{ bookInfo.book_name }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <div v-for="bookInfo in borrowHistory.bookInfos" :key="bookInfo.id">
+        <div v-for="bookInfo in preProcessBookItems(reservation.book_items)" :key="bookInfo.book_id">
           {{ bookInfo.quantity }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-price">
         <div>
-          {{ borrowHistory.price }}
+          {{ reservation.total_fee }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-status">
-        <div :class="borrowHistory.status">{{ borrowHistory.status }}</div>
+        <div :class="passEnumKey(reservation.status)">{{ passEnumKey(reservation.status) }}</div>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
-        v-if="borrowHistory.status == 'Borrowing'"
+        v-if="passEnumKey(reservation.status) == 'BORROWING'"
       >
-        <div>Borrowed Date: {{ borrowHistory.borrowedDate }}</div>
-        <div>Expected Date: {{ borrowHistory.expectedDate }}</div>
+        <div>Borrowed Date: {{ reservation.borrowedDate }}</div>
+        <div>Expected Date: {{ reservation.expectedDate }}</div>
       </div>
       <!-- <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
@@ -77,10 +78,22 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { ReservationStatus } from '../common/bundleOfEnum';
+import { bookitems2BookData, getEnumKeyWithValue } from '../utilities/data-util';
 export default {
   name: "ExtendLoan",
+  computed: {
+    ...mapGetters({
+      reservationById: 'reservation/reservationById',
+    }),
+    reservation() {
+      return this.reservationById(this.reservation_id) || {};
+    }
+  },
   data() {
     return {
+      reservation_id: this.$route.params.reservation_id,
       extendFee: [
         {
           day: "3",
@@ -114,6 +127,18 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$store.dispatch('reservation/initCurrentReservations');
+  },
+  methods: {
+    passEnumKey(status) {
+      return getEnumKeyWithValue(ReservationStatus, status)
+    },
+
+    preProcessBookItems(bookitems) {
+      return bookitems2BookData(bookitems);
+    }
+  }
 };
 </script>
 

@@ -79,7 +79,7 @@ const routes = [
     component: Contact
   },
   {
-    path: '/extendloan',
+    path: '/extendloan/:reservation_id',
     name: 'extendloan',
     component: ExtendLoan
   },

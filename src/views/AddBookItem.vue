@@ -26,11 +26,11 @@
       </div>
       <div class="input-box">
         <span>Date of Purchase:</span>
-        <input type="text" placeholder="" v-model="bookitem.date_of_purchase" />
+        <input type="date" placeholder="" v-model="bookitem.date_of_purchase" />
       </div>
       <div class="input-box">
         <span>Date add to lib:</span>
-        <input type="text" placeholder="" v-model="bookitem.date_added_to_library" />
+        <input type="date" placeholder="" v-model="bookitem.date_added_to_library" />
       </div>
 
       <div class="input-box">
@@ -75,6 +75,7 @@ export default {
         this.bookitem.book_id = parseInt(this.book_id);
         
         await this.$store.dispatch('bookitem/addBookItem', this.bookitem);
+        this.$router.push('/managebook');
 
         toastSuccess('Add bookitem successfully!');
       } catch(e) {

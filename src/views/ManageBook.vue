@@ -102,6 +102,10 @@ export default {
     }
     catch(e) {
       toastError(e);
+    } 
+    finally {
+      this.$store.dispatch('category/init');
+      this.$store.dispatch('department/init');
     }
   },
   methods: {

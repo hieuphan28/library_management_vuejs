@@ -10,7 +10,7 @@
                 ${{ bookInfo.rent_cost }}
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-6 book-left">
-                Only ({{ booksLeft }}) books left
+                Only ({{ bookLeft }}) books left
               </div>
             </div>
           </div>
@@ -35,16 +35,15 @@
                 <li>{{ bookInfo.author }}</li>
                 <li>{{ bookInfo.category?.category_name || bookInfo.category_name}}</li>
                 <li>{{ bookInfo.department?.department_name || bookInfo.department_name}}</li>
-                <li>{{ bookInfo.quantity }}</li>
+                <li>{{ bookQuantity }}</li>
                 <li>{{ bookInfo.publication_date }}</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <button class="btn" v-if="isMember">
-        <router-link to="/cart"
-          ><i class="fas fa-shopping-cart"></i> Add to cart</router-link>
+      <button class="btn" v-if="isMember" @click="AddToCart">
+        <i class="fas fa-shopping-cart"></i> Add to cart
       </button>
     </div>
   </div>
@@ -52,25 +51,47 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { toastError } from '../utilities/toast-util';
+import { toastError, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "BookProfies",
   props: ['book_id'],
   computed: {
+    ...mapGetters("user", ["currentUser", "isMember"]),
     ...mapGetters({
       getBookById: 'book/bookById',
+      bookItemQuantityByBookId: 'bookitem/bookItemQuantityByBookId',
+      bookItemAvailableByBookId: 'bookitem/bookItemAvailableByBookId',
     }),
-    ...mapGetters("user", ["currentUser", "isMember"]),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
+    },
+    bookQuantity() {
+      return this.bookItemQuantityByBookId(this.book_id);
+    },
+    bookLeft() {
+      return this.bookItemAvailableByBookId(this.book_id);
     }
   },
   async mounted() {
     try {
+      await this.$store.dispatch('bookitem/getBookItemByBookId', this.book_id);
       await this.$store.dispatch('book/getBookById', this.book_id);
-      await this.$store.dispatch('bookitem/countBookItemByBookId', this.bookInfo);
     } catch(e) {
       toastError(e);
+    }
+  },
+  methods: {
+    async AddToCart() {
+      try {
+        await this.$store.dispatch('reservation/addCurrentCartItem', {
+          book_id: this.book_id,
+        });
+
+        this.$store.dispatch('bookitem/getBookItemByBookId', this.book_id);
+        toastSuccess('Add item to cart successfully.');
+      } catch(e) {
+        toastError(e);
+      }
     }
   }
 };

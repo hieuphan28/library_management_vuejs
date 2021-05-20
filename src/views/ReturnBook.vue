@@ -16,117 +16,127 @@
       </div>
     </div>
 
-    <!-- TRANSACTION-INFO -->
-    <div class="reserveinfo">
-      <h1>RETURN BOOK</h1>
-      <div class="form">
+    <div v-for="reservation in returnReservations" :key="reservation.reservation_id">
+      <!-- TRANSACTION-INFO -->
+      <div class="reserveinfo">
+        <h1>RETURN BOOK</h1>
+        <div class="form">
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm- 6 col-6 name">
+              <div class="reid">Reservation ID:</div>
+              <div class="userI">UserID:</div>
+              <div class="usernam">Username:</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
+              <div class="reservationID">{{ reservation.reservation_id }}</div>
+              <div class="userID">{{ reservation.user_id }}</div>
+              <div class="username">{{ reservation.user?.username }}</div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-6 name">
+              <div class="reid">Date of Reservation:</div>
+              <div class="userI">Expected Return Date:</div>
+              <div class="usernam">Total Fee:</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
+              <div class="date-reserve">{{ reservation.reserved_time || 'null' }}</div>
+              <div class="date-return">{{ reservation.expected_return_date || 'null' }}</div>
+              <div class="totalfee">{{ reservation.total_fee }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONEY -->
+      <div class="money">
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm- 6 col-6 name">
-            <div class="reid">Reservation ID:</div>
-            <div class="userI">UserID:</div>
-            <div class="usernam">Username:</div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6 name">
+            <ul>
+              <li>Return Date:</li>
+              <li>Late:</li>
+              <li>Money Receive:</li>
+              <li>Money Exchange:</li>
+              <li>Fine:</li>
+            </ul>
+            <!-- <div class="deposit">Return Date:</div>
+            <div class="moneyr">Late:</div>
+            <div class="moneyr">Money Receive:</div>
+            <div class="moneyr">Money Exchange:</div>
+            <div class="moneyr">Fine:</div> -->
           </div>
-          <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
-            <div class="reservationID">{{ reservationID }}</div>
-            <div class="userID">{{ userID }}</div>
-            <div class="username">{{ username }}</div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
+            <ul>
+            <li> <input type="text" placeholder="" /></li>
+            <li> <input type="text" placeholder="" /></li>
+            <li> <input type="text" placeholder="" /></li>
+            <li> <input type="text" placeholder="" /></li>
+            <li> <input type="text" placeholder="" /></li>
+            
+            </ul>
+            
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-6 col-6 name">
-            <div class="reid">Date of Reservation:</div>
-            <div class="userI">Expected Return Date:</div>
-            <div class="usernam">Total Fee:</div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
-            <div class="date-reserve">{{ datereserve }}</div>
-            <div class="date-return">{{ datereturn }}</div>
-            <div class="totalfee">{{ totalfee }}</div>
-          </div>
+
+
         </div>
       </div>
-    </div>
 
-    <!-- MONEY -->
-    <div class="money">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6 name">
-          <ul>
-            <li>Return Date:</li>
-            <li>Late:</li>
-            <li>Money Receive:</li>
-            <li>Money Exchange:</li>
-            <li>Fine:</li>
-          </ul>
-          <!-- <div class="deposit">Return Date:</div>
-          <div class="moneyr">Late:</div>
-          <div class="moneyr">Money Receive:</div>
-          <div class="moneyr">Money Exchange:</div>
-          <div class="moneyr">Fine:</div> -->
+      <!-- BOOK RESERVED -->
+      <div class="book">
+        <div class="row title">
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2">BOOK ITEM ID</div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-4">NAME</div>
+          <div class="col-lg-2 col-md-2 col-sm-1 col-1">RENT COST</div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
+          <div class="col-lg-2 col-md-2 col-sm-1 col-1">TOTAL</div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
-          <ul>
-          <li> <input type="text" placeholder="" /></li>
-           <li> <input type="text" placeholder="" /></li>
-           <li> <input type="text" placeholder="" /></li>
-           <li> <input type="text" placeholder="" /></li>
-           <li> <input type="text" placeholder="" /></li>
+        <div
+          class="row info"
           
-          </ul>
-          
+        >
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
+            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+              {{ book.book_id }}
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
+            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+              {{ book.book_name }}
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-rentcost">
+            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+              {{ book.rent_cost }}
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
+            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+              {{ book.quantity }}
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-total">
+            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+              {{ book.total_rent_cost }}
+            </div>
+          </div>
         </div>
 
-
+        <button class="btn" @click="returnBook(reservation)">Return</button>
       </div>
-    </div>
-
-    <!-- BOOK RESERVED -->
-    <div class="book">
-      <div class="row title">
-        <div class="col-lg-2 col-md-2 col-sm-2 col-2">BOOK ITEM ID</div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-4">NAME</div>
-        <div class="col-lg-2 col-md-2 col-sm-1 col-1">RENT COST</div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
-        <div class="col-lg-2 col-md-2 col-sm-1 col-1">TOTAL</div>
-      </div>
-      <div
-        class="row info"
-        v-for="bookTransaction in bookTransactions"
-        :key="bookTransaction.id"
-      >
-        <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
-          <div v-for="bookInfo in bookTransaction.bookInfos" :key="bookInfo.id">
-            {{ bookInfo.bookitemiD }}
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-          <div v-for="bookInfo in bookTransaction.bookInfos" :key="bookInfo.id">
-            {{ bookInfo.book_name }}
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-rentcost">
-          <div v-for="bookInfo in bookTransaction.bookInfos" :key="bookInfo.id">
-            {{ bookInfo.rentcost }}
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-          <div v-for="bookInfo in bookTransaction.bookInfos" :key="bookInfo.id">
-            {{ bookInfo.quantity }}
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-total">
-          <div v-for="bookInfo in bookTransaction.bookInfos" :key="bookInfo.id">
-            {{ bookInfo.total }}
-          </div>
-        </div>
-      </div>
-
-      <button class="btn">Return</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { bookitems2BookData } from '../utilities/data-util';
+import { toastError, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "IssueBook",
+  computed: {
+    ...mapGetters({
+      issueReservations: 'reservation/issueReservations',
+      returnReservations: 'reservation/returnReservations',
+    })
+  },
   data() {
     return {
       reservationID: "12033",
@@ -139,7 +149,7 @@ export default {
       bookTransactions: [
         {
           id: 1,
-          bookInfos: [
+          books: [
             {
               book_id: 1,
               bookitemiD: "#0123456",
@@ -169,6 +179,24 @@ export default {
       ],
     };
   },
+  methods: {
+    preProcessBookItems(bookitems) {
+      return bookitems2BookData(bookitems);
+    },
+
+    async returnBook(reservation) {
+      try {
+        await this.$store.dispatch('reservation/returnReservation', reservation.reservation_id);
+
+        toastSuccess('Issue successfully.');
+      } catch(e) {
+        toastError(e);
+      }
+    }
+  },
+  mounted() {
+    this.$store.dispatch('reservation/getReturn');
+  }
 };
 </script>
 
@@ -231,6 +259,18 @@ export default {
   input::placeholder {
     color: rgba(0, 0, 0, 0.38);
     font-style: italic;
+  }
+}
+
+.main-title {
+  margin-top: 3%;
+  margin-left: 0;
+  h1 {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.54);
+    padding-bottom: 2%;
   }
 }
 

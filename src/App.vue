@@ -23,14 +23,11 @@ export default {
     Footer
   },
   store: store,
-  beforeMount: async function() {
-    try {
-      await this.$store.dispatch('user/checkAuth');
-      await this.$store.dispatch('category/init');
-      await this.$store.dispatch('department/init');
-    } catch(e) {
-      toastError(e);
-    }
+  beforeMount: function() {
+    this.$store.dispatch('user/checkAuth');
+    this.$store.dispatch('reservation/initCurrentReservations');
+    this.$store.dispatch('category/init');
+    this.$store.dispatch('department/init');
   }
 };
 </script>
