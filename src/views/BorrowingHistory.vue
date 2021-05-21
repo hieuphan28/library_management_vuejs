@@ -46,7 +46,7 @@
         class="col-lg-4 col-md-4 col-sm-4 col-4 book-extend d-flex"
         v-if="reservationItem.status == ReservationStatus.BORROWING"
       >
-        <button><router-link to="/extendloan">Extend Loan</router-link></button>
+        <button><router-link :to="`/extendloan/${reservationItem.reservation_id}`">Extend Loan</router-link></button>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
