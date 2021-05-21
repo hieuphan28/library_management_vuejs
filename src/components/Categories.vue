@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="department">
-      <div class="title">DEPARTMENT:</div>
+      <div class="title">DEPARTMENTS:</div>
       <div class="filter" v-for="department in departments" :key="department.id">
         <div class="department-name">
           <a :href="`/books?department=${department.department_id}`">{{ department.department_name }}</a>

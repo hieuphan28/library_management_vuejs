@@ -30,8 +30,8 @@
       </div>
       <div class="col-lg-5 col-md-5 col-sm-5 col-5 detail-right">
         TOTAL:
-        <div class="total-fee">${{ showTotalRentFee }}</div>
-        <button>Reserve</button>
+        <div class="total-fee">${{ currentCart.total_fee }}</div>
+        <button @click="startReserve">Reserve</button>
       </div>
     </div>
     <div class="row title">
@@ -42,30 +42,30 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">TOTAL</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1"></div>
     </div>
-    <div class="row info" v-for="(cart, index) in cart" :key="index">
+    <div class="row info" v-for="(book) in preProcessBookItems(currentCart.book_items)" :key="book.book_id">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">
         <div>
-          <img class="book-cover" src="../assets/book/gulliver.png" alt="" />
+          <img class="book-cover" :src="book.thumbnail" alt="" />
         </div>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-3 book-name">
         <div>
-          {{ cart.book_name }}
+          {{ book.book_name }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <input type="number" v-model="cart.quantity" />
+        <input type="number" v-model="book.quantity" @change="changeBookQuantity(book)" />
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-price">
         <div>
-          {{ cart.price }}
+          {{ book.rent_cost }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 total">
-        <div>{{ cart.total }}</div>
+        <div>{{ book.total_rent_cost }}</div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1 icon">
-        <button>
+        <button @click="clearReservationItem(book)">
           <img src="../assets/Bin.png" alt="" />
         </button>
       </div>
@@ -75,15 +75,71 @@
 
 <script>
 import moment from "moment";
+import { bookitems2BookData } from '../utilities/data-util';
+import { mapGetters } from 'vuex';
+import { toastError, toastSuccess } from '../utilities/toast-util';
 
 export default {
   name: "Carts",
-  data() {
-    return {
-      reservedDate: "",
-      returnedDate: "",
-      checkDate: false,
-    };
+  computed: {
+    ...mapGetters({
+      currentCart: 'reservation/currentCart'
+    })
+  },
+  methods: {
+    preProcessBookItems(bookitems) {
+      return bookitems2BookData(bookitems);
+    },
+
+    async changeBookQuantity(book) {
+      try {
+        const bookData = bookitems2BookData(this.currentCart.book_items);
+        const amount = book.quantity - bookData.find(item => `${item.book_id}` === `${book.book_id}`)?.quantity;
+
+        if (amount > 0) {
+          await this.$store.dispatch('reservation/addCurrentCartItem', {
+            book_id: book.book_id
+          });
+        }
+
+        if (amount < 0) {
+          await this.$store.dispatch('reservation/removeCurrentCartItem', {
+            book_id: book.book_id,
+            amount: Math.abs(amount)
+          });
+        }
+
+        if (amount == 0) return;
+
+        toastSuccess('Update successfully!');
+      } catch(e) {
+        throw toastError(e);
+      }
+    },
+
+    async clearReservationItem(book) {
+      try {
+
+        await this.$store.dispatch('reservation/removeCurrentCartItem', {
+            book_id: book.book_id,
+            amount: -1
+          });
+
+        toastSuccess('Update successfully!');
+      } catch(e) {
+        throw toastError(e);
+      }
+    },
+
+    async startReserve() {
+      try {
+        await this.$store.dispatch('reservation/borrow', this.currentCart.reservation_id);
+
+        toastSuccess('Request reserve successfully.');
+      } catch(e) {
+        toastError(e);
+      }
+    }
   },
 };
 </script>

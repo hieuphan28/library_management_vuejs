@@ -78,7 +78,7 @@
           </div>
           <div class="input-box">
             <span>Publication Date:</span>
-            <input type="text" placeholder="" v-model="book.publication_date" />
+            <input type="date" placeholder="" v-model="book.publication_date" />
           </div>
           <div class="input-box">
             <span>Price:</span>

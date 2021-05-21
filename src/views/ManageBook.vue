@@ -51,8 +51,8 @@
               <!-- <div class="quantity">{{ book.quantity }} book(s)</div> -->
             </div>
             <div class="button">
-              <button class="btn d-block">
-                <a @click="removeBook(book)"
+              <button @click="removeBook(book)" class="btn d-block">
+                <a
                   ><i class="fa fa-trash"></i>Delete
                 </a>
               </button>
@@ -102,6 +102,10 @@ export default {
     }
     catch(e) {
       toastError(e);
+    } 
+    finally {
+      this.$store.dispatch('category/init');
+      this.$store.dispatch('department/init');
     }
   },
   methods: {

@@ -103,12 +103,12 @@
         </div>
         <div class="input-box">
           <span>Date of Purchase:</span>
-          <input type="text" placeholder="" v-model="book.date_of_purchase" />
+          <input type="date" placeholder="" v-model="book.date_of_purchase" />
         </div>
         <div class="input-box">
           <span>Date add to lib:</span>
           <input
-            type="text"
+            type="date"
             placeholder=""
             v-model="book.date_added_to_library"
           />

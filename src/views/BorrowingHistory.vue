@@ -10,71 +10,86 @@
     </div>
     <div
       class="row info"
-      v-for="borrowHistory in borrowHistories"
-      :key="borrowHistory.id"
+      v-for="reservationItem in reservations"
+      :key="reservationItem.reservation_id"
     >
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 borrowingID">
-        <div>{{ borrowHistory.borrowId }}</div>
+        <div>{{ reservationItem.reservation_id }}</div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-        <div v-for="bookInfo in borrowHistory.bookInfos" :key="bookInfo.id">
-          {{ bookInfo.book_name }}
+        <div v-for="book in preProcessBookItems(reservationItem.book_items)" :key="book.book_id">
+          {{ book.book_name }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <div v-for="bookInfo in borrowHistory.bookInfos" :key="bookInfo.id">
-          {{ bookInfo.quantity }}
+        <div v-for="book in preProcessBookItems(reservationItem.book_items)" :key="book.book_id">
+          {{ book.quantity }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-price">
         <div>
-          {{ borrowHistory.price }}
+          {{ reservationItem.total_fee }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-status">
-        <div :class="borrowHistory.status">{{ borrowHistory.status }}</div>
+        <div :class="passEnumKey(reservationItem.status)">{{ passEnumKey(reservationItem.status) }}</div>
       </div>
 
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
-        v-if="borrowHistory.status == 'Borrowing'"
+        v-if="reservationItem.status == ReservationStatus.BORROWING"
       >
-        <div>Borrowed Date: {{ borrowHistory.borrowedDate }}</div>
-        <div>Expected Date: {{ borrowHistory.expectedDate }}</div>
+        <div>Borrowed Date: {{ reservationItem.borrowedDate }}</div>
+        <div>Expected Date: {{ reservationItem.expectedDate }}</div>
       </div>
       <div
         class="col-lg-4 col-md-4 col-sm-4 col-4 book-extend d-flex"
-        v-if="borrowHistory.status == 'Borrowing'"
+        v-if="reservationItem.status == ReservationStatus.BORROWING"
       >
-        <button><router-link to="/extendloan">Extend Loan</router-link></button>
+        <button><router-link :to="`/extendloan/${reservationItem.reservation_id}`">Extend Loan</router-link></button>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
-        v-if="borrowHistory.status == 'Finished'"
+        v-if="reservationItem.status == ReservationStatus.CLOSED"
       >
-        <div>Borrowed Date: {{ borrowHistory.borrowedDate }}</div>
-        <div>Returned Date: {{ borrowHistory.returnedDate }}</div>
+        <div>Borrowed Date: {{ reservationItem.borrowedDate }}</div>
+        <div>Returned Date: {{ reservationItem.returnedDate }}</div>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
-        v-if="borrowHistory.status == 'Reserved'"
+        v-if="reservationItem.status == ReservationStatus.RESERVED"
       >
-        <div>Reserved Date: {{ borrowHistory.reservedDate }}</div>
+        <div>Reserved Date: {{ reservationItem.reservedDate }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import { toastError, toastSuccess } from '../utilities/toast-util';
+import { ReservationStatus } from '../common/bundleOfEnum'
+import { bookitems2BookData, getEnumKeyWithValue } from '../utilities/data-util'
+
 export default {
   name: "BorrowingHistory",
+  computed: {
+    ...mapGetters({
+      reservations: 'reservation/currentReservations'
+    })
+    // reservations() {
+    //   return this.currentReservation() || []
+    // },
+  },
+
   data() {
     return {
+      ReservationStatus,
       borrowHistories: [
         {
           id: 1,
           borrowId: "#0123456",
-          bookInfos: [
+          bookitems: [
             { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
             { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
             { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
@@ -89,7 +104,7 @@ export default {
         {
           id: 2,
           borrowId: "#7654321",
-          bookInfos: [
+          bookitems: [
             { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
             { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
             { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
@@ -107,7 +122,7 @@ export default {
         {
           id: 3,
           borrowId: "#7654321",
-          bookInfos: [
+          bookitems: [
             { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
             { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
             { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
@@ -122,6 +137,18 @@ export default {
       ],
     };
   },
+  mounted() {
+
+  },
+  methods: {
+    passEnumKey(status) {
+      return getEnumKeyWithValue(ReservationStatus, status)
+    },
+
+    preProcessBookItems(bookitems) {
+      return bookitems2BookData(bookitems);
+    }
+  }
 };
 </script>
 
@@ -178,7 +205,7 @@ export default {
     }
     .book-status {
     }
-    .Borrowing {
+    .BORROWING {
       background: #fdffae;
       border-radius: 18px;
       padding: 0.5rem 0.5rem;
@@ -186,7 +213,7 @@ export default {
       margin-left: auto;
       margin-right: auto;
     }
-    .Finished {
+    .CLOSED {
       background: rgba(135, 255, 115, 0.7);
       border-radius: 18px;
       padding: 0.5rem 0.5rem;
@@ -194,7 +221,7 @@ export default {
       margin-left: auto;
       margin-right: auto;
     }
-    .Reserved {
+    .RESERVED {
       background: #ff9494 50%;
       border-radius: 18px;
       padding: 0.5rem 0.5rem;

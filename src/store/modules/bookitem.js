@@ -1,3 +1,5 @@
+import { BookStatus } from '../../common/bundleOfEnum';
+import LibException from '../../exceptions/lib-exception';
 import * as bookItemService from '../../services/bookitem-service';
 
 const state = () => ({
@@ -14,6 +16,15 @@ const getters = {
     bookItemByBookId: (state, getters) => (book_id) => {
         return state.data.filter(x => `${x.book_id}` === `${book_id}`);
     },
+
+    bookItemQuantityByBookId: (state, getters) => book_id => {
+        return getters.bookItemByBookId(book_id).length;
+    },
+
+    bookItemAvailableByBookId: (state, getters) => book_id => {
+        return getters.bookItemByBookId(book_id)
+            .filter(x => `${x.status}` === `${BookStatus.AVAILABLE}`).length;
+    },
 }
 
 const actions = {
@@ -28,12 +39,14 @@ const actions = {
 
     async getBookItemByBookId({state, commit}, book_id) {
         const data = await bookItemService.getBookItemByBookId(book_id);
-        commit('addBulkBookItem', data);
+        data.forEach(item => {
+            commit('upsertBookItem', item);
+        });
     },
 
     async addBookItem({state, commit}, bookitem) {
         const data = await bookItemService.addBookItem(bookitem);
-        commit('addBookItem', data);
+        commit('upsertBookItem', data);
     },
 
     async updateBookItem({state, commit}, bookitem) {
@@ -42,22 +55,14 @@ const actions = {
     }, 
 
     async removeBookItem({state, commit}, bookitem) {
+        if (`${bookitem?.status}` !== `${BookStatus.AVAILABLE}`)
+            throw new LibException('This bookitem is in used');
         const data = await bookItemService.removeBookItem(bookitem);
         commit('removeBookItem', bookitem);
     }
 }
 
 const mutations = {
-    addBookItem(state, bookitem) {
-        state.data.push(bookitem);
-    },
-
-    addBulkBookItem(state, bookitems) {
-        bookitems.forEach(item => {
-            state.data.push(item);
-        });
-    },
-
     upsertBookItem(state, bookitem) {
         const existIndex = state.data.findIndex(x => x.book_item_id === bookitem.book_item_id);
         (existIndex !== -1) && (state.data[existIndex] = bookitem)
