@@ -2,6 +2,11 @@ const getEnumKeyWithValue = (obj, value) => {
   return getEnumKeys(obj)[value + 1];
 }
 
+/**
+ * Return list keys of Enum. Eg: getEnumKeys(BookStatus) =>  ['AVAILABLE', 'LOST', 'NOT_AVAILABLE', 'UNDEFIED']
+ * @param {any} obj Enum object in javascript
+ * @returns List of enum key. 
+ */
 const getEnumKeys = (obj) => {
   return obj && Object.keys(obj) || [];
 }
