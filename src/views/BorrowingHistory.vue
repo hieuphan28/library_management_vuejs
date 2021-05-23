@@ -17,12 +17,12 @@
         <div>{{ reservationItem.reservation_id }}</div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-        <div v-for="book in preProcessBookItems(reservationItem.book_items)" :key="book.book_id">
+        <div v-for="book in reservationItem.book_items_sum" :key="book.book_id">
           {{ book.book_name }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <div v-for="book in preProcessBookItems(reservationItem.book_items)" :key="book.book_id">
+        <div v-for="book in reservationItem.book_items_sum" :key="book.book_id">
           {{ book.quantity }}
         </div>
       </div>
@@ -39,9 +39,9 @@
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="reservationItem.status == ReservationStatus.BORROWING"
       >
-        <div>Borrowed Date: {{ reservationItem.borrowedDate }}</div>
-        <div>Expected Date: {{ reservationItem.expectedDate }}</div>
-      </div>
+        <div>Borrowed Date: {{ reservationItem.reserved_time }}</div>
+        <div>Expected Date: {{ reservationItem.expected_return_date }}</div>
+      </div>  
       <div
         class="col-lg-4 col-md-4 col-sm-4 col-4 book-extend d-flex"
         v-if="reservationItem.status == ReservationStatus.BORROWING"
@@ -52,14 +52,14 @@
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="reservationItem.status == ReservationStatus.CLOSED"
       >
-        <div>Borrowed Date: {{ reservationItem.borrowedDate }}</div>
-        <div>Returned Date: {{ reservationItem.returnedDate }}</div>
+        <div>Borrowed Date: {{ reservationItem.reserved_time }}</div>
+        <div>Returned Date: {{ reservationItem.returned_date }}</div>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="reservationItem.status == ReservationStatus.RESERVED"
       >
-        <div>Reserved Date: {{ reservationItem.reservedDate }}</div>
+        <div>Reserved Date: {{ reservationItem.reserved_time }}</div>
       </div>
     </div>
   </div>
@@ -144,10 +144,6 @@ export default {
     passEnumKey(status) {
       return getEnumKeyWithValue(ReservationStatus, status)
     },
-
-    preProcessBookItems(bookitems) {
-      return bookitems2BookData(bookitems);
-    }
   }
 };
 </script>

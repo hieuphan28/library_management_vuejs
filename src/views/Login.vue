@@ -69,6 +69,7 @@ export default {
         toastError(e);
       }
     },
+
     myFunction() {
       var x = document.getElementById("myInput");
       if (x.type === "password") {
@@ -77,6 +78,10 @@ export default {
         x.type = "password";
       }
     },
+  },
+  mounted() {
+    if (this.currentUser && this.currentUser.token)
+        this.$router.push('/');
   },
 };
 </script>

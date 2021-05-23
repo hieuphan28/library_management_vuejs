@@ -1,5 +1,6 @@
 import { ReservationStatus } from "../../common/bundleOfEnum";
 import * as reservationService from "../../services/reservation-service";
+import { bookitems2BookData, preProcessReservation } from "../../utilities/data-util";
 
 const state = () => ({
     data: [],
@@ -9,11 +10,11 @@ const sortByDate = (a,b) => new Date(b.create_date) - new Date(a.create_date);
 
 const getters = {
     reservations: (state, getters, rootGetters) => {
-        return state.data;
+        return (state.data || []).map(item => preProcessReservation(item));
     },
 
     reservationByStatus: (state, getters) => status => {
-        return state.data
+        return getters.reservations
         .filter(item => `${item.status}` === `${status}`)
         .sort(sortByDate);
     },
@@ -25,7 +26,7 @@ const getters = {
     },
 
     reservationByUserId: (state, getters) => (user_id) => {
-        return state.data
+        return getters.reservations
             .filter(item => `${item.user_id}` === `${user_id}`)
             .filter(item => `${item.status}` !== `${ReservationStatus.TEMP}`)
             .sort(sortByDate);
@@ -57,12 +58,12 @@ const getters = {
     // Admin
 
     issueReservations: (state, getters) => {
-        return getters.reservationByStatus(ReservationStatus.BORROWING);
+        return getters.reservationByStatus(ReservationStatus.RESERVED);
     },
 
     returnReservations: (state, getters) => {
-        return getters.reservationByStatus(ReservationStatus.RESERVED);
-    }
+        return getters.reservationByStatus(ReservationStatus.BORROWING);
+    },
 }
 
 const actions = {
@@ -101,8 +102,8 @@ const actions = {
         commit('upsertReservation', result);
     },
 
-    async borrow({state, commit, rootGetters}, reservation_id) {
-        const result = await reservationService.borrow(reservation_id);
+    async borrow({state, commit, rootGetters}, reservation) {
+        const result = await reservationService.borrow(reservation);
 
         commit('upsertReservation', result);
     },
@@ -131,8 +132,8 @@ const actions = {
         }); 
     },
 
-    async returnReservation({state, commit}, reservation_id) {
-        const result = await reservationService.returnReservation(reservation_id)
+    async returnReservation({state, commit}, reservation) {
+        const result = await reservationService.returnReservation(reservation)
 
         commit('upsertReservation', result);
     }

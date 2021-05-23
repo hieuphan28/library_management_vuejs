@@ -14,8 +14,8 @@ const BookStatus = {
 const ReservationStatus = {
     UNDEFINED: -1,
     TEMP: 0,
-    BORROWING: 1,
-    RESERVED: 2,
+    RESERVED: 1,
+    BORROWING: 2,
     CLOSED: 3,
     CANCELED: 4,
 }

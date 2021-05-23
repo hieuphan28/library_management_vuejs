@@ -18,12 +18,12 @@
         <div>{{ reservation.reservation_id }}</div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-        <div v-for="bookInfo in preProcessBookItems(reservation.book_items)" :key="bookInfo.book_id">
+        <div v-for="bookInfo in reservation.book_items_sum" :key="bookInfo.book_id">
           {{ bookInfo.book_name }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <div v-for="bookInfo in preProcessBookItems(reservation.book_items)" :key="bookInfo.book_id">
+        <div v-for="bookInfo in reservation.book_items_sum" :key="bookInfo.book_id">
           {{ bookInfo.quantity }}
         </div>
       </div>
@@ -80,7 +80,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { ReservationStatus } from '../common/bundleOfEnum';
-import { bookitems2BookData, getEnumKeyWithValue } from '../utilities/data-util';
+import { getEnumKeyWithValue } from '../utilities/data-util';
 export default {
   name: "ExtendLoan",
   computed: {
@@ -133,10 +133,6 @@ export default {
   methods: {
     passEnumKey(status) {
       return getEnumKeyWithValue(ReservationStatus, status)
-    },
-
-    preProcessBookItems(bookitems) {
-      return bookitems2BookData(bookitems);
     }
   }
 };
