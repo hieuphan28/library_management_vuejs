@@ -1,14 +1,13 @@
 <template>
   <div class="container">
     <div class="row cart-details">
-      <div class="col-lg-3 col-md-3 col-sm-3 col-3 detail-left">
+      <div class="col-lg-3 col-md-3 col-sm-6 col-6 detail-left">
         <ul>
           <li>Reserved Date:</li>
           <li>Expected Return Date :</li>
-          <li>Expected Return Date :</li>
         </ul>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
+      <div class="col-lg-4 col-md-4 col-sm-6 col-6 detail-middle">
         <ul>
           <li>
             <input type="date" v-model="reserved_time" />
@@ -28,7 +27,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-lg-5 col-md-5 col-sm-5 col-5 detail-right">
+      <div class="col-lg-5 col-md-5 col-sm-12 col-12 detail-right">
         TOTAL:
         <div class="total-fee">${{ currentCart.total_fee }}</div>
         <button @click="startReserve">Reserve</button>
@@ -159,6 +158,7 @@ export default {
       ul {
         li {
           padding: 5% 0 5% 0;
+          font-weight: bold ;
         }
       }
     }
@@ -173,7 +173,7 @@ export default {
       font-weight: 600;
       display: flex;
       align-items: center;
-      text-align: right;
+      text-align: right;  
       .total-fee {
         padding: 0 0 0 60px;
         border: none;

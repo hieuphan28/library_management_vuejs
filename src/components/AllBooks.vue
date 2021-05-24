@@ -191,21 +191,23 @@
         </div>
       </div>
     </div>
-    <div id="allbook">
-      <button class="btn d-block">
-                 <router-link to="/books">All Books</router-link>
-      </button>
-     
+
+    <div class="wrapper">
+      <div class="allbook">
+        <router-link to="/books"
+          ><button class="btn d-block">All Books</button>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   name: "AllBooks",
   computed: {
-    ...mapGetters('book', ['allBooks'])
-  }
+    ...mapGetters("book", ["allBooks"]),
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -327,33 +329,30 @@ h2 b {
 .carousel-indicators li.active {
   background: rgba(0, 0, 0, 0.6);
 }
-#allbook {
+
+.wrapper {
+  margin: 5% 0%;
   text-align: center;
-  margin: 2%;
-  font-weight: bold;
-  text-decoration: underline;
-  cursor: pointer;
-}
+  .allbook {
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    a {
+      text-decoration: none;
+    }
 
-
-button {
-  margin-top: 7%;
-  width: 100px;
-  background: #ecd4b4;
-  border: 1px solid #b7b7b7;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
-  margin-left: 45%;
-  text-decoration: none;
-  a{
-    color: rgba(0, 0, 0, 0.54);
-    text-decoration: none;
-    text-align: center;
+    button {
+      background: #ecd4b4;
+      border: 1px solid #b7b7b7;
+      box-sizing: border-box;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.54);
+    }
+    button:hover {
+      background: #ffe5c3;
+    }
   }
-}
-
-button:hover {
-  background: #ffe5c3;
 }
 </style>
