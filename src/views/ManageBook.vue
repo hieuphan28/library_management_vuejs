@@ -52,21 +52,20 @@
             </div>
             <div class="button">
               <button @click="removeBook(book)" class="btn d-block">
-                <a
-                  ><i class="fa fa-trash"></i>Delete
-                </a>
+                <a><i class="fa fa-trash"></i>Delete </a>
               </button>
-              <button class="btn d-block">
-                <router-link :to="{ path: '/updatebook/' + book.book_id }"
-                  ><i class="fa fa-list" aria-hidden="true"></i>Edit
-                </router-link>
-              </button>
-              <button class="btn d-block">
-                <router-link :to="`/addbookitem/${book.book_id}`"
-                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book
-                  Item</router-link
-                >
-              </button>
+              <router-link :to="{ path: '/updatebook/' + book.book_id }">
+                <button class="btn d-block">
+                  <a> <i class="fa fa-list" aria-hidden="true"></i>Edit </a>
+                </button>
+              </router-link>
+              <router-link :to="`/addbookitem/${book.book_id}`">
+                <button class="btn d-block">
+                  <a>
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Book Item
+                  </a>
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -82,7 +81,7 @@ export default {
   name: "ManageBook",
   computed: {
     ...mapGetters({
-      localSearch: 'book/search',
+      localSearch: "book/search",
     }),
     books: function() {
       return this.bookData;
@@ -92,28 +91,26 @@ export default {
     return {
       searchText: undefined,
       bookData: undefined,
-    }
+    };
   },
   async mounted() {
     try {
-      this.bookData = this.$store.getters['book/books'];
-      await this.$store.dispatch('book/init');
-      this.bookData = this.$store.getters['book/books'];
-    }
-    catch(e) {
+      this.bookData = this.$store.getters["book/books"];
+      await this.$store.dispatch("book/init");
+      this.bookData = this.$store.getters["book/books"];
+    } catch (e) {
       toastError(e);
-    } 
-    finally {
-      this.$store.dispatch('category/init');
-      this.$store.dispatch('department/init');
+    } finally {
+      this.$store.dispatch("category/init");
+      this.$store.dispatch("department/init");
     }
   },
   methods: {
     async removeBook(book) {
       try {
         await this.$store.dispatch("book/removeBook", book);
-        this.bookData = this.$store.getters['book/books'];
-        
+        this.bookData = this.$store.getters["book/books"];
+
         toastSuccess("Remove book successfully.");
       } catch (e) {
         toastError(e);
@@ -121,11 +118,11 @@ export default {
     },
     search() {
       this.bookData = this.localSearch(this.searchText);
-    }
+    },
   },
   watch: {
-    searchText: 'search' 
-  }
+    searchText: "search",
+  },
 };
 </script>
 
@@ -138,7 +135,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-   img {
+  img {
     flex-shrink: 15;
     min-width: 100%;
     min-height: 100%;
@@ -149,7 +146,13 @@ export default {
     margin: 0;
   }
 }
-
+.head {
+  a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.38);
+    float: left;
+  }
+}
 .head {
   margin-top: 5%;
   button {
