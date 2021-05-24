@@ -77,64 +77,11 @@ export default {
     ...mapGetters({
       reservations: 'reservation/currentReservations'
     })
-    // reservations() {
-    //   return this.currentReservation() || []
-    // },
   },
 
   data() {
     return {
       ReservationStatus,
-      borrowHistories: [
-        {
-          id: 1,
-          borrowId: "#0123456",
-          bookitems: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$60",
-          status: "Borrowing",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-        {
-          id: 2,
-          borrowId: "#7654321",
-          bookitems: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 4, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 5, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 6, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$90",
-          status: "Finished",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-        {
-          id: 3,
-          borrowId: "#7654321",
-          bookitems: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$90",
-          status: "Reserved",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-      ],
     };
   },
   mounted() {

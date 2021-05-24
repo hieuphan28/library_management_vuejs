@@ -28,7 +28,8 @@ const preProcessReservation = (reservation) => {
     }
   });
 
-  const totalRentFee = bookData.reduce((x, item) => x + (item?.total_rent_cost || 0), 0);
+  const totalRentFee = reservation.total_fee 
+    || bookData.reduce((x, item) => x + (item?.total_rent_cost || 0), 0);
   let deposit = undefined;
   if (totalRentFee <= 50)
     deposit = totalRentFee * 2;
@@ -39,7 +40,7 @@ const preProcessReservation = (reservation) => {
   else
     deposit = totalRentFee * 10;
   
-  reservation.total_rent_fee = totalRentFee;
+  reservation.total_fee = totalRentFee;
   reservation.deposit = deposit;
   reservation.receive_money = deposit + totalRentFee;
   reservation.book_items_sum = bookData;
@@ -49,7 +50,7 @@ const preProcessReservation = (reservation) => {
 
 const getFineDateLate = (reservation) => {
   const dateLate = reservation && reservation.date_late || 0;
-  const totalFee = reservation.total_rent_fee || 0;
+  const totalFee = reservation.total_fee || 0;
   
   if (!dateLate) return 0;
 

@@ -80,6 +80,12 @@ const returnReservation = async (reservation) => {
     return handleResponse(res);
 }
 
+const extendReservation = async (reservation) => {
+    const res = await axios.post(`${apiPrefix}/reservation/extend`, reservation);
+
+    return handleResponse(res);
+}
+
 
 export {
     getReservations,
@@ -91,4 +97,5 @@ export {
     issueReservation,
     getReturn,
     returnReservation,
+    extendReservation,
 }

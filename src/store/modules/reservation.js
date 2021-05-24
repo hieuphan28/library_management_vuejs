@@ -108,6 +108,12 @@ const actions = {
         commit('upsertReservation', result);
     },
 
+    async extend({state, commit}, reservation) {
+        const result = await reservationService.extendReservation(reservation);
+
+        commit('upsertReservation', result);
+    },
+
     // admin
 
     async getIssue({state, commit}) {
