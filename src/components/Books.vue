@@ -20,7 +20,7 @@
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 fee">
             {{ item.rent_cost + '$' }}
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-6"  v-if="isMember">
             <i class="fas fa-shopping-cart"> </i>
           </div>
         </div>
@@ -32,13 +32,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import { toastError } from '../utilities/toast-util.js';
-
+import { UserRole } from "../common/bundleOfEnum";
 export default {
   name: "Books",
   computed: {
     ...mapGetters({
       books: 'book/books'
-    })
+    }),
+    ...mapGetters("user", ["isMember"]),
   },
   data() {
     return {

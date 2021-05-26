@@ -1,8 +1,15 @@
 <template>
   <div class="container">
-    <form class="add-item-form" action="" method="" @submit.prevent="addBookItem">
+    <form
+      class="add-item-form"
+      action=""
+      method=""
+      @submit.prevent="addBookItem"
+    >
       <div class="row back">
-        <router-link to="/managebook"><i class="fa fa-arrow-left" aria-hidden="true"></i></router-link>
+        <router-link to="/managebook"
+          ><i class="fa fa-arrow-left" aria-hidden="true"></i
+        ></router-link>
       </div>
 
       <div class="row title">
@@ -30,7 +37,11 @@
       </div>
       <div class="input-box">
         <span>Date add to lib:</span>
-        <input type="date" placeholder="" v-model="bookitem.date_added_to_library" />
+        <input
+          type="date"
+          placeholder=""
+          v-model="bookitem.date_added_to_library"
+        />
       </div>
 
       <div class="input-box">
@@ -39,7 +50,11 @@
       </div>
       <div class="input-box">
         <span>Status:</span>
-        <input type="text" placeholder="" v-model="bookitem.status" />
+        <select v-model="bookStatusSelected">
+          <option v-for="(option, index) in testMapping()" :key="index">
+            {{ option }}
+          </option>
+        </select>
       </div>
       <div class="row bt">
         <button class="btn">
@@ -51,43 +66,53 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { toastError, toastSuccess } from '../utilities/toast-util';
+import { mapGetters } from "vuex";
+import { toastError, toastSuccess } from "../utilities/toast-util";
+import { getEnumKeys } from "../utilities/data-util";
+import { BookStatus } from "../common/bundleOfEnum";
+
 export default {
   name: "AddBookItem",
   data() {
     return {
       book_id: this.$route.params.book_id,
       bookitem: {},
+      bookStatusSelected: undefined,
+      BookStatus,
     };
   },
   computed: {
     ...mapGetters({
-      getBookById: 'book/bookById',
+      getBookById: "book/bookById",
     }),
     bookInfo() {
       return this.getBookById(this.book_id) || {};
-    }
+    },
   },
   methods: {
     async addBookItem() {
       try {
         this.bookitem.book_id = parseInt(this.book_id);
         
-        await this.$store.dispatch('bookitem/addBookItem', this.bookitem);
-        this.$router.push('/managebook');
 
-        toastSuccess('Add bookitem successfully!');
-      } catch(e) {
+        await this.$store.dispatch("bookitem/addBookItem", this.bookitem);
+        this.$router.push("/managebook");
+
+        toastSuccess("Add bookitem successfully!");
+      } catch (e) {
         toastError(e);
       }
+    },
+
+    testMapping() {
+      return getEnumKeys(BookStatus);
     }
   },
   mounted() {
     if (!this.bookInfo.book_name) {
-      this.$store.dispatch('book/getBookById', this.book_id);
-    } 
-  }
+      this.$store.dispatch("book/getBookById", this.book_id);
+    }
+  },
 };
 </script>
 
@@ -118,7 +143,6 @@ export default {
       width: 80%;
       height: 90px;
       background-color: rgba(0, 0, 0, 0.1);
-      
     }
   }
 }
@@ -159,6 +183,17 @@ export default {
 .add-item-form .input-box input {
   /* border: none; */
   width: 50%;
+  margin-right: 10%;
+  float: right;
+  font-size: medium;
+  background: #fafafa;
+  border: 1px solid #cecece;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 0.5% 0 0.5% 2%;
+}
+.input-box select{
+   width: 50%;
   margin-right: 10%;
   float: right;
   font-size: medium;
