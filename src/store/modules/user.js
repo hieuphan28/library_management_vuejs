@@ -37,7 +37,7 @@ const actions = {
     },
 
     async registerAdmin({state, commit}, user) {
-        const data = await userService.register(user);
+        const data = await userService.registerAdmin(user);
         
         commit('setCurrentUser', data);
     },
