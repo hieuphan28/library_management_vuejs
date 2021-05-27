@@ -51,22 +51,36 @@
               <!-- <div class="quantity">{{ book.quantity }} book(s)</div> -->
             </div>
             <div class="button">
-              <button @click="removeBook(book)" class="btn d-block">
-                <a
-                  ><i class="fa fa-trash"></i>Delete
-                </a>
+              <button @click="openPopup(book)" class="btn d-block">
+                <a><i class="fa fa-trash"></i>Delete </a>
               </button>
-              <button class="btn d-block">
-                <router-link :to="{ path: '/updatebook/' + book.book_id }"
-                  ><i class="fa fa-list" aria-hidden="true"></i>Edit
-                </router-link>
-              </button>
-              <button class="btn d-block">
-                <router-link :to="`/addbookitem/${book.book_id}`"
-                  ><i class="fa fa-plus" aria-hidden="true"></i>Add Book
-                  Item</router-link
-                >
-              </button>
+              <div class="form-popup" id="myPopup">
+                <form action="/action_page.php" class="form-container">
+                  <p>Are you sure you want to delete this book?</p>
+                  <button type="submit" class="btn" @click="removeBook(book)">
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    class="btn cancel"
+                    @click="closePopup(book)"
+                  >
+                    No
+                  </button>
+                </form>
+              </div>
+              <router-link :to="{ path: '/updatebook/' + book.book_id }">
+                <button class="btn d-block">
+                  <a> <i class="fa fa-list" aria-hidden="true"></i>Edit </a>
+                </button>
+              </router-link>
+              <router-link :to="`/addbookitem/${book.book_id}`">
+                <button class="btn d-block">
+                  <a>
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Book Item
+                  </a>
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -82,7 +96,7 @@ export default {
   name: "ManageBook",
   computed: {
     ...mapGetters({
-      localSearch: 'book/search',
+      localSearch: "book/search",
     }),
     books: function() {
       return this.bookData;
@@ -92,40 +106,45 @@ export default {
     return {
       searchText: undefined,
       bookData: undefined,
-    }
+    };
   },
   async mounted() {
     try {
-      this.bookData = this.$store.getters['book/books'];
-      await this.$store.dispatch('book/init');
-      this.bookData = this.$store.getters['book/books'];
-    }
-    catch(e) {
+      this.bookData = this.$store.getters["book/books"];
+      await this.$store.dispatch("book/init");
+      this.bookData = this.$store.getters["book/books"];
+    } catch (e) {
       toastError(e);
-    } 
-    finally {
-      this.$store.dispatch('category/init');
-      this.$store.dispatch('department/init');
+    } finally {
+      this.$store.dispatch("category/init");
+      this.$store.dispatch("department/init");
     }
   },
   methods: {
     async removeBook(book) {
       try {
         await this.$store.dispatch("book/removeBook", book);
-        this.bookData = this.$store.getters['book/books'];
-        
+        this.bookData = this.$store.getters["book/books"];
+        document.getElementById("myPopup").style.display = "none";
         toastSuccess("Remove book successfully.");
       } catch (e) {
+        document.getElementById("myPopup").style.display = "none";
         toastError(e);
       }
     },
     search() {
       this.bookData = this.localSearch(this.searchText);
-    }
+    },
+    openPopup(book) {
+      document.getElementById("myPopup").style.display = "block";
+    },
+    closePopup() {
+      document.getElementById("myPopup").style.display = "none";
+    },
   },
   watch: {
-    searchText: 'search' 
-  }
+    searchText: "search",
+  },
 };
 </script>
 
@@ -138,7 +157,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-   img {
+  img {
     flex-shrink: 15;
     min-width: 100%;
     min-height: 100%;
@@ -149,7 +168,13 @@ export default {
     margin: 0;
   }
 }
-
+.head {
+  a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.38);
+    float: left;
+  }
+}
 .head {
   margin-top: 5%;
   button {
@@ -254,5 +279,33 @@ export default {
 
 button:hover {
   background: #ffe5c3;
+}
+
+//POPUP
+.form-popup {
+  background-color: #ffff;
+  text-align: center;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  width: 450px;
+  padding: 3rem 3rem 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.form-popup form p {
+  text-align: center;
+  font-size: 120%;
+  font-weight: bold;
+}
+.form-popup button {
+  margin-right: 1rem;
+  text-align: center;
+  padding: 0.4rem 0 !important;
+  color: rgba(0, 0, 0, 0.7);
 }
 </style>

@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as appManager from '../infrastructure/app-manager';
-import { handleResponse } from '../infrastructure/app-handle'; 
+import {
+    handleResponse
+} from '../infrastructure/app-handle';
 
 const apiPrefix = appManager.getApiPrefix();
 
@@ -9,7 +11,11 @@ const addBook = async (book) => {
     return handleResponse(res);
 }
 
-const searchBook = async ({query, skip, limit}) => {
+const searchBook = async ({
+    query,
+    skip,
+    limit
+}) => {
     const res = await axios.get(`${apiPrefix}/book`, {
         params: {
             q: query,

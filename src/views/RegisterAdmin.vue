@@ -93,7 +93,7 @@ export default {
           dob: this.dob,
           address: this.address,
         });
-        
+        this.$router.push("/login");
         toastSuccess("Register successfully");
       } catch (e) {
         toastError(e);

@@ -95,6 +95,7 @@ export default {
         });
 
         toastSuccess("Register Successfully!");
+        this.$router.push("/login");
       } catch (e) {
         toastError(e);
       }
