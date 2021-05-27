@@ -17,12 +17,12 @@
         <div>{{ reservationItem.reservation_id }}</div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-        <div v-for="book in preProcessBookItems(reservationItem.book_items)" :key="book.book_id">
+        <div v-for="book in reservationItem.book_items_sum" :key="book.book_id">
           {{ book.book_name }}
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-        <div v-for="book in preProcessBookItems(reservationItem.book_items)" :key="book.book_id">
+        <div v-for="book in reservationItem.book_items_sum" :key="book.book_id">
           {{ book.quantity }}
         </div>
       </div>
@@ -39,9 +39,9 @@
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="reservationItem.status == ReservationStatus.BORROWING"
       >
-        <div>Borrowed Date: {{ reservationItem.borrowedDate }}</div>
-        <div>Expected Date: {{ reservationItem.expectedDate }}</div>
-      </div>
+        <div>Borrowed Date: {{ reservationItem.reserved_time }}</div>
+        <div>Expected Date: {{ reservationItem.expected_return_date }}</div>
+      </div>  
       <div
         class="col-lg-4 col-md-4 col-sm-4 col-4 book-extend d-flex"
         v-if="reservationItem.status == ReservationStatus.BORROWING"
@@ -52,14 +52,14 @@
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="reservationItem.status == ReservationStatus.CLOSED"
       >
-        <div>Borrowed Date: {{ reservationItem.borrowedDate }}</div>
-        <div>Returned Date: {{ reservationItem.returnedDate }}</div>
+        <div>Borrowed Date: {{ reservationItem.reserved_time }}</div>
+        <div>Returned Date: {{ reservationItem.returned_date }}</div>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
         v-if="reservationItem.status == ReservationStatus.RESERVED"
       >
-        <div>Reserved Date: {{ reservationItem.reservedDate }}</div>
+        <div>Reserved Date: {{ reservationItem.reserved_time }}</div>
       </div>
     </div>
   </div>
@@ -77,64 +77,11 @@ export default {
     ...mapGetters({
       reservations: 'reservation/currentReservations'
     })
-    // reservations() {
-    //   return this.currentReservation() || []
-    // },
   },
 
   data() {
     return {
       ReservationStatus,
-      borrowHistories: [
-        {
-          id: 1,
-          borrowId: "#0123456",
-          bookitems: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$60",
-          status: "Borrowing",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-        {
-          id: 2,
-          borrowId: "#7654321",
-          bookitems: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 4, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 5, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 6, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$90",
-          status: "Finished",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-        {
-          id: 3,
-          borrowId: "#7654321",
-          bookitems: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$90",
-          status: "Reserved",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-      ],
     };
   },
   mounted() {
@@ -144,10 +91,6 @@ export default {
     passEnumKey(status) {
       return getEnumKeyWithValue(ReservationStatus, status)
     },
-
-    preProcessBookItems(bookitems) {
-      return bookitems2BookData(bookitems);
-    }
   }
 };
 </script>

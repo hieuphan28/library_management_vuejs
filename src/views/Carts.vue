@@ -11,18 +11,18 @@
       <div class="col-lg-4 col-md-4 col-sm-4 col-4 detail-middle">
         <ul>
           <li>
-            <input type="date" v-model="reservedDate" />
-            <span v-if="Date.now() < new Date(reservedDate)">Valid Date</span>
-            <span v-if="Date.now() >= new Date(reservedDate)"
+            <input type="date" v-model="reserved_time" />
+            <span v-if="Date.now() < new Date(reserved_time)">Valid Date</span>
+            <span v-if="Date.now() >= new Date(reserved_time)"
               >Invalid Date! Please re-input</span
             >
           </li>
           <li>
-            <input type="date" v-model="returnedDate" />
-            <span v-if="new Date(reservedDate) < new Date(returnedDate)"
+            <input type="date" v-model="expected_return_date" />
+            <span v-if="new Date(reserved_time) < new Date(expected_return_date)"
               >Valid Date</span
             >
-            <span v-if="new Date(reservedDate) >= new Date(returnedDate)"
+            <span v-if="new Date(reserved_time) >= new Date(expected_return_date)"
               >Invalid Date! Please re-input</span
             >
           </li>
@@ -42,7 +42,7 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">TOTAL</div>
       <div class="col-lg-1 col-md-1 col-sm-1 col-1"></div>
     </div>
-    <div class="row info" v-for="(book) in preProcessBookItems(currentCart.book_items)" :key="book.book_id">
+    <div class="row info" v-for="(book) in currentCart.book_items_sum" :key="book.book_id">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">
         <div>
           <img class="book-cover" :src="book.thumbnail" alt="" />
@@ -75,7 +75,6 @@
 
 <script>
 import moment from "moment";
-import { bookitems2BookData } from '../utilities/data-util';
 import { mapGetters } from 'vuex';
 import { toastError, toastSuccess } from '../utilities/toast-util';
 
@@ -86,11 +85,13 @@ export default {
       currentCart: 'reservation/currentCart'
     })
   },
+  data() {
+    return {
+      reserved_time: undefined,
+      expected_return_date: undefined,
+    }
+  },
   methods: {
-    preProcessBookItems(bookitems) {
-      return bookitems2BookData(bookitems);
-    },
-
     async changeBookQuantity(book) {
       try {
         const bookData = bookitems2BookData(this.currentCart.book_items);
@@ -133,7 +134,13 @@ export default {
 
     async startReserve() {
       try {
-        await this.$store.dispatch('reservation/borrow', this.currentCart.reservation_id);
+        const reservation = {
+          ...this.currentCart,
+          reserved_time: this.reserved_time,
+          expected_return_date: this.expected_return_date,
+        }
+
+        await this.$store.dispatch('reservation/borrow', reservation);
 
         toastSuccess('Request reserve successfully.');
       } catch(e) {

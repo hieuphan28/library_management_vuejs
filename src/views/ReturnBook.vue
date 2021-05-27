@@ -65,11 +65,11 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
             <ul>
-            <li> <input type="text" placeholder="" /></li>
-            <li> <input type="text" placeholder="" /></li>
-            <li> <input type="text" placeholder="" /></li>
-            <li> <input type="text" placeholder="" /></li>
-            <li> <input type="text" placeholder="" /></li>
+            <li> <input type="date" placeholder="" v-model="reservation.returned_date" @change="updateReturnDateReservation(reservation)"/></li>
+            <li> <input type="text" placeholder="" v-model="reservation.date_late"/></li>
+            <li> <input type="text" placeholder="" v-model="reservation.receive_money" /></li>
+            <li> <input type="text" placeholder="" v-model="reservation.exchange_money" /></li>
+            <li> <input type="text" placeholder="" v-model="reservation.fine_date_late" /></li>
             
             </ul>
             
@@ -93,27 +93,27 @@
           
         >
           <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.book_id }}
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.book_name }}
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-rentcost">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.rent_cost }}
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.quantity }}
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-total">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.total_rent_cost }}
             </div>
           </div>
@@ -127,71 +127,41 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { bookitems2BookData } from '../utilities/data-util';
+import { getFineDateLate } from '../utilities/data-util';
 import { toastError, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "IssueBook",
   computed: {
     ...mapGetters({
-      issueReservations: 'reservation/issueReservations',
       returnReservations: 'reservation/returnReservations',
     })
   },
   data() {
     return {
-      reservationID: "12033",
-      userID: "#78612",
-      username: "Long Lus",
-      datereserve: "12/3/2021",
-      datereturn: "12/6/2021",
-      totalfee: "$60",
 
-      bookTransactions: [
-        {
-          id: 1,
-          books: [
-            {
-              book_id: 1,
-              bookitemiD: "#0123456",
-              book_name: "Gulliver's Travel",
-              rentcost: "60",
-              quantity: "1",
-              total: "60",
-            },
-            {
-              book_id: 2,
-              bookitemiD: "#0123456",
-              book_name: "Gulliver's Travel",
-              rentcost: "60",
-              quantity: "1",
-              total: "60",
-            },
-            {
-              book_id: 3,
-              bookitemiD: "#0123456",
-              book_name: "Gulliver's Travel",
-              rentcost: "60",
-              quantity: "1",
-              total: "60",
-            },
-          ],
-        },
-      ],
-    };
+    }
   },
   methods: {
-    preProcessBookItems(bookitems) {
-      return bookitems2BookData(bookitems);
-    },
-
     async returnBook(reservation) {
       try {
-        await this.$store.dispatch('reservation/returnReservation', reservation.reservation_id);
+        await this.$store.dispatch('reservation/returnReservation', reservation);
 
         toastSuccess('Issue successfully.');
       } catch(e) {
         toastError(e);
       }
+    },
+
+    updateReturnDateReservation(reservation) {
+      const returnDate = reservation.returned_date && new Date(reservation.returned_date);
+      const expectedDate = reservation.expected_return_date && new Date(reservation.expected_return_date);
+
+      let dateLate = (returnDate.getTime() - expectedDate.getTime()) / (1000 * 3600 * 24);
+      
+      dateLate = dateLate < 0 ? 0 : dateLate;
+      reservation.date_late = dateLate;
+      reservation.fine_date_late = dateLate && getFineDateLate(reservation); 
+      reservation.exchange_money = reservation.deposit - reservation.fine_date_late;
     }
   },
   mounted() {

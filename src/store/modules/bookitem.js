@@ -61,8 +61,8 @@ const actions = {
     async removeBookItem({state, commit}, bookitem) {
         if (`${bookitem?.status}` !== `${BookStatus.AVAILABLE}`)
             throw new LibException('This bookitem is in used');
-        const data = await bookItemService.removeBookItem(bookitem);
-        commit('removeBookItem', bookitem);
+        const data = await bookItemService.removeBookItem(bookitem) || bookitem;
+        commit('removeBookItem', data);
     }
 }
 

@@ -54,8 +54,8 @@
             <div class="moneyr">Money Receive:</div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
-            <div><input type="text" placeholder="" /></div>
-            <input type="text" placeholder="" />
+            <div><input type="text" placeholder="" :value="reservation.deposit" /></div>
+            <input type="text" placeholder="" :value="reservation.receive_money" />
           </div>
         </div>
       </div>
@@ -70,39 +70,39 @@
           <div class="col-lg-2 col-md-2 col-sm-1 col-1">TOTAL</div>
           <div class="col-lg-1 col-md-1 col-sm-1 col-1"></div>
         </div>
-        <!-- v-for="book in preProcessBookItems(reservation.book_items)"
+        <!-- v-for="book in reservation.book_items_sum"
           :key="book.id" -->
         <div
           class="row info"
           
         >
           <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id" >
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id" >
               {{ book.book_id }}
             </div>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-4 col-4 book-name">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.book_name }}
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-rentcost">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.rent_cost }}
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.quantity }}
             </div>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-total">
-            <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.total_rent_cost }}
             </div>
           </div>
           <div class="col-lg-1 col-md-1 col-sm-1 col-1 trash">
-            <!-- <div v-for="book in preProcessBookItems(reservation.book_items)" :key="book.book_id">
+            <!-- <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </div> -->
           </div>
@@ -116,7 +116,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { bookitems2BookData } from '../utilities/data-util';
 import { toastError, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "IssueBook",
@@ -124,55 +123,14 @@ export default {
     ...mapGetters({
       issueReservations: 'reservation/issueReservations',
       returnReservations: 'reservation/returnReservations',
-    })
+    }),
   },
   data() {
     return {
-      reservationID: "12033",
-      userID: "#78612",
-      username: "Long Lus",
-      datereserve: "12/3/2021",
-      datereturn: "12/6/2021",
-      totalfee: "$60",
 
-      books: [
-        {
-          id: 1,
-          books: [
-            {
-              book_id: 1,
-              bookitemiD: "#0123456",
-              book_name: "Gulliver's Travel",
-              rentcost: "60",
-              quantity: "1",
-              total: "60",
-            },
-            {
-              book_id: 2,
-              bookitemiD: "#0123456",
-              book_name: "Gulliver's Travel",
-              rentcost: "60",
-              quantity: "1",
-              total: "60",
-            },
-            {
-              book_id: 3,
-              bookitemiD: "#0123456",
-              book_name: "Gulliver's Travel",
-              rentcost: "60",
-              quantity: "1",
-              total: "60",
-            },
-          ],
-        },
-      ],
-    };
+    }
   },
   methods: {
-    preProcessBookItems(bookitems) {
-      return bookitems2BookData(bookitems);
-    },
-
     async issueBook(reservation) {
       try {
         await this.$store.dispatch('reservation/issueReservation', reservation.reservation_id);

@@ -38,10 +38,8 @@ const removeReservationItem = async ({user_id, book_id, amount}) => {
     return handleResponse(res)
 }
 
-const borrow = async (reservation_id) => {
-    const res = await axios.post(`${apiPrefix}/reservation/borrow`, {
-        reservation_id
-    });
+const borrow = async (reservation) => {
+    const res = await axios.post(`${apiPrefix}/reservation/borrow`, reservation);
 
     return handleResponse(res);
 }
@@ -76,11 +74,15 @@ const getReturn = async () => {
     return handleResponse(res);
 }
 
-const returnReservation = async (reservation_id) => {
-    const res = await axios.post(`${apiPrefix}/reservation/return`, {
-        reservation_id
-    });
+const returnReservation = async (reservation) => {
+    const res = await axios.post(`${apiPrefix}/reservation/return`, reservation);
     
+    return handleResponse(res);
+}
+
+const extendReservation = async (reservation) => {
+    const res = await axios.post(`${apiPrefix}/reservation/extend`, reservation);
+
     return handleResponse(res);
 }
 
@@ -95,4 +97,5 @@ export {
     issueReservation,
     getReturn,
     returnReservation,
+    extendReservation,
 }
