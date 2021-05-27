@@ -35,11 +35,13 @@ const actions = {
         
         commit('setCurrentUser', data);
     },
+
     async registerAdmin({state, commit}, user) {
         const data = await userService.register(user);
         
         commit('setCurrentUser', data);
     },
+
     async changePassword({state, commit},user){
         const data = await userService.changePassword(user)|| user;
         const refrPassword = Object.assign(state.currentUser, user);

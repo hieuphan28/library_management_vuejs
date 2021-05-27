@@ -79,7 +79,6 @@ export default {
       phone: "",
       dob: "",
       address: "",
-      role: 0,
     };
   },
   methods: {
@@ -92,8 +91,7 @@ export default {
           email: this.email,
           phone: this.phone,
           dob: this.dob,
-          address: this.address,
-          role: this.role,
+          address: this.address
         });
 
         toastSuccess("Register Successfully!");
