@@ -193,6 +193,7 @@ body {
   text-align: center;
 }
 .changepass-form .btn-box a button {
+  width: 100%;
   padding: 0.2rem 7.2rem;
   margin: 10px 0;
   background: #ecd4b4;

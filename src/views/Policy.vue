@@ -15,7 +15,7 @@
           <div class="circle">
             <img src="../assets/Contact/Vector.png" alt="" />
           </div>
-          <h1>ADDRESS</h1>
+          <h1>INFO</h1>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -28,7 +28,7 @@
           <div class="circle">
             <img src="../assets/Contact/Vector-1.png" alt="" />
           </div>
-          <h1>PHONE</h1>
+          <h1>POLICY</h1>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -41,7 +41,7 @@
           <div class="circle">
             <img src="../assets/Contact/Vector-2.png" alt="" />
           </div>
-          <h1>EMAIL</h1>
+          <h1>RULES</h1>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: "Contact",
+  name: "Policy",
 };
 </script>
 

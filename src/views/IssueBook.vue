@@ -193,7 +193,7 @@ export default {
       border: 1px solid rgba(0, 0, 0, 0.28);
       box-sizing: border-box;
       border-radius: 8px;
-      padding: 1% 2% 1% 2%;
+      padding: 0.5% 1% 0.5% 1%;
     }
     i {
       margin-left: 2%;

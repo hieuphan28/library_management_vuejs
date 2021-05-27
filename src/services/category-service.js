@@ -6,13 +6,11 @@ const apiPrefix = appManager.getApiPrefix();
 
 const addCategory = async (category) => {
     const res = await axios.post(`${apiPrefix}/category`, category);
-
     return handleResponse(res);
 }
 
 const getCategories = async () => {
     const res = await axios.get(`${apiPrefix}/categories-list`);
-
     return handleResponse(res);
 }
 

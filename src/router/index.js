@@ -21,6 +21,7 @@ import ReturnBook from '../views/ReturnBook.vue'
 import AddCategory from '../views/AddCategory.vue'
 import AddDepartment from '../views/AddDepartment.vue'
 import RegisterAdmin from '../views/RegisterAdmin.vue'
+import Policy from '../views/Policy.vue'
 
 const routes = [
   {
@@ -128,6 +129,12 @@ const routes = [
     path: '/admin/register',
     name: 'registeradmin',
     component: RegisterAdmin
+  },
+
+  {
+    path: '/policy',
+    name: 'policy',
+    component: Policy
   },
 ]
 
