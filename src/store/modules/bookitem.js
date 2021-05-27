@@ -1,6 +1,7 @@
 import { BookStatus } from '../../common/bundleOfEnum';
 import LibException from '../../exceptions/lib-exception';
 import * as bookItemService from '../../services/bookitem-service';
+import { getEnumKeyWithValue } from "../../utilities/data-util";
 
 const state = () => ({
     data: [],
@@ -10,11 +11,14 @@ const sortByDate = (a,b) => new Date(b.create_date) - new Date(a.create_date);
 
 const getters = {
     bookItem: (state, getters) => {
-        return state.data;
+        return state.data.map(item => {
+            item.status_key = getEnumKeyWithValue(BookStatus, item.status);
+            return item;
+        });
     },
 
     bookItemByBookId: (state, getters) => (book_id) => {
-        return state.data.filter(x => `${x.book_id}` === `${book_id}`);
+        return getters.bookItem.filter(x => `${x.book_id}` === `${book_id}`);
     },
 
     bookItemQuantityByBookId: (state, getters) => book_id => {

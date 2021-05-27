@@ -34,9 +34,9 @@
           </div>
           <div class="input-box">
             <span>Category:</span>
-            <select v-model="bookInfo.category_name">
+            <select v-model="bookInfo.category_id">
               <option
-                :value="option.category_name"
+                :value="option.category_id"
                 v-for="(option, index) in categories"
                 :key="index"
               >
@@ -47,9 +47,9 @@
 
           <div class="input-box">
             <span>Department:</span>
-            <select v-model="bookInfo.department_name">
+            <select v-model="bookInfo.department_id">
               <option
-                :value="option.department_name"
+                :value="option.department_id"
                 v-for="(option, index) in departments"
                 :key="index"
               >
@@ -59,16 +59,26 @@
           </div>
           <div class="input-box">
             <span>Price:</span>
-            <input type="number" min="0"  placeholder="" v-model="bookInfo.price" />
+            <input
+              type="double"
+              min="0"
+              placeholder=""
+              v-model="bookInfo.price"
+            />
           </div>
           <div class="input-box">
             <span>Rent Cost:</span>
-            <input type="number" min="0" placeholder="" v-model="bookInfo.rent_cost" />
+            <input
+              type="double"
+              min="0"
+              placeholder=""
+              v-model="bookInfo.rent_cost"
+            />
           </div>
           <div class="input-box">
             <span>Publication Date:</span>
             <input
-              type="text"
+              type="date"
               placeholder=""
               v-model="bookInfo.publication_date"
             />
@@ -120,7 +130,11 @@
         </div>
         <div class="input-box">
           <span>Status:</span>
-          <input type="text" placeholder="" v-model="book.status" />
+          <select v-model="book.status_key">
+            <option v-for="(option, index) in testMapping()" :key="index">
+              {{ option }}
+            </option>
+          </select>
         </div>
       </div>
     </div>
@@ -130,6 +144,9 @@
 <script>
 import { mapGetters } from "vuex";
 import { toastError, toastSuccess } from "../utilities/toast-util";
+import { getEnumKeys } from "../utilities/data-util";
+import { BookStatus } from "../common/bundleOfEnum";
+import book from "../store/modules/book";
 export default {
   name: "UpdateBook",
   computed: {
@@ -168,6 +185,10 @@ export default {
 
     async saveBookItem(bookitem) {
       try {
+        bookitem.status =
+          bookitem.status_key === undefined
+            ? BookStatus.UNDEFINED
+            : BookStatus[bookitem.status_key];
         await this.$store.dispatch("bookitem/updateBookItem", bookitem);
 
         toastSuccess("Update book item successfully.");
@@ -184,6 +205,9 @@ export default {
       } catch (e) {
         toastError(e);
       }
+    },
+    testMapping() {
+      return getEnumKeys(BookStatus);
     },
   },
 };
@@ -254,7 +278,7 @@ export default {
       .input-box {
         margin-bottom: 4%;
       }
-      select{
+      select {
         width: 53%;
         float: right;
         font-size: medium;
@@ -338,6 +362,17 @@ export default {
   }
   .input-box input {
     /* border: none; */
+    width: 30%;
+    float: right;
+    font-size: medium;
+    background: #fafafa;
+    border: 1px solid #cecece;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 0.5% 0 0.5% 2%;
+    margin-right: 25%;
+  }
+  .input-box select {
     width: 30%;
     float: right;
     font-size: medium;

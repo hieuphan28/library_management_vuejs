@@ -114,8 +114,13 @@
       <ul class="mobile-item" style="">
         <li><router-link to="/">HOME</router-link></li>
         <li><router-link to="/books">BOOKS</router-link></li>
-        <li class="mean-last">
+        <li>
           <router-link to="/contact">CONTACT</router-link>
+        </li>
+        <li class="mean-last">
+          <router-link to="/managebook" v-if="isAdmin"
+            >MANAGE BOOK
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -128,11 +133,6 @@ import { UserRole } from "../common/bundleOfEnum";
 
 export default {
   name: "Header",
-  data() {
-    return {
-      showNav: false,
-    };
-  },
   computed: {
     ...mapGetters("user", ["currentUser", "isLogged", "isMember", "isAdmin"]),
   },
