@@ -95,7 +95,7 @@ export default {
           address: this.address,
           role: this.role,
         });
-        
+        this.$router.push("/login");
         toastSuccess("Register successfully");
       } catch (e) {
         toastError(e);

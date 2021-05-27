@@ -25,63 +25,22 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
-                <div class="col-md-3 col-12">
+                <div
+                  class="col-sm-3"
+                  v-for="item in books.slice(i, i + 4)"
+                  :key="item.id"
+                >
                   <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book1.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
+                    <router-link :to="{ path: '/bookinfo/' + item.book_id }">
+                      <div class="img-box">
+                        <img :src="item.thumbnail" class="img-fluid" alt="" />
+                      </div>
+                    </router-link>
                     <div class="thumb-content">
-                      <p>Apple iPad</p>
-                      <p class="item-price"><span>$369.00</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book2.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div class="thumb-content">
-                      <p>Sony Headphone</p>
-                      <p class="item-price"><span>$23.99</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book3.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div class="thumb-content">
-                      <p>Macbook Air</p>
-                      <p class="item-price"><span>$649.00</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book4.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div class="thumb-content">
-                      <p>Nikon DSLR</p>
-                      <p class="item-price"><span>$250.00</span></p>
+                      <p>{{ item.book_name }}</p>
+                      <p class="item-price">
+                        <span>{{ "$" + item.rent_cost }}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -89,63 +48,22 @@
             </div>
             <div class="carousel-item">
               <div class="row">
-                <div class="col-md-3 col-12">
+                <div
+                  class="col-sm-3"
+                  v-for="item in books.slice(i+5, i + 9)"
+                  :key="item.id"
+                >
                   <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book5.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
+                    <router-link :to="{ path: '/bookinfo/' + item.book_id }">
+                      <div class="img-box">
+                        <img :src="item.thumbnail" class="img-fluid" alt="" />
+                      </div>
+                    </router-link>
                     <div class="thumb-content">
-                      <p>Sony Play Station</p>
-                      <p class="item-price"><span>$269.00</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book6.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div class="thumb-content">
-                      <p>Macbook Pro</p>
-                      <p class="item-price"><span>$869.00</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book7.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div class="thumb-content">
-                      <p>Bose Speaker</p>
-                      <p class="item-price"><span>$99.00</span></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 col-12">
-                  <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book8.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
-                    <div class="thumb-content">
-                      <p>Samsung Galaxy S8</p>
-                      <p class="item-price"><span>$569.00</span></p>
+                      <p>{{ item.book_name }}</p>
+                      <p class="item-price">
+                        <span>{{ "$" + item.rent_cost }}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -184,13 +102,23 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "NewBooks",
   computed: {
-    ...mapGetters('book', ['newBooks'])
-  }
-};
+    ...mapGetters({
+      books: "book/books",
+    }),
+    // ...mapActions({
+    //   all
+    // })
+  },
+  data() {
+    return {
+      i: 0,
+    };
+  },
+}
 </script>
 <style scoped>
 .intro {
