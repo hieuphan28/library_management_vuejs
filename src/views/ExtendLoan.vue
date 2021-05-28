@@ -8,11 +8,8 @@
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">PRICE</div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2">STATUS</div>
     </div>
-    <!-- v-for="borrowHistory in borrowHistories"
-      :key="borrowHistory.id" -->
     <div
       class="row info"
-      
     >
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 borrowingID">
         <div>{{ reservation.reservation_id }}</div>
@@ -42,21 +39,8 @@
         <div>Borrowed Date: {{ reservation.borrowedDate }}</div>
         <div>Expected Date: {{ reservation.expectedDate }}</div>
       </div>
-      <!-- <div
-        class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
-        v-if="borrowHistory.status == 'Finished'"
-      >
-        <div>Borrowed Date: {{ borrowHistory.borrowedDate }}</div>
-        <div>Returned Date: {{ borrowHistory.returnedDate }}</div>
-      </div>
-      <div
-        class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
-        v-if="borrowHistory.status == 'Reserved'"
-      >
-        <div>Reserved Date: {{ borrowHistory.reservedDate }}</div>
-      </div> -->
     </div>
-    <div>
+    <!-- <div>
       <form class="extend-loan">
         <label for="newDate">Number of Days</label>
         <input type="text" id="newDate" />
@@ -73,7 +57,7 @@
           </select>
         </div>
       </form>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -91,42 +75,7 @@ export default {
       return this.reservationById(this.reservation_id) || {};
     }
   },
-  data() {
-    return {
-      reservation_id: this.$route.params.reservation_id,
-      extendFee: [
-        {
-          day: "3",
-          fee: "5",
-        },
-        {
-          day: "7",
-          fee: "8",
-        },
-        {
-          day: "14",
-          fee: "12",
-        },
-      ],
-      borrowHistories: [
-        {
-          id: 1,
-          borrowId: "#0123456",
-          bookInfos: [
-            { book_id: 1, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 2, book_name: "Gulliver's Travel", quantity: "1" },
-            { book_id: 3, book_name: "Gulliver's Travel", quantity: "1" },
-          ],
-          price: "$60",
-          status: "Borrowing",
-          borrowedDate: "7/02/2021",
-          expectedDate: "11/02/2021",
-          reservedDate: "7/02/2021",
-          returnedDate: "11/02/2021",
-        },
-      ],
-    };
-  },
+ 
   mounted() {
     this.$store.dispatch('reservation/initCurrentReservations');
   },
