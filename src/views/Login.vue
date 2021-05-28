@@ -3,10 +3,9 @@
   <div class="login">
     <img class="background" src="../assets/carousel/2.jpg" alt="background" />
     <form @submit.prevent="handleLogin" class="login-form">
+      <Loading :active.sync="isLoading"  class="loading"/>
       <div class="bar">
-        <router-link to="/login" class="login-bar active"
-          >Login</router-link
-        >
+        <router-link to="/login" class="login-bar active">Login</router-link>
         <router-link to="/register">Sign up</router-link>
       </div>
       <h1>Login</h1>
@@ -44,9 +43,14 @@ import {
   toastSuccess,
 } from "../utilities/toast-util";
 import { mapState } from "vuex";
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
   name: "Login",
+  components: {
+        Loading,
+    },
   computed: mapState({
     currentUser: (state) => state.user.currentUser,
   }),
@@ -54,11 +58,13 @@ export default {
     return {
       username: "",
       password: "",
+      isLoading: false,
     };
   },
   methods: {
-    handleLogin: async function() {
+    handleLogin: async function () {
       try {
+        this.isLoading = true;
         await this.$store.dispatch("user/login", {
           username: this.username,
           password: this.password,
@@ -67,7 +73,8 @@ export default {
         this.$router.push("/");
       } catch (e) {
         toastError(e);
-      }
+        this.isLoading = false;
+      } 
     },
 
     myFunction() {
@@ -80,8 +87,7 @@ export default {
     },
   },
   mounted() {
-    if (this.currentUser && this.currentUser.token)
-        this.$router.push('/');
+    if (this.currentUser && this.currentUser.token) this.$router.push("/");
   },
 };
 </script>
@@ -129,6 +135,9 @@ export default {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+.loading{
+  border-radius: 25px;
 }
 .login-form .input-box > img {
   float: right;
