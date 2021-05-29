@@ -32,7 +32,9 @@
         </div>
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-status">
-        <div :class="passEnumKey(reservationItem.status)">{{ passEnumKey(reservationItem.status) }}</div>
+        <div :class="passEnumKey(reservationItem.status)">
+          {{ passEnumKey(reservationItem.status) }}
+        </div>
       </div>
 
       <div
@@ -41,12 +43,16 @@
       >
         <div>Borrowed Date: {{ reservationItem.reserved_time }}</div>
         <div>Expected Date: {{ reservationItem.expected_return_date }}</div>
-      </div>  
+      </div>
       <div
         class="col-lg-4 col-md-4 col-sm-4 col-4 book-extend d-flex"
         v-if="reservationItem.status == ReservationStatus.BORROWING"
       >
-        <button v-if="!reservationItem.is_extended" ><router-link :to="`/extendloan/${reservationItem.reservation_id}`">Extend Loan</router-link></button>
+        <button v-if="!reservationItem.is_extended">
+          <router-link :to="`/extendloan/${reservationItem.reservation_id}`"
+            >Extend Loan</router-link
+          >
+        </button>
       </div>
       <div
         class="col-lg-8 col-md-8 col-sm-8 col-8 book-date d-flex"
@@ -66,17 +72,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { toastError, toastSuccess } from '../utilities/toast-util';
-import { ReservationStatus } from '../common/bundleOfEnum'
-import { bookitems2BookData, getEnumKeyWithValue } from '../utilities/data-util'
+import { mapGetters } from "vuex";
+import { toastError, toastSuccess } from "../utilities/toast-util";
+import { ReservationStatus } from "../common/bundleOfEnum";
+import {
+  bookitems2BookData,
+  getEnumKeyWithValue,
+} from "../utilities/data-util";
 
 export default {
   name: "BorrowingHistory",
   computed: {
     ...mapGetters({
-      reservations: 'reservation/currentReservations'
-    })
+      reservations: "reservation/currentReservations",
+    }),
   },
 
   data() {
@@ -85,17 +94,19 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch('reservation/initCurrentReservations');
+    this.$store.dispatch("reservation/initCurrentReservations");
   },
   methods: {
     passEnumKey(status) {
-      return getEnumKeyWithValue(ReservationStatus, status)
+      return getEnumKeyWithValue(ReservationStatus, status);
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/_variable.scss/";
+
 .container {
   .page-title {
     text-align: center;
@@ -141,16 +152,24 @@ export default {
         width: 50%;
         margin-left: auto;
         margin-right: auto;
-        background: rgba(226, 226, 226, 0.5);
-        border-radius: 18px;
-        padding: 0.5rem 0.5rem;
+        // background: rgba(226, 226, 226, 0.5);
+        // border-radius: 18px;
+        // padding: 0.5rem 0.5rem;
       }
     }
     .book-status {
+      font-size: medium;
+      @include tablet {
+        font-size: small;
+      }
+
+      @include mobile {
+        font-size: x-small;
+      }
     }
     .BORROWING {
       background: #fdffae;
-      border-radius: 18px;
+      border-radius: 8px;
       padding: 0.5rem 0.5rem;
       width: 80%;
       margin-left: auto;
@@ -158,7 +177,7 @@ export default {
     }
     .CLOSED {
       background: rgba(135, 255, 115, 0.7);
-      border-radius: 18px;
+      border-radius: 8px;
       padding: 0.5rem 0.5rem;
       width: 80%;
       margin-left: auto;
@@ -166,7 +185,7 @@ export default {
     }
     .RESERVED {
       background: #ff9494 50%;
-      border-radius: 18px;
+      border-radius: 8px;
       padding: 0.5rem 0.5rem;
       width: 80%;
       margin-left: auto;
@@ -186,13 +205,15 @@ export default {
         padding: 2%;
         border: none;
         background-color: rgba(236, 212, 180, 1);
+        transition: 0.3s;
         a {
           text-decoration: none;
-          color: black;
+          color: rgb(0, 0, 0, 0.54);
         }
       }
       button:hover {
         background-color: rgba(255, 229, 195, 1);
+        color: rgb(0, 0, 0, 0.87);
       }
     }
   }

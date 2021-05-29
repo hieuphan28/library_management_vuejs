@@ -24,7 +24,6 @@
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-6 search">
         <input type="text" placeholder="Search books" v-model="searchText" />
-        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
       </div>
     </div>
 
@@ -247,6 +246,8 @@ export default {
 .book_descrip {
   width: 100%;
   height: 50px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .info {
   margin: 2% 0%;
@@ -286,6 +287,8 @@ button:hover {
 
 //POPUP
 .form-popup {
+  border: solid 0.5px rgba(0, 0, 0, 0.25);
+  border-radius: 8rem;
   background-color: #ffff;
   text-align: center;
   display: none;
@@ -297,8 +300,8 @@ button:hover {
   z-index: 9;
   width: 450px;
   padding: 3rem 3rem 2rem 3rem;
-  border-radius: 1rem;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  
+  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.25);
 }
 .form-popup form p {
   text-align: center;

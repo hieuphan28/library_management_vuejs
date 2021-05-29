@@ -91,7 +91,7 @@
     <div class="bookitem" v-for="(book, index) in bookItems" :key="index">
       <div class="row title">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 order">
-          <h1>Book Item {{ book.id }} :</h1>
+          <h1>Book Item {{ }} :</h1>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 button">
           <button class="btn" @click="removeBookItem(book)">
@@ -162,6 +162,9 @@ export default {
     bookItems() {
       return this.getBookItemById(this.book_id) || {};
     },
+    bookItemId(){
+      
+    }
   },
   data() {
     return {
@@ -354,6 +357,7 @@ export default {
     margin-bottom: 2%;
   }
   .input-box span {
+    // float: left;
     margin-left: 20%;
     color: rgba(0, 0, 0, 0.87);
     display: inline;

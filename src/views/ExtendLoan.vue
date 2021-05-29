@@ -40,24 +40,6 @@
         <div>Expected Date: {{ reservation.expectedDate }}</div>
       </div>
     </div>
-    <!-- <div>
-      <form class="extend-loan">
-        <label for="newDate">Number of Days</label>
-        <input type="text" id="newDate" />
-        <div class="extend-option">
-          <div>drop down button</div>
-          <select name="" id="">
-            <option
-              :value="option.value"
-              v-for="(option, index) in extendFee"
-              :key="index"
-            >
-            {{option.day}}  -  {{option.fee}}  $
-            </option>
-          </select>
-        </div>
-      </form>
-    </div> -->
   </div>
 </template>
 

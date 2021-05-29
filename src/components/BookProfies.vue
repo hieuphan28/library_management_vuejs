@@ -158,10 +158,8 @@ button {
   border-radius: 10px;
   width: 150px;
   text-decoration: none;
-  a{
-    color: rgba(0, 0, 0, 0.54);
+  color: rgba(0, 0, 0, 0.54);
     transition: 0.3s;
-  }
   i {
     position: relative;
     width: auto;
@@ -174,10 +172,6 @@ button:hover {
   color: rgba(0, 0, 0, 0.87);
 }
 
-a:hover {
-  color: rgba(0, 0, 0, 0.87);
-  text-decoration: none;
-}
 
 ul {
   padding: 0;

@@ -60,6 +60,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import "../scss/_variable.scss/";
+
 .background {
   img {
     background-color: rgb(0, 0, 0, 0.87);
@@ -75,8 +77,15 @@ export default {
 }
 
 .contact {
+  @include mobile {
+    height: 110vh;
+  }
+
+  @include tablet {
+    height: 70vh;
+  }
   position: relative;
-  height: 110vh;
+  height: 80vh;
   background-color: rgb(0, 0, 0, 0.87);
 }
 /* .contact .background img {

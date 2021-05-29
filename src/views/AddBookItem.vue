@@ -13,14 +13,7 @@
       </div>
 
       <div class="row title">
-        <div class="col-lg-9 col-md-9 col-sm-9 col-9 left">
           <h1>{{ bookInfo.book_name }}</h1>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-3 right">
-          <div class="avatar">
-            <a href=""></a>
-          </div>
-        </div>
       </div>
 
       <div class="input-box">
@@ -129,21 +122,12 @@ export default {
 
 .title {
   margin-bottom: 5%;
-  .left h1 {
+  text-align: center;
+  justify-content: center;
+   h1 {
     color: rgba(0, 0, 0, 0.87);
-    margin-top: 8%;
-    text-align: center;
     font-size: x-large;
     font-weight: bold;
-  }
-  .right {
-    text-align: center;
-
-    .avatar {
-      width: 80%;
-      height: 90px;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
   }
 }
 
@@ -174,6 +158,8 @@ export default {
 }
 .add-item-form .input-box {
   margin-bottom: 5%;
+  text-align: left;
+  margin-left: 10%;
 }
 .add-item-form .input-box span {
   color: rgba(0, 0, 0, 0.87);
