@@ -3,11 +3,13 @@
     <!-- HEADER -->
     <div class="head">
       <div class="row">
-        <div class="col-lg-1 col-md-1 col-sm-12 col-12 issue">
-          <router-link to="/issuebook">Issue Book</router-link>
+        <div class="col-lg-1 col-md-12 col-sm-12 col-12 issue">
+          <router-link to="/issuebook"><button>Issue Book</button></router-link>
         </div>
-        <div class="col-lg-1 col-md-1 col-sm-12 col-12 return">
-          <router-link to="/returnbook">Return Book</router-link>
+        <div class="col-lg-1 col-md-12 col-sm-12 col-12 return">
+          <router-link to="/returnbook"
+            ><button>Return Book</button></router-link
+          >
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-12 lookfor">
           <input type="text" placeholder="Search username" />
@@ -16,10 +18,14 @@
       </div>
     </div>
 
-    <div v-for="reservation in returnReservations" :key="reservation.reservation_id">
+    <h1>RETURN BOOK</h1>
+
+    <div
+      v-for="reservation in returnReservations"
+      :key="reservation.reservation_id"
+    >
       <!-- TRANSACTION-INFO -->
       <div class="reserveinfo">
-        <h1>RETURN BOOK</h1>
         <div class="form">
           <div class="row">
             <div class="col-lg-4 col-md-4 col-sm- 6 col-6 name">
@@ -38,8 +44,12 @@
               <div class="usernam">Total Fee:</div>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
-              <div class="date-reserve">{{ reservation.reserved_time || 'null' }}</div>
-              <div class="date-return">{{ reservation.expected_return_date || 'null' }}</div>
+              <div class="date-reserve">
+                {{ reservation.reserved_time || "null" }}
+              </div>
+              <div class="date-return">
+                {{ reservation.expected_return_date || "null" }}
+              </div>
               <div class="totalfee">{{ reservation.total_fee }}</div>
             </div>
           </div>
@@ -65,17 +75,44 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
             <ul>
-            <li> <input type="date" placeholder="" v-model="reservation.returned_date" @change="updateReturnDateReservation(reservation)"/></li>
-            <li> <input type="text" placeholder="" v-model="reservation.date_late"/></li>
-            <li> <input type="text" placeholder="" v-model="reservation.receive_money" /></li>
-            <li> <input type="text" placeholder="" v-model="reservation.exchange_money" /></li>
-            <li> <input type="text" placeholder="" v-model="reservation.fine_date_late" /></li>
-            
+              <li>
+                <input
+                  type="date"
+                  placeholder=""
+                  v-model="reservation.returned_date"
+                  @change="updateReturnDateReservation(reservation)"
+                />
+              </li>
+              <li>
+                <input
+                  type="text"
+                  placeholder=""
+                  v-model="reservation.date_late"
+                />
+              </li>
+              <li>
+                <input
+                  type="text"
+                  placeholder=""
+                  v-model="reservation.receive_money"
+                />
+              </li>
+              <li>
+                <input
+                  type="text"
+                  placeholder=""
+                  v-model="reservation.exchange_money"
+                />
+              </li>
+              <li>
+                <input
+                  type="text"
+                  placeholder=""
+                  v-model="reservation.fine_date_late"
+                />
+              </li>
             </ul>
-            
           </div>
-
-
         </div>
       </div>
 
@@ -88,10 +125,7 @@
           <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
           <div class="col-lg-2 col-md-2 col-sm-1 col-1">TOTAL</div>
         </div>
-        <div
-          class="row info"
-          
-        >
+        <div class="row info">
           <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
             <div v-for="book in reservation.book_items_sum" :key="book.book_id">
               {{ book.book_id }}
@@ -119,67 +153,82 @@
           </div>
         </div>
 
-        <button class="btn" @click="returnBook(reservation)">Return</button>
+        <div class="wrapper" @click="returnBook(reservation)">
+          <div class="returnbutton">
+            <button class="btn">Return</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { getFineDateLate } from '../utilities/data-util';
-import { toastError, toastSuccess } from '../utilities/toast-util';
+import { mapGetters } from "vuex";
+import { getFineDateLate } from "../utilities/data-util";
+import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
   name: "IssueBook",
   computed: {
     ...mapGetters({
-      returnReservations: 'reservation/returnReservations',
-    })
+      returnReservations: "reservation/returnReservations",
+    }),
   },
   data() {
-    return {
-
-    }
+    return {};
   },
   methods: {
     async returnBook(reservation) {
       try {
-        await this.$store.dispatch('reservation/returnReservation', reservation);
+        await this.$store.dispatch(
+          "reservation/returnReservation",
+          reservation
+        );
 
-        toastSuccess('Issue successfully.');
-      } catch(e) {
+        toastSuccess("Return Successfully!");
+      } catch (e) {
         toastError(e);
       }
     },
 
     updateReturnDateReservation(reservation) {
-      const returnDate = reservation.returned_date && new Date(reservation.returned_date);
-      const expectedDate = reservation.expected_return_date && new Date(reservation.expected_return_date);
+      const returnDate =
+        reservation.returned_date && new Date(reservation.returned_date);
+      const expectedDate =
+        reservation.expected_return_date &&
+        new Date(reservation.expected_return_date);
 
-      let dateLate = (returnDate.getTime() - expectedDate.getTime()) / (1000 * 3600 * 24);
-      
+      let dateLate =
+        (returnDate.getTime() - expectedDate.getTime()) / (1000 * 3600 * 24);
+
       dateLate = dateLate < 0 ? 0 : dateLate;
       reservation.date_late = dateLate;
-      reservation.fine_date_late = dateLate && getFineDateLate(reservation); 
-      reservation.exchange_money = reservation.deposit - reservation.fine_date_late;
-    }
+      reservation.fine_date_late = dateLate && getFineDateLate(reservation);
+      reservation.exchange_money =
+        reservation.deposit - reservation.fine_date_late;
+    },
   },
   mounted() {
-    this.$store.dispatch('reservation/getReturn');
-  }
+    this.$store.dispatch("reservation/getReturn");
+  },
 };
 </script>
 
+
 <style lang="scss" scoped>
+@import "../scss/_variable.scss/";
 // HEADER
 .head {
   margin-top: 5%;
   .issue {
-    border: 1px rgba(0, 0, 0, 0.38) solid;
-    font-size: medium;
-    background: rgba(0, 0, 0, 0);
-    color: rgb(0, 0, 0, 0.87);
-    text-align: center;
+    button {
+      width: 100%;
+      border: 1px rgba(0, 0, 0, 0.38) solid;
+      font-size: medium;
+      background: rgba(0, 0, 0, 0);
+      color: rgb(0, 0, 0, 0.87);
+      text-align: center;
+    }
     a {
       color: rgb(0, 0, 0, 0.54);
       text-decoration: none;
@@ -187,18 +236,21 @@ export default {
     transition: 0.3s;
   }
   .return {
-    border: 1px rgba(0, 0, 0, 0.38) solid;
-    font-size: medium;
-    background: rgba(0, 0, 0, 0.1);
-    color: rgb(0, 0, 0, 0.87);
-    text-align: center;
+    button {
+      width: 100%;
+      border: 1px rgba(0, 0, 0, 0.38) solid;
+      font-size: medium;
+      background: rgba(0, 0, 0, 0.1);
+      color: rgb(0, 0, 0, 0.87);
+      text-align: center;
+    }
     a {
       color: rgb(0, 0, 0, 0.87);
       text-decoration: none;
     }
   }
 
-  .issue:hover {
+  .issue button:hover {
     background: rgba(0, 0, 0, 0.1);
     color: rgb(0, 0, 0, 0.87);
     text-align: center;
@@ -232,69 +284,77 @@ export default {
   }
 }
 
-.main-title {
-  margin-top: 3%;
-  margin-left: 0;
-  h1 {
-    font-size: x-large;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.54);
-    padding-bottom: 2%;
-  }
+h1 {
+  font-size: x-large;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.54);
+  padding-bottom: 2%;
 }
 
 // RESERVEINFO
 .reserveinfo {
   margin-top: 3%;
   margin-left: 0;
-  h1 {
-    font-size: x-large;
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.54);
-    padding-bottom: 2%;
-  }
 
   .form {
+    width: 80%;
     margin-top: 2%;
-    text-align: center;
+    // text-align: center;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-    padding: 2% 10%;
+    padding: 2% 3%;
+    position: relative;
+    left: 11%;
     .name {
-      margin-left: 3%;
+      @include mobile {
+        font-size: small;
+      }
+      padding-left: 3%;
+      float: left;
       font-weight: bold;
-      margin-right: -6%;
+      // margin-right: -6%;
     }
     .data {
+      @include mobile {
+        font-size: small;
+      }
       text-align: left;
+      padding-left: 0;
     }
   }
 }
 
 //MONEY
 .money {
-  text-align: center;
   margin-top: 2%;
+
   .name {
-    text-align: right;
     font-weight: bold;
-    ul li{
+    float: right;
+    ul li {
+      @include mobile {
+        padding-left: 4rem;
+      }
+
+      @include tablet {
+        padding-left: 10rem;
+      }
+      padding-left: 20rem;
+      text-align: left;
       padding-bottom: 2.3%;
     }
   }
   .input {
     text-align: left;
 
-    ul li{
+    ul li {
       padding-bottom: 1%;
     }
     input {
-      border-radius: 8px;
+      border-radius: 5px;
       border: 0.25px solid rgba(0, 0, 0, 0.38);
-     
-      padding: 0.5% 0 0.5% 0;
+      padding: 0.5% 0 0.5% 2%;
     }
   }
 }
@@ -302,10 +362,13 @@ export default {
 // BOOK
 .book {
   margin-top: 3%;
-  margin-bottom: 3%;
+  border-bottom: solid rgba(0, 0, 0, 0.87) 1px;
   .title {
     text-align: center;
     font-weight: 600;
+    @include mobile {
+      font-size: small;
+    }
   }
   .info {
     text-align: center;
@@ -350,19 +413,27 @@ export default {
   color: rgb(0, 0, 0, 0.87);
 }
 
-button {
-  width: 130px;
-  margin-left: 44%;
-  background: rgba(236, 212, 180, 1);
-  border-radius: 10px;
-  padding: 0.5% 25px 0.75% 25px;
-  color: rgba(0, 0, 0, 0.54);
-  transition: 0.3s;
-  font-weight: bold;
-  
-}
-button:hover {
-  background: #ffe5c3;
-  color: rgba(0, 0, 0, 0.87);
+.wrapper {
+  margin: 3% 0%;
+  text-align: center;
+  .returnbutton {
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    width: 100px;
+    button {
+      width: 100%;
+      background: #ecd4b4;
+      border: 1px solid #b7b7b7;
+      box-sizing: border-box;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.54);
+    }
+    button:hover {
+      background: #ffe5c3;
+    }
+  }
 }
 </style>

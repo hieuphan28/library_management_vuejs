@@ -11,42 +11,54 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12 left">
-          <div class="circle">
-            <img src="../assets/Contact/Vector.png" alt="" />
-          </div>
-          <h1>INFO</h1>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12 left-side">
+          <div class="title">Business rules</div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12 left">
-          <div class="circle">
-            <img src="../assets/Contact/Vector-1.png" alt="" />
-          </div>
-          <h1>POLICY</h1>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div class="col-lg-8 col-md-8 col-sm-12 col-12 right-side">
+          Before going to the library to borrow books, reader has to make a
+          reservation first, along with information of date of reservation, and
+          expected return date. After that, readers can go to the library and
+          directly pick up their reservation.
+          <br />When librarian issues books to customers, the librarian has to
+          inform customers a deposit and the money received for the books to be
+          borrowed. Money received = deposit + total rent fee of book items.
         </div>
       </div>
+
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12 col-12 left">
-          <div class="circle">
-            <img src="../assets/Contact/Vector-2.png" alt="" />
-          </div>
-          <h1>RULES</h1>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12 left-side">
+          <div class="title">How to calculate the deposit?</div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
-         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <div class="col-lg-8 col-md-8 col-sm-12 col-12 right-side">
+          Deposit
+          <br />
+          = 2*total_fee (if the total rent fee of book items is less than or
+          equal to $50) <br />
+          = 3*total_fee (if $50 is less than the total rent fee of book items
+          less than or equal to $100) <br />
+          = 5*total_fee (if $100 is less than the total rent fee of book items
+          less than or equal to $500) <br />
+          = 10*total_fee (if the total rent fee of book items is greater than
+          $500)
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-12 left-side">
+          <div class="title">
+            How to calculate the fine if you return books lately?
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-12 right-side">
+          Based on the number of dates later than expected return date, your
+          fine for 1 day for returning books lately will be calculated as
+          followed:<br />
+          $10 if the total rent fee of book items is less than or equal to $50.
+          <br />$20 if $50 is less than the total rent fee of book items is less
+          than or equal to $100.<br />
+          $30 if $100 is less than the total rent fee of book items is less than
+          or equal to $500. <br />
+          $50 if the total rent fee of book items is greater than $500.
         </div>
       </div>
     </div>
@@ -60,6 +72,8 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+@import "../scss/_variable.scss/";
+
 .background {
   img {
     background-color: rgb(0, 0, 0, 0.87);
@@ -70,13 +84,21 @@ export default {
     position: fixed;
   }
   .brightness {
-    filter: brightness(0.30);
+    filter: brightness(0.3);
   }
 }
 
 .contact {
+  @include mobile {
+    height: 120vh;
+  }
+
+  @include tablet {
+    height: 110vh;
+  }
+
   position: relative;
-  height: 110vh;
+  height: 90vh;
   background-color: rgb(0, 0, 0, 0.87);
 }
 /* .contact .background img {
@@ -90,25 +112,28 @@ export default {
 .contact .container .row {
   margin-top: 5%;
 }
-.container .row .left {
+.container .row .left-side {
   text-align: center;
   padding: 0%;
 }
-.circle img {
-  width: 60px;
-  opacity: 90%;
-}
 
-
-.right{
+.right-side {
   padding: 0;
 }
-.container .row .left h1 {
-  margin-top: 5%;
-  font-size: large;
-  color: white;
+.container .left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    width: 70%;
+    font-size: large;
+    color: white;
+    text-transform: uppercase;
+    justify-content: center;
+  }
 }
-.right {
+.right-side {
   // padding-right: 15%;
   color: rgb(255, 255, 255, 0.7);
 }
