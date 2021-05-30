@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <NavigationBar />
-    <div>
+    <NavigationBar id="header"/>
+    <div id="body">
       <router-view />
     </div>
     <Footer />
@@ -34,7 +34,10 @@ export default {
 
 <style lang="scss">
 #app {
-  width: 100%;
-  min-height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;  
+}
+#body{
+ flex: 1;
 }
 </style>

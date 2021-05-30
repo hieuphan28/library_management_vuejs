@@ -47,12 +47,12 @@ export default {
 </script>
 <style lang='scss' scoped>
 footer {
-  position: relative;
-  left: 0;
   bottom: 0;
   width: 100%;
   background-color: #ecd4b4;
   text-align: center;
+  z-index: 100;
+  position: relative;
 }
 footer .container {
   color: black;
