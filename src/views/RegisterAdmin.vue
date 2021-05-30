@@ -79,7 +79,6 @@ export default {
       phone: "",
       dob: "",
       address: "",
-      role: 1,
     };
   },
   methods: {
@@ -93,7 +92,6 @@ export default {
           phone: this.phone,
           dob: this.dob,
           address: this.address,
-          role: this.role,
         });
         this.$router.push("/login");
         toastSuccess("Register successfully");

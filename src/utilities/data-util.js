@@ -13,7 +13,8 @@ const getEnumKeys = (obj) => {
 
 const preProcessReservation = (reservation) => {
   const bookitems = reservation && reservation.book_items;
-  const bookData = []; 
+  const bookData = [];
+
   (bookitems || []).forEach(book_item => {
     const existIndex = bookData.findIndex(x => `${x.book_id}` === `${book_item.book_id}`);
     if (existIndex !== -1) {
@@ -31,6 +32,7 @@ const preProcessReservation = (reservation) => {
   const totalRentFee = reservation.total_fee 
     || bookData.reduce((x, item) => x + (item?.total_rent_cost || 0), 0);
   let deposit = undefined;
+
   if (totalRentFee <= 50)
     deposit = totalRentFee * 2;
   else if (50 < totalRentFee && totalRentFee <= 100)
@@ -48,11 +50,16 @@ const preProcessReservation = (reservation) => {
   return reservation;
 }
 
+/**
+ * Get fine of date late
+ * @param {any} reservation Reservation object
+ * @returns dateLate fee
+ */
 const getFineDateLate = (reservation) => {
   const dateLate = reservation && reservation.date_late || 0;
-  const totalFee = reservation.total_fee || 0;
+  const totalFee = reservation && reservation.total_fee || 0;
   
-  if (!dateLate) return 0;
+  if (dateLate <= 0) return 0;
 
   if (totalFee <= 50) return dateLate * 10;
 

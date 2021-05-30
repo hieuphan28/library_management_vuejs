@@ -109,10 +109,12 @@
         </div>
       </div>
     </div>
-    <div id="allbook">
-      <button class="btn d-block">
-        <router-link to="/books">All Books</router-link>
-      </button>
+    <div class="wrapper">
+      <div class="allbook">
+        <router-link to="/books"
+          ><button class="btn d-block">All Books</button>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -253,24 +255,29 @@ h2 b {
   background: rgba(0, 0, 0, 0.6);
 }
 
-button {
-  margin-top: 7%;
-  width: 100px;
-  background: #ecd4b4;
-  border: 1px solid #b7b7b7;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
-  margin-left: 45%;
-  text-decoration: none;
-  a {
-    color: rgba(0, 0, 0, 0.54);
-    text-decoration: none;
-    text-align: center;
-  }
-}
+.wrapper {
+  margin: 5% 0%;
+  text-align: center;
+  .allbook {
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    a {
+      text-decoration: none;
+    }
 
-button:hover {
-  background: #ffe5c3;
+    button {
+      background: #ecd4b4;
+      border: 1px solid #b7b7b7;
+      box-sizing: border-box;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.54);
+    }
+    button:hover {
+      background: #ffe5c3;
+    }
+  }
 }
 </style>

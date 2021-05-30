@@ -7,6 +7,7 @@
       action=""
       method=""
     >
+     <Loading :active.sync="isLoading"  class="loading"/>
       <div class="bar">
         <router-link to="/login">Login</router-link>
         <router-link to="/register"
@@ -63,8 +64,14 @@ import axios from "axios";
 import user from "../store/modules/user";
 import { toastError, toastMessage, toastSuccess } from "../utilities/toast-util";
 import { mapActions, mapGetters, mapState } from "vuex";
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
   name: "Register",
+   components: {
+        Loading,
+    },
   computed: {
     ...mapGetters("user", {
       currentUser: "currentUser",
@@ -79,12 +86,13 @@ export default {
       phone: "",
       dob: "",
       address: "",
-      role: 0,
+      isLoading: false,
     };
   },
   methods: {
     HandleSubmit: async function() {
       try {
+        this.isLoading = true;
         await this.$store.dispatch("user/register", {
           userId: this.userId,
           username: this.username,
@@ -92,14 +100,14 @@ export default {
           email: this.email,
           phone: this.phone,
           dob: this.dob,
-          address: this.address,
-          role: this.role,
+          address: this.address
         });
 
         toastSuccess("Register Successfully!");
         this.$router.push("/login");
       } catch (e) {
         toastError(e);
+        this.isLoading = false;
       }
     },
     myFunction() {
@@ -160,6 +168,9 @@ export default {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+.loading{
+  border-radius: 25px;
 }
 .register .create-account-form .input-box {
   // margin-bottom: 5%;

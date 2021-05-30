@@ -32,7 +32,7 @@
       <div
         class="col-lg-6 col-md-6 col-sm-12 col-12"
         v-for="book in books"
-        :key="book.id"
+        :key="book.book_id"
       >
         <div class="row allbook">
           <div class="col-lg-5 col-md-12 col-sm-12 col-12">
@@ -55,15 +55,15 @@
                 <a><i class="fa fa-trash"></i>Delete </a>
               </button>
               <div class="form-popup" id="myPopup">
-                <form action="/action_page.php" class="form-container">
+                <form @submit.prevent="removeBook(removeBookData)" class="form-container">
                   <p>Are you sure you want to delete this book?</p>
-                  <button type="submit" class="btn" @click="removeBook(book)">
+                  <button type="submit" class="btn">
                     Yes
                   </button>
                   <button
                     type="button"
                     class="btn cancel"
-                    @click="closePopup(book)"
+                    @click="closePopup()"
                   >
                     No
                   </button>
@@ -106,6 +106,7 @@ export default {
     return {
       searchText: undefined,
       bookData: undefined,
+      removeBookData: undefined,
     };
   },
   async mounted() {
@@ -125,10 +126,11 @@ export default {
       try {
         await this.$store.dispatch("book/removeBook", book);
         this.bookData = this.$store.getters["book/books"];
-        document.getElementById("myPopup").style.display = "none";
+
+        this.closePopup(book);
         toastSuccess("Remove book successfully.");
       } catch (e) {
-        document.getElementById("myPopup").style.display = "none";
+        this.closePopup(book);
         toastError(e);
       }
     },
@@ -136,6 +138,7 @@ export default {
       this.bookData = this.localSearch(this.searchText);
     },
     openPopup(book) {
+      this.removeBookData = book;
       document.getElementById("myPopup").style.display = "block";
     },
     closePopup() {

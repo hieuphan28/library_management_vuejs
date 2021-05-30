@@ -23,11 +23,12 @@ const register = async (data) => {
     const res = await axios.post(`${apiPrefix}/user/registration`, data);
     return handleResponse(res);
 }
+
 const registerAdmin = async (data) => {
     const res = await axios.post(`${apiPrefix}/user/registration/admin`, data);
     return handleResponse(res);
-
 }
+
 const changePassword = async (data) => {
     const res = await axios.put(`${apiPrefix}/changepassword`, data);
     return handleResponse(res);
@@ -35,13 +36,11 @@ const changePassword = async (data) => {
 
 const getProfile = async () => {
     const res = await axios.get(`${apiPrefix}/profile`);
-
     return handleResponse(res);
 }
 
 const updateProfile = async (user) => {
     const res = await axios.put(`${apiPrefix}/user`, user);
-
     return handleResponse(res);
 }
 

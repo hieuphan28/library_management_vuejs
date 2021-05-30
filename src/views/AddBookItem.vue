@@ -93,7 +93,7 @@ export default {
     async addBookItem() {
       try {
         this.bookitem.book_id = parseInt(this.book_id);
-        
+        this.bookitem.status = BookStatus[this.bookStatusSelected];
 
         await this.$store.dispatch("bookitem/addBookItem", this.bookitem);
         this.$router.push("/managebook");

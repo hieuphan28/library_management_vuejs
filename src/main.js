@@ -5,6 +5,8 @@ import store from './store'
 import moshaToast from 'mosha-vue-toastify'
 import 'mosha-vue-toastify/dist/style.css'
 import firebase from 'firebase/app'
+import VueLoading from 'vue-loading-overlay';
+
 
 firebase.initializeApp({
     apiKey: "AIzaSyDRSzUN5JG0izRubllBTClpmhaEV78DvkU",
@@ -20,4 +22,5 @@ const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(moshaToast)
+app.use(VueLoading);
 app.mount('#app')

@@ -7,14 +7,25 @@
       action=""
       method=""
     >
+      <Loading :active.sync="isLoading" class="loading" />
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
-        <input type="text" placeholder="id" readonly="true" v-model="currentUser.user_id"/>
+        <input
+          type="text"
+          placeholder="id"
+          readonly="true"
+          v-model="currentUser.user_id"
+        />
       </div>
       <div class="input-box">
         <span>Username:</span>
-        <input type="text" placeholder="username" readonly="true" v-model="currentUser.username"/>
+        <input
+          type="text"
+          placeholder="username"
+          readonly="true"
+          v-model="currentUser.username"
+        />
       </div>
       <div class="input-box">
         <span>Email:</span>
@@ -22,7 +33,7 @@
       </div>
       <div class="input-box">
         <span>Phone:</span>
-        <input type="text" placeholder="phone" v-model="currentUser.phone"/>
+        <input type="text" placeholder="phone" v-model="currentUser.phone" />
       </div>
       <div class="input-box">
         <span>DOB:</span>
@@ -30,7 +41,11 @@
       </div>
       <div class="input-box">
         <span>Address:</span>
-        <input type="text" placeholder="address" v-model="currentUser.address" />
+        <input
+          type="text"
+          placeholder="address"
+          v-model="currentUser.address"
+        />
       </div>
       <div class="btn-box">
         <a href="#">
@@ -42,32 +57,51 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
-import user from '../store/modules/user';
-import { toastError, toastMessage, toastSuccess } from '../utilities/toast-util';
+import { mapActions, mapGetters, mapState } from "vuex";
+import user from "../store/modules/user";
+import {
+  toastError,
+  toastMessage,
+  toastSuccess,
+} from "../utilities/toast-util";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   name: "ViewProfile",
+  components: {
+    Loading,
+  },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   computed: {
-    ...mapGetters('user',{
-      currentUser: 'currentUser'
-    })
+    ...mapGetters("user", {
+      currentUser: "currentUser",
+    }),
   },
   methods: {
-    handleSubmit: async function() {
+    handleSubmit: async function () {
       try {
-        await this.$store.dispatch('user/updateProfile', this.currentUser);
-        toastSuccess('Update successfully');
-      } catch(e) {
+        this.isLoading = true;
+        setTimeout(() => {
+                  this.isLoading = false
+                },3000)
+        await this.$store.dispatch("user/updateProfile", this.currentUser);
+        toastSuccess("Update successfully");
+      } catch (e) {
         toastError(e.message);
+        this.isLoading = false;
       }
-    }
+    },
   },
-  mounted: function() {
-    if (!this.currentUser?.user_id || !this.currentUser?.token) 
-      this.$router.push('/login');
-    this.$store.dispatch('user/getProfile');
-  }
+  mounted: function () {
+    if (!this.currentUser?.user_id || !this.currentUser?.token)
+      this.$router.push("/login");
+    this.$store.dispatch("user/getProfile");
+  },
 };
 </script>
 

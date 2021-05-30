@@ -60,7 +60,7 @@
           <div class="input-box">
             <span>Price:</span>
             <input
-              type="double"
+              type="number"
               min="0"
               placeholder=""
               v-model="bookInfo.price"
@@ -69,7 +69,7 @@
           <div class="input-box">
             <span>Rent Cost:</span>
             <input
-              type="double"
+              type="number"
               min="0"
               placeholder=""
               v-model="bookInfo.rent_cost"
