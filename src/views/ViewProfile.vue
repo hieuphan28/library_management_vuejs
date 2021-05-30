@@ -7,7 +7,7 @@
       action=""
       method=""
     >
-      <Loading :active.sync="isLoading" class="loading" />
+      <Loading: active.sync="isLoading" class="loading" />
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>

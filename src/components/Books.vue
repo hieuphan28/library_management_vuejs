@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid">
     <div class="search" v-if="query && query.length > 0">
-      Search results for 
-      <span>'{{query}} '</span>
+      Search results for
+      <span>'{{ query }} '</span>
     </div>
 
     <div class="row ">
@@ -11,16 +11,22 @@
         v-for="item in books"
         :key="item.id"
       >
-        <router-link :to="{ path: '/bookinfo/' + item.book_id}"
-          > <div class="contain"><img class="book-cover" :src="item.thumbnail" alt=""
-        /></div> </router-link>
+        <router-link :to="{ path: '/bookinfo/' + item.book_id }">
+          <div class="contain">
+            <img class="book-cover" :src="item.thumbnail" alt="" />
+          </div>
+        </router-link>
 
         <div class="book-name">{{ item.book_name }}</div>
         <div class="row book-info">
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 fee">
-            {{ item.rent_cost + '$' }}
+            {{ item.rent_cost + "$" }}
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6"  v-if="isMember">
+          <div
+            class="col-lg-6 col-md-6 col-sm-6 col-6"
+            v-if="isMember"
+            @click="AddToCart"
+          >
             <i class="fas fa-shopping-cart"> </i>
           </div>
         </div>
@@ -30,14 +36,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { toastError } from '../utilities/toast-util.js';
+import { mapGetters } from "vuex";
+import { toastError } from "../utilities/toast-util.js";
 import { UserRole } from "../common/bundleOfEnum";
 export default {
   name: "Books",
   computed: {
     ...mapGetters({
-      books: 'book/books'
+      books: "book/books",
     }),
     ...mapGetters("user", ["isMember"]),
   },
@@ -54,36 +60,52 @@ export default {
   async mounted() {
     try {
       if (this.category) {
-        await this.$store.dispatch('book/getBookByCategory', parseInt(this.category));
-      }
-      else if (this.department) {
-        await this.$store.dispatch('book/getBookByDepart', parseInt(this.department));  
-      }
-      else if (this.query || this.skip || this.limit) {
-        await this.$store.dispatch('book/searchBook', {
+        await this.$store.dispatch(
+          "book/getBookByCategory",
+          parseInt(this.category)
+        );
+      } else if (this.department) {
+        await this.$store.dispatch(
+          "book/getBookByDepart",
+          parseInt(this.department)
+        );
+      } else if (this.query || this.skip || this.limit) {
+        await this.$store.dispatch("book/searchBook", {
           query: this.query,
           skip: this.skip,
           limit: this.limit,
         });
-      } 
-      else {
-        await this.$store.dispatch('book/init');
+      } else {
+        await this.$store.dispatch("book/init");
       }
-      
-    } catch(e) {
+    } catch (e) {
       toastError(e);
     }
-  }
+  },
+  methods: {
+    async AddToCart() {
+      try {
+        await this.$store.dispatch("reservation/addCurrentCartItem", {
+          book_id: this.book_id,
+        });
+
+        this.$store.dispatch("bookitem/getBookItemByBookId", this.book_id);
+        toastSuccess("Add item to cart successfully.");
+      } catch (e) {
+        toastError(e);
+      }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.search{
+.search {
   border-bottom: solid 1px rgba(0, 0, 0, 0.87);
   margin-top: 5%;
   font-size: large;
   padding-bottom: 1%;
-  span{
+  span {
     color: #897160;
     font-style: italic;
   }
@@ -97,7 +119,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-   img {
+  img {
     flex-shrink: 15;
     min-width: 100%;
     min-height: 100%;
@@ -133,10 +155,10 @@ export default {
     float: right;
     font-size: 20px;
     transition: 0.3s;
+    cursor: pointer;
   }
-  i:hover{
+  i:hover {
     color: rgba(0, 0, 0, 0.87);
   }
 }
 </style>
-
