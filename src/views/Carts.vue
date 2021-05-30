@@ -91,6 +91,7 @@
 import moment from "moment";
 import { mapGetters } from "vuex";
 import { toastError, toastSuccess } from "../utilities/toast-util";
+import { preProcessReservation } from "../utilities/data-util";
 
 export default {
   name: "Carts",
@@ -108,11 +109,12 @@ export default {
   methods: {
     async changeBookQuantity(book) {
       try {
-        const bookData = bookitems2BookData(this.currentCart.book_items);
-        const amount =
-          book.quantity -
-          bookData.find((item) => `${item.book_id}` === `${book.book_id}`)
-            ?.quantity;
+        const bookData = this.$store.getters['reservation/currentCart'].book_items_sum;
+        const amount = book.quantity - (bookData.find((item) => `${item.book_id}` === `${book.book_id}`)?.quantity || 0);
+
+        this.currentCart.book_items_sum.map(item => {
+          if (`${item.book_id}` === `${book.book_id}`) item.quantity = book.quantity;
+        });
 
         if (amount > 0) {
           await this.$store.dispatch("reservation/addCurrentCartItem", {
@@ -127,8 +129,10 @@ export default {
           });
         }
 
-        if (amount == 0) return;
-
+        if (amount == 0) { 
+          return;
+        }
+        
         toastSuccess("Update successfully!");
       } catch (e) {
         throw toastError(e);
