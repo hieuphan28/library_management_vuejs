@@ -7,16 +7,15 @@ import 'mosha-vue-toastify/dist/style.css'
 import firebase from 'firebase/app'
 import VueLoading from 'vue-loading-overlay';
 
-
 firebase.initializeApp({
-    apiKey: "AIzaSyDRSzUN5JG0izRubllBTClpmhaEV78DvkU",
-    authDomain: "lib-management-c4811.firebaseapp.com",
-    projectId: "lib-management-c4811",
-    storageBucket: "lib-management-c4811.appspot.com",
-    messagingSenderId: "120134528586",
-    appId: "1:120134528586:web:6f803cc389e86cf33a40b3",
-    measurementId: "G-7VCCJW1S3H"
-  });
+  apiKey: "AIzaSyCvzvejN5MKdcQj4w0J9QFxzKTmHYSuNg8",
+  authDomain: "library-management-syste-4ecbb.firebaseapp.com",
+  projectId: "library-management-syste-4ecbb",
+  storageBucket: "library-management-syste-4ecbb.appspot.com",
+  messagingSenderId: "617822062997",
+  appId: "1:617822062997:web:36294bde7e4f4556ae0e9c",
+  measurementId: "G-NPB6Y6BJ7B"
+});
 
 const app = createApp(App)
 app.use(store)

@@ -1,92 +1,96 @@
 <template>
   <div class="container">
     <!-- UPDATE--BOOK--INFO -->
-    <div class="updatebookinfo">
-      <div class="row save">
-        <button class="btn" @click="saveBook">Save</button>
-      </div>
+    <form action="" @submit.prevent="saveBook">
+      <div class="updatebookinfo">
+        <div class="row save">
+          <button class="btn">Save</button>
+        </div>
+        <div class="row all">
+          <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
+            <div class="contain">
+              <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
+            <h1 class="title">
+              <input type="text" v-model="bookInfo.book_name" required/>
+            </h1>
+            <div class="textarea">
+              <textarea
+                name="paragraph_text"
+                cols="69"
+                rows="4"
+                v-model="bookInfo.description"
+                 required
+              ></textarea>
+            </div>
+            <div class="input-box">
+              <span>Language:</span>
+              <input type="text" placeholder="" v-model="bookInfo.language" required />
+            </div>
+            <div class="input-box">
+              <span>Author:</span>
+              <input type="text" placeholder="" v-model="bookInfo.author" required />
+            </div>
+            <div class="input-box">
+              <span>Category:</span>
+              <select v-model="bookInfo.category_id" required>
+                <option
+                  :value="option.category_id"
+                  v-for="(option, index) in categories"
+                  :key="index"
+                >
+                  {{ option.category_name }}
+                </option>
+              </select>
+            </div>
 
-      <div class="row all">
-        <div class="col-lg-5 col-md-5 col-sm-12 col-12 left-side">
-          <div class="contain">
-            <img class="book-cover" :src="bookInfo.thumbnail" alt="" />
+            <div class="input-box">
+              <span>Department:</span>
+              <select v-model="bookInfo.department_id" required>
+                <option
+                  :value="option.department_id"
+                  v-for="(option, index) in departments"
+                  :key="index"
+                >
+                  {{ option.department_name }}
+                </option>
+              </select>
+            </div>
+            <div class="input-box">
+              <span>Price:</span>
+              <input
+                type="double"
+                min="0"
+                placeholder=""
+                v-model="bookInfo.price"
+                 required
+              />
+            </div>
+            <div class="input-box">
+              <span>Rent Cost:</span>
+              <input
+                type="double"
+                min="0"
+                placeholder=""
+                v-model="bookInfo.rent_cost"
+                 required
+              />
+            </div>
+            <div class="input-box">
+              <span>Publication Date:</span>
+              <input
+                type="date"
+                placeholder=""
+                v-model="bookInfo.publication_date"
+                 required
+              />
+            </div>
           </div>
         </div>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
-          <h1 class="title">
-            <input type="text" v-model="bookInfo.book_name" />
-          </h1>
-          <div class="textarea">
-            <textarea
-              name="paragraph_text"
-              cols="69"
-              rows="4"
-              v-model="bookInfo.description"
-            ></textarea>
-          </div>
-          <div class="input-box">
-            <span>Language:</span>
-            <input type="text" placeholder="" v-model="bookInfo.language" />
-          </div>
-          <div class="input-box">
-            <span>Author:</span>
-            <input type="text" placeholder="" v-model="bookInfo.author" />
-          </div>
-          <div class="input-box">
-            <span>Category:</span>
-            <select v-model="bookInfo.category_id">
-              <option
-                :value="option.category_id"
-                v-for="(option, index) in categories"
-                :key="index"
-              >
-                {{ option.category_name }}
-              </option>
-            </select>
-          </div>
-
-          <div class="input-box">
-            <span>Department:</span>
-            <select v-model="bookInfo.department_id">
-              <option
-                :value="option.department_id"
-                v-for="(option, index) in departments"
-                :key="index"
-              >
-                {{ option.department_name }}
-              </option>
-            </select>
-          </div>
-          <div class="input-box">
-            <span>Price:</span>
-            <input
-              type="number"
-              min="0"
-              placeholder=""
-              v-model="bookInfo.price"
-            />
-          </div>
-          <div class="input-box">
-            <span>Rent Cost:</span>
-            <input
-              type="number"
-              min="0"
-              placeholder=""
-              v-model="bookInfo.rent_cost"
-            />
-          </div>
-          <div class="input-box">
-            <span>Publication Date:</span>
-            <input
-              type="date"
-              placeholder=""
-              v-model="bookInfo.publication_date"
-            />
-          </div>
-        </div>
       </div>
-    </div>
-
+    </form>
     <!-- UPDATE--BOOK--ITEM -->
     <div class="bookitem" v-for="(book, index) in bookItems" :key="index">
       <div class="row title">
