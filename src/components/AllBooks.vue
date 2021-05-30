@@ -52,7 +52,7 @@
               <div class="row">
                 <div
                   class="col-sm-3"
-                  v-for="item in books.slice(i+5, i + 9)"
+                  v-for="item in books.slice(i + 5, i + 9)"
                   :key="item.id"
                 >
                   <div class="thumb-wrapper">
@@ -73,18 +73,22 @@
             </div>
             <div class="carousel-item">
               <div class="row">
-                <div class="col-sm-3">
+                <div
+                  class="col-sm-3"
+                  v-for="item in books.slice(i + 10, i + 14)"
+                  :key="item.id"
+                >
                   <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book9.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
+                    <router-link :to="{ path: '/bookinfo/' + item.book_id }">
+                      <div class="img-box">
+                        <img :src="item.thumbnail" class="img-fluid" alt="" />
+                      </div>
+                    </router-link>
                     <div class="thumb-content">
-                      <p>Apple iPhone</p>
-                      <p class="item-price"><span>$349.00</span></p>
+                      <p>{{ item.book_name }}</p>
+                      <p class="item-price">
+                        <span>{{ "$" + item.rent_cost }}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -126,7 +130,6 @@ export default {
     ...mapGetters({
       books: "book/books",
     }),
-
   },
   data() {
     return {
