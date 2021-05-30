@@ -18,11 +18,9 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-            <li data-target="#myCarousel" data-slide-to="4"></li>
           </ol>
           <!-- Wrapper for carousel items -->
-          <div class="carousel-inner">
+           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
                 <div
@@ -50,7 +48,7 @@
               <div class="row">
                 <div
                   class="col-sm-3"
-                  v-for="item in books.slice(i+5, i + 9)"
+                  v-for="item in books.slice(i + 5, i + 9)"
                   :key="item.id"
                 >
                   <div class="thumb-wrapper">
@@ -71,18 +69,22 @@
             </div>
             <div class="carousel-item">
               <div class="row">
-                <div class="col-md-3 col-12">
+                <div
+                  class="col-sm-3"
+                  v-for="item in books.slice(i + 10, i + 14)"
+                  :key="item.id"
+                >
                   <div class="thumb-wrapper">
-                    <div class="img-box">
-                      <img
-                        src="../assets/newbooks/book9.png"
-                        class="img-fluid"
-                        alt=""
-                      />
-                    </div>
+                    <router-link :to="{ path: '/bookinfo/' + item.book_id }">
+                      <div class="img-box">
+                        <img :src="item.thumbnail" class="img-fluid" alt="" />
+                      </div>
+                    </router-link>
                     <div class="thumb-content">
-                      <p>Apple iPhone</p>
-                      <p class="item-price"><span>$349.00</span></p>
+                      <p>{{ item.book_name }}</p>
+                      <p class="item-price">
+                        <span>{{ "$" + item.rent_cost }}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -118,7 +120,7 @@ export default {
       i: 0,
     };
   },
-}
+};
 </script>
 <style scoped>
 .intro {
@@ -139,7 +141,7 @@ h2 {
   font-weight: bold;
 }
 h2 b {
-  color: #FFC000;
+  color: #ffc000;
 }
 .carousel {
   margin: 2% auto;
@@ -214,7 +216,7 @@ h2 b {
   /* width:100%; */
 }
 .carousel .item-price span {
-  color: #86BD57;
+  color: #86bd57;
   font-size: 110%;
 }
 .carousel .carousel-indicators {
