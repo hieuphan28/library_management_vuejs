@@ -1,4 +1,5 @@
 <template>
+  <PageLoader class="page-loader" />
   <div class="container">
     <div class="row head">
       <div class="col-lg-2 col-md-12 col-sm-12 col-12 left-side">
@@ -91,8 +92,12 @@
 <script>
 import { mapGetters } from "vuex";
 import { toastError, toastSuccess } from "../utilities/toast-util";
+import PageLoader from "../components/PageLoader.vue";
 export default {
   name: "ManageBook",
+  components: {
+    PageLoader,
+  },
   computed: {
     ...mapGetters({
       localSearch: "book/search",
@@ -151,6 +156,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container{
+  min-height: calc(100vh - 95px); 
+  padding-top: 3%;
+}
 .contain {
   border: solid 1px rgba(0, 0, 0, 0.38);
   width: 180px;
@@ -159,6 +168,7 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  
   img {
     flex-shrink: 15;
     min-width: 100%;
@@ -178,7 +188,7 @@ export default {
   }
 }
 .head {
-  margin-top: 5%;
+ 
   button {
     float: left;
     width: 160px;

@@ -7,6 +7,7 @@
       action=""
       method=""
     >
+      <Loading :active.sync="isLoading"  class="loading"/>
       <h1>Change Password</h1>
       <div class="input-box">
         <span>Current Password:</span>
@@ -16,28 +17,15 @@
           type="password"
           placeholder=""
         />
-        <img
-          class="eye"
-          src="../assets/eye.svg"
-          alt=""
-          @click="myFunction()"
-        />
+        <img class="eye" src="../assets/eye.svg" alt="" @click="myFunction()" />
       </div>
       <div class="input-box">
         <span>New Password:</span>
-        <input
-          v-model="password"
-          type="password"
-          placeholder=""
-        />
+        <input v-model="password" type="password" placeholder="" />
       </div>
       <div class="input-box">
         <span>Confirm Password:</span>
-        <input
-          v-model="confirmed_password"
-          type="password"
-          placeholder=""
-        />
+        <input v-model="confirmed_password" type="password" placeholder="" />
       </div>
       <div class="btn-box">
         <a href="">
@@ -56,8 +44,14 @@ import {
   toastSuccess,
 } from "../utilities/toast-util";
 import { mapActions, mapGetters, mapState } from "vuex";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+
 export default {
   name: "ChangePassword",
+  components: {
+    Loading
+  },
   computed: {
     ...mapGetters("user", {
       currentUser: "currentUser",
@@ -68,11 +62,16 @@ export default {
       current_password: "",
       password: "",
       confirmed_password: "",
+      isLoading: false,
     };
   },
   methods: {
     async changePassSubmit() {
       try {
+        this.isLoading = true;
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 3000);
         if (this.password == this.confirmed_password) {
           await this.$store.dispatch(`user/changePassword`, {
             current_password: this.current_password,
@@ -85,9 +84,10 @@ export default {
         }
       } catch (e) {
         toastError(e.response.data.meta.message);
+        this.isLoading = false;
       }
     },
-    mounted: function() {
+    mounted: function () {
       if (!this.currentUser?.user_id || !this.currentUser?.token)
         this.$router.push("/login");
     },
