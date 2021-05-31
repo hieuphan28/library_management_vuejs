@@ -76,11 +76,6 @@
                     >Logout</a
                   ></router-link
                 >
-                <!-- <router-link to="/login" v-if="!isLogged"
-                  ><a class="dropdown-item" href="#" @click="clearCurrentUser"
-                    >Login</a
-                  ></router-link
-                > -->
                 <router-link
                   class="dropdown-item"
                   to="/borrow-history"
