@@ -25,7 +25,7 @@
           <div
             class="col-lg-6 col-md-6 col-sm-6 col-6"
             v-if="isMember"
-            @click="AddToCart"
+            @click="AddToCart(item)"
           >
             <i class="fas fa-shopping-cart"> </i>
           </div>
@@ -37,7 +37,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { toastError } from "../utilities/toast-util.js";
+import { toastError, toastSuccess } from "../utilities/toast-util.js";
 import { UserRole } from "../common/bundleOfEnum";
 export default {
   name: "Books",
@@ -83,10 +83,10 @@ export default {
     }
   },
   methods: {
-    async AddToCart() {
+    async AddToCart(book) {
       try {
         await this.$store.dispatch("reservation/addCurrentCartItem", {
-          book_id: this.book_id,
+          book_id: book.book_id,
         });
 
         this.$store.dispatch("bookitem/getBookItemByBookId", this.book_id);
