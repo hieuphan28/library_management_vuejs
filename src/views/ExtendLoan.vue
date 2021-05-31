@@ -13,8 +13,8 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-6 data">
         <ul>
           <li>{{ reservation.reservation_id }}</li>
-          <li>{{ reservation.borrowedDate }}</li>
-          <li>{{ reservation.expectedDate }}</li>
+          <li>{{ reservation.reserved_time }}</li>
+          <li>{{ reservation.expected_return_date }}</li>
         </ul>
       </div>
     </div>
@@ -33,7 +33,7 @@
     </div>
     <div class="numberdays">
       <label for="newDate">Number of day extended:</label>
-      <input type="text" id="newDate" />
+      <input type="text" v-model="numberOfDayExtend" id="newDate" />
     </div>
     <div class="table">
       <div class="row name">
@@ -61,9 +61,7 @@
     </div>
     <div class="wrapper">
       <div class="extend">
-        <router-link to="/books"
-          ><button class="btn d-block">Extend</button>
-        </router-link>
+        <button class="btn d-block" @click="startExtend">Extend</button>
       </div>
     </div>
     <!-- OLD CODE -->
@@ -120,6 +118,7 @@
 import { mapGetters } from "vuex";
 import { ReservationStatus } from "../common/bundleOfEnum";
 import { getEnumKeyWithValue } from "../utilities/data-util";
+import { toastError, toastInfo, toastSuccess } from '../utilities/toast-util';
 export default {
   name: "ExtendLoan",
   computed: {
@@ -133,6 +132,7 @@ export default {
   data() {
     return {
       reservation_id: this.$route.params.reservation_id,
+      numberOfDayExtend: undefined,
     };
   },
   mounted() {
@@ -142,6 +142,30 @@ export default {
     passEnumKey(status) {
       return getEnumKeyWithValue(ReservationStatus, status);
     },
+
+    async startExtend() {
+      try {
+        if (!this.reservation 
+        // || this.reservation.is_extended 
+          || !this.numberOfDayExtend || this.numberOfDayExtend > 5) {
+          toastInfo("This reservation or the number of day extend is not valid.");
+          return;
+        } 
+
+        const newExpectReturned = new Date(this.reservation?.expected_return_date);
+        newExpectReturned.setDate(newExpectReturned.getDate() + parseInt(this.numberOfDayExtend));
+
+        await this.$store.dispatch('reservation/extend', {
+          ...this.reservation,
+          expected_return_date: newExpectReturned.toISOString(),
+        });
+
+        toastSuccess('Extend loan successfully.');
+        this.$router.push('/borrow-history');
+      } catch(e) {
+        toastError(e);
+      }
+    }
   },
 };
 </script>

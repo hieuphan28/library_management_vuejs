@@ -168,8 +168,9 @@ export default {
               expected_return_date: this.expected_return_date,
             };
             await this.$store.dispatch("reservation/borrow", reservation);
-
             toastSuccess("Request reserve successfully.");
+
+            this.$router.push('/borrow-history');
           } else {
             toastError("Please try again");
           }
