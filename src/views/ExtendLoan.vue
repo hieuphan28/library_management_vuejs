@@ -145,9 +145,7 @@ export default {
 
     async startExtend() {
       try {
-        if (!this.reservation 
-        // || this.reservation.is_extended 
-          || !this.numberOfDayExtend || this.numberOfDayExtend > 5) {
+        if (!this.reservation || !this.numberOfDayExtend || this.numberOfDayExtend > 5) {
           toastInfo("This reservation or the number of day extend is not valid.");
           return;
         } 
