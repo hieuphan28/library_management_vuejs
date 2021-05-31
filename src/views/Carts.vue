@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="row cart-details">
-      <form action="" @submit.prevent="startReserve">
+    <form action="" @submit.prevent="startReserve">
+      <div class="row cart-details">
         <div class="col-lg-3 col-md-3 col-sm-6 col-6 detail-left">
           <ul>
             <li>Reserved Date:</li>
@@ -38,8 +38,8 @@
           <div class="total-fee">${{ currentCart.total_fee }}</div>
           <button>Reserve</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
     <div class="row title">
       <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
       <div class="col-lg-3 col-md-3 col-sm-3 col-3">NAME</div>
@@ -150,20 +150,26 @@ export default {
 
     async startReserve() {
       try {
-        if (this.reserved_time != undefined && this.expected_return_date != undefined) {
-          if(Date.now() <= new Date(this.reserved_time)&& new Date(this.reserved_time) <= new Date(this.expected_return_date)){
-          const reservation = {
-            ...this.currentCart,
-            reserved_time: this.reserved_time,
-            expected_return_date: this.expected_return_date,
-          };
-          await this.$store.dispatch("reservation/borrow", reservation);
+        if (
+          this.reserved_time != undefined &&
+          this.expected_return_date != undefined
+        ) {
+          if (
+            Date.now() <= new Date(this.reserved_time) &&
+            new Date(this.reserved_time) <= new Date(this.expected_return_date)
+          ) {
+            const reservation = {
+              ...this.currentCart,
+              reserved_time: this.reserved_time,
+              expected_return_date: this.expected_return_date,
+            };
+            await this.$store.dispatch("reservation/borrow", reservation);
 
-          toastSuccess("Request reserve successfully.");
+            toastSuccess("Request reserve successfully.");
+          } else {
+            toastError("Please try again");
+          }
         }
-        else{
-          toastError("Please try again")
-        }}
       } catch (e) {
         toastError(e);
       }
