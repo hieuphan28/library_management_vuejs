@@ -6,11 +6,12 @@ const state = () => ({
     data: [],
 });
 
-const sortByDate = (a,b) => new Date(b.create_date) - new Date(a.create_date);
+const sortByDate = (a,b) => new Date(b.created_time) - new Date(a.created_time);
 
 const getters = {
     reservations: (state, getters, rootGetters) => {
-        return (state.data || []).map(item => preProcessReservation(item));
+        return (state.data || []).map(item => preProcessReservation(item))
+            .reverse();
     },
 
     reservationByStatus: (state, getters) => status => {
