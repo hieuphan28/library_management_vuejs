@@ -122,7 +122,8 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
+@import "../scss/_variable.scss/";
 .intro {
   text-align: center;
   width: 50%;
@@ -174,7 +175,9 @@ h2 b {
   right: 0;
 }
 .carousel .carousel-item p {
-  /* font-weight: bold; */
+   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .carousel .thumb-wrapper {
   text-align: center;
