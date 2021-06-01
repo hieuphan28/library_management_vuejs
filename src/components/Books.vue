@@ -12,7 +12,7 @@
         :key="item.id"
       >
         <router-link :to="{ path: '/bookinfo/' + item.book_id }">
-          <div class="contain">
+          <div class="contain bookimg">
             <img class="book-cover" :src="item.thumbnail" alt="" />
           </div>
         </router-link>
@@ -23,7 +23,6 @@
             {{ item.rent_cost + "$" }}
           </div>
           <div
-            class="col-lg-6 col-md-6 col-sm-6 col-6"
             v-if="isMember"
             @click="AddToCart(item)"
           >
@@ -100,6 +99,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/_variable.scss/";
 .search {
   border-bottom: solid 1px rgba(0, 0, 0, 0.87);
   margin-top: 5%;
@@ -108,6 +108,9 @@ export default {
   span {
     color: #897160;
     font-style: italic;
+  }
+  @include mobile{
+    font-size: small;
   }
 }
 
@@ -134,6 +137,12 @@ export default {
 .row {
   margin-top: 2%;
 }
+.bookimg {
+  @include mobile {
+    width: 100px;
+    height: 120px;
+  }
+}
 .book-cover {
   width: 100%;
   height: auto;
@@ -142,6 +151,9 @@ export default {
   padding-top: 3%;
   font-size: 20px;
   font-weight: bold;
+  @include mobile {
+    font-size: small;
+  }
 }
 .book-info {
   margin-top: 5%;
@@ -149,13 +161,21 @@ export default {
   color: rgba(0, 0, 0, 0.54);
   align-items: center;
 
-
+  .fee {
+    @include mobile {
+      font-size: 0.9em;
+    }
+  }
   i {
     color: rgba(0, 0, 0, 0.38);
     float: right;
     font-size: 20px;
     transition: 0.3s;
     cursor: pointer;
+    @include mobile {
+      float: left;
+      font-size: 1em;
+    }
   }
   i:hover {
     color: rgba(0, 0, 0, 0.87);

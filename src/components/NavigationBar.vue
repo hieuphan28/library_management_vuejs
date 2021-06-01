@@ -14,7 +14,7 @@
             <ul class="meninmenu">
               <li><router-link to="/">Home</router-link></li>
               <li>
-                <a :href="'/books'">Books</a>
+                <router-link to="'/books">Books</router-link>
               </li>
               <li>
                 <router-link to="/contact">Contact</router-link>
@@ -29,7 +29,17 @@
         </div>
         <div class="col-8 col-md-6 col-lg-4">
           <ul class="header__sidebar__right d-flex align-items-center">
-            <li class="shop_search dropdown show">
+            <li class="shop_search dropdown show" v-if="isLogged">
+              <input
+                type="text"
+                placeholder="Search your books"
+                v-model="searchQuery"
+              />
+              <a :href="`/books?q=${searchQuery}`">
+                <i class="fa fa-search" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li class="shop_search dropdown show nologged" v-if="!isLogged">
               <input
                 type="text"
                 placeholder="Search your books"
@@ -44,10 +54,10 @@
                 ><i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </router-link>
             </li>
-            <li class="not_logged" v-if="!isLogged">
+            <li class="not_logged desktop-res" v-if="!isLogged">
               <router-link to="/register">Register</router-link>
             </li>
-            <li class="not_logged" v-if="!isLogged">
+            <li class="not_logged desktop-res" v-if="!isLogged">
               <router-link to="/login">Login</router-link>
             </li>
 
@@ -117,6 +127,12 @@
             >MANAGE BOOK
           </router-link>
         </li>
+        <li class="mobile-res" v-if="!isLogged">
+          <router-link to="/register">Register</router-link>
+        </li>
+        <li class="mobile-res" v-if="!isLogged">
+          <router-link to="/login">Login</router-link>
+        </li>
       </ul>
     </nav>
   </div>
@@ -153,6 +169,26 @@ export default {
   @include tablet {
     display: none;
   }
+}
+li.desktop-res {
+  @include mobile {
+    display: none !important;
+  }
+  @include tablet {
+    display: none !important;
+  }
+}
+li.mobile-res a {
+  color: rgba(0, 0, 0, 0.54);
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 0 12px 30px;
+  transition: all 0.4s ease 0s;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  text-align: right;
+  text-transform: uppercase;
 }
 .nav-menu {
   display: none;
@@ -259,6 +295,15 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
+.header__area .header__sidebar__right > li.nologged {
+  @include mobile {
+    margin-left: 3rem;
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
 .shop_search input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
@@ -281,7 +326,7 @@ export default {
 .shop_search a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
-.shopcart{
+.shopcart {
   @include mobile {
     margin-right: 10px;
   }
