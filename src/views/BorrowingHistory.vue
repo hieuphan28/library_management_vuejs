@@ -2,11 +2,13 @@
   <div class="container">
     <div class="page-title">BORROWING HISTORY</div>
     <div class="row title">
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">BORROWING ID</div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-4">NAME</div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">PRICE</div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">STATUS</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">
+        BORROWING ID
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-4 title-view">NAME</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">QUANTITY</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">PRICE</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">STATUS</div>
     </div>
     <div
       class="row info"
@@ -108,6 +110,9 @@ export default {
 @import "../scss/_variable.scss/";
 
 .container {
+  @include mobile {
+    font-size: x-small;
+  }
   .page-title {
     text-align: center;
     font-weight: 600;
@@ -117,6 +122,11 @@ export default {
   .title {
     text-align: center;
     font-weight: 600;
+    .title-view {
+      @include mobile {
+        padding-right: 0.1rem;
+      }
+    }
   }
   .info {
     text-align: center;
@@ -126,6 +136,9 @@ export default {
 
     .borrowingID {
       div {
+        @include mobile {
+          width: 2.5rem;
+        }
         border-radius: 18px;
         background: rgba(226, 226, 226, 0.5);
         padding: 0.5rem 0.5rem;
@@ -155,6 +168,9 @@ export default {
         // background: rgba(226, 226, 226, 0.5);
         // border-radius: 18px;
         // padding: 0.5rem 0.5rem;
+        // @include mobile {
+        //   padding-right: 0.1rem;
+        // }
       }
     }
     .book-status {
@@ -165,31 +181,42 @@ export default {
 
       @include mobile {
         font-size: x-small;
+        padding-left: 0!important;
+
       }
     }
     .BORROWING {
       background: #fdffae;
       border-radius: 8px;
       padding: 0.5rem 0.5rem;
-      width: 80%;
+      width: 8rem;
       margin-left: auto;
       margin-right: auto;
+      @include mobile {
+        width: 4rem;
+      }
     }
     .CLOSED {
       background: rgba(135, 255, 115, 0.7);
       border-radius: 8px;
       padding: 0.5rem 0.5rem;
-      width: 80%;
+      width: 8rem;
       margin-left: auto;
       margin-right: auto;
+      @include mobile {
+        width: 4rem;
+      }
     }
     .RESERVED {
       background: #ff9494 50%;
       border-radius: 8px;
       padding: 0.5rem 0.5rem;
-      width: 80%;
+      width: 8rem;
       margin-left: auto;
       margin-right: auto;
+      @include mobile {
+        width: 4rem;
+      }
     }
     .book-date {
       div {
@@ -200,6 +227,9 @@ export default {
       padding: 2.5% 4% 0 4%;
 
       button {
+        @include mobile{
+          width:3rem;
+        }
         margin-left: auto;
         border-radius: 8px;
         padding: 2%;

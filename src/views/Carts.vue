@@ -41,12 +41,12 @@
       </div>
     </form>
     <div class="row title">
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
-      <div class="col-lg-3 col-md-3 col-sm-3 col-3">NAME</div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">PRICE</div>
-      <div class="col-lg-2 col-md-2 col-sm-2 col-2">TOTAL</div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-1"></div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view"></div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-3 title-view">NAME</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">QUANTITY</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">PRICE</div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-2 title-view">TOTAL</div>
+      <div class="col-lg-1 col-md-1 col-sm-1 col-1 title-view"></div>
     </div>
     <div
       class="row info"
