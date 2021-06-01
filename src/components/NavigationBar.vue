@@ -29,13 +29,12 @@
         </div>
         <div class="col-8 col-md-6 col-lg-4">
           <ul class="header__sidebar__right d-flex align-items-center">
-            <li class="search-input"><input
+            <li class="shop_search dropdown show">
+              <input
                 type="text"
                 placeholder="Search your books"
                 v-model="searchQuery"
-              /></li>
-            <li class="shop_search dropdown show">
-              
+              />
               <a :href="`/books?q=${searchQuery}`">
                 <i class="fa fa-search" aria-hidden="true"></i
               ></a>
@@ -177,7 +176,7 @@ export default {
     height: auto;
     outline: black;
   }
-  button:hover{
+  button:hover {
     color: #000;
   }
 }
@@ -260,14 +259,14 @@ export default {
   display: flex;
   justify-content: space-evenly;
 }
-.search-input input[type="text"] {
+.shop_search input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   text-decoration: none;
   float: right;
   padding: 6px;
   border: none;
-  margin-right: 0;
+  margin-right: 10px;
   font-size: 17px;
   @include mobile {
     width: 70%;
@@ -282,7 +281,11 @@ export default {
 .shop_search a i:hover {
   color: rgba(0, 0, 0, 0.87);
 }
-
+.shopcart{
+  @include mobile {
+    margin-right: 10px;
+  }
+}
 .shopcart a i {
   color: rgba(0, 0, 0, 0.54);
 }
