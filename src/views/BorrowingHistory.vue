@@ -1,4 +1,5 @@
 <template>
+<PageLoader class="page-loader" />
   <div class="container">
     <div class="page-title">BORROWING HISTORY</div>
     <div class="row title">
@@ -77,6 +78,7 @@
 import { mapGetters } from "vuex";
 import { toastError, toastSuccess } from "../utilities/toast-util";
 import { ReservationStatus } from "../common/bundleOfEnum";
+import PageLoader from "../components/PageLoader.vue";
 import {
   bookitems2BookData,
   getEnumKeyWithValue,
@@ -84,6 +86,9 @@ import {
 
 export default {
   name: "BorrowingHistory",
+  components: {
+    PageLoader,
+  },
   computed: {
     ...mapGetters({
       reservations: "reservation/currentReservations",
@@ -113,6 +118,7 @@ export default {
   @include mobile {
     font-size: x-small;
   }
+  min-height: calc(100vh - 95px); 
   .page-title {
     text-align: center;
     font-weight: 600;

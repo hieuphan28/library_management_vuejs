@@ -7,7 +7,7 @@
       action=""
       method=""
     >
-      <Loading :active.sync="isLoading"  class="loading"/>
+      <Loading :active.sync="isLoading" class="loading" />
       <h1>Personal Profile</h1>
       <div class="input-box">
         <span>User ID:</span>
@@ -87,8 +87,8 @@ export default {
       try {
         this.isLoading = true;
         setTimeout(() => {
-                  this.isLoading = false
-                },3000)
+          this.isLoading = false;
+        }, 3000);
         await this.$store.dispatch("user/updateProfile", this.currentUser);
         toastSuccess("Update successfully");
       } catch (e) {

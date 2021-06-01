@@ -29,12 +29,13 @@
         </div>
         <div class="col-8 col-md-6 col-lg-4">
           <ul class="header__sidebar__right d-flex align-items-center">
-            <li class="shop_search dropdown show">
-              <input
+            <li class="search-input"><input
                 type="text"
                 placeholder="Search your books"
                 v-model="searchQuery"
-              />
+              /></li>
+            <li class="shop_search dropdown show">
+              
               <a :href="`/books?q=${searchQuery}`">
                 <i class="fa fa-search" aria-hidden="true"></i
               ></a>
@@ -105,7 +106,7 @@
     </div>
   </header>
   <div class="mobile-menu" v-show="showNav">
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" v-on:click="showNav = !showNav">
       <ul class="mobile-item" style="">
         <li><router-link to="/">HOME</router-link></li>
         <li><router-link to="/books">BOOKS</router-link></li>
@@ -172,8 +173,12 @@ export default {
     background: #ecd4b4;
     margin-top: 28px;
     border: none;
-    width: 60%;
+    width: 30px;
     height: auto;
+    outline: black;
+  }
+  button:hover{
+    color: #000;
   }
 }
 .nav-menu-item {
@@ -253,19 +258,23 @@ export default {
   align-items: center;
   align-self: stretch;
   display: flex;
+  justify-content: space-evenly;
 }
-.header__area .header__sidebar__right > li.shop_search > input[type="text"] {
+.search-input input[type="text"] {
   background: rgba(255, 255, 255, 0.8);
-  // border-radius: 8px;
+  border-radius: 8px;
   text-decoration: none;
   float: right;
   padding: 6px;
   border: none;
-  margin-top: 8px;
-  margin-right: 16px;
+  margin-right: 0;
   font-size: 17px;
+  @include mobile {
+    width: 70%;
+    font-size: 12px;
+    margin: 0 3px;
+  }
 }
-
 .shop_search a {
   color: rgba(0, 0, 0, 0.54);
 }
