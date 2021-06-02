@@ -5,7 +5,7 @@
         <h2>All <b>Books</b></h2>
         <p class="intro">
           Explore all our books here, with all information and accessibility to
-          library materials. What are you waiting for? Start you adventure now!
+          library materials. What are you waiting for? Start your adventure now!
         </p>
         <div
           id="myCarousel1"

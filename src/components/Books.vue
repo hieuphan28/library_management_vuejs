@@ -151,6 +151,7 @@ export default {
   padding-top: 3%;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
   @include mobile {
     font-size: small;
   }
