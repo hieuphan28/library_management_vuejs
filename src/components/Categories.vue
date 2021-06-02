@@ -46,6 +46,7 @@ export default {
   @include mobile {
     margin-left: 1rem;
     padding: 0;
+    margin-right:0!important;
   }
 }
 .title {
