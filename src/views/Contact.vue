@@ -105,7 +105,7 @@ export default {
 }
 .circle img {
   width: 60px;
-  opacity: 90;
+  // opacity: 90;
 }
 
 
