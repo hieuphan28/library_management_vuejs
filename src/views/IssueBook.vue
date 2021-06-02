@@ -23,7 +23,7 @@
     <h1>ISSUE BOOK</h1>
 
     <div
-      v-for="reservation in reservations"
+      v-for="reservation in (usernameTextSearch ? searchReservations : issueReservations)"
       :key="reservation.reservation_id"
     >
       <!-- TRANSACTION-INFO -->
@@ -144,6 +144,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { ReservationStatus } from '../common/bundleOfEnum';
 import { checkContain } from '../utilities/data-util';
 import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
@@ -151,17 +152,19 @@ export default {
   computed: {
     ...mapGetters({
       issueReservations: "reservation/issueReservations",
-      returnReservations: "reservation/returnReservations",
+      reservationBySearch: "reservation/reservationBySearch",
     }),
 
-    reservations() {
-      return this.reservationData;
+    searchReservations() {
+      return this.reservationBySearch({
+        query: this.usernameTextSearch,
+        status: ReservationStatus.RESERVED,
+      });
     },
   },
   data() {
     return {
       usernameTextSearch: undefined,
-      reservationData: undefined,
     };
   },
   methods: {
@@ -177,28 +180,10 @@ export default {
         toastError(e);
       }
     },
-
-    searchByUsername() {
-      if (this.usernameTextSearch) {
-        this.reservationData = this.issueReservations.filter(item => checkContain(item.user?.username, this.usernameTextSearch));
-        return;
-      }
-
-      this.reservationData = this.issueReservations;
-    }
   },
-  async mounted() {
-    try {
-      this.reservationData = this.issueReservations;
-      await this.$store.dispatch("reservation/getIssue");
-      this.reservationData = this.issueReservations;
-    } catch(e) {
-      toastError(e);
-    }
+  mounted() {
+    this.$store.dispatch("reservation/getIssue");
   },
-  watch: {
-    usernameTextSearch: 'searchByUsername'
-  }
 };
 </script>
 

@@ -180,6 +180,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.$store.dispatch("reservation/initCurrentReservations");
+  },
 };
 </script>
 

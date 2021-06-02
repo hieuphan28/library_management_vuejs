@@ -1,6 +1,6 @@
 import { ReservationStatus } from "../../common/bundleOfEnum";
 import * as reservationService from "../../services/reservation-service";
-import { bookitems2BookData, preProcessReservation } from "../../utilities/data-util";
+import { bookitems2BookData, checkContain, preProcessReservation } from "../../utilities/data-util";
 
 const state = () => ({
     data: [],
@@ -16,8 +16,14 @@ const getters = {
 
     reservationByStatus: (state, getters) => status => {
         return getters.reservations
-        .filter(item => `${item.status}` === `${status}`)
-        .sort(sortByDate);
+            .filter(item => `${item.status}` === `${status}`)
+            .sort(sortByDate)
+    },
+
+    reservationBySearch: (state, getters) => ({query, status}) => {
+        return getters.reservationByStatus(status)
+            .filter(item => checkContain(item.user?.username, query))
+            .sort(sortByDate);
     },
 
     reservationByUserIdAndStatus: (state, getters) => ({user_id, status}) => {
