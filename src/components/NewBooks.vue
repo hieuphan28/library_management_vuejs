@@ -4,8 +4,8 @@
       <div class="col-md-12">
         <h2>New <b>Books</b></h2>
         <p class="intro">
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered lebmid alteration in some ledmid form
+          Explore our new books here with all accessability to the basic
+          information of the newest ones.
         </p>
         <div
           id="myCarousel"
@@ -20,7 +20,7 @@
             <li data-target="#myCarousel" data-slide-to="2"></li>
           </ol>
           <!-- Wrapper for carousel items -->
-           <div class="carousel-inner">
+          <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="row">
                 <div
@@ -175,7 +175,7 @@ h2 b {
   right: 0;
 }
 .carousel .carousel-item p {
-   overflow: hidden;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -224,6 +224,9 @@ h2 b {
 }
 .carousel .carousel-indicators {
   bottom: -50px;
+  @include mobile {
+    bottom: -30px;
+  }
 }
 .carousel-indicators li,
 .carousel-indicators li.active {

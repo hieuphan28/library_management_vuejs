@@ -32,13 +32,13 @@
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right-side">
           Deposit
           <br />
-          = 2*total_fee (if the total rent fee of book items is less than or
+          = 2 x total fee (if the total rent fee of book items is less than or
           equal to $50) <br />
-          = 3*total_fee (if $50 is less than the total rent fee of book items
-          less than or equal to $100) <br />
-          = 5*total_fee (if $100 is less than the total rent fee of book items
-          less than or equal to $500) <br />
-          = 10*total_fee (if the total rent fee of book items is greater than
+          = 3 x total fee (if the total rent fee of book items is more than $50
+          and less than or equal to $100) <br />
+          = 3 x total fee (if the total rent fee of book items is more than $50
+          and less than or equal to $100) <br />
+          = 10 x total fee (if the total rent fee of book items is greater than
           $500)
         </div>
       </div>
@@ -54,10 +54,8 @@
           fine for 1 day for returning books lately will be calculated as
           followed:<br />
           $10 if the total rent fee of book items is less than or equal to $50.
-          <br />$20 if $50 is less than the total rent fee of book items is less
-          than or equal to $100.<br />
-          $30 if $100 is less than the total rent fee of book items is less than
-          or equal to $500. <br />
+          <br />$20 if the total rent fee of book items is more than $50 and less than or equal to $100.<br />
+          $30 if the total rent fee of book items is more than $100 and less than or equal to $500. <br />
           $50 if the total rent fee of book items is greater than $500.
         </div>
       </div>
@@ -71,7 +69,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import "../scss/_variable.scss/";
 
 .background {
