@@ -14,7 +14,7 @@
           >
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-12 lookfor">
-          <input type="text" placeholder="Search username" />
+          <input type="text" placeholder="Search username" v-model="usernameTextSearch"/>
           <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -23,7 +23,7 @@
     <h1>ISSUE BOOK</h1>
 
     <div
-      v-for="reservation in issueReservations"
+      v-for="reservation in reservations"
       :key="reservation.reservation_id"
     >
       <!-- TRANSACTION-INFO -->
@@ -144,6 +144,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { checkContain } from '../utilities/data-util';
 import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
   name: "IssueBook",
@@ -152,9 +153,16 @@ export default {
       issueReservations: "reservation/issueReservations",
       returnReservations: "reservation/returnReservations",
     }),
+
+    reservations() {
+      return this.reservationData;
+    },
   },
   data() {
-    return {};
+    return {
+      usernameTextSearch: undefined,
+      reservationData: undefined,
+    };
   },
   methods: {
     async issueBook(reservation) {
@@ -169,10 +177,28 @@ export default {
         toastError(e);
       }
     },
+
+    searchByUsername() {
+      if (this.usernameTextSearch) {
+        this.reservationData = this.issueReservations.filter(item => checkContain(item.user?.username, this.usernameTextSearch));
+        return;
+      }
+
+      this.reservationData = this.issueReservations;
+    }
   },
   async mounted() {
-    this.$store.dispatch("reservation/getIssue");
+    try {
+      this.reservationData = this.issueReservations;
+      await this.$store.dispatch("reservation/getIssue");
+      this.reservationData = this.issueReservations;
+    } catch(e) {
+      toastError(e);
+    }
   },
+  watch: {
+    usernameTextSearch: 'searchByUsername'
+  }
 };
 </script>
 
