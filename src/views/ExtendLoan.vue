@@ -46,7 +46,7 @@
             v-for="bookInfo in reservation.book_items_sum"
             :key="bookInfo.book_id"
           >
-            {{ bookInfo.book_item_id }}
+            {{ bookInfo.book_id }}
           </div>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-8 col-8">

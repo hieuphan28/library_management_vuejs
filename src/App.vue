@@ -25,7 +25,6 @@ export default {
   store: store,
   beforeMount: function() {
     this.$store.dispatch('user/checkAuth');
-    this.$store.dispatch('reservation/initCurrentReservations');
     this.$store.dispatch('category/init');
     this.$store.dispatch('department/init');
   }

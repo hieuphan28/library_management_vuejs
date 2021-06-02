@@ -5,7 +5,7 @@
       <span>'{{ query }} '</span>
     </div>
 
-    <div class="row ">
+    <div class="row">
       <div
         class="col-lg-4 col-md-6 col-sm-12 col-12"
         v-for="item in books"
@@ -16,16 +16,14 @@
             <img class="book-cover" :src="item.thumbnail" alt="" />
           </div>
         </router-link>
-
-        <div class="book-name">{{ item.book_name }}</div>
+        <router-link :to="{ path: '/bookinfo/' + item.book_id }">
+          <div class="book-name">{{ item.book_name }}</div>
+        </router-link>
         <div class="row book-info">
           <div class="col-lg-6 col-md-6 col-sm-6 col-6 fee">
             {{ item.rent_cost + "$" }}
           </div>
-          <div
-            v-if="isMember"
-            @click="AddToCart(item)"
-          >
+          <div v-if="isMember" @click="AddToCart(item)">
             <i class="fas fa-shopping-cart"> </i>
           </div>
         </div>
@@ -109,7 +107,7 @@ export default {
     color: #897160;
     font-style: italic;
   }
-  @include mobile{
+  @include mobile {
     font-size: small;
   }
 }
@@ -136,6 +134,9 @@ export default {
 
 .row {
   margin-top: 2%;
+  a {
+    text-decoration: none;
+  }
 }
 .bookimg {
   @include mobile {
@@ -151,6 +152,9 @@ export default {
   padding-top: 3%;
   font-size: 20px;
   font-weight: bold;
+  cursor: pointer;
+  color: black;
+  list-style: none;
   @include mobile {
     font-size: small;
   }
