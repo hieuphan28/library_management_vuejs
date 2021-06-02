@@ -4,8 +4,8 @@
       <div class="col-md-12">
         <h2>All <b>Books</b></h2>
         <p class="intro">
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered lebmid alteration in some ledmid form
+          Explore all our books here, with all information and accessibility to
+          library materials. What are you waiting for? Start you adventure now!
         </p>
         <div
           id="myCarousel1"
@@ -29,7 +29,7 @@
               <div class="row">
                 <div
                   class="col-sm-3"
-                  v-for="item in books.slice(i, i + 4)"
+                  v-for="item in books.slice(i + 10, i + 14)"
                   :key="item.id"
                 >
                   <div class="thumb-wrapper">
@@ -75,7 +75,7 @@
               <div class="row">
                 <div
                   class="col-sm-3"
-                  v-for="item in books.slice(i + 10, i + 14)"
+                  v-for="item in books.slice(i, i + 4)"
                   :key="item.id"
                 >
                   <div class="thumb-wrapper">
@@ -244,7 +244,11 @@ h2 b {
 }
 .carousel .carousel-indicators {
   bottom: -50px;
+  @include mobile {
+    bottom: -30px;
+  }
 }
+
 .carousel-indicators li,
 .carousel-indicators li.active {
   width: 10px;

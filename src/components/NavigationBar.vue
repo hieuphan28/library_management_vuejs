@@ -14,7 +14,7 @@
             <ul class="meninmenu">
               <li><router-link to="/">Home</router-link></li>
               <li>
-                <router-link to="'/books">Books</router-link>
+                <router-link to="/books">Books</router-link>
               </li>
               <li>
                 <router-link to="/contact">Contact</router-link>

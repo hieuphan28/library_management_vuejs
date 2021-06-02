@@ -34,8 +34,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "../scss/_variable.scss/";
 .carousel-inner{
   height: 55vh;
+  @include mobile{
+      height:34vh;
+  }
 }
 </style>

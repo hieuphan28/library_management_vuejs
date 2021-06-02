@@ -18,9 +18,9 @@
           <h1>ADDRESS</h1>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          8502 Inglewood, Maine 98380 <br />
+          6391 Elgin St, Delaware 10299<br />
+          2118 Thornridge Syracuse, Connecticut
         </div>
       </div>
       <div class="row">
@@ -31,9 +31,10 @@
           <h1>PHONE</h1>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Please do not hesitate to contact us for more information via phone
+          numbers below<br />
+          +1-202-555-0185<br />
+          +1-202-555-0156<br />
         </div>
       </div>
       <div class="row">
@@ -44,9 +45,10 @@
           <h1>EMAIL</h1>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-12 right">
-         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Please do not hesitate to contact us for more information via emails
+          below<br />
+          danalibrary@gmail.com<br />
+          library@danang.gov.vn<br />
         </div>
       </div>
     </div>
@@ -59,7 +61,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import "../scss/_variable.scss/";
 
 .background {
@@ -72,7 +74,7 @@ export default {
     position: fixed;
   }
   .brightness {
-    filter: brightness(0.30);
+    filter: brightness(0.3);
   }
 }
 
@@ -108,8 +110,7 @@ export default {
   // opacity: 90;
 }
 
-
-.right{
+.right {
   padding: 0;
 }
 .container .row .left h1 {
