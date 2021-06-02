@@ -14,7 +14,7 @@
           </div>
           <div class="col-lg-7 col-md-7 col-sm-12 col-12 right-side">
             <h1 class="title">
-              <input type="text" v-model="bookInfo.book_name" required/>
+              <input type="text" v-model="bookInfo.book_name" required />
             </h1>
             <div class="textarea">
               <textarea
@@ -22,16 +22,26 @@
                 cols="69"
                 rows="4"
                 v-model="bookInfo.description"
-                 required
+                required
               ></textarea>
             </div>
             <div class="input-box">
               <span>Language:</span>
-              <input type="text" placeholder="" v-model="bookInfo.language" required />
+              <input
+                type="text"
+                placeholder=""
+                v-model="bookInfo.language"
+                required
+              />
             </div>
             <div class="input-box">
               <span>Author:</span>
-              <input type="text" placeholder="" v-model="bookInfo.author" required />
+              <input
+                type="text"
+                placeholder=""
+                v-model="bookInfo.author"
+                required
+              />
             </div>
             <div class="input-box">
               <span>Category:</span>
@@ -65,7 +75,7 @@
                 min="0"
                 placeholder=""
                 v-model="bookInfo.price"
-                 required
+                required
               />
             </div>
             <div class="input-box">
@@ -75,7 +85,7 @@
                 min="0"
                 placeholder=""
                 v-model="bookInfo.rent_cost"
-                 required
+                required
               />
             </div>
             <div class="input-box">
@@ -84,7 +94,7 @@
                 type="date"
                 placeholder=""
                 v-model="bookInfo.publication_date"
-                 required
+                required
               />
             </div>
           </div>
@@ -95,12 +105,30 @@
     <div class="bookitem" v-for="(book, index) in bookItems" :key="index">
       <div class="row title">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 order">
-          <h1>Book Item {{ }} :</h1>
+          <h1>Book Item {{}} :</h1>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 button">
-          <button class="btn" @click="removeBookItem(book)">
-            <i class="fa fa-trash" aria-hidden="true"> Delete </i>
+          <button @click="openPopup(bookitem)" class="btn d-block">
+            <i class="fa fa-trash"> Delete</i>
           </button>
+          <div class="form-popup" id="myPopup">
+            <form
+              @submit.prevent="removeBookItem(removeBookItemData)"
+              class="form-container"
+            >
+              <p>Are you sure you want to delete this book?</p>
+              <button
+                type="button"
+                class="btn cancel yesnobutton"
+                @click="closePopup()"
+              >
+                No
+              </button>
+              <button type="submit" class="btn yesnobutton">
+                Yes
+              </button>
+            </form>
+          </div>
           <button
             class="btn"
             style="margin-right: 10px"
@@ -166,9 +194,7 @@ export default {
     bookItems() {
       return this.getBookItemById(this.book_id) || {};
     },
-    bookItemId(){
-      
-    }
+    bookItemId() {},
   },
   data() {
     return {
@@ -207,11 +233,19 @@ export default {
     async removeBookItem(bookitem) {
       try {
         await this.$store.dispatch("bookitem/removeBookItem", bookitem);
-
+        this.closePopup(bookitem);
         toastSuccess("Remove book item successfully.");
       } catch (e) {
+        this.closePopup(bookitem);
         toastError(e);
       }
+    },
+    openPopup(bookitem) {
+      this.removeBookItemData = bookitem;
+      document.getElementById("myPopup").style.display = "block";
+    },
+    closePopup() {
+      document.getElementById("myPopup").style.display = "none";
     },
     testMapping() {
       return getEnumKeys(BookStatus);
@@ -391,5 +425,35 @@ export default {
     padding: 0.5% 0 0.5% 2%;
     margin-right: 25%;
   }
+}
+//POPUP
+.form-popup {
+  border: solid 0.5px rgba(0, 0, 0, 0.25);
+  border-radius: 8rem;
+  background-color: #ffff;
+  text-align: center;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  width: 450px;
+  padding: 3rem 3rem 2rem 3rem;
+
+  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.25);
+}
+.form-popup form p {
+  text-align: center;
+  font-size: 120%;
+  font-weight: bold;
+}
+.form-popup button {
+  margin-right: 1rem!important;
+  text-align: center;
+  padding: 0.4rem 0 !important;
+  color: rgba(0, 0, 0, 0.7);
+ 
 }
 </style>
