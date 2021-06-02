@@ -21,150 +21,154 @@
     <h1>RETURN BOOK</h1>
 
     <div
-      v-for="reservation in reservations"
+      v-for="reservation in (usernameTextSearch ? searchReservations : returnReservations)"
       :key="reservation.reservation_id"
     >
-      <!-- TRANSACTION-INFO -->
-      <div class="reserveinfo">
-        <div class="form">
+      <form @submit.prevent="returnBook(reservation)">
+        <!-- TRANSACTION-INFO -->
+        <div class="reserveinfo">
+          <div class="form">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm- 6 col-6 name">
+                <div class="reid">Reservation ID:</div>
+                <div class="userI">UserID:</div>
+                <div class="usernam">Username:</div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
+                <div class="reservationID">{{ reservation.reservation_id }}</div>
+                <div class="userID">{{ reservation.user_id }}</div>
+                <div class="username">{{ reservation.user?.username }}</div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6 col-6 name">
+                <div class="reid">Date of Reservation:</div>
+                <div class="userI">Expected Return Date:</div>
+                <div class="usernam">Total Fee:</div>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
+                <div class="date-reserve">
+                  {{ reservation.reserved_time || "null" }}
+                </div>
+                <div class="date-return">
+                  {{ reservation.expected_return_date || "null" }}
+                </div>
+                <div class="totalfee">{{ reservation.total_fee }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MONEY -->
+        <div class="money">
           <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm- 6 col-6 name">
-              <div class="reid">Reservation ID:</div>
-              <div class="userI">UserID:</div>
-              <div class="usernam">Username:</div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6 name">
+              <ul>
+                <li>Return Date:</li>
+                <li>Late:</li>
+                <li>Money Receive:</li>
+                <li>Money Exchange:</li>
+                <li>Fine:</li>
+              </ul>
+              <!-- <div class="deposit">Return Date:</div>
+              <div class="moneyr">Late:</div>
+              <div class="moneyr">Money Receive:</div>
+              <div class="moneyr">Money Exchange:</div>
+              <div class="moneyr">Fine:</div> -->
             </div>
-            <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
-              <div class="reservationID">{{ reservation.reservation_id }}</div>
-              <div class="userID">{{ reservation.user_id }}</div>
-              <div class="username">{{ reservation.user?.username }}</div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
+              <ul>
+                <li>
+                  <input
+                    type="date"
+                    placeholder=""
+                    v-model="reservation.returned_date"
+                    @change="updateReturnDateReservation(reservation)"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    type="text"
+                    placeholder=""
+                    v-model="reservation.date_late"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="text"
+                    placeholder=""
+                    v-model="reservation.receive_money"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="text"
+                    placeholder=""
+                    v-model="reservation.exchange_money"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="text"
+                    placeholder=""
+                    v-model="reservation.fine_date_late"
+                  />
+                </li>
+              </ul>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-6 name">
-              <div class="reid">Date of Reservation:</div>
-              <div class="userI">Expected Return Date:</div>
-              <div class="usernam">Total Fee:</div>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-6 col-6 data">
-              <div class="date-reserve">
-                {{ reservation.reserved_time || "null" }}
+          </div>
+        </div>
+
+        <!-- BOOK RESERVED -->
+        <div class="book">
+          <div class="row title">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2">BOOK ITEM ID</div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4">NAME</div>
+            <div class="col-lg-2 col-md-2 col-sm-1 col-1">RENT COST</div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
+            <div class="col-lg-2 col-md-2 col-sm-1 col-1">TOTAL</div>
+          </div>
+          <div class="row info">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
+              <div v-for="book in reservation.book_items_sum" :key="book.book_id">
+                {{ book.book_id }}
               </div>
-              <div class="date-return">
-                {{ reservation.expected_return_date || "null" }}
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
+              <div v-for="book in reservation.book_items_sum" :key="book.book_id">
+                {{ book.book_name }}
               </div>
-              <div class="totalfee">{{ reservation.total_fee }}</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-rentcost">
+              <div v-for="book in reservation.book_items_sum" :key="book.book_id">
+                {{ book.rent_cost }}
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
+              <div v-for="book in reservation.book_items_sum" :key="book.book_id">
+                {{ book.quantity }}
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-total">
+              <div v-for="book in reservation.book_items_sum" :key="book.book_id">
+                {{ book.total_rent_cost }}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- MONEY -->
-      <div class="money">
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6 name">
-            <ul>
-              <li>Return Date:</li>
-              <li>Late:</li>
-              <li>Money Receive:</li>
-              <li>Money Exchange:</li>
-              <li>Fine:</li>
-            </ul>
-            <!-- <div class="deposit">Return Date:</div>
-            <div class="moneyr">Late:</div>
-            <div class="moneyr">Money Receive:</div>
-            <div class="moneyr">Money Exchange:</div>
-            <div class="moneyr">Fine:</div> -->
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-6 input">
-            <ul>
-              <li>
-                <input
-                  type="date"
-                  placeholder=""
-                  v-model="reservation.returned_date"
-                  @change="updateReturnDateReservation(reservation)"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  placeholder=""
-                  v-model="reservation.date_late"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  placeholder=""
-                  v-model="reservation.receive_money"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  placeholder=""
-                  v-model="reservation.exchange_money"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  placeholder=""
-                  v-model="reservation.fine_date_late"
-                />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- BOOK RESERVED -->
-      <div class="book">
-        <div class="row title">
-          <div class="col-lg-2 col-md-2 col-sm-2 col-2">BOOK ITEM ID</div>
-          <div class="col-lg-4 col-md-4 col-sm-4 col-4">NAME</div>
-          <div class="col-lg-2 col-md-2 col-sm-1 col-1">RENT COST</div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-2">QUANTITY</div>
-          <div class="col-lg-2 col-md-2 col-sm-1 col-1">TOTAL</div>
-        </div>
-        <div class="row info">
-          <div class="col-lg-2 col-md-2 col-sm-2 col-2 bookitemiD">
-            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
-              {{ book.book_id }}
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4 col-4 book-name">
-            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
-              {{ book.book_name }}
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-rentcost">
-            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
-              {{ book.rent_cost }}
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-2 book-quantity">
-            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
-              {{ book.quantity }}
-            </div>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-1 col-1 book-total">
-            <div v-for="book in reservation.book_items_sum" :key="book.book_id">
-              {{ book.total_rent_cost }}
+          <div class="wrapper">
+            <div class="returnbutton">
+              <button class="btn">Return</button>
             </div>
           </div>
         </div>
-
-        <div class="wrapper" @click="returnBook(reservation)">
-          <div class="returnbutton">
-            <button class="btn">Return</button>
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import { ReservationStatus } from '../common/bundleOfEnum';
 import { checkContain, getFineDateLate } from "../utilities/data-util";
 import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
@@ -172,21 +176,26 @@ export default {
   computed: {
     ...mapGetters({
       returnReservations: "reservation/returnReservations",
+      reservationBySearch: "reservation/reservationBySearch",
     }),
 
-    reservations() {
-      return this.reservationData;
+    searchReservations() {
+      return this.reservationBySearch({
+        query: this.usernameTextSearch,
+        status: ReservationStatus.BORROWING,
+      });
     },
   },
   data() {
     return {
       usernameTextSearch: undefined,
-      reservationData: undefined,
     };
   },
   methods: {
     async returnBook(reservation) {
       try {
+        if (!reservation.returned_date) return;
+
         await this.$store.dispatch(
           "reservation/returnReservation",
           reservation
@@ -214,28 +223,10 @@ export default {
       reservation.exchange_money =
         reservation.deposit - reservation.fine_date_late;
     },
-
-    searchByUsername() {
-      if (this.usernameTextSearch) {
-        this.reservationData = this.returnReservations.filter(item => checkContain(item.user?.username, this.usernameTextSearch));
-        return;
-      }
-
-      this.reservationData = this.returnReservations;
-    }
   },
-  async mounted() {
-    try {
-      this.reservationData = this.returnReservations;
-      await this.$store.dispatch("reservation/getReturn");
-      this.reservationData = this.returnReservations;
-    } catch(e) {
-      toastError(e);
-    }
+  mounted() {
+    this.$store.dispatch("reservation/getReturn");
   },
-  watch: {
-    usernameTextSearch: 'searchByUsername'
-  }
 };
 </script>
 
