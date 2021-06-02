@@ -1,15 +1,9 @@
 import * as bookService from '../../services/book-service';
+import { checkContain } from '../../utilities/data-util';
 
 const state = () => ({
     data: [],
 });
-
-const checkContain = (item, value) => {
-    const d = item.trim().toLowerCase();
-    const v = value.trim().toLowerCase();
-
-    return d.includes(v);
-};
 
 const getters = {
     books: (state, getters) => {

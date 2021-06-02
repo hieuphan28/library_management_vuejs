@@ -70,9 +70,19 @@ const getFineDateLate = (reservation) => {
   if (totalFee > 500) return dateLate * 50;
 } 
 
+const checkContain = (item, value) => {
+  if (!item || !value) return false;
+
+  const d = item.trim().toLowerCase();
+  const v = value.trim().toLowerCase();
+
+  return d.includes(v);
+};
+
 export {
     preProcessReservation,
     getEnumKeyWithValue,
     getEnumKeys,
     getFineDateLate,
+    checkContain,
 }

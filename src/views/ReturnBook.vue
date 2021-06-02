@@ -12,7 +12,7 @@
           >
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-12 lookfor">
-          <input type="text" placeholder="Search username" />
+          <input type="text" placeholder="Search username" v-model="usernameTextSearch" />
           <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
         </div>
       </div>
@@ -21,7 +21,7 @@
     <h1>RETURN BOOK</h1>
 
     <div
-      v-for="reservation in returnReservations"
+      v-for="reservation in reservations"
       :key="reservation.reservation_id"
     >
       <!-- TRANSACTION-INFO -->
@@ -165,7 +165,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { getFineDateLate } from "../utilities/data-util";
+import { checkContain, getFineDateLate } from "../utilities/data-util";
 import { toastError, toastSuccess } from "../utilities/toast-util";
 export default {
   name: "IssueBook",
@@ -173,9 +173,16 @@ export default {
     ...mapGetters({
       returnReservations: "reservation/returnReservations",
     }),
+
+    reservations() {
+      return this.reservationData;
+    },
   },
   data() {
-    return {};
+    return {
+      usernameTextSearch: undefined,
+      reservationData: undefined,
+    };
   },
   methods: {
     async returnBook(reservation) {
@@ -207,10 +214,28 @@ export default {
       reservation.exchange_money =
         reservation.deposit - reservation.fine_date_late;
     },
+
+    searchByUsername() {
+      if (this.usernameTextSearch) {
+        this.reservationData = this.returnReservations.filter(item => checkContain(item.user?.username, this.usernameTextSearch));
+        return;
+      }
+
+      this.reservationData = this.returnReservations;
+    }
   },
-  mounted() {
-    this.$store.dispatch("reservation/getReturn");
+  async mounted() {
+    try {
+      this.reservationData = this.returnReservations;
+      await this.$store.dispatch("reservation/getReturn");
+      this.reservationData = this.returnReservations;
+    } catch(e) {
+      toastError(e);
+    }
   },
+  watch: {
+    usernameTextSearch: 'searchByUsername'
+  }
 };
 </script>
 
