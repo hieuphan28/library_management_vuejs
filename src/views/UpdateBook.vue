@@ -108,26 +108,24 @@
           <h1>Book Item {{}} :</h1>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 button">
-          <button @click="openPopup(bookitem)" class="btn d-block">
-            <i class="fa fa-trash"> Delete</i>
-          </button>
-          <div class="form-popup" id="myPopup">
-            <form
-              @submit.prevent="removeBookItem(removeBookItemData)"
-              class="form-container"
-            >
-              <p>Are you sure you want to delete this book?</p>
-              <button
-                type="button"
-                class="btn cancel yesnobutton"
-                @click="closePopup()"
+          <div class="button">
+            <button @click="openPopup(book)" class="btn d-block">
+              <i class="fa fa-trash"> Delete</i>
+            </button>
+            <div class="form-popup" id="myPopup">
+              <form
+                @submit.prevent="removeBookItem(removeBookItemData)"
+                class="form-container"
               >
-                No
-              </button>
-              <button type="submit" class="btn yesnobutton">
-                Yes
-              </button>
-            </form>
+                <p>Are you sure you want to delete this book?</p>
+                <button type="button" class="btn cancel" @click="closePopup()">
+                  No
+                </button>
+                <button type="submit" class="btn">
+                  Yes
+                </button>
+              </form>
+            </div>
           </div>
           <button
             class="btn"
@@ -199,6 +197,7 @@ export default {
   data() {
     return {
       book_id: this.$router.currentRoute.value.params.book_id,
+      removeBookData: undefined,
     };
   },
   async mounted() {
@@ -233,9 +232,11 @@ export default {
     async removeBookItem(bookitem) {
       try {
         await this.$store.dispatch("bookitem/removeBookItem", bookitem);
-        this.closePopup(bookitem);
+        console.log(bookitem);
         toastSuccess("Remove book item successfully.");
+        this.closePopup(bookitem);
       } catch (e) {
+        console.log(bookitem);
         this.closePopup(bookitem);
         toastError(e);
       }
@@ -454,6 +455,5 @@ export default {
   text-align: center;
   padding: 0.4rem 0 !important;
   color: rgba(0, 0, 0, 0.7);
- 
 }
 </style>
